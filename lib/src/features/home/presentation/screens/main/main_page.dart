@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../shared/themes/spacing.dart';
-import '../../../../program/presentation/screens/program/program_page.dart';
+// import '../../../../program/presentation/screens/program/program_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -12,10 +12,10 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   List<Widget> pages = [
-    const ProgramPage(),
+    // const ProgramPage(),
   ];
 
-  int _currentIndex = 0;
+  // int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,8 @@ class _MainPageState extends State<MainPage> {
           child: const Text('Programs'),
         ),
       ),
-      body: pages[_currentIndex],
+      body: Container(),
+      // body: pages[_currentIndex],
       // bottomNavigationBar: BottomNavigationBar(
       //   items: [
       //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Program'),
