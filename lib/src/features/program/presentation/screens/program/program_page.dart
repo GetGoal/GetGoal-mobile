@@ -89,36 +89,30 @@ class _ProgramPageState extends State<ProgramPage> {
         bottom: AppSpeacing.appMargin,
       ),
       height: 32,
-      child: ListView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        children: [
-          ListView.builder(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            itemCount: labelList.length,
-            itemBuilder: (context, index) {
-              return Container(
-                padding: const EdgeInsets.only(right: 8),
-                child: FilterItem(
-                  title: labelList[index].labelName!,
-                  selected: filterSelected,
-                  currentIndex: index,
-                  onTapped: () {
-                    if (filterSelected != index) {
-                      filterProgramBloc.add(
-                        FilterProgramEvent.clicked(
-                          labels: labelList,
-                          selectedFilter: index,
-                        ),
-                      );
-                    }
-                  },
-                ),
-              );
-            },
-          ),
-        ],
+        itemCount: labelList.length,
+        itemBuilder: (context, index) {
+          return Container(
+            padding: const EdgeInsets.only(right: 8),
+            child: FilterItem(
+              title: labelList[index].labelName!,
+              selected: filterSelected,
+              currentIndex: index,
+              onTapped: () {
+                if (filterSelected != index) {
+                  filterProgramBloc.add(
+                    FilterProgramEvent.clicked(
+                      labels: labelList,
+                      selectedFilter: index,
+                    ),
+                  );
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }
