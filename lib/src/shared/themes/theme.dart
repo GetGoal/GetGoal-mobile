@@ -15,5 +15,18 @@ ThemeData appTheme(BuildContext context) {
       titleSpacing: 20,
     ),
     fontFamily: 'Nunito',
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        textStyle: TextStyle(
+          color: AppColors.black,
+          fontSize: 12,
+          fontFamily: 'Nunito',
+        ),
+        splashFactory: NoSplash.splashFactory,
+        shadowColor: Colors.transparent,
+      ),
+    ),
   );
 }
