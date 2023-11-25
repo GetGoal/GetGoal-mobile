@@ -25,6 +25,11 @@ class _ProgramPageState extends State<ProgramPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
