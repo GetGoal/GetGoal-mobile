@@ -34,9 +34,9 @@ class FilterProgramBloc extends Bloc<FilterProgramEvent, FilterProgramState> {
       }
 
       List<ProgramFilter> fixedItem = <ProgramFilter>[
-        const ProgramFilter.label(labelId: 0, labelName: 'For you'),
-        const ProgramFilter.label(labelId: 0, labelName: 'All'),
-        const ProgramFilter.label(labelId: 0, labelName: 'Following'),
+        const ProgramFilter.label(labelId: -1, labelName: 'For you'),
+        const ProgramFilter.label(labelId: -2, labelName: 'All'),
+        const ProgramFilter.label(labelId: -3, labelName: 'Following'),
       ];
       emit(
         FilterProgramState.loadedSuccess(
