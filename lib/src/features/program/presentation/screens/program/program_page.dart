@@ -183,25 +183,29 @@ class _ProgramPageState extends State<ProgramPage> {
 
   Widget _programLoadedSuccess(List<Program> programList) {
     return Expanded(
-      child: SingleChildScrollView(
-        child: ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
-          shrinkWrap: true,
-          itemCount: programList.length,
-          itemBuilder: (context, index) {
-            return ProgramCard(
-              programImage: programList[index].programImage,
-              programName: programList[index].programName,
-              programDesc: programList[index].programDesc,
-              rating: programList[index].rating,
-              duration: programList[index].expectedTime,
-              label: programList[index].labels![0],
-              onTab: () {
-                // Todo: Write a code navigate to program info page
-              },
-            );
-          },
+      child: RefreshIndicator(
+        color: AppColors.primary,
+        onRefresh: () async => _programBloc.add(const ProgramEvent.started()),
+        child: SingleChildScrollView(
+          child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
+            shrinkWrap: true,
+            itemCount: programList.length,
+            itemBuilder: (context, index) {
+              return ProgramCard(
+                programImage: programList[index].programImage,
+                programName: programList[index].programName,
+                programDesc: programList[index].programDesc,
+                rating: programList[index].rating,
+                duration: programList[index].expectedTime,
+                label: programList[index].labels![0],
+                onTab: () {
+                  // Todo: Write a code navigate to program info page
+                },
+              );
+            },
+          ),
         ),
       ),
     );
