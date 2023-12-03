@@ -2,11 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import '../features/program/data/repositories/program_filter_repository_impl.dart';
+import '../features/program/data/repositories/program_repository_impl.dart';
+import '../features/program/data/sources/api/program_api_service.dart';
 import '../features/program/data/sources/api/program_filter_api_service.dart';
 import '../features/program/domain/repositories/program_filter_repository.dart';
+import '../features/program/domain/repositories/program_repository.dart';
 import '../features/program/domain/usecases/label/get_program_filter_usecase.dart';
+import '../features/program/domain/usecases/program/get_program_by_id_usecase.dart';
+import '../features/program/domain/usecases/program/get_program_usecase.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 
+import '../features/program/presentation/bloc/program/program_bloc.dart';
 import 'dio_client.dart';
 import 'env.dart';
 
@@ -31,4 +37,14 @@ Future<void> initializeDependencies() async {
   getIt.registerFactory<FilterProgramBloc>(
     () => FilterProgramBloc(getIt()),
   );
+
+  getIt.registerLazySingleton<ProgramApiService>(() => ProgramApiService(dio));
+  getIt.registerLazySingleton<ProgramRepository>(
+    () => ProgramRepositoryImpl(getIt()),
+  );
+  getIt.registerLazySingleton<GetProgramUsecase>(
+    () => GetProgramUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(() => GetProgramByLabelName(getIt()));
+  getIt.registerFactory<ProgramBloc>(() => ProgramBloc(getIt(), getIt()));
 }
