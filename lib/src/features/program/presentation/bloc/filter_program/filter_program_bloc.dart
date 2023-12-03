@@ -23,24 +23,29 @@ class FilterProgramBloc extends Bloc<FilterProgramEvent, FilterProgramState> {
     FilterProgramStarted event,
     Emitter<FilterProgramState> emit,
   ) async {
-    emit(const FilterProgramState.loading());
+    try {
+      emit(const FilterProgramState.loading());
 
-    final filterList = await _getProgramFilterUsecase();
+      final filterList = await _getProgramFilterUsecase();
 
-    if (filterList.data == null) {
+      if (filterList.data!.isEmpty) {
+        emit(const FilterProgramState.loading());
+        return;
+      }
+
+      List<ProgramFilter> fixedItem = <ProgramFilter>[
+        const ProgramFilter.label(labelId: 0, labelName: 'For you'),
+        const ProgramFilter.label(labelId: 0, labelName: 'All'),
+        const ProgramFilter.label(labelId: 0, labelName: 'Following'),
+      ];
+      emit(
+        FilterProgramState.loadedSuccess(
+          labels: [...fixedItem, ...filterList.data!],
+        ),
+      );
+    } catch (e) {
       emit(const FilterProgramState.error());
     }
-
-    List<ProgramFilter> fixedItem = <ProgramFilter>[
-      const ProgramFilter.label(labelId: 0, labelName: 'For you'),
-      const ProgramFilter.label(labelId: 0, labelName: 'All'),
-      const ProgramFilter.label(labelId: 0, labelName: 'Following'),
-    ];
-    emit(
-      FilterProgramState.loadedSuccess(
-        labels: [...fixedItem, ...filterList.data!],
-      ),
-    );
   }
 
   FutureOr<void> _onFilterClicked(

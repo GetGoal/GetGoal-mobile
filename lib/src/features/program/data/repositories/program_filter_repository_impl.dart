@@ -9,14 +9,14 @@ import '../mappers/program_filter_mapper.dart';
 import '../sources/api/program_filter_api_service.dart';
 
 class ProgramFilterRepositoryImpl implements ProgramFilterRepository {
-  ProgramFilterRepositoryImpl(this._labelApiService);
+  ProgramFilterRepositoryImpl(this._programFilterApiService);
 
-  final ProgramFilterApiService _labelApiService;
+  final ProgramFilterApiService _programFilterApiService;
 
   @override
   Future<DataState<List<ProgramFilter>>> getProgramFilters() async {
     try {
-      final httpResponse = await _labelApiService.getLabels();
+      final httpResponse = await _programFilterApiService.getLabels();
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
