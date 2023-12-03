@@ -21,6 +21,8 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.white,
         title: Padding(
           padding: EdgeInsets.only(top: AppSpeacing.appMargin),
           child: const Text('Programs'),

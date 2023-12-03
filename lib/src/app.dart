@@ -16,6 +16,7 @@ class GetGoalApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           filterProgramBloc,
+          programBloc,
         ],
         child: const MainPage(),
       ),
