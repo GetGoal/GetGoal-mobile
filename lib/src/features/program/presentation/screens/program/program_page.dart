@@ -258,18 +258,18 @@ class _ProgramPageState extends State<ProgramPage> {
           selectedFilter: index,
         ),
       );
-      // switch (index) {
-      //   case 0:
-      //     break;
-      //   case 1:
-      //     _programBloc.add(const ProgramEvent.started());
-      //     break;
-      //   case 2:
-      //     break;
-      //   default:
-      //     _programBloc.add(ProgramEvent.filterClicked(
-      //         labelName: labelList[index].labelName!));
-      // }
+      switch (index) {
+        case 0:
+          break;
+        case 1:
+          _programBloc.add(const ProgramEvent.started());
+          break;
+        case 2:
+          break;
+        default:
+          _programBloc.add(ProgramEvent.filterClicked(
+              labelName: labelList[index].labelName!));
+      }
     }
   }
 }
