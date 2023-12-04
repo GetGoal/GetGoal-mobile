@@ -1,44 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
+import '../../../../../../shared/widgets/button/done_button.dart';
 
 class ListTaskForPlanning extends StatelessWidget {
   const ListTaskForPlanning({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 102,
-          // height: MediaQuery.of(context).size.height * 0.15,
-          margin: const EdgeInsets.only(
-            right: 20,
-            left: 20,
+    return Container(
+      height: 102,
+      // height: MediaQuery.of(context).size.height * 0.15,
+      margin: const EdgeInsets.only(
+        right: 20,
+        left: 20,
+      ),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: AppShadow.shadow,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          _numberTask(),
+          const SizedBox(
+            width: 8,
           ),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: AppShadow.shadow,
-            borderRadius: BorderRadius.circular(16),
+          _taskDetail(),
+          const SizedBox(
+            width: 8,
           ),
-          child: Row(
-            children: [
-              _numberTask(),
-              const SizedBox(
-                width: 8,
-              ),
-              _taskDetail(),
-              const SizedBox(
-                width: 8,
-              ),
-              Icon(Icons.edit),
-            ],
-          ),
-        ),
-      ],
+          _editButton(),
+        ],
+      ),
     );
   }
 
@@ -56,28 +54,70 @@ class ListTaskForPlanning extends StatelessWidget {
   }
 
   Widget _taskDetail() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Tune Your Guitar',
-          style: body2(),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-        ),
-        Text(
-          '(icon) 1/10/2023',
-          style: description().copyWith(color: AppColors.description),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-        ),
-        Text(
-          '(icon) start_time - enddate_endtime',
-          style: description().copyWith(color: AppColors.description),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-        ),
-      ],
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Tune Your Guitar',
+            style: body2(),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Row(
+            children: [
+              SvgPicture.asset(
+                AppIcon.calendar_icon,
+                height: 16,
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              Text(
+                '1/10/2023',
+                style: description().copyWith(color: AppColors.description),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Row(
+            children: [
+              SvgPicture.asset(
+                AppIcon.duration_time_icon,
+                height: 16,
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              Text(
+                '1 PM - 1.30 PM',
+                style: description().copyWith(color: AppColors.description),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
+}
+
+Widget _editButton() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      SvgPicture.asset(
+        AppIcon.edit_task_icon,
+        height: 16,
+      ),
+    ],
+  );
 }
