@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../themes/color.dart';
-
 class CircleButton extends StatelessWidget {
   const CircleButton({
     super.key,
