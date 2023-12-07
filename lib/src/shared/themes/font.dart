@@ -11,11 +11,29 @@ TextStyle heading2() {
   );
 }
 
+TextStyle heading3() {
+  return const TextStyle(
+    fontSize: 24,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+  );
+}
+
 TextStyle title1() {
   return const TextStyle(
     fontSize: 16,
     color: Colors.black,
     fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+  );
+}
+
+TextStyle body1() {
+  return const TextStyle(
+    fontSize: 16,
+    color: Colors.black,
+    fontWeight: FontWeight.normal,
     fontFamily: fontFamily,
   );
 }

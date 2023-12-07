@@ -9,10 +9,12 @@ import '../features/program/domain/repositories/program_filter_repository.dart';
 import '../features/program/domain/repositories/program_repository.dart';
 import '../features/program/domain/usecases/label/get_program_filter_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_id_usecase.dart';
+import '../features/program/domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_usecase.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 
 import '../features/program/presentation/bloc/program/program_bloc.dart';
+import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
 import 'dio_client.dart';
 import 'env.dart';
 
@@ -45,6 +47,9 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton<GetProgramUsecase>(
     () => GetProgramUsecase(getIt()),
   );
-  getIt.registerLazySingleton(() => GetProgramByLabelName(getIt()));
+  getIt.registerLazySingleton(() => GetProgramByLabelNameUsecase(getIt()));
   getIt.registerFactory<ProgramBloc>(() => ProgramBloc(getIt(), getIt()));
+
+  getIt.registerLazySingleton(() => GetProgramByIdUsecase(getIt()));
+  getIt.registerFactory<ProgramInfoBloc>(() => ProgramInfoBloc(getIt()));
 }

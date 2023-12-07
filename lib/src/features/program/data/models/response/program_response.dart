@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../task/data/sources/api/task_response.dart';
 import 'program_filter_response.dart';
 
 part 'program_response.g.dart';
@@ -15,6 +16,19 @@ class ProgramResponse {
 
   @JsonKey(name: 'Program')
   final ProgramDataModel? program;
+}
+
+@JsonSerializable()
+class ProgramResponse2 {
+  ProgramResponse2({required this.program});
+
+  factory ProgramResponse2.fromJson(Map<String, dynamic> json) =>
+      _$ProgramResponse2FromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProgramResponse2ToJson(this);
+
+  @JsonKey(name: 'Program')
+  final ProgramModel? program;
 }
 
 @JsonSerializable()
@@ -44,6 +58,7 @@ class ProgramModel {
     required this.expectedTime,
     required this.updatedAt,
     required this.labels,
+    required this.tasks,
   });
 
   factory ProgramModel.fromJson(Map<String, dynamic> json) =>
@@ -74,4 +89,7 @@ class ProgramModel {
 
   @JsonKey(name: 'labels')
   final List<Label>? labels;
+
+  @JsonKey(name: 'tasks')
+  final List<TaskResponse>? tasks;
 }

@@ -1,8 +1,9 @@
+import '../../../task/data/mappers/task_mapper.dart';
 import '../../domain/models/program.dart';
 import '../models/response/program_response.dart';
 
 extension ProgramMapper on ProgramModel {
-  Program toDomain() => Program(
+  Program programToEntity() => Program(
         programId: programId ?? 0,
         programName: programName ?? '',
         rating: rating ?? 0.0,
@@ -20,5 +21,7 @@ extension ProgramMapper on ProgramModel {
                   ),
                 )
                 .toList(),
+        tasks:
+            tasks!.isEmpty ? [] : tasks!.map((e) => e.taskToEntity()).toList(),
       );
 }

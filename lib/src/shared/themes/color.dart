@@ -4,6 +4,7 @@ class AppColors {
   static Color primary = HexColor.fromHex('FFD08A');
   static Color white = HexColor.fromHex('FFFFFF');
   static Color black = HexColor.fromHex('000000');
+  static Color stock = HexColor.fromHex('EAEBEC');
 }
 
 extension HexColor on Color {
@@ -18,9 +19,10 @@ extension HexColor on Color {
 class AppShadow {
   static List<BoxShadow> shadow = [
     BoxShadow(
-        color: AppColors.black.withOpacity(0.1),
-        spreadRadius: 0,
-        blurRadius: 48,
-        offset: const Offset(0, 2))
+      color: AppColors.black.withOpacity(0.1),
+      spreadRadius: 0,
+      blurRadius: 48,
+      offset: const Offset(0, 2),
+    ),
   ];
 }

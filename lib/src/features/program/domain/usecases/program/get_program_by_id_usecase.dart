@@ -3,14 +3,13 @@ import '../../../../../core/bases/base_usecase.dart';
 import '../../models/program.dart';
 import '../../repositories/program_repository.dart';
 
-class GetProgramByLabelName
-    implements BaseUseCase<DataState<List<Program>>, String> {
-  GetProgramByLabelName(this._programRepository);
+class GetProgramByIdUsecase implements BaseUseCase<DataState<Program>, String> {
+  GetProgramByIdUsecase(this._programRepository);
 
   final ProgramRepository _programRepository;
 
   @override
-  Future<DataState<List<Program>>> call({required String params}) {
-    return _programRepository.getProgramByLabelName(params);
+  Future<DataState<Program>> call({required String params}) {
+    return _programRepository.getProgramById(params);
   }
 }

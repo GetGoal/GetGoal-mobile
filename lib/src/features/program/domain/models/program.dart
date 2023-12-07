@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../task/domain/models/task.dart';
+
 part 'program.freezed.dart';
 
 @freezed
@@ -13,6 +15,7 @@ sealed class Program with _$Program {
     final String? expectedTime,
     final String? updatedAt,
     final List<Label>? labels,
+    final List<Task>? tasks,
   }) = _Program;
 }
 
