@@ -18,6 +18,18 @@ Map<String, dynamic> _$ProgramResponseToJson(ProgramResponse instance) =>
       'Program': instance.program,
     };
 
+ProgramResponse2 _$ProgramResponse2FromJson(Map<String, dynamic> json) =>
+    ProgramResponse2(
+      program: json['Program'] == null
+          ? null
+          : ProgramModel.fromJson(json['Program'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ProgramResponse2ToJson(ProgramResponse2 instance) =>
+    <String, dynamic>{
+      'Program': instance.program,
+    };
+
 ProgramDataModel _$ProgramDataModelFromJson(Map<String, dynamic> json) =>
     ProgramDataModel(
       count: json['count'] as int?,
@@ -43,6 +55,9 @@ ProgramModel _$ProgramModelFromJson(Map<String, dynamic> json) => ProgramModel(
       labels: (json['labels'] as List<dynamic>?)
           ?.map((e) => Label.fromJson(e as Map<String, dynamic>))
           .toList(),
+      tasks: (json['tasks'] as List<dynamic>?)
+          ?.map((e) => TaskResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ProgramModelToJson(ProgramModel instance) =>
@@ -55,4 +70,5 @@ Map<String, dynamic> _$ProgramModelToJson(ProgramModel instance) =>
       'expected_time': instance.expectedTime,
       'updated_at': instance.updatedAt,
       'labels': instance.labels,
+      'tasks': instance.tasks,
     };

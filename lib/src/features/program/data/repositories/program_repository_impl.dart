@@ -22,7 +22,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
         return DataSuccess(
           httpResponse.data.program!.programs!
               .map(
-                (e) => e.toDomain(),
+                (e) => e.programToEntity(),
               )
               .toList(),
         );
@@ -53,10 +53,32 @@ class ProgramRepositoryImpl implements ProgramRepository {
         return DataSuccess(
           httpResponse.data.program!.programs!
               .map(
-                (e) => e.toDomain(),
+                (e) => e.programToEntity(),
               )
               .toList(),
         );
+      } else {
+        return DataFailed(
+          DioException(
+            error: httpResponse.response.statusMessage,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse,
+            requestOptions: httpResponse.response.requestOptions,
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return DataFailed(e);
+    }
+  }
+
+  @override
+  Future<DataState<Program>> getProgramById(String programId) async {
+    try {
+      final httpResponse = await _programApiService.getProgramById(programId);
+
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(httpResponse.data.program!.programToEntity());
       } else {
         return DataFailed(
           DioException(

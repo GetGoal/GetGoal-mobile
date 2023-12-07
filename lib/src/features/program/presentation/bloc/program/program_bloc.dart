@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
 import '../../../domain/models/program.dart';
-import '../../../domain/usecases/program/get_program_by_id_usecase.dart';
+import '../../../domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../../../domain/usecases/program/get_program_usecase.dart';
 
 part 'program_event.dart';
@@ -21,7 +21,7 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
   }
 
   final GetProgramUsecase _getProgramUsecase;
-  final GetProgramByLabelName _getProgramByLabelName;
+  final GetProgramByLabelNameUsecase _getProgramByLabelName;
 
   final _logger = Logger(
     printer: PrettyPrinter(),

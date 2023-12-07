@@ -24,6 +24,7 @@ mixin _$Program {
   String? get expectedTime => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
   List<Label>? get labels => throw _privateConstructorUsedError;
+  List<Task>? get tasks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProgramCopyWith<Program> get copyWith => throw _privateConstructorUsedError;
@@ -42,7 +43,8 @@ abstract class $ProgramCopyWith<$Res> {
       String? programDesc,
       String? expectedTime,
       String? updatedAt,
-      List<Label>? labels});
+      List<Label>? labels,
+      List<Task>? tasks});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$ProgramCopyWithImpl<$Res, $Val extends Program>
     Object? expectedTime = freezed,
     Object? updatedAt = freezed,
     Object? labels = freezed,
+    Object? tasks = freezed,
   }) {
     return _then(_value.copyWith(
       programId: freezed == programId
@@ -100,6 +103,10 @@ class _$ProgramCopyWithImpl<$Res, $Val extends Program>
           ? _value.labels
           : labels // ignore: cast_nullable_to_non_nullable
               as List<Label>?,
+      tasks: freezed == tasks
+          ? _value.tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>?,
     ) as $Val);
   }
 }
@@ -119,7 +126,8 @@ abstract class _$$ProgramImplCopyWith<$Res> implements $ProgramCopyWith<$Res> {
       String? programDesc,
       String? expectedTime,
       String? updatedAt,
-      List<Label>? labels});
+      List<Label>? labels,
+      List<Task>? tasks});
 }
 
 /// @nodoc
@@ -141,6 +149,7 @@ class __$$ProgramImplCopyWithImpl<$Res>
     Object? expectedTime = freezed,
     Object? updatedAt = freezed,
     Object? labels = freezed,
+    Object? tasks = freezed,
   }) {
     return _then(_$ProgramImpl(
       programId: freezed == programId
@@ -175,6 +184,10 @@ class __$$ProgramImplCopyWithImpl<$Res>
           ? _value._labels
           : labels // ignore: cast_nullable_to_non_nullable
               as List<Label>?,
+      tasks: freezed == tasks
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>?,
     ));
   }
 }
@@ -190,8 +203,10 @@ class _$ProgramImpl implements _Program {
       this.programDesc,
       this.expectedTime,
       this.updatedAt,
-      final List<Label>? labels})
-      : _labels = labels;
+      final List<Label>? labels,
+      final List<Task>? tasks})
+      : _labels = labels,
+        _tasks = tasks;
 
   @override
   final int? programId;
@@ -217,9 +232,19 @@ class _$ProgramImpl implements _Program {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<Task>? _tasks;
+  @override
+  List<Task>? get tasks {
+    final value = _tasks;
+    if (value == null) return null;
+    if (_tasks is EqualUnmodifiableListView) return _tasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'Program(programId: $programId, programName: $programName, rating: $rating, programImage: $programImage, programDesc: $programDesc, expectedTime: $expectedTime, updatedAt: $updatedAt, labels: $labels)';
+    return 'Program(programId: $programId, programName: $programName, rating: $rating, programImage: $programImage, programDesc: $programDesc, expectedTime: $expectedTime, updatedAt: $updatedAt, labels: $labels, tasks: $tasks)';
   }
 
   @override
@@ -240,7 +265,8 @@ class _$ProgramImpl implements _Program {
                 other.expectedTime == expectedTime) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality().equals(other._labels, _labels));
+            const DeepCollectionEquality().equals(other._labels, _labels) &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks));
   }
 
   @override
@@ -253,7 +279,8 @@ class _$ProgramImpl implements _Program {
       programDesc,
       expectedTime,
       updatedAt,
-      const DeepCollectionEquality().hash(_labels));
+      const DeepCollectionEquality().hash(_labels),
+      const DeepCollectionEquality().hash(_tasks));
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +298,8 @@ abstract class _Program implements Program {
       final String? programDesc,
       final String? expectedTime,
       final String? updatedAt,
-      final List<Label>? labels}) = _$ProgramImpl;
+      final List<Label>? labels,
+      final List<Task>? tasks}) = _$ProgramImpl;
 
   @override
   int? get programId;
@@ -289,6 +317,8 @@ abstract class _Program implements Program {
   String? get updatedAt;
   @override
   List<Label>? get labels;
+  @override
+  List<Task>? get tasks;
   @override
   @JsonKey(ignore: true)
   _$$ProgramImplCopyWith<_$ProgramImpl> get copyWith =>

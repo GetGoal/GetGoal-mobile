@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../shared/themes/color.dart';
@@ -201,7 +202,7 @@ class _ProgramPageState extends State<ProgramPage> {
                 duration: programList[index].expectedTime,
                 label: programList[index].labels![0],
                 onTab: () {
-                  // Todo: Write a code navigate to program info page
+                  context.push('/program_info/${programList[index].programId}');
                 },
               );
             },
