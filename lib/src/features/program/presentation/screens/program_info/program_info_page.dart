@@ -37,13 +37,18 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
   @override
   Widget build(BuildContext context) {
     return GetGoalSubScaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              _programInfoSection(),
-            ],
+      body: RefreshIndicator(
+        color: AppColors.primary,
+        onRefresh: () async => _programInfoBloc
+            .add(ProgramInfoEvent.started(programId: widget.programId)),
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                _programInfoSection(),
+              ],
+            ),
           ),
         ),
       ),
