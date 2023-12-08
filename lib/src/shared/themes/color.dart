@@ -5,6 +5,8 @@ class AppColors {
   static Color white = HexColor.fromHex('FFFFFF');
   static Color black = HexColor.fromHex('000000');
   static Color stock = HexColor.fromHex('EAEBEC');
+  static Color description = HexColor.fromHex('8C8C8C');
+  static Color red = HexColor.fromHex('F04438');
 }
 
 extension HexColor on Color {

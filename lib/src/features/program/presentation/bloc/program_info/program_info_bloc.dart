@@ -30,12 +30,11 @@ class ProgramInfoBloc extends Bloc<ProgramInfoEvent, ProgramInfoState> {
   ) async {
     try {
       emit(const ProgramInfoState.loading());
-      print(event.programId);
 
       final program =
           await _getProgramByIdUsecase.call(params: event.programId!);
 
-      _logger.d(program.data);
+      // _logger.d(program.data);
       if (program.data == null) {
         emit(const ProgramInfoState.error());
         return;
