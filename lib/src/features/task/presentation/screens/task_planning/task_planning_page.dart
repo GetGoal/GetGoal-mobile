@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
@@ -23,7 +24,7 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _tasks(),
+            _tasksSection(widget.tasks),
             const SizedBox(height: 36),
           ],
         ),
@@ -32,7 +33,10 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
     );
   }
 
-  Widget _tasks() {
+  Widget _tasksSection(List<Task> tasks) {
+    if (tasks.isEmpty) {
+      return _tasksEmpty();
+    }
     return Container(
       margin: EdgeInsets.only(
         top: AppSpeacing.appMargin,
@@ -62,13 +66,37 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
     );
   }
 
+  Widget _tasksEmpty() {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height / 1.5,
+      child: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Sorry, some error occur.\nPlease try again',
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _bottomButton() {
+    bool isTaskEmpty = widget.tasks.isEmpty;
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 36),
       margin: EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
       child: MainButton(
-        buttonText: 'Done',
-        onTap: () {},
+        buttonText: isTaskEmpty ? 'Back' : 'Done',
+        onTap: () {
+          if (isTaskEmpty) {
+            context.pop();
+            return;
+          }
+        },
       ),
     );
   }
