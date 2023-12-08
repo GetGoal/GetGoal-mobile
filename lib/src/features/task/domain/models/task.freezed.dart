@@ -81,6 +81,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? taskDescription = freezed,
     Object? link = freezed,
     Object? mediaUrl = freezed,
+  }) {
+    return _then(_value.copyWith(
+      taskId: freezed == taskId
+          ? _value.taskId
           : taskId // ignore: cast_nullable_to_non_nullable
               as int?,
       taskName: freezed == taskName
@@ -140,10 +144,21 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
   factory _$$TaskImplCopyWith(
           _$TaskImpl value, $Res Function(_$TaskImpl) then) =
       __$$TaskImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? taskId,
+      String? taskName,
+      int? taskStatus,
+      int? userAccountId,
       int? isSetNotification,
       String? startTime,
       String? endTime,
+      int? programId,
       String? category,
+      int? timeBeforeNotify,
+      String? taskDescription,
+      String? link,
       String? mediaUrl});
 }
 
@@ -332,7 +347,13 @@ class _$TaskImpl implements _Task {
       __$$TaskImplCopyWithImpl<_$TaskImpl>(this, _$identity);
 }
 
+abstract class _Task implements Task {
   const factory _Task(
+      {final int? taskId,
+      final String? taskName,
+      final int? taskStatus,
+      final int? userAccountId,
+      final int? isSetNotification,
       final String? startTime,
       final String? endTime,
       final int? programId,

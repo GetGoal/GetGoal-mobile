@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
-import '../../../../../../shared/widgets/button/done_button.dart';
 
-class ListTaskForPlanning extends StatelessWidget {
-  const ListTaskForPlanning({super.key});
+class TaskPlanningCard extends StatelessWidget {
+  const TaskPlanningCard({
+    super.key,
+    required this.taskNumber,
+    required this.taskName,
+    this.startTime,
+    this.endTime,
+  });
+
+  final int taskNumber;
+  final String taskName;
+  final String? startTime;
+  final String? endTime;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 102,
-      // height: MediaQuery.of(context).size.height * 0.15,
-      margin: const EdgeInsets.only(
-        right: 20,
-        left: 20,
-      ),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -49,17 +54,20 @@ class ListTaskForPlanning extends StatelessWidget {
         color: AppColors.primary,
         shape: BoxShape.circle,
       ),
-      child: const Center(child: Text('1')),
+      child: Center(child: Text('$taskNumber')),
     );
   }
 
   Widget _taskDetail() {
+    bool isStartTimeEmpty = startTime!.isEmpty;
+    bool isEndTimeEmpty = endTime!.isEmpty;
+
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Tune Your Guitar',
+            taskName,
             style: body2(),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
@@ -72,13 +80,21 @@ class ListTaskForPlanning extends StatelessWidget {
               SvgPicture.asset(
                 AppIcon.calendar_icon,
                 height: 16,
+                colorFilter: isStartTimeEmpty
+                    ? ColorFilter.mode(AppColors.red, BlendMode.srcIn)
+                    : ColorFilter.mode(AppColors.description, BlendMode.srcIn),
               ),
               const SizedBox(
                 width: 4,
               ),
               Text(
-                '1/10/2023',
-                style: description().copyWith(color: AppColors.description),
+                isStartTimeEmpty
+                    ? '-'
+                    : DateFormat('dd/MM/yyyy')
+                        .format(DateTime.parse(startTime!)),
+                style: isStartTimeEmpty
+                    ? description().copyWith(color: AppColors.red)
+                    : description().copyWith(color: AppColors.description),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
@@ -92,13 +108,20 @@ class ListTaskForPlanning extends StatelessWidget {
               SvgPicture.asset(
                 AppIcon.duration_time_icon,
                 height: 16,
+                colorFilter: isEndTimeEmpty
+                    ? ColorFilter.mode(AppColors.red, BlendMode.srcIn)
+                    : ColorFilter.mode(AppColors.description, BlendMode.srcIn),
               ),
               const SizedBox(
                 width: 4,
               ),
               Text(
-                '1 PM - 1.30 PM',
-                style: description().copyWith(color: AppColors.description),
+                isEndTimeEmpty
+                    ? '-'
+                    : DateFormat('dd/MM/yyyy').format(DateTime.parse(endTime!)),
+                style: isEndTimeEmpty
+                    ? description().copyWith(color: AppColors.red)
+                    : description().copyWith(color: AppColors.description),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),

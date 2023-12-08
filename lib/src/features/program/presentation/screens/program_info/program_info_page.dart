@@ -100,7 +100,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
         const SizedBox(height: 20),
         _taskOverview(program.tasks),
         const SizedBox(height: 40),
-        _startProgramBotton(),
+        _startProgramBotton(program.tasks!),
         const SizedBox(height: 36),
       ],
     );
@@ -260,10 +260,12 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
     );
   }
 
-  Widget _startProgramBotton() {
+  Widget _startProgramBotton(List<Task> tasks) {
     return MainButton(
       buttonText: 'Start this program',
-      onTap: () => {},
+      onTap: () {
+        context.push('/task_planning', extra: tasks);
+      },
     );
   }
 }
