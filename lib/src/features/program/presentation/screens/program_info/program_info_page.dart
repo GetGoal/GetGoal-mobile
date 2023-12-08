@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
+import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/image/cache_image.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
@@ -28,34 +29,30 @@ class ProgramInfoPage extends StatefulWidget {
 class _ProgramInfoPageState extends State<ProgramInfoPage> {
   ProgramInfoBloc get _programInfoBloc => context.read<ProgramInfoBloc>();
 
+  List<Task> tasks = [];
+
   @override
   void initState() {
     _programInfoBloc.add(ProgramInfoEvent.started(programId: widget.programId));
+    _programInfoBloc.stream.listen(
+      (state) {
+        if (state is ProgramInfoStateLoadedSuccess) {
+          setState(() {
+            tasks = state.program!.tasks!;
+          });
+        }
+      },
+    );
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return GetGoalSubScaffold(
-      body: RefreshIndicator(
-        color: AppColors.primary,
-        onRefresh: () async => _programInfoBloc
-            .add(ProgramInfoEvent.started(programId: widget.programId)),
-        child: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                _programInfoSection(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+  void dispose() {
+    super.dispose();
   }
 
-  Widget _programInfoSection() {
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<ProgramInfoBloc, ProgramInfoState>(
       builder: (context, state) {
         switch (state) {
@@ -75,53 +72,71 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
   }
 
   Widget _programInfoLoading() {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.5,
-      child: Center(
-        child: CircularProgressIndicator(
-          color: AppColors.primary,
+    return GetGoalSubScaffold(
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height / 1.5,
+        child: Center(
+          child: CircularProgressIndicator(
+            color: AppColors.primary,
+          ),
         ),
       ),
     );
   }
 
   Widget _programInfoLoadedSuccess(Program program) {
-    return Column(
-      children: [
-        _programImage(program.programImage!),
-        const SizedBox(height: 20),
-        _programHeader(
-          label: program.labels![0],
-          programName: program.programName,
-          duration: program.expectedTime,
+    return GetGoalSubScaffold(
+      body: RefreshIndicator(
+        color: AppColors.primary,
+        onRefresh: () async => _programInfoBloc
+            .add(ProgramInfoEvent.started(programId: widget.programId)),
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                _programImage(program.programImage!),
+                const SizedBox(height: 20),
+                _programHeader(
+                  label: program.labels![0],
+                  programName: program.programName,
+                  duration: program.expectedTime,
+                ),
+                const SizedBox(height: 20),
+                _programDescription(program.programDesc),
+                const SizedBox(height: 20),
+                _taskOverview(program.tasks),
+              ],
+            ),
+          ),
         ),
-        const SizedBox(height: 20),
-        _programDescription(program.programDesc),
-        const SizedBox(height: 20),
-        _taskOverview(program.tasks),
-        const SizedBox(height: 40),
-        _startProgramBotton(program.tasks!),
-        const SizedBox(height: 36),
-      ],
+      ),
+      bottomNavigationBar: _startProgramBotton(program.tasks!),
     );
   }
 
   Widget _programInfoError() {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.5,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Some error occur. Please retry'),
-            const SizedBox(
-              height: 8,
-            ),
-            ElevatedButton(
-              onPressed: () => context.pop(),
-              child: const Text('Go back'),
-            ),
-          ],
+    return GetGoalSubScaffold(
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height / 1.5,
+        child: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Sorry, some error occur.\nPlease retry',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(vertical: 24),
+        margin: EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
+        child: MainButton(
+          buttonText: 'Back',
+          onTap: () => context.pop(),
         ),
       ),
     );
@@ -261,11 +276,24 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
   }
 
   Widget _startProgramBotton(List<Task> tasks) {
-    return MainButton(
-      buttonText: 'Start this program',
-      onTap: () {
-        context.push('/task_planning', extra: tasks);
-      },
+    bool isTasksEmpty = tasks.isEmpty;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      margin: EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
+      child: MainButton(
+        buttonText: isTasksEmpty ? 'Back' : 'Start this program',
+        onTap: () {
+          if (isTasksEmpty) {
+            context.pop();
+          } else {
+            context.push(
+              '/task_planning',
+              extra: tasks,
+            );
+          }
+        },
+      ),
     );
   }
 }
