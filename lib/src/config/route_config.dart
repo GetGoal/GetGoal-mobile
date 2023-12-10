@@ -44,10 +44,15 @@ class RouteConfig {
         ),
       ),
       GoRoute(
-        path: Routes.taskPlanningPage,
+        path: '${Routes.taskPlanningPage}/:id',
         name: Routes.taskPlanningPage,
-        builder: (context, state) => TaskPlanningPage(
-          tasks: state.extra as List<Task>,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            taskPlanningBloc,
+          ],
+          child: TaskPlanningPage(
+            programId: state.pathParameters['id'],
+          ),
         ),
       ),
     ],

@@ -14,4 +14,9 @@ abstract class TaskApiService {
   Future<HttpResponse<TaskResponse>> getTaskByUser(
     @Body() TaskUserRequest requestBody,
   );
+
+  @GET('/v1/tasks/plan/{id}')
+  Future<HttpResponse<TaskResponse>> getTaskByProgramId(
+    @Path('id') String programId,
+  );
 }

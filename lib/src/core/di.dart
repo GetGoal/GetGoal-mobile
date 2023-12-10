@@ -19,7 +19,9 @@ import '../features/program/presentation/bloc/program_info/program_info_bloc.dar
 import '../features/task/data/repositories/task_repository_impl.dart';
 import '../features/task/data/sources/api/task_api_service.dart';
 import '../features/task/domain/repositories/task_repository.dart';
+import '../features/task/domain/usecases/task/get_task_by_program_id.dart';
 import '../features/task/domain/usecases/task/get_task_by_user_usecase.dart';
+import '../features/task/presentation/bloc/task_planning/task_planning_bloc.dart';
 import '../features/task/presentation/screens/home/bloc/date_timeline/date_timeline_bloc.dart';
 import '../features/task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import 'dio_client.dart';
@@ -71,6 +73,8 @@ Future<void> initializeDependencies() async {
   );
   getIt.registerFactory<DateTimelineBloc>(() => DateTimelineBloc());
   getIt.registerFactory<TodoBloc>(() => TodoBloc(getIt()));
+  getIt.registerFactory<TaskPlanningBloc>(() => TaskPlanningBloc(getIt()));
 
   getIt.registerLazySingleton(() => GetTaskByUserUsecase(getIt()));
+  getIt.registerLazySingleton(() => GetTaskByProgramIdUsecase(getIt()));
 }

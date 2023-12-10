@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -24,6 +23,30 @@ class TaskRepositoryImpl implements TaskRepository {
           params: TaskUserRequestParameters(email: email, date: date),
         ),
       );
+
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          httpResponse.data.task!.tasks!.map((e) => e.taskToEntity()).toList(),
+        );
+      } else {
+        return DataFailed(
+          DioException(
+            error: httpResponse.response.statusMessage,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse,
+            requestOptions: httpResponse.response.requestOptions,
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return DataFailed(e);
+    }
+  }
+
+  @override
+  Future<DataState<List<Task>>> getTaskByProgramId(String programId) async {
+    try {
+      final httpResponse = await _taskApiService.getTaskByProgramId(programId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
