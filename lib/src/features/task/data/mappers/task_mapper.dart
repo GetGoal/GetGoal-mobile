@@ -1,7 +1,7 @@
 import '../../domain/models/task.dart';
-import '../sources/api/task_response.dart';
+import '../models/response/task_response.dart';
 
-extension ProgramMapper on TaskResponse {
+extension ProgramMapper on TaskModel {
   Task taskToEntity() => Task(
         taskId: taskId ?? 0,
         taskName: taskName ?? '',

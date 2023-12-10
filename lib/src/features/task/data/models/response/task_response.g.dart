@@ -7,6 +7,29 @@ part of 'task_response.dart';
 // **************************************************************************
 
 TaskResponse _$TaskResponseFromJson(Map<String, dynamic> json) => TaskResponse(
+      task: json['Task'] == null
+          ? null
+          : TaskInfo.fromJson(json['Task'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TaskResponseToJson(TaskResponse instance) =>
+    <String, dynamic>{
+      'Task': instance.task,
+    };
+
+TaskInfo _$TaskInfoFromJson(Map<String, dynamic> json) => TaskInfo(
+      count: json['count'] as int?,
+      tasks: (json['tasks'] as List<dynamic>?)
+          ?.map((e) => TaskModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$TaskInfoToJson(TaskInfo instance) => <String, dynamic>{
+      'count': instance.count,
+      'tasks': instance.tasks,
+    };
+
+TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => TaskModel(
       taskId: json['task_id'] as int?,
       taskName: json['task_name'] as String?,
       taskStatus: json['task_status'] as int?,
@@ -23,8 +46,7 @@ TaskResponse _$TaskResponseFromJson(Map<String, dynamic> json) => TaskResponse(
       updatedAt: json['updated_at'] as String?,
     );
 
-Map<String, dynamic> _$TaskResponseToJson(TaskResponse instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$TaskModelToJson(TaskModel instance) => <String, dynamic>{
       'task_id': instance.taskId,
       'task_name': instance.taskName,
       'task_status': instance.taskStatus,

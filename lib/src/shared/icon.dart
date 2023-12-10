@@ -11,4 +11,20 @@ class AppIcon {
   static const String duration_time_icon =
       'assets/icons/duration_time_icon.svg';
   static const String edit_task_icon = 'assets/icons/edit_task_icon.svg';
+  static const String check_icon = 'assets/icons/check_icon.svg';
+  static const String bottom_nav_home = 'assets/icons/bottom_nav_home_icon.svg';
+  static const String bottom_nav_programs =
+      'assets/icons/bottom_nav_programs_icon.svg';
+  static const String bottom_nav_add = 'assets/icons/bottom_nav_add_icon.svg';
+  static const String bottom_nav_calendar =
+      'assets/icons/bottom_nav_calendar_icon.svg';
+  static const String bottom_nav_user = 'assets/icons/bottom_nav_user_icon.svg';
+  static const String bottom_nav_home_selected =
+      'assets/icons/bottom_nav_home_selected_icon.svg';
+  static const String bottom_nav_programs_selected =
+      'assets/icons/bottom_nav_programs_selected_icon.svg';
+  static const String bottom_nav_calendar_selected =
+      'assets/icons/bottom_nav_calendar_selected_icon.svg';
+  static const String bottom_nav_user_selected =
+      'assets/icons/bottom_nav_user_selected_icon.svg';
 }

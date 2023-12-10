@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../features/landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../features/program/data/repositories/program_filter_repository_impl.dart';
 import '../features/program/data/repositories/program_repository_impl.dart';
 import '../features/program/data/sources/api/program_api_service.dart';
@@ -15,6 +16,12 @@ import '../features/program/presentation/bloc/filter_program/filter_program_bloc
 
 import '../features/program/presentation/bloc/program/program_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
+import '../features/task/data/repositories/task_repository_impl.dart';
+import '../features/task/data/sources/api/task_api_service.dart';
+import '../features/task/domain/repositories/task_repository.dart';
+import '../features/task/domain/usecases/task/get_task_by_user_usecase.dart';
+import '../features/task/presentation/screens/home/bloc/date_timeline/date_timeline_bloc.dart';
+import '../features/task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import 'dio_client.dart';
 import 'env.dart';
 
@@ -25,6 +32,10 @@ Future<void> initializeDependencies() async {
 
   //Dio
   getIt.registerSingleton<Dio>(Dio());
+
+  getIt.registerFactory<MainPageBloc>(
+    () => MainPageBloc(),
+  );
 
   //Program feature
   getIt.registerLazySingleton<ProgramFilterApiService>(
@@ -52,4 +63,14 @@ Future<void> initializeDependencies() async {
 
   getIt.registerLazySingleton(() => GetProgramByIdUsecase(getIt()));
   getIt.registerFactory<ProgramInfoBloc>(() => ProgramInfoBloc(getIt()));
+
+  //to-do feature
+  getIt.registerLazySingleton<TaskApiService>(() => TaskApiService(dio));
+  getIt.registerLazySingleton<TaskRepository>(
+    () => TaskRepositoryImpl(getIt()),
+  );
+  getIt.registerFactory<DateTimelineBloc>(() => DateTimelineBloc());
+  getIt.registerFactory<TodoBloc>(() => TodoBloc(getIt()));
+
+  getIt.registerLazySingleton(() => GetTaskByUserUsecase(getIt()));
 }
