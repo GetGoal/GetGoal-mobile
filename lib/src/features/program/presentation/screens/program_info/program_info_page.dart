@@ -288,8 +288,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
             context.pop();
           } else {
             context.push(
-              '/task_planning',
-              extra: tasks,
+              '/task_planning/${widget.programId}',
             );
           }
         },

@@ -4,7 +4,36 @@ part 'task_response.g.dart';
 
 @JsonSerializable()
 class TaskResponse {
-  TaskResponse({
+  TaskResponse({required this.task});
+
+  factory TaskResponse.fromJson(Map<String, dynamic> json) =>
+      _$TaskResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TaskResponseToJson(this);
+
+  @JsonKey(name: 'Task')
+  final TaskInfo? task;
+}
+
+@JsonSerializable()
+class TaskInfo {
+  TaskInfo({required this.count, required this.tasks});
+
+  factory TaskInfo.fromJson(Map<String, dynamic> json) =>
+      _$TaskInfoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TaskInfoToJson(this);
+
+  @JsonKey(name: 'count')
+  final int? count;
+
+  @JsonKey(name: 'tasks')
+  final List<TaskModel>? tasks;
+}
+
+@JsonSerializable()
+class TaskModel {
+  TaskModel({
     required this.taskId,
     required this.taskName,
     required this.taskStatus,
@@ -21,10 +50,10 @@ class TaskResponse {
     required this.updatedAt,
   });
 
-  factory TaskResponse.fromJson(Map<String, dynamic> json) =>
-      _$TaskResponseFromJson(json);
+  factory TaskModel.fromJson(Map<String, dynamic> json) =>
+      _$TaskModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TaskResponseToJson(this);
+  Map<String, dynamic> toJson() => _$TaskModelToJson(this);
 
   @JsonKey(name: 'task_id')
   final int? taskId;

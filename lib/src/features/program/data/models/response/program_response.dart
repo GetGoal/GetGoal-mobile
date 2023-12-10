@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../task/data/sources/api/task_response.dart';
+import '../../../../task/data/models/response/task_response.dart';
 import 'program_filter_response.dart';
 
 part 'program_response.g.dart';
@@ -91,5 +91,5 @@ class ProgramModel {
   final List<Label>? labels;
 
   @JsonKey(name: 'tasks')
-  final List<TaskResponse>? tasks;
+  final List<TaskModel>? tasks;
 }

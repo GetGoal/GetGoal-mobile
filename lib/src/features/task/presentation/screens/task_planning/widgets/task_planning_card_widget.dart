@@ -12,13 +12,11 @@ class TaskPlanningCard extends StatelessWidget {
     required this.taskNumber,
     required this.taskName,
     this.startTime,
-    this.endTime,
   });
 
   final int taskNumber;
   final String taskName;
   final String? startTime;
-  final String? endTime;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +58,6 @@ class TaskPlanningCard extends StatelessWidget {
 
   Widget _taskDetail() {
     bool isStartTimeEmpty = startTime!.isEmpty;
-    bool isEndTimeEmpty = endTime!.isEmpty;
 
     return Expanded(
       child: Column(
@@ -103,30 +100,30 @@ class TaskPlanningCard extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Row(
-            children: [
-              SvgPicture.asset(
-                AppIcon.duration_time_icon,
-                height: 16,
-                colorFilter: isEndTimeEmpty
-                    ? ColorFilter.mode(AppColors.red, BlendMode.srcIn)
-                    : ColorFilter.mode(AppColors.description, BlendMode.srcIn),
-              ),
-              const SizedBox(
-                width: 4,
-              ),
-              Text(
-                isEndTimeEmpty
-                    ? '-'
-                    : DateFormat('dd/MM/yyyy').format(DateTime.parse(endTime!)),
-                style: isEndTimeEmpty
-                    ? description().copyWith(color: AppColors.red)
-                    : description().copyWith(color: AppColors.description),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     SvgPicture.asset(
+          //       AppIcon.duration_time_icon,
+          //       height: 16,
+          //       colorFilter: isEndTimeEmpty
+          //           ? ColorFilter.mode(AppColors.red, BlendMode.srcIn)
+          //           : ColorFilter.mode(AppColors.description, BlendMode.srcIn),
+          //     ),
+          //     const SizedBox(
+          //       width: 4,
+          //     ),
+          //     Text(
+          //       isEndTimeEmpty
+          //           ? '-'
+          //           : DateFormat('dd/MM/yyyy').format(DateTime.parse(endTime!)),
+          //       style: isEndTimeEmpty
+          //           ? description().copyWith(color: AppColors.red)
+          //           : description().copyWith(color: AppColors.description),
+          //       overflow: TextOverflow.ellipsis,
+          //       maxLines: 2,
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

@@ -1,7 +1,10 @@
-import '../../domain/models/task.dart';
-import '../sources/api/task_response.dart';
+import 'package:intl/intl.dart';
 
-extension ProgramMapper on TaskResponse {
+import '../../domain/models/task.dart';
+import '../models/request/create_join_program_task_user_request.dart';
+import '../models/response/task_response.dart';
+
+extension ProgramMapper on TaskModel {
   Task taskToEntity() => Task(
         taskId: taskId ?? 0,
         taskName: taskName ?? '',
@@ -16,5 +19,16 @@ extension ProgramMapper on TaskResponse {
         taskDescription: taskDescription ?? '',
         link: link ?? '',
         mediaUrl: mediaUrl ?? '',
+      );
+}
+
+extension TaskToJoinProgramTaskRequest on Task {
+  JoinProramTaskReqeust taskToJoinProgramTaskRequest() => JoinProramTaskReqeust(
+        isSetNotification: isSetNotification ?? 0,
+        startTime: startTime != null
+            ? DateFormat('yyyy-MM-dd hh:mm:ss')
+                .format(DateTime.parse(startTime!))
+            : DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now()),
+        timeBeforeNotify: timeBeforeNotify ?? 0,
       );
 }

@@ -1,5 +1,3 @@
-// ignore_for_file: require_trailing_commas
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -87,7 +85,7 @@ class _ProgramPageState extends State<ProgramPage> {
           case ProgramStateError():
             return _programError();
           default:
-            return _programLoading();
+            return Container();
         }
       },
     );
@@ -268,8 +266,11 @@ class _ProgramPageState extends State<ProgramPage> {
         case 2:
           break;
         default:
-          _programBloc.add(ProgramEvent.filterClicked(
-              labelName: labelList[index].labelName!));
+          _programBloc.add(
+            ProgramEvent.filterClicked(
+              labelName: labelList[index].labelName!,
+            ),
+          );
       }
     }
   }

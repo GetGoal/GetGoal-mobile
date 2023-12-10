@@ -56,7 +56,7 @@ ProgramModel _$ProgramModelFromJson(Map<String, dynamic> json) => ProgramModel(
           ?.map((e) => Label.fromJson(e as Map<String, dynamic>))
           .toList(),
       tasks: (json['tasks'] as List<dynamic>?)
-          ?.map((e) => TaskResponse.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TaskModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

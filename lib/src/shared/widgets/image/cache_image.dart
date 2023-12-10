@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../core/cache_manager.dart';
-
 class CacheImage extends StatelessWidget {
   const CacheImage({super.key, this.programImage, this.radius});
 
@@ -13,8 +11,8 @@ class CacheImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      cacheManager: CustomCacheManager.instance,
-      fadeInDuration: const Duration(milliseconds: 1),
+      key: UniqueKey(),
+      fadeInDuration: const Duration(milliseconds: 100),
       fadeOutCurve: Curves.fastLinearToSlowEaseIn,
       imageUrl: programImage!,
       imageBuilder: (context, imageProvider) => Container(

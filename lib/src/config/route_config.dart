@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../features/home/presentation/screens/main/main_page.dart';
+import '../features/landing/presentation/screens/main/main_page.dart';
 import '../features/program/presentation/screens/program_info/program_info_page.dart';
 import '../features/task/domain/models/task.dart';
 import '../features/task/presentation/screens/task_planning/task_planning_page.dart';
@@ -21,9 +21,12 @@ class RouteConfig {
         path: Routes.mainPage,
         builder: (context, state) => MultiBlocProvider(
           providers: [
+            mainPageBloc,
             filterProgramBloc,
             programBloc,
             programInfoBloc,
+            dateTimelineBloc,
+            todoBloc
           ],
           child: const MainPage(),
         ),
@@ -41,10 +44,15 @@ class RouteConfig {
         ),
       ),
       GoRoute(
-        path: Routes.taskPlanningPage,
+        path: '${Routes.taskPlanningPage}/:id',
         name: Routes.taskPlanningPage,
-        builder: (context, state) => TaskPlanningPage(
-          tasks: state.extra as List<Task>,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            taskPlanningBloc,
+          ],
+          child: TaskPlanningPage(
+            programId: state.pathParameters['id'],
+          ),
         ),
       ),
     ],
