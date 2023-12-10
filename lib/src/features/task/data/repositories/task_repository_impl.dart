@@ -26,7 +26,6 @@ class TaskRepositoryImpl implements TaskRepository {
       );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        log(httpResponse.data.task!.tasks!.toString());
         return DataSuccess(
           httpResponse.data.task!.tasks!.map((e) => e.taskToEntity()).toList(),
         );

@@ -34,7 +34,6 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<MainPageBloc, MainPageState>(
       builder: (context, state) {
-        log(state.toString());
         return Scaffold(
           appBar: AppBar(
             title: Padding(
