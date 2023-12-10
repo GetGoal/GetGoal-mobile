@@ -7,5 +7,6 @@ class TaskPlanningEvent with _$TaskPlanningEvent {
   }) = StartedEvent;
   const factory TaskPlanningEvent.created({
     required List<Task> tasks,
+    required String programId,
   }) = CreatedEvent;
 }

@@ -25,8 +25,10 @@ extension ProgramMapper on TaskModel {
 extension TaskToJoinProgramTaskRequest on Task {
   JoinProramTaskReqeust taskToJoinProgramTaskRequest() => JoinProramTaskReqeust(
         isSetNotification: isSetNotification ?? 0,
-        startTime:
-            startTime ?? DateFormat('yyyy-MM-dd hh:mm').format(DateTime.now()),
+        startTime: startTime != null
+            ? DateFormat('yyyy-MM-dd hh:mm:ss')
+                .format(DateTime.parse(startTime!))
+            : DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now()),
         timeBeforeNotify: timeBeforeNotify ?? 0,
       );
 }

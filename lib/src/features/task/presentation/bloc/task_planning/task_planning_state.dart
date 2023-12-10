@@ -9,4 +9,9 @@ class TaskPlanningState with _$TaskPlanningState {
   }) = TaskPlanningStateLoadedSuccess;
   const factory TaskPlanningState.empty() = TaskPlanningStateEmpty;
   const factory TaskPlanningState.error() = TaskPlanningStateError;
+
+  const factory TaskPlanningState.joinedProgram() =
+      TaskPlanningStateJoinedProgram;
+  const factory TaskPlanningState.joinedProgramError() =
+      TaskPlanningStateJoinedProgramError;
 }

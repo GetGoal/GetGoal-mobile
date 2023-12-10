@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -35,7 +38,26 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TaskPlanningBloc, TaskPlanningState>(
+    return BlocConsumer<TaskPlanningBloc, TaskPlanningState>(
+      buildWhen: (previous, current) =>
+          current is! TaskPlanningStateJoinedProgramError,
+      listener: (context, state) {
+        switch (state) {
+          case TaskPlanningStateJoinedProgram():
+            log('program joined');
+            scheduleMicrotask(() async {
+              await Future.delayed(const Duration(seconds: 1));
+              // ignore: use_build_context_synchronously
+              context.pop();
+            });
+            break;
+          case TaskPlanningStateJoinedProgramError():
+            _taskPlanningBloc
+                .add(TaskPlanningEvent.started(programId: widget.programId!));
+            log('error');
+          default:
+        }
+      },
       builder: (context, state) {
         switch (state) {
           case TaskPlanningStateInitial():
@@ -48,6 +70,8 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
             return _tasksEmpty(<Task>[]);
           case TaskPlanningStateError():
             return _tasksEmpty(<Task>[]);
+          case TaskPlanningStateJoinedProgram():
+            return const LoadingScreen();
           default:
             return Container();
         }
@@ -147,6 +171,12 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
             context.pop();
             return;
           }
+          _taskPlanningBloc.add(
+            TaskPlanningEvent.created(
+              tasks: tasks,
+              programId: widget.programId!,
+            ),
+          );
         },
       ),
     );
