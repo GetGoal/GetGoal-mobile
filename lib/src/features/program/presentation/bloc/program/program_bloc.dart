@@ -92,8 +92,6 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
       final programList =
           await _getProgramBySearchUsecase.call(params: event.text);
 
-      log(programList.data.toString());
-
       if (programList.data!.isEmpty) {
         emit(const ProgramState.searchEmpty());
         return;
