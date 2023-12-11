@@ -148,6 +148,7 @@ class _HomePageState extends State<HomePage> {
                       taskStatus: getTaskStatus(tasks[index].taskStatus!),
                       taskName: tasks[index].taskName,
                       taskDescription: tasks[index].taskDescription,
+                      startTime: tasks[index].startTime,
                     ),
                   );
                 },

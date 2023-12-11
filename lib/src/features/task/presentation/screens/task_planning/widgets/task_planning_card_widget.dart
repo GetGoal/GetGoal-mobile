@@ -100,30 +100,23 @@ class TaskPlanningCard extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          // Row(
-          //   children: [
-          //     SvgPicture.asset(
-          //       AppIcon.duration_time_icon,
-          //       height: 16,
-          //       colorFilter: isEndTimeEmpty
-          //           ? ColorFilter.mode(AppColors.red, BlendMode.srcIn)
-          //           : ColorFilter.mode(AppColors.description, BlendMode.srcIn),
-          //     ),
-          //     const SizedBox(
-          //       width: 4,
-          //     ),
-          //     Text(
-          //       isEndTimeEmpty
-          //           ? '-'
-          //           : DateFormat('dd/MM/yyyy').format(DateTime.parse(endTime!)),
-          //       style: isEndTimeEmpty
-          //           ? description().copyWith(color: AppColors.red)
-          //           : description().copyWith(color: AppColors.description),
-          //       overflow: TextOverflow.ellipsis,
-          //       maxLines: 2,
-          //     ),
-          //   ],
-          // ),
+          Row(
+            children: [
+              SvgPicture.asset(
+                AppIcon.duration_time_icon,
+                height: 16,
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              Text(
+                DateFormat.jm().format(DateTime.parse(startTime!)),
+                overflow: TextOverflow.ellipsis,
+                style: description().copyWith(color: AppColors.description),
+                maxLines: 2,
+              ),
+            ],
+          ),
         ],
       ),
     );
