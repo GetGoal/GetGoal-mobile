@@ -8,5 +8,6 @@ class FilterProgramState with _$FilterProgramState {
     required List<ProgramFilter> labels,
     @Default(0) int selectedFilter,
   }) = FilterProgramStateLoadedSuccess;
+  const factory FilterProgramState.hide() = FilterProgramStateHide;
   const factory FilterProgramState.error() = FilterProgramStateError;
 }

@@ -15,6 +15,7 @@ class FilterProgramBloc extends Bloc<FilterProgramEvent, FilterProgramState> {
       : super(const FilterProgramState.initial()) {
     on<FilterProgramStarted>(_onFilterProgramStarted);
     on<FilterProgramClicked>(_onFilterClicked);
+    on<FilterProgramHided>(_onFilterHide);
   }
 
   final GetProgramFilterUsecase _getProgramFilterUsecase;
@@ -58,5 +59,12 @@ class FilterProgramBloc extends Bloc<FilterProgramEvent, FilterProgramState> {
         selectedFilter: event.selectedFilter,
       ),
     );
+  }
+
+  FutureOr<void> _onFilterHide(
+    FilterProgramHided event,
+    Emitter<FilterProgramState> emit,
+  ) {
+    emit(const FilterProgramState.hide());
   }
 }

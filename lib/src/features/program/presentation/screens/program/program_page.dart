@@ -67,6 +67,8 @@ class _ProgramPageState extends State<ProgramPage> {
               :final selectedFilter
             ):
             return _filterBarLoadedSuccess(labels, selectedFilter);
+          case FilterProgramStateHide():
+            return Container();
           case FilterProgramStateError():
             return _filterBarError();
           default:
@@ -289,9 +291,14 @@ class _ProgramPageState extends State<ProgramPage> {
       child: TextField(
         onTap: () {
           _programBloc.add(const ProgramEvent.searching());
+          _filterProgramBloc.add(const FilterProgramEvent.hided());
         },
         onSubmitted: (value) {
-          if (value.trim().isEmpty) return;
+          if (value.trim().isEmpty) {
+            _filterProgramBloc.add(const FilterProgramEvent.started());
+            _programBloc.add(const ProgramEvent.started());
+            return;
+          }
           _programBloc.add(ProgramEvent.searchProgram(text: value));
         },
         controller: _searchController,
@@ -315,6 +322,7 @@ class _ProgramPageState extends State<ProgramPage> {
               : IconButton(
                   onPressed: () {
                     _programBloc.add(const ProgramEvent.started());
+                    _filterProgramBloc.add(const FilterProgramEvent.started());
                     _searchController.clear();
                   },
                   icon: const Icon(Icons.cancel),
