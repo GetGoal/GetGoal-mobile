@@ -25,8 +25,6 @@ class FilterProgramBloc extends Bloc<FilterProgramEvent, FilterProgramState> {
     Emitter<FilterProgramState> emit,
   ) async {
     try {
-      emit(const FilterProgramState.loading());
-
       final filterList = await _getProgramFilterUsecase();
 
       if (filterList.data!.isEmpty) {

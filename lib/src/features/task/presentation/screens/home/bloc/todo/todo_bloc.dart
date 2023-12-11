@@ -29,8 +29,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     Emitter<TodoState> emit,
   ) async {
     try {
-      emit(const TodoState.loading());
-
       final taskList = await _getTaskByUserUsecase.call(
         params: 'kheintze0@gg.com',
         date: formatForRequest(DateTime.now()),
