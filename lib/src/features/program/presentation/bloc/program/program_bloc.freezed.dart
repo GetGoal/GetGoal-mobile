@@ -21,6 +21,8 @@ mixin _$ProgramEvent {
     required TResult Function() started,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
+    required TResult Function() searching,
+    required TResult Function(String text) searchProgram,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +30,8 @@ mixin _$ProgramEvent {
     TResult? Function()? started,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
+    TResult? Function()? searching,
+    TResult? Function(String text)? searchProgram,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +39,8 @@ mixin _$ProgramEvent {
     TResult Function()? started,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
+    TResult Function()? searching,
+    TResult Function(String text)? searchProgram,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,8 @@ mixin _$ProgramEvent {
     required TResult Function(ProgramEventStart value) started,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
+    required TResult Function(ProgramEventSearching value) searching,
+    required TResult Function(ProgramEventSearchProgram value) searchProgram,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +58,8 @@ mixin _$ProgramEvent {
     TResult? Function(ProgramEventStart value)? started,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult? Function(ProgramEventSearching value)? searching,
+    TResult? Function(ProgramEventSearchProgram value)? searchProgram,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +67,8 @@ mixin _$ProgramEvent {
     TResult Function(ProgramEventStart value)? started,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult Function(ProgramEventSearching value)? searching,
+    TResult Function(ProgramEventSearchProgram value)? searchProgram,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +133,8 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
     required TResult Function() started,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
+    required TResult Function() searching,
+    required TResult Function(String text) searchProgram,
   }) {
     return started();
   }
@@ -131,6 +145,8 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
     TResult? Function()? started,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
+    TResult? Function()? searching,
+    TResult? Function(String text)? searchProgram,
   }) {
     return started?.call();
   }
@@ -141,6 +157,8 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
     TResult Function()? started,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
+    TResult Function()? searching,
+    TResult Function(String text)? searchProgram,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -155,6 +173,8 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
     required TResult Function(ProgramEventStart value) started,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
+    required TResult Function(ProgramEventSearching value) searching,
+    required TResult Function(ProgramEventSearchProgram value) searchProgram,
   }) {
     return started(this);
   }
@@ -165,6 +185,8 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
     TResult? Function(ProgramEventStart value)? started,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult? Function(ProgramEventSearching value)? searching,
+    TResult? Function(ProgramEventSearchProgram value)? searchProgram,
   }) {
     return started?.call(this);
   }
@@ -175,6 +197,8 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
     TResult Function(ProgramEventStart value)? started,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult Function(ProgramEventSearching value)? searching,
+    TResult Function(ProgramEventSearchProgram value)? searchProgram,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -230,6 +254,8 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
     required TResult Function() started,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
+    required TResult Function() searching,
+    required TResult Function(String text) searchProgram,
   }) {
     return clicked();
   }
@@ -240,6 +266,8 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
     TResult? Function()? started,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
+    TResult? Function()? searching,
+    TResult? Function(String text)? searchProgram,
   }) {
     return clicked?.call();
   }
@@ -250,6 +278,8 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
     TResult Function()? started,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
+    TResult Function()? searching,
+    TResult Function(String text)? searchProgram,
     required TResult orElse(),
   }) {
     if (clicked != null) {
@@ -264,6 +294,8 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
     required TResult Function(ProgramEventStart value) started,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
+    required TResult Function(ProgramEventSearching value) searching,
+    required TResult Function(ProgramEventSearchProgram value) searchProgram,
   }) {
     return clicked(this);
   }
@@ -274,6 +306,8 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
     TResult? Function(ProgramEventStart value)? started,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult? Function(ProgramEventSearching value)? searching,
+    TResult? Function(ProgramEventSearchProgram value)? searchProgram,
   }) {
     return clicked?.call(this);
   }
@@ -284,6 +318,8 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
     TResult Function(ProgramEventStart value)? started,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult Function(ProgramEventSearching value)? searching,
+    TResult Function(ProgramEventSearchProgram value)? searchProgram,
     required TResult orElse(),
   }) {
     if (clicked != null) {
@@ -368,6 +404,8 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
     required TResult Function() started,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
+    required TResult Function() searching,
+    required TResult Function(String text) searchProgram,
   }) {
     return filterClicked(labelName);
   }
@@ -378,6 +416,8 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
     TResult? Function()? started,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
+    TResult? Function()? searching,
+    TResult? Function(String text)? searchProgram,
   }) {
     return filterClicked?.call(labelName);
   }
@@ -388,6 +428,8 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
     TResult Function()? started,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
+    TResult Function()? searching,
+    TResult Function(String text)? searchProgram,
     required TResult orElse(),
   }) {
     if (filterClicked != null) {
@@ -402,6 +444,8 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
     required TResult Function(ProgramEventStart value) started,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
+    required TResult Function(ProgramEventSearching value) searching,
+    required TResult Function(ProgramEventSearchProgram value) searchProgram,
   }) {
     return filterClicked(this);
   }
@@ -412,6 +456,8 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
     TResult? Function(ProgramEventStart value)? started,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult? Function(ProgramEventSearching value)? searching,
+    TResult? Function(ProgramEventSearchProgram value)? searchProgram,
   }) {
     return filterClicked?.call(this);
   }
@@ -422,6 +468,8 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
     TResult Function(ProgramEventStart value)? started,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult Function(ProgramEventSearching value)? searching,
+    TResult Function(ProgramEventSearchProgram value)? searchProgram,
     required TResult orElse(),
   }) {
     if (filterClicked != null) {
@@ -442,6 +490,283 @@ abstract class ProgramEventFilterClicked implements ProgramEvent {
 }
 
 /// @nodoc
+abstract class _$$ProgramEventSearchingImplCopyWith<$Res> {
+  factory _$$ProgramEventSearchingImplCopyWith(
+          _$ProgramEventSearchingImpl value,
+          $Res Function(_$ProgramEventSearchingImpl) then) =
+      __$$ProgramEventSearchingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ProgramEventSearchingImplCopyWithImpl<$Res>
+    extends _$ProgramEventCopyWithImpl<$Res, _$ProgramEventSearchingImpl>
+    implements _$$ProgramEventSearchingImplCopyWith<$Res> {
+  __$$ProgramEventSearchingImplCopyWithImpl(_$ProgramEventSearchingImpl _value,
+      $Res Function(_$ProgramEventSearchingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ProgramEventSearchingImpl implements ProgramEventSearching {
+  const _$ProgramEventSearchingImpl();
+
+  @override
+  String toString() {
+    return 'ProgramEvent.searching()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProgramEventSearchingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() clicked,
+    required TResult Function(String labelName) filterClicked,
+    required TResult Function() searching,
+    required TResult Function(String text) searchProgram,
+  }) {
+    return searching();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? clicked,
+    TResult? Function(String labelName)? filterClicked,
+    TResult? Function()? searching,
+    TResult? Function(String text)? searchProgram,
+  }) {
+    return searching?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? clicked,
+    TResult Function(String labelName)? filterClicked,
+    TResult Function()? searching,
+    TResult Function(String text)? searchProgram,
+    required TResult orElse(),
+  }) {
+    if (searching != null) {
+      return searching();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventClicked value) clicked,
+    required TResult Function(ProgramEventFilterClicked value) filterClicked,
+    required TResult Function(ProgramEventSearching value) searching,
+    required TResult Function(ProgramEventSearchProgram value) searchProgram,
+  }) {
+    return searching(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventClicked value)? clicked,
+    TResult? Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult? Function(ProgramEventSearching value)? searching,
+    TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+  }) {
+    return searching?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventClicked value)? clicked,
+    TResult Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult Function(ProgramEventSearching value)? searching,
+    TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    required TResult orElse(),
+  }) {
+    if (searching != null) {
+      return searching(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProgramEventSearching implements ProgramEvent {
+  const factory ProgramEventSearching() = _$ProgramEventSearchingImpl;
+}
+
+/// @nodoc
+abstract class _$$ProgramEventSearchProgramImplCopyWith<$Res> {
+  factory _$$ProgramEventSearchProgramImplCopyWith(
+          _$ProgramEventSearchProgramImpl value,
+          $Res Function(_$ProgramEventSearchProgramImpl) then) =
+      __$$ProgramEventSearchProgramImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String text});
+}
+
+/// @nodoc
+class __$$ProgramEventSearchProgramImplCopyWithImpl<$Res>
+    extends _$ProgramEventCopyWithImpl<$Res, _$ProgramEventSearchProgramImpl>
+    implements _$$ProgramEventSearchProgramImplCopyWith<$Res> {
+  __$$ProgramEventSearchProgramImplCopyWithImpl(
+      _$ProgramEventSearchProgramImpl _value,
+      $Res Function(_$ProgramEventSearchProgramImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = null,
+  }) {
+    return _then(_$ProgramEventSearchProgramImpl(
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ProgramEventSearchProgramImpl implements ProgramEventSearchProgram {
+  const _$ProgramEventSearchProgramImpl({required this.text});
+
+  @override
+  final String text;
+
+  @override
+  String toString() {
+    return 'ProgramEvent.searchProgram(text: $text)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProgramEventSearchProgramImpl &&
+            (identical(other.text, text) || other.text == text));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, text);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProgramEventSearchProgramImplCopyWith<_$ProgramEventSearchProgramImpl>
+      get copyWith => __$$ProgramEventSearchProgramImplCopyWithImpl<
+          _$ProgramEventSearchProgramImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() clicked,
+    required TResult Function(String labelName) filterClicked,
+    required TResult Function() searching,
+    required TResult Function(String text) searchProgram,
+  }) {
+    return searchProgram(text);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? clicked,
+    TResult? Function(String labelName)? filterClicked,
+    TResult? Function()? searching,
+    TResult? Function(String text)? searchProgram,
+  }) {
+    return searchProgram?.call(text);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? clicked,
+    TResult Function(String labelName)? filterClicked,
+    TResult Function()? searching,
+    TResult Function(String text)? searchProgram,
+    required TResult orElse(),
+  }) {
+    if (searchProgram != null) {
+      return searchProgram(text);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventClicked value) clicked,
+    required TResult Function(ProgramEventFilterClicked value) filterClicked,
+    required TResult Function(ProgramEventSearching value) searching,
+    required TResult Function(ProgramEventSearchProgram value) searchProgram,
+  }) {
+    return searchProgram(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventClicked value)? clicked,
+    TResult? Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult? Function(ProgramEventSearching value)? searching,
+    TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+  }) {
+    return searchProgram?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventClicked value)? clicked,
+    TResult Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult Function(ProgramEventSearching value)? searching,
+    TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    required TResult orElse(),
+  }) {
+    if (searchProgram != null) {
+      return searchProgram(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProgramEventSearchProgram implements ProgramEvent {
+  const factory ProgramEventSearchProgram({required final String text}) =
+      _$ProgramEventSearchProgramImpl;
+
+  String get text;
+  @JsonKey(ignore: true)
+  _$$ProgramEventSearchProgramImplCopyWith<_$ProgramEventSearchProgramImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ProgramState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -450,6 +775,7 @@ mixin _$ProgramState {
     required TResult Function(List<Program> programs) loadedSuccess,
     required TResult Function() programEmpty,
     required TResult Function() error,
+    required TResult Function() searchEmpty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -459,6 +785,7 @@ mixin _$ProgramState {
     TResult? Function(List<Program> programs)? loadedSuccess,
     TResult? Function()? programEmpty,
     TResult? Function()? error,
+    TResult? Function()? searchEmpty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -468,6 +795,7 @@ mixin _$ProgramState {
     TResult Function(List<Program> programs)? loadedSuccess,
     TResult Function()? programEmpty,
     TResult Function()? error,
+    TResult Function()? searchEmpty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -478,6 +806,7 @@ mixin _$ProgramState {
     required TResult Function(ProgramStateLoadedSuccess value) loadedSuccess,
     required TResult Function(ProgramStateEmpty value) programEmpty,
     required TResult Function(ProgramStateError value) error,
+    required TResult Function(ProgramStateSearchEmpty value) searchEmpty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -487,6 +816,7 @@ mixin _$ProgramState {
     TResult? Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(ProgramStateEmpty value)? programEmpty,
     TResult? Function(ProgramStateError value)? error,
+    TResult? Function(ProgramStateSearchEmpty value)? searchEmpty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -496,6 +826,7 @@ mixin _$ProgramState {
     TResult Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult Function(ProgramStateEmpty value)? programEmpty,
     TResult Function(ProgramStateError value)? error,
+    TResult Function(ProgramStateSearchEmpty value)? searchEmpty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -562,6 +893,7 @@ class _$ProgramStateInitalImpl implements ProgramStateInital {
     required TResult Function(List<Program> programs) loadedSuccess,
     required TResult Function() programEmpty,
     required TResult Function() error,
+    required TResult Function() searchEmpty,
   }) {
     return initial();
   }
@@ -574,6 +906,7 @@ class _$ProgramStateInitalImpl implements ProgramStateInital {
     TResult? Function(List<Program> programs)? loadedSuccess,
     TResult? Function()? programEmpty,
     TResult? Function()? error,
+    TResult? Function()? searchEmpty,
   }) {
     return initial?.call();
   }
@@ -586,6 +919,7 @@ class _$ProgramStateInitalImpl implements ProgramStateInital {
     TResult Function(List<Program> programs)? loadedSuccess,
     TResult Function()? programEmpty,
     TResult Function()? error,
+    TResult Function()? searchEmpty,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -602,6 +936,7 @@ class _$ProgramStateInitalImpl implements ProgramStateInital {
     required TResult Function(ProgramStateLoadedSuccess value) loadedSuccess,
     required TResult Function(ProgramStateEmpty value) programEmpty,
     required TResult Function(ProgramStateError value) error,
+    required TResult Function(ProgramStateSearchEmpty value) searchEmpty,
   }) {
     return initial(this);
   }
@@ -614,6 +949,7 @@ class _$ProgramStateInitalImpl implements ProgramStateInital {
     TResult? Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(ProgramStateEmpty value)? programEmpty,
     TResult? Function(ProgramStateError value)? error,
+    TResult? Function(ProgramStateSearchEmpty value)? searchEmpty,
   }) {
     return initial?.call(this);
   }
@@ -626,6 +962,7 @@ class _$ProgramStateInitalImpl implements ProgramStateInital {
     TResult Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult Function(ProgramStateEmpty value)? programEmpty,
     TResult Function(ProgramStateError value)? error,
+    TResult Function(ProgramStateSearchEmpty value)? searchEmpty,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -683,6 +1020,7 @@ class _$ProgramStateLoadingImpl implements ProgramStateLoading {
     required TResult Function(List<Program> programs) loadedSuccess,
     required TResult Function() programEmpty,
     required TResult Function() error,
+    required TResult Function() searchEmpty,
   }) {
     return loading();
   }
@@ -695,6 +1033,7 @@ class _$ProgramStateLoadingImpl implements ProgramStateLoading {
     TResult? Function(List<Program> programs)? loadedSuccess,
     TResult? Function()? programEmpty,
     TResult? Function()? error,
+    TResult? Function()? searchEmpty,
   }) {
     return loading?.call();
   }
@@ -707,6 +1046,7 @@ class _$ProgramStateLoadingImpl implements ProgramStateLoading {
     TResult Function(List<Program> programs)? loadedSuccess,
     TResult Function()? programEmpty,
     TResult Function()? error,
+    TResult Function()? searchEmpty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -723,6 +1063,7 @@ class _$ProgramStateLoadingImpl implements ProgramStateLoading {
     required TResult Function(ProgramStateLoadedSuccess value) loadedSuccess,
     required TResult Function(ProgramStateEmpty value) programEmpty,
     required TResult Function(ProgramStateError value) error,
+    required TResult Function(ProgramStateSearchEmpty value) searchEmpty,
   }) {
     return loading(this);
   }
@@ -735,6 +1076,7 @@ class _$ProgramStateLoadingImpl implements ProgramStateLoading {
     TResult? Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(ProgramStateEmpty value)? programEmpty,
     TResult? Function(ProgramStateError value)? error,
+    TResult? Function(ProgramStateSearchEmpty value)? searchEmpty,
   }) {
     return loading?.call(this);
   }
@@ -747,6 +1089,7 @@ class _$ProgramStateLoadingImpl implements ProgramStateLoading {
     TResult Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult Function(ProgramStateEmpty value)? programEmpty,
     TResult Function(ProgramStateError value)? error,
+    TResult Function(ProgramStateSearchEmpty value)? searchEmpty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -839,6 +1182,7 @@ class _$ProgramStateLoadedSuccessImpl implements ProgramStateLoadedSuccess {
     required TResult Function(List<Program> programs) loadedSuccess,
     required TResult Function() programEmpty,
     required TResult Function() error,
+    required TResult Function() searchEmpty,
   }) {
     return loadedSuccess(programs);
   }
@@ -851,6 +1195,7 @@ class _$ProgramStateLoadedSuccessImpl implements ProgramStateLoadedSuccess {
     TResult? Function(List<Program> programs)? loadedSuccess,
     TResult? Function()? programEmpty,
     TResult? Function()? error,
+    TResult? Function()? searchEmpty,
   }) {
     return loadedSuccess?.call(programs);
   }
@@ -863,6 +1208,7 @@ class _$ProgramStateLoadedSuccessImpl implements ProgramStateLoadedSuccess {
     TResult Function(List<Program> programs)? loadedSuccess,
     TResult Function()? programEmpty,
     TResult Function()? error,
+    TResult Function()? searchEmpty,
     required TResult orElse(),
   }) {
     if (loadedSuccess != null) {
@@ -879,6 +1225,7 @@ class _$ProgramStateLoadedSuccessImpl implements ProgramStateLoadedSuccess {
     required TResult Function(ProgramStateLoadedSuccess value) loadedSuccess,
     required TResult Function(ProgramStateEmpty value) programEmpty,
     required TResult Function(ProgramStateError value) error,
+    required TResult Function(ProgramStateSearchEmpty value) searchEmpty,
   }) {
     return loadedSuccess(this);
   }
@@ -891,6 +1238,7 @@ class _$ProgramStateLoadedSuccessImpl implements ProgramStateLoadedSuccess {
     TResult? Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(ProgramStateEmpty value)? programEmpty,
     TResult? Function(ProgramStateError value)? error,
+    TResult? Function(ProgramStateSearchEmpty value)? searchEmpty,
   }) {
     return loadedSuccess?.call(this);
   }
@@ -903,6 +1251,7 @@ class _$ProgramStateLoadedSuccessImpl implements ProgramStateLoadedSuccess {
     TResult Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult Function(ProgramStateEmpty value)? programEmpty,
     TResult Function(ProgramStateError value)? error,
+    TResult Function(ProgramStateSearchEmpty value)? searchEmpty,
     required TResult orElse(),
   }) {
     if (loadedSuccess != null) {
@@ -966,6 +1315,7 @@ class _$ProgramStateEmptyImpl implements ProgramStateEmpty {
     required TResult Function(List<Program> programs) loadedSuccess,
     required TResult Function() programEmpty,
     required TResult Function() error,
+    required TResult Function() searchEmpty,
   }) {
     return programEmpty();
   }
@@ -978,6 +1328,7 @@ class _$ProgramStateEmptyImpl implements ProgramStateEmpty {
     TResult? Function(List<Program> programs)? loadedSuccess,
     TResult? Function()? programEmpty,
     TResult? Function()? error,
+    TResult? Function()? searchEmpty,
   }) {
     return programEmpty?.call();
   }
@@ -990,6 +1341,7 @@ class _$ProgramStateEmptyImpl implements ProgramStateEmpty {
     TResult Function(List<Program> programs)? loadedSuccess,
     TResult Function()? programEmpty,
     TResult Function()? error,
+    TResult Function()? searchEmpty,
     required TResult orElse(),
   }) {
     if (programEmpty != null) {
@@ -1006,6 +1358,7 @@ class _$ProgramStateEmptyImpl implements ProgramStateEmpty {
     required TResult Function(ProgramStateLoadedSuccess value) loadedSuccess,
     required TResult Function(ProgramStateEmpty value) programEmpty,
     required TResult Function(ProgramStateError value) error,
+    required TResult Function(ProgramStateSearchEmpty value) searchEmpty,
   }) {
     return programEmpty(this);
   }
@@ -1018,6 +1371,7 @@ class _$ProgramStateEmptyImpl implements ProgramStateEmpty {
     TResult? Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(ProgramStateEmpty value)? programEmpty,
     TResult? Function(ProgramStateError value)? error,
+    TResult? Function(ProgramStateSearchEmpty value)? searchEmpty,
   }) {
     return programEmpty?.call(this);
   }
@@ -1030,6 +1384,7 @@ class _$ProgramStateEmptyImpl implements ProgramStateEmpty {
     TResult Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult Function(ProgramStateEmpty value)? programEmpty,
     TResult Function(ProgramStateError value)? error,
+    TResult Function(ProgramStateSearchEmpty value)? searchEmpty,
     required TResult orElse(),
   }) {
     if (programEmpty != null) {
@@ -1086,6 +1441,7 @@ class _$ProgramStateErrorImpl implements ProgramStateError {
     required TResult Function(List<Program> programs) loadedSuccess,
     required TResult Function() programEmpty,
     required TResult Function() error,
+    required TResult Function() searchEmpty,
   }) {
     return error();
   }
@@ -1098,6 +1454,7 @@ class _$ProgramStateErrorImpl implements ProgramStateError {
     TResult? Function(List<Program> programs)? loadedSuccess,
     TResult? Function()? programEmpty,
     TResult? Function()? error,
+    TResult? Function()? searchEmpty,
   }) {
     return error?.call();
   }
@@ -1110,6 +1467,7 @@ class _$ProgramStateErrorImpl implements ProgramStateError {
     TResult Function(List<Program> programs)? loadedSuccess,
     TResult Function()? programEmpty,
     TResult Function()? error,
+    TResult Function()? searchEmpty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1126,6 +1484,7 @@ class _$ProgramStateErrorImpl implements ProgramStateError {
     required TResult Function(ProgramStateLoadedSuccess value) loadedSuccess,
     required TResult Function(ProgramStateEmpty value) programEmpty,
     required TResult Function(ProgramStateError value) error,
+    required TResult Function(ProgramStateSearchEmpty value) searchEmpty,
   }) {
     return error(this);
   }
@@ -1138,6 +1497,7 @@ class _$ProgramStateErrorImpl implements ProgramStateError {
     TResult? Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(ProgramStateEmpty value)? programEmpty,
     TResult? Function(ProgramStateError value)? error,
+    TResult? Function(ProgramStateSearchEmpty value)? searchEmpty,
   }) {
     return error?.call(this);
   }
@@ -1150,6 +1510,7 @@ class _$ProgramStateErrorImpl implements ProgramStateError {
     TResult Function(ProgramStateLoadedSuccess value)? loadedSuccess,
     TResult Function(ProgramStateEmpty value)? programEmpty,
     TResult Function(ProgramStateError value)? error,
+    TResult Function(ProgramStateSearchEmpty value)? searchEmpty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1161,4 +1522,133 @@ class _$ProgramStateErrorImpl implements ProgramStateError {
 
 abstract class ProgramStateError implements ProgramState {
   const factory ProgramStateError() = _$ProgramStateErrorImpl;
+}
+
+/// @nodoc
+abstract class _$$ProgramStateSearchEmptyImplCopyWith<$Res> {
+  factory _$$ProgramStateSearchEmptyImplCopyWith(
+          _$ProgramStateSearchEmptyImpl value,
+          $Res Function(_$ProgramStateSearchEmptyImpl) then) =
+      __$$ProgramStateSearchEmptyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ProgramStateSearchEmptyImplCopyWithImpl<$Res>
+    extends _$ProgramStateCopyWithImpl<$Res, _$ProgramStateSearchEmptyImpl>
+    implements _$$ProgramStateSearchEmptyImplCopyWith<$Res> {
+  __$$ProgramStateSearchEmptyImplCopyWithImpl(
+      _$ProgramStateSearchEmptyImpl _value,
+      $Res Function(_$ProgramStateSearchEmptyImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ProgramStateSearchEmptyImpl implements ProgramStateSearchEmpty {
+  const _$ProgramStateSearchEmptyImpl();
+
+  @override
+  String toString() {
+    return 'ProgramState.searchEmpty()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProgramStateSearchEmptyImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Program> programs) loadedSuccess,
+    required TResult Function() programEmpty,
+    required TResult Function() error,
+    required TResult Function() searchEmpty,
+  }) {
+    return searchEmpty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Program> programs)? loadedSuccess,
+    TResult? Function()? programEmpty,
+    TResult? Function()? error,
+    TResult? Function()? searchEmpty,
+  }) {
+    return searchEmpty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Program> programs)? loadedSuccess,
+    TResult Function()? programEmpty,
+    TResult Function()? error,
+    TResult Function()? searchEmpty,
+    required TResult orElse(),
+  }) {
+    if (searchEmpty != null) {
+      return searchEmpty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProgramStateInital value) initial,
+    required TResult Function(ProgramStateLoading value) loading,
+    required TResult Function(ProgramStateLoadedSuccess value) loadedSuccess,
+    required TResult Function(ProgramStateEmpty value) programEmpty,
+    required TResult Function(ProgramStateError value) error,
+    required TResult Function(ProgramStateSearchEmpty value) searchEmpty,
+  }) {
+    return searchEmpty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProgramStateInital value)? initial,
+    TResult? Function(ProgramStateLoading value)? loading,
+    TResult? Function(ProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult? Function(ProgramStateEmpty value)? programEmpty,
+    TResult? Function(ProgramStateError value)? error,
+    TResult? Function(ProgramStateSearchEmpty value)? searchEmpty,
+  }) {
+    return searchEmpty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProgramStateInital value)? initial,
+    TResult Function(ProgramStateLoading value)? loading,
+    TResult Function(ProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult Function(ProgramStateEmpty value)? programEmpty,
+    TResult Function(ProgramStateError value)? error,
+    TResult Function(ProgramStateSearchEmpty value)? searchEmpty,
+    required TResult orElse(),
+  }) {
+    if (searchEmpty != null) {
+      return searchEmpty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProgramStateSearchEmpty implements ProgramState {
+  const factory ProgramStateSearchEmpty() = _$ProgramStateSearchEmptyImpl;
 }

@@ -11,7 +11,7 @@ extension ProgramMapper on ProgramModel {
         programImage: madiaUrl ?? '',
         expectedTime: expectedTime ?? '',
         updatedAt: updatedAt ?? '',
-        labels: labels!.isEmpty
+        labels: labels == null
             ? []
             : labels!
                 .map(
@@ -22,6 +22,6 @@ extension ProgramMapper on ProgramModel {
                 )
                 .toList(),
         tasks:
-            tasks!.isEmpty ? [] : tasks!.map((e) => e.taskToEntity()).toList(),
+            tasks == null ? [] : tasks!.map((e) => e.taskToEntity()).toList(),
       );
 }
