@@ -83,7 +83,7 @@ class _ProgramPageState extends State<ProgramPage> {
       builder: (context, state) {
         switch (state) {
           case ProgramStateInital():
-            return Container();
+            return _programLoading();
           case ProgramStateLoading():
             return _programLoading();
           case ProgramStateLoadedSuccess(

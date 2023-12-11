@@ -29,8 +29,6 @@ class ProgramInfoBloc extends Bloc<ProgramInfoEvent, ProgramInfoState> {
     Emitter<ProgramInfoState> emit,
   ) async {
     try {
-      emit(const ProgramInfoState.loading());
-
       final program =
           await _getProgramByIdUsecase.call(params: event.programId!);
 

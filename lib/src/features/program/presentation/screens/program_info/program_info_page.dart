@@ -10,6 +10,7 @@ import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/image/cache_image.dart';
+import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../task/domain/models/task.dart';
 import '../../../domain/models/program.dart';
@@ -57,9 +58,9 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
       builder: (context, state) {
         switch (state) {
           case ProgramInfoStateInitial():
-            return Container();
+            return const LoadingScreen();
           case ProgramInfoStateLoading():
-            return _programInfoLoading();
+            return const LoadingScreen();
           case ProgramInfoStateLoadedSuccess(:final program):
             return _programInfoLoadedSuccess(program!);
           case ProgramInfoStateError():
@@ -74,7 +75,6 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
   Widget _programInfoLoading() {
     return GetGoalSubScaffold(
       body: SizedBox(
-        height: MediaQuery.of(context).size.height / 1.5,
         child: Center(
           child: CircularProgressIndicator(
             color: AppColors.primary,

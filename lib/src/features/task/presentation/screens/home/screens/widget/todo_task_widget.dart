@@ -52,6 +52,9 @@ class TodoTask extends StatelessWidget {
                   _taskDescription(),
                   const SizedBox(height: 4),
                   _taskDuration(taskStatus!),
+                  const SizedBox(
+                    width: double.infinity,
+                  ),
                 ],
               ),
             ),

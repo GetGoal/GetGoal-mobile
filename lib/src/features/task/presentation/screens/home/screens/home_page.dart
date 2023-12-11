@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context, state) {
         switch (state) {
           case TodoEventStarted():
-            return Container();
+            return _todoLoading();
           case TodoStateLoading():
             return _todoLoading();
           case TodoStateLoadedSuccess(:final todoList, :final doneList):
