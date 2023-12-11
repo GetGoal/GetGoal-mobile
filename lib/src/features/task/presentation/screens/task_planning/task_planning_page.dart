@@ -45,11 +45,7 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
         switch (state) {
           case TaskPlanningStateJoinedProgram():
             log('program joined');
-            scheduleMicrotask(() async {
-              await Future.delayed(const Duration(seconds: 1));
-              // ignore: use_build_context_synchronously
-              context.pop();
-            });
+            context.go('/main');
             break;
           case TaskPlanningStateJoinedProgramError():
             _taskPlanningBloc

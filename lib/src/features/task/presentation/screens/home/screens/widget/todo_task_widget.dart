@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../../shared/icon.dart';
 import '../../../../../../../shared/themes/color.dart';
@@ -49,6 +50,7 @@ class TodoTask extends StatelessWidget {
                 children: [
                   _taskName(),
                   _taskDescription(),
+                  const SizedBox(height: 4),
                   _taskDuration(taskStatus!),
                 ],
               ),
@@ -122,7 +124,7 @@ class TodoTask extends StatelessWidget {
             ),
             const SizedBox(width: 4),
             Text(
-              '1PM - 1.30PM',
+              DateFormat.jm().format(DateTime.parse(startTime!)),
               style: description().copyWith(color: AppColors.description),
             ),
           ],

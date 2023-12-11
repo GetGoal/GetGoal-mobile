@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../features/landing/presentation/screens/main/main_page.dart';
 import '../features/program/presentation/screens/program_info/program_info_page.dart';
-import '../features/task/domain/models/task.dart';
 import '../features/task/presentation/screens/task_planning/task_planning_page.dart';
 import '../shared/bloc_state.dart';
 
@@ -18,6 +17,7 @@ class RouteConfig {
     navigatorKey: _rootNavigatorKey,
     routes: [
       GoRoute(
+        name: Routes.mainPage,
         path: Routes.mainPage,
         builder: (context, state) => MultiBlocProvider(
           providers: [

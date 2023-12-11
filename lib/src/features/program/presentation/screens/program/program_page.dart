@@ -220,6 +220,7 @@ class _ProgramPageState extends State<ProgramPage> {
                     label: isLabelEmpty
                         ? const Label(labelName: 'Unknow')
                         : programList[index].labels![0],
+                    createdAt: programList[index].updatedAt,
                     onTab: () {
                       context.push(
                         '/program_info/${programList[index].programId}',
@@ -310,7 +311,7 @@ class _ProgramPageState extends State<ProgramPage> {
           filled: true,
           prefixIconColor: AppColors.description,
           prefixIcon: Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             child: SvgPicture.asset(
               AppIcon.search_icon,
               fit: BoxFit.scaleDown,

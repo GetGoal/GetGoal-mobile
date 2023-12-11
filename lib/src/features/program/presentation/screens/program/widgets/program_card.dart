@@ -20,6 +20,7 @@ class ProgramCard extends StatelessWidget {
     this.programDesc,
     this.label,
     this.rating,
+    this.createdAt,
     this.onTab,
   });
 
@@ -30,6 +31,7 @@ class ProgramCard extends StatelessWidget {
   final String? programDesc;
   final Label? label;
   final double? rating;
+  final String? createdAt;
   final Function? onTab;
 
   @override
@@ -178,7 +180,7 @@ class ProgramCard extends StatelessWidget {
               title: '${label!.labelName}',
             ),
             const SizedBox(width: 8),
-            Text(DateFormat('yMMMd').format(DateTime.now())),
+            Text(DateFormat('yMMMd').format(DateTime.parse(createdAt!))),
           ],
         ),
         const Spacer(),
