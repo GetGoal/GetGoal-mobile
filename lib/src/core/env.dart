@@ -11,17 +11,17 @@ class AppEnvironment {
   static setupEnv(Environment env) {
     switch (env) {
       case Environment.dev:
-        baseApiUrl = 'http://cp23ssa1.sit.kmutt.ac.th/api/dev';
+        baseApiUrl = 'https://capstone23.sit.kmutt.ac.th/ssa1/api/dev';
         _environment = Environment.dev;
         break;
 
       case Environment.qa:
-        baseApiUrl = 'https://cp23ssa1.sit.kmutt.ac.th/api/qa';
+        baseApiUrl = 'https://capstone23.sit.kmutt.ac.th/ssa1/api/qa';
         _environment = Environment.qa;
         break;
 
       case Environment.prod:
-        baseApiUrl = 'https://cp23ssa1.sit.kmutt.ac.th/api/prod';
+        baseApiUrl = 'https://capstone23.sit.kmutt.ac.th/ssa1/api';
         _environment = Environment.prod;
         break;
 

@@ -9,4 +9,5 @@ class ProgramState with _$ProgramState {
   }) = ProgramStateLoadedSuccess;
   const factory ProgramState.programEmpty() = ProgramStateEmpty;
   const factory ProgramState.error() = ProgramStateError;
+  const factory ProgramState.searchEmpty() = ProgramStateSearchEmpty;
 }

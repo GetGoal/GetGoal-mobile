@@ -6,4 +6,7 @@ class ProgramEvent with _$ProgramEvent {
   const factory ProgramEvent.clicked() = ProgramEventClicked;
   const factory ProgramEvent.filterClicked({required String labelName}) =
       ProgramEventFilterClicked;
+  const factory ProgramEvent.searching() = ProgramEventSearching;
+  const factory ProgramEvent.searchProgram({required String text}) =
+      ProgramEventSearchProgram;
 }

@@ -21,18 +21,21 @@ mixin _$FilterProgramEvent {
     required TResult Function() started,
     required TResult Function(List<ProgramFilter> labels, int selectedFilter)
         clicked,
+    required TResult Function() hided,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(List<ProgramFilter> labels, int selectedFilter)? clicked,
+    TResult? Function()? hided,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(List<ProgramFilter> labels, int selectedFilter)? clicked,
+    TResult Function()? hided,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +43,21 @@ mixin _$FilterProgramEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(FilterProgramStarted value) started,
     required TResult Function(FilterProgramClicked value) clicked,
+    required TResult Function(FilterProgramHided value) hided,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FilterProgramStarted value)? started,
     TResult? Function(FilterProgramClicked value)? clicked,
+    TResult? Function(FilterProgramHided value)? hided,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FilterProgramStarted value)? started,
     TResult Function(FilterProgramClicked value)? clicked,
+    TResult Function(FilterProgramHided value)? hided,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +123,7 @@ class _$FilterProgramStartedImpl implements FilterProgramStarted {
     required TResult Function() started,
     required TResult Function(List<ProgramFilter> labels, int selectedFilter)
         clicked,
+    required TResult Function() hided,
   }) {
     return started();
   }
@@ -126,6 +133,7 @@ class _$FilterProgramStartedImpl implements FilterProgramStarted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(List<ProgramFilter> labels, int selectedFilter)? clicked,
+    TResult? Function()? hided,
   }) {
     return started?.call();
   }
@@ -135,6 +143,7 @@ class _$FilterProgramStartedImpl implements FilterProgramStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(List<ProgramFilter> labels, int selectedFilter)? clicked,
+    TResult Function()? hided,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -148,6 +157,7 @@ class _$FilterProgramStartedImpl implements FilterProgramStarted {
   TResult map<TResult extends Object?>({
     required TResult Function(FilterProgramStarted value) started,
     required TResult Function(FilterProgramClicked value) clicked,
+    required TResult Function(FilterProgramHided value) hided,
   }) {
     return started(this);
   }
@@ -157,6 +167,7 @@ class _$FilterProgramStartedImpl implements FilterProgramStarted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FilterProgramStarted value)? started,
     TResult? Function(FilterProgramClicked value)? clicked,
+    TResult? Function(FilterProgramHided value)? hided,
   }) {
     return started?.call(this);
   }
@@ -166,6 +177,7 @@ class _$FilterProgramStartedImpl implements FilterProgramStarted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FilterProgramStarted value)? started,
     TResult Function(FilterProgramClicked value)? clicked,
+    TResult Function(FilterProgramHided value)? hided,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -266,6 +278,7 @@ class _$FilterProgramClickedImpl implements FilterProgramClicked {
     required TResult Function() started,
     required TResult Function(List<ProgramFilter> labels, int selectedFilter)
         clicked,
+    required TResult Function() hided,
   }) {
     return clicked(labels, selectedFilter);
   }
@@ -275,6 +288,7 @@ class _$FilterProgramClickedImpl implements FilterProgramClicked {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(List<ProgramFilter> labels, int selectedFilter)? clicked,
+    TResult? Function()? hided,
   }) {
     return clicked?.call(labels, selectedFilter);
   }
@@ -284,6 +298,7 @@ class _$FilterProgramClickedImpl implements FilterProgramClicked {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(List<ProgramFilter> labels, int selectedFilter)? clicked,
+    TResult Function()? hided,
     required TResult orElse(),
   }) {
     if (clicked != null) {
@@ -297,6 +312,7 @@ class _$FilterProgramClickedImpl implements FilterProgramClicked {
   TResult map<TResult extends Object?>({
     required TResult Function(FilterProgramStarted value) started,
     required TResult Function(FilterProgramClicked value) clicked,
+    required TResult Function(FilterProgramHided value) hided,
   }) {
     return clicked(this);
   }
@@ -306,6 +322,7 @@ class _$FilterProgramClickedImpl implements FilterProgramClicked {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FilterProgramStarted value)? started,
     TResult? Function(FilterProgramClicked value)? clicked,
+    TResult? Function(FilterProgramHided value)? hided,
   }) {
     return clicked?.call(this);
   }
@@ -315,6 +332,7 @@ class _$FilterProgramClickedImpl implements FilterProgramClicked {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FilterProgramStarted value)? started,
     TResult Function(FilterProgramClicked value)? clicked,
+    TResult Function(FilterProgramHided value)? hided,
     required TResult orElse(),
   }) {
     if (clicked != null) {
@@ -337,6 +355,115 @@ abstract class FilterProgramClicked implements FilterProgramEvent {
 }
 
 /// @nodoc
+abstract class _$$FilterProgramHidedImplCopyWith<$Res> {
+  factory _$$FilterProgramHidedImplCopyWith(_$FilterProgramHidedImpl value,
+          $Res Function(_$FilterProgramHidedImpl) then) =
+      __$$FilterProgramHidedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FilterProgramHidedImplCopyWithImpl<$Res>
+    extends _$FilterProgramEventCopyWithImpl<$Res, _$FilterProgramHidedImpl>
+    implements _$$FilterProgramHidedImplCopyWith<$Res> {
+  __$$FilterProgramHidedImplCopyWithImpl(_$FilterProgramHidedImpl _value,
+      $Res Function(_$FilterProgramHidedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FilterProgramHidedImpl implements FilterProgramHided {
+  const _$FilterProgramHidedImpl();
+
+  @override
+  String toString() {
+    return 'FilterProgramEvent.hided()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FilterProgramHidedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(List<ProgramFilter> labels, int selectedFilter)
+        clicked,
+    required TResult Function() hided,
+  }) {
+    return hided();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(List<ProgramFilter> labels, int selectedFilter)? clicked,
+    TResult? Function()? hided,
+  }) {
+    return hided?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(List<ProgramFilter> labels, int selectedFilter)? clicked,
+    TResult Function()? hided,
+    required TResult orElse(),
+  }) {
+    if (hided != null) {
+      return hided();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FilterProgramStarted value) started,
+    required TResult Function(FilterProgramClicked value) clicked,
+    required TResult Function(FilterProgramHided value) hided,
+  }) {
+    return hided(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FilterProgramStarted value)? started,
+    TResult? Function(FilterProgramClicked value)? clicked,
+    TResult? Function(FilterProgramHided value)? hided,
+  }) {
+    return hided?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FilterProgramStarted value)? started,
+    TResult Function(FilterProgramClicked value)? clicked,
+    TResult Function(FilterProgramHided value)? hided,
+    required TResult orElse(),
+  }) {
+    if (hided != null) {
+      return hided(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FilterProgramHided implements FilterProgramEvent {
+  const factory FilterProgramHided() = _$FilterProgramHidedImpl;
+}
+
+/// @nodoc
 mixin _$FilterProgramState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -344,6 +471,7 @@ mixin _$FilterProgramState {
     required TResult Function() loading,
     required TResult Function(List<ProgramFilter> labels, int selectedFilter)
         loadedSuccess,
+    required TResult Function() hide,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -353,6 +481,7 @@ mixin _$FilterProgramState {
     TResult? Function()? loading,
     TResult? Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult? Function()? hide,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -362,6 +491,7 @@ mixin _$FilterProgramState {
     TResult Function()? loading,
     TResult Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult Function()? hide,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -372,6 +502,7 @@ mixin _$FilterProgramState {
     required TResult Function(FilterProgramStateLoading value) loading,
     required TResult Function(FilterProgramStateLoadedSuccess value)
         loadedSuccess,
+    required TResult Function(FilterProgramStateHide value) hide,
     required TResult Function(FilterProgramStateError value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -380,6 +511,7 @@ mixin _$FilterProgramState {
     TResult? Function(FilterProgramStateInitial value)? initial,
     TResult? Function(FilterProgramStateLoading value)? loading,
     TResult? Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult? Function(FilterProgramStateHide value)? hide,
     TResult? Function(FilterProgramStateError value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -388,6 +520,7 @@ mixin _$FilterProgramState {
     TResult Function(FilterProgramStateInitial value)? initial,
     TResult Function(FilterProgramStateLoading value)? loading,
     TResult Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult Function(FilterProgramStateHide value)? hide,
     TResult Function(FilterProgramStateError value)? error,
     required TResult orElse(),
   }) =>
@@ -458,6 +591,7 @@ class _$FilterProgramStateInitialImpl implements FilterProgramStateInitial {
     required TResult Function() loading,
     required TResult Function(List<ProgramFilter> labels, int selectedFilter)
         loadedSuccess,
+    required TResult Function() hide,
     required TResult Function() error,
   }) {
     return initial();
@@ -470,6 +604,7 @@ class _$FilterProgramStateInitialImpl implements FilterProgramStateInitial {
     TResult? Function()? loading,
     TResult? Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult? Function()? hide,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -482,6 +617,7 @@ class _$FilterProgramStateInitialImpl implements FilterProgramStateInitial {
     TResult Function()? loading,
     TResult Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult Function()? hide,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -498,6 +634,7 @@ class _$FilterProgramStateInitialImpl implements FilterProgramStateInitial {
     required TResult Function(FilterProgramStateLoading value) loading,
     required TResult Function(FilterProgramStateLoadedSuccess value)
         loadedSuccess,
+    required TResult Function(FilterProgramStateHide value) hide,
     required TResult Function(FilterProgramStateError value) error,
   }) {
     return initial(this);
@@ -509,6 +646,7 @@ class _$FilterProgramStateInitialImpl implements FilterProgramStateInitial {
     TResult? Function(FilterProgramStateInitial value)? initial,
     TResult? Function(FilterProgramStateLoading value)? loading,
     TResult? Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult? Function(FilterProgramStateHide value)? hide,
     TResult? Function(FilterProgramStateError value)? error,
   }) {
     return initial?.call(this);
@@ -520,6 +658,7 @@ class _$FilterProgramStateInitialImpl implements FilterProgramStateInitial {
     TResult Function(FilterProgramStateInitial value)? initial,
     TResult Function(FilterProgramStateLoading value)? loading,
     TResult Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult Function(FilterProgramStateHide value)? hide,
     TResult Function(FilterProgramStateError value)? error,
     required TResult orElse(),
   }) {
@@ -580,6 +719,7 @@ class _$FilterProgramStateLoadingImpl implements FilterProgramStateLoading {
     required TResult Function() loading,
     required TResult Function(List<ProgramFilter> labels, int selectedFilter)
         loadedSuccess,
+    required TResult Function() hide,
     required TResult Function() error,
   }) {
     return loading();
@@ -592,6 +732,7 @@ class _$FilterProgramStateLoadingImpl implements FilterProgramStateLoading {
     TResult? Function()? loading,
     TResult? Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult? Function()? hide,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -604,6 +745,7 @@ class _$FilterProgramStateLoadingImpl implements FilterProgramStateLoading {
     TResult Function()? loading,
     TResult Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult Function()? hide,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -620,6 +762,7 @@ class _$FilterProgramStateLoadingImpl implements FilterProgramStateLoading {
     required TResult Function(FilterProgramStateLoading value) loading,
     required TResult Function(FilterProgramStateLoadedSuccess value)
         loadedSuccess,
+    required TResult Function(FilterProgramStateHide value) hide,
     required TResult Function(FilterProgramStateError value) error,
   }) {
     return loading(this);
@@ -631,6 +774,7 @@ class _$FilterProgramStateLoadingImpl implements FilterProgramStateLoading {
     TResult? Function(FilterProgramStateInitial value)? initial,
     TResult? Function(FilterProgramStateLoading value)? loading,
     TResult? Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult? Function(FilterProgramStateHide value)? hide,
     TResult? Function(FilterProgramStateError value)? error,
   }) {
     return loading?.call(this);
@@ -642,6 +786,7 @@ class _$FilterProgramStateLoadingImpl implements FilterProgramStateLoading {
     TResult Function(FilterProgramStateInitial value)? initial,
     TResult Function(FilterProgramStateLoading value)? loading,
     TResult Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult Function(FilterProgramStateHide value)? hide,
     TResult Function(FilterProgramStateError value)? error,
     required TResult orElse(),
   }) {
@@ -749,6 +894,7 @@ class _$FilterProgramStateLoadedSuccessImpl
     required TResult Function() loading,
     required TResult Function(List<ProgramFilter> labels, int selectedFilter)
         loadedSuccess,
+    required TResult Function() hide,
     required TResult Function() error,
   }) {
     return loadedSuccess(labels, selectedFilter);
@@ -761,6 +907,7 @@ class _$FilterProgramStateLoadedSuccessImpl
     TResult? Function()? loading,
     TResult? Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult? Function()? hide,
     TResult? Function()? error,
   }) {
     return loadedSuccess?.call(labels, selectedFilter);
@@ -773,6 +920,7 @@ class _$FilterProgramStateLoadedSuccessImpl
     TResult Function()? loading,
     TResult Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult Function()? hide,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -789,6 +937,7 @@ class _$FilterProgramStateLoadedSuccessImpl
     required TResult Function(FilterProgramStateLoading value) loading,
     required TResult Function(FilterProgramStateLoadedSuccess value)
         loadedSuccess,
+    required TResult Function(FilterProgramStateHide value) hide,
     required TResult Function(FilterProgramStateError value) error,
   }) {
     return loadedSuccess(this);
@@ -800,6 +949,7 @@ class _$FilterProgramStateLoadedSuccessImpl
     TResult? Function(FilterProgramStateInitial value)? initial,
     TResult? Function(FilterProgramStateLoading value)? loading,
     TResult? Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult? Function(FilterProgramStateHide value)? hide,
     TResult? Function(FilterProgramStateError value)? error,
   }) {
     return loadedSuccess?.call(this);
@@ -811,6 +961,7 @@ class _$FilterProgramStateLoadedSuccessImpl
     TResult Function(FilterProgramStateInitial value)? initial,
     TResult Function(FilterProgramStateLoading value)? loading,
     TResult Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult Function(FilterProgramStateHide value)? hide,
     TResult Function(FilterProgramStateError value)? error,
     required TResult orElse(),
   }) {
@@ -832,6 +983,133 @@ abstract class FilterProgramStateLoadedSuccess implements FilterProgramState {
   _$$FilterProgramStateLoadedSuccessImplCopyWith<
           _$FilterProgramStateLoadedSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FilterProgramStateHideImplCopyWith<$Res> {
+  factory _$$FilterProgramStateHideImplCopyWith(
+          _$FilterProgramStateHideImpl value,
+          $Res Function(_$FilterProgramStateHideImpl) then) =
+      __$$FilterProgramStateHideImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FilterProgramStateHideImplCopyWithImpl<$Res>
+    extends _$FilterProgramStateCopyWithImpl<$Res, _$FilterProgramStateHideImpl>
+    implements _$$FilterProgramStateHideImplCopyWith<$Res> {
+  __$$FilterProgramStateHideImplCopyWithImpl(
+      _$FilterProgramStateHideImpl _value,
+      $Res Function(_$FilterProgramStateHideImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FilterProgramStateHideImpl implements FilterProgramStateHide {
+  const _$FilterProgramStateHideImpl();
+
+  @override
+  String toString() {
+    return 'FilterProgramState.hide()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FilterProgramStateHideImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ProgramFilter> labels, int selectedFilter)
+        loadedSuccess,
+    required TResult Function() hide,
+    required TResult Function() error,
+  }) {
+    return hide();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ProgramFilter> labels, int selectedFilter)?
+        loadedSuccess,
+    TResult? Function()? hide,
+    TResult? Function()? error,
+  }) {
+    return hide?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ProgramFilter> labels, int selectedFilter)?
+        loadedSuccess,
+    TResult Function()? hide,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (hide != null) {
+      return hide();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FilterProgramStateInitial value) initial,
+    required TResult Function(FilterProgramStateLoading value) loading,
+    required TResult Function(FilterProgramStateLoadedSuccess value)
+        loadedSuccess,
+    required TResult Function(FilterProgramStateHide value) hide,
+    required TResult Function(FilterProgramStateError value) error,
+  }) {
+    return hide(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FilterProgramStateInitial value)? initial,
+    TResult? Function(FilterProgramStateLoading value)? loading,
+    TResult? Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult? Function(FilterProgramStateHide value)? hide,
+    TResult? Function(FilterProgramStateError value)? error,
+  }) {
+    return hide?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FilterProgramStateInitial value)? initial,
+    TResult Function(FilterProgramStateLoading value)? loading,
+    TResult Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult Function(FilterProgramStateHide value)? hide,
+    TResult Function(FilterProgramStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (hide != null) {
+      return hide(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FilterProgramStateHide implements FilterProgramState {
+  const factory FilterProgramStateHide() = _$FilterProgramStateHideImpl;
 }
 
 /// @nodoc
@@ -880,6 +1158,7 @@ class _$FilterProgramStateErrorImpl implements FilterProgramStateError {
     required TResult Function() loading,
     required TResult Function(List<ProgramFilter> labels, int selectedFilter)
         loadedSuccess,
+    required TResult Function() hide,
     required TResult Function() error,
   }) {
     return error();
@@ -892,6 +1171,7 @@ class _$FilterProgramStateErrorImpl implements FilterProgramStateError {
     TResult? Function()? loading,
     TResult? Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult? Function()? hide,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -904,6 +1184,7 @@ class _$FilterProgramStateErrorImpl implements FilterProgramStateError {
     TResult Function()? loading,
     TResult Function(List<ProgramFilter> labels, int selectedFilter)?
         loadedSuccess,
+    TResult Function()? hide,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -920,6 +1201,7 @@ class _$FilterProgramStateErrorImpl implements FilterProgramStateError {
     required TResult Function(FilterProgramStateLoading value) loading,
     required TResult Function(FilterProgramStateLoadedSuccess value)
         loadedSuccess,
+    required TResult Function(FilterProgramStateHide value) hide,
     required TResult Function(FilterProgramStateError value) error,
   }) {
     return error(this);
@@ -931,6 +1213,7 @@ class _$FilterProgramStateErrorImpl implements FilterProgramStateError {
     TResult? Function(FilterProgramStateInitial value)? initial,
     TResult? Function(FilterProgramStateLoading value)? loading,
     TResult? Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult? Function(FilterProgramStateHide value)? hide,
     TResult? Function(FilterProgramStateError value)? error,
   }) {
     return error?.call(this);
@@ -942,6 +1225,7 @@ class _$FilterProgramStateErrorImpl implements FilterProgramStateError {
     TResult Function(FilterProgramStateInitial value)? initial,
     TResult Function(FilterProgramStateLoading value)? loading,
     TResult Function(FilterProgramStateLoadedSuccess value)? loadedSuccess,
+    TResult Function(FilterProgramStateHide value)? hide,
     TResult Function(FilterProgramStateError value)? error,
     required TResult orElse(),
   }) {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../domain/models/program.dart';
@@ -23,15 +25,21 @@ class _ProgramPageState extends State<ProgramPage> {
   FilterProgramBloc get _filterProgramBloc => context.read<FilterProgramBloc>();
   ProgramBloc get _programBloc => context.read<ProgramBloc>();
 
+  final _searchController = TextEditingController();
+
   @override
   void initState() {
     _filterProgramBloc.add(const FilterProgramEvent.started());
     _programBloc.add(const ProgramEvent.started());
+    _searchController.addListener(() {
+      setState(() {});
+    });
     super.initState();
   }
 
   @override
   void dispose() {
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -59,6 +67,8 @@ class _ProgramPageState extends State<ProgramPage> {
               :final selectedFilter
             ):
             return _filterBarLoadedSuccess(labels, selectedFilter);
+          case FilterProgramStateHide():
+            return Container();
           case FilterProgramStateError():
             return _filterBarError();
           default:
@@ -84,6 +94,8 @@ class _ProgramPageState extends State<ProgramPage> {
             return _programEmpty();
           case ProgramStateError():
             return _programError();
+          case ProgramStateSearchEmpty():
+            return _programSearchEmpty();
           default:
             return Container();
         }
@@ -141,11 +153,14 @@ class _ProgramPageState extends State<ProgramPage> {
               title: labelList[index].labelName!,
               selected: filterSelected,
               currentIndex: index,
-              onTapped: () => _onProgramFilterTapped(
-                labelList: labelList,
-                filterSelected: filterSelected,
-                index: index,
-              ),
+              onTapped: () {
+                _searchController.clear();
+                _onProgramFilterTapped(
+                  labelList: labelList,
+                  filterSelected: filterSelected,
+                  index: index,
+                );
+              },
             ),
           );
         },
@@ -170,8 +185,7 @@ class _ProgramPageState extends State<ProgramPage> {
   }
 
   Widget _programLoading() {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.5,
+    return Expanded(
       child: Center(
         child: CircularProgressIndicator(
           color: AppColors.primary,
@@ -186,24 +200,35 @@ class _ProgramPageState extends State<ProgramPage> {
         color: AppColors.primary,
         onRefresh: () async => _programBloc.add(const ProgramEvent.started()),
         child: SingleChildScrollView(
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
-            shrinkWrap: true,
-            itemCount: programList.length,
-            itemBuilder: (context, index) {
-              return ProgramCard(
-                programImage: programList[index].programImage,
-                programName: programList[index].programName,
-                programDesc: programList[index].programDesc,
-                rating: programList[index].rating,
-                duration: programList[index].expectedTime,
-                label: programList[index].labels![0],
-                onTab: () {
-                  context.push('/program_info/${programList[index].programId}');
+          child: Column(
+            children: [
+              _searchBar(),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                padding:
+                    EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
+                shrinkWrap: true,
+                itemCount: programList.length,
+                itemBuilder: (context, index) {
+                  bool isLabelEmpty = programList[index].labels!.isEmpty;
+                  return ProgramCard(
+                    programImage: programList[index].programImage,
+                    programName: programList[index].programName,
+                    programDesc: programList[index].programDesc,
+                    rating: programList[index].rating,
+                    duration: programList[index].expectedTime,
+                    label: isLabelEmpty
+                        ? const Label(labelName: 'Unknow')
+                        : programList[index].labels![0],
+                    onTab: () {
+                      context.push(
+                        '/program_info/${programList[index].programId}',
+                      );
+                    },
+                  );
                 },
-              );
-            },
+              ),
+            ],
           ),
         ),
       ),
@@ -211,9 +236,8 @@ class _ProgramPageState extends State<ProgramPage> {
   }
 
   Widget _programEmpty() {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.5,
-      child: const Center(
+    return const Expanded(
+      child: Center(
         child: Text(
           "Sorry, we don't have any program on this category\nright now",
           textAlign: TextAlign.center,
@@ -240,6 +264,77 @@ class _ProgramPageState extends State<ProgramPage> {
               child: const Text('Reload'),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _programSearchEmpty() {
+    return Column(
+      children: [
+        _searchBar(),
+        const Text(
+          "Sorry, we couldn't find anything that includes \nall the words you searched for.",
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget _searchBar() {
+    bool isSearchTextEmpty = _searchController.text.isEmpty;
+
+    return Container(
+      margin: const EdgeInsets.all(20),
+      height: 56,
+      decoration: BoxDecoration(boxShadow: AppShadow.shadow),
+      child: TextField(
+        onTap: () {
+          _programBloc.add(const ProgramEvent.searching());
+          _filterProgramBloc.add(const FilterProgramEvent.hided());
+        },
+        onSubmitted: (value) {
+          if (value.trim().isEmpty) {
+            _filterProgramBloc.add(const FilterProgramEvent.started());
+            _programBloc.add(const ProgramEvent.started());
+            return;
+          }
+          _programBloc.add(ProgramEvent.searchProgram(text: value));
+        },
+        controller: _searchController,
+        textInputAction: TextInputAction.search,
+        decoration: InputDecoration(
+          isDense: true,
+          hintText: 'Search',
+          fillColor: AppColors.white,
+          filled: true,
+          prefixIconColor: AppColors.description,
+          prefixIcon: Container(
+            padding: const EdgeInsets.all(16),
+            child: SvgPicture.asset(
+              AppIcon.search_icon,
+              fit: BoxFit.scaleDown,
+              width: 24,
+            ),
+          ),
+          suffixIcon: isSearchTextEmpty
+              ? const SizedBox()
+              : IconButton(
+                  onPressed: () {
+                    _programBloc.add(const ProgramEvent.started());
+                    _filterProgramBloc.add(const FilterProgramEvent.started());
+                    _searchController.clear();
+                  },
+                  icon: const Icon(Icons.cancel),
+                ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(36)),
+            borderSide: BorderSide(color: AppColors.stock, width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(36)),
+            borderSide: BorderSide(color: AppColors.primary, width: 1),
+          ),
         ),
       ),
     );

@@ -21,4 +21,9 @@ abstract class ProgramApiService {
   Future<HttpResponse<ProgramResponse2>> getProgramById(
     @Path('id') String programId,
   );
+
+  @GET('/v1/programs/search')
+  Future<HttpResponse<ProgramResponse>> getProgramBySearch(
+    @Query('text') String text,
+  );
 }

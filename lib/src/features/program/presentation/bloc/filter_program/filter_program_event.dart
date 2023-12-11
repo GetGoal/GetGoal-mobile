@@ -7,4 +7,5 @@ class FilterProgramEvent with _$FilterProgramEvent {
     required List<ProgramFilter> labels,
     required int selectedFilter,
   }) = FilterProgramClicked;
+  const factory FilterProgramEvent.hided() = FilterProgramHided;
 }

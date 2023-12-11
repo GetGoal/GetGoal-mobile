@@ -27,4 +27,5 @@ class AppIcon {
       'assets/icons/bottom_nav_calendar_selected_icon.svg';
   static const String bottom_nav_user_selected =
       'assets/icons/bottom_nav_user_selected_icon.svg';
+  static const String search_icon = 'assets/icons/search_icon.svg';
 }

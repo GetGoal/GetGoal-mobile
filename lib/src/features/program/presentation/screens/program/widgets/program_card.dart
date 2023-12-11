@@ -174,7 +174,9 @@ class ProgramCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            ProgramLebel(title: '${label!.labelName}'),
+            ProgramLebel(
+              title: '${label!.labelName}',
+            ),
             const SizedBox(width: 8),
             Text(DateFormat('yMMMd').format(DateTime.now())),
           ],
