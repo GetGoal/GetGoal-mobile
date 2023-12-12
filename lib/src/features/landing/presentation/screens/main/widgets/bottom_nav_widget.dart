@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -20,7 +22,7 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: 96,
+      height: Platform.isIOS ? 96 : 72,
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
@@ -32,7 +34,7 @@ class BottomNavigation extends StatelessWidget {
         boxShadow: AppShadow.shadow,
       ),
       child: SizedBox(
-        height: 72,
+        height: 48,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
