@@ -49,13 +49,17 @@ class BottomNavItem extends StatelessWidget {
                     BlendMode.srcIn,
                   ),
                 ),
-          const SizedBox(height: 4),
-          Text(
-            title ?? '',
-            style: description().copyWith(
-              color: isCurrentPage ? AppColors.primary : AppColors.description,
-            ),
-          ),
+          position == 2 ? const SizedBox() : const SizedBox(height: 4),
+          position == 2
+              ? const SizedBox()
+              : Text(
+                  title ?? '',
+                  style: description().copyWith(
+                    color: isCurrentPage
+                        ? AppColors.primary
+                        : AppColors.description,
+                  ),
+                ),
         ],
       ),
     );
