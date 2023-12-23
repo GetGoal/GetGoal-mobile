@@ -28,4 +28,5 @@ class AppIcon {
   static const String bottom_nav_user_selected =
       'assets/icons/bottom_nav_user_selected_icon.svg';
   static const String search_icon = 'assets/icons/search_icon.svg';
+  static const String setting_icon = 'assets/icons/setting_icon.svg';
 }
