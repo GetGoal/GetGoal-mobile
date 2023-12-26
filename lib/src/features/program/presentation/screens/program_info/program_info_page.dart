@@ -133,7 +133,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(vertical: 24),
-        margin: EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
+        margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
         child: MainButton(
           buttonText: 'Back',
           onTap: () => context.pop(),
@@ -280,7 +280,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 24),
-      margin: EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
+      margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
       child: MainButton(
         buttonText: isTasksEmpty ? 'Back' : 'Start this program',
         onTap: () {

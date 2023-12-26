@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../features/landing/presentation/screens/main/main_page.dart';
 import '../features/program/presentation/screens/program_info/program_info_page.dart';
+import '../features/setting/presentation/screens/setting/setting_page.dart';
 import '../features/task/presentation/screens/task_planning/task_planning_page.dart';
 import '../shared/bloc_state.dart';
 
@@ -55,6 +56,18 @@ class RouteConfig {
           ),
         ),
       ),
+      GoRoute(
+        path: Routes.settingPage,
+        name: Routes.settingPage,
+        pageBuilder: (context, state) => const MaterialPage(
+          child: SettingPage(),
+        ),
+        // builder: (context, state) => MultiBlocProvider(
+        //   providers: [
+        //   ],
+        //   child: const SettingPage(),
+        // ),
+      ),
     ],
   );
 
@@ -66,4 +79,5 @@ class Routes {
   static const String programPage = '/program';
   static const String programInfomationPage = '/program_info';
   static const String taskPlanningPage = '/task_planning';
+  static const String settingPage = '/setting';
 }

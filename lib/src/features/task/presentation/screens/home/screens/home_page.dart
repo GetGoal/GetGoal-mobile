@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
       child: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
+          margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

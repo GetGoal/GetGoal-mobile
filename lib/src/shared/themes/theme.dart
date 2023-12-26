@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './font.dart';
 import 'color.dart';
+import 'spacing.dart';
 
 ThemeData appTheme(BuildContext context) {
   return ThemeData(
@@ -12,7 +13,7 @@ ThemeData appTheme(BuildContext context) {
       elevation: 0,
       titleTextStyle: heading2(),
       centerTitle: false,
-      titleSpacing: 20,
+      titleSpacing: AppSpacing.appMargin,
       scrolledUnderElevation: 0,
     ),
     fontFamily: 'Nunito',
