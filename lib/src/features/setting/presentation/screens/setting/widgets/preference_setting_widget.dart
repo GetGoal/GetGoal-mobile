@@ -10,7 +10,7 @@ class PreferenceSettingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(AppSpeacing.appMargin),
+      margin: EdgeInsets.all(AppSpacing.appMargin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -22,7 +22,7 @@ class PreferenceSettingWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Container(
-            padding: EdgeInsets.all(AppSpeacing.appMargin),
+            padding: EdgeInsets.all(AppSpacing.appMargin),
             decoration: BoxDecoration(
               boxShadow: AppShadow.shadow,
               borderRadius: const BorderRadius.all(Radius.circular(24)),

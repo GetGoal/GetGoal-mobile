@@ -40,7 +40,7 @@ class _MainPageState extends State<MainPage> {
           appBar: AppBar(
             title: Padding(
               padding: EdgeInsets.only(
-                top: AppSpeacing.appMargin,
+                top: AppSpacing.appMargin,
               ),
               child: Text(state.appbarTitle),
             ),
@@ -63,8 +63,8 @@ class _MainPageState extends State<MainPage> {
   Widget _settingIconAction() {
     return Container(
       margin: EdgeInsets.only(
-        top: AppSpeacing.appMargin,
-        right: AppSpeacing.appMargin,
+        top: AppSpacing.appMargin,
+        right: AppSpacing.appMargin,
       ),
       child: GestureDetector(
         onTap: () {

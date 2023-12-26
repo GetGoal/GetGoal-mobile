@@ -53,7 +53,7 @@ class DateSelectorTimeline extends StatelessWidget {
   ) {
     return Container(
       margin: EdgeInsets.only(
-        left: AppSpeacing.appMargin,
+        left: AppSpacing.appMargin,
       ),
       height: 72,
       child: ScrollablePositionedList.builder(

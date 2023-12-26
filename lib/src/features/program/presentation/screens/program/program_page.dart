@@ -106,8 +106,8 @@ class _ProgramPageState extends State<ProgramPage> {
   Widget _filterBarLoading() {
     return Container(
       margin: EdgeInsets.only(
-        left: AppSpeacing.appMargin,
-        bottom: AppSpeacing.appMargin,
+        left: AppSpacing.appMargin,
+        bottom: AppSpacing.appMargin,
       ),
       height: 32,
       child: Shimmer.fromColors(
@@ -138,8 +138,8 @@ class _ProgramPageState extends State<ProgramPage> {
   ) {
     return Container(
       margin: EdgeInsets.only(
-        left: AppSpeacing.appMargin,
-        bottom: AppSpeacing.appMargin,
+        left: AppSpacing.appMargin,
+        bottom: AppSpacing.appMargin,
       ),
       height: 32,
       child: ListView.builder(
@@ -171,7 +171,7 @@ class _ProgramPageState extends State<ProgramPage> {
   Widget _filterBarError() {
     return Container(
       margin: EdgeInsets.only(
-        bottom: AppSpeacing.appMargin,
+        bottom: AppSpacing.appMargin,
       ),
       alignment: Alignment.center,
       height: 32,
@@ -205,8 +205,7 @@ class _ProgramPageState extends State<ProgramPage> {
               _searchBar(),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
-                padding:
-                    EdgeInsets.symmetric(horizontal: AppSpeacing.appMargin),
+                padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
                 shrinkWrap: true,
                 itemCount: programList.length,
                 itemBuilder: (context, index) {

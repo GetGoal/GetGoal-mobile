@@ -13,7 +13,7 @@ ThemeData appTheme(BuildContext context) {
       elevation: 0,
       titleTextStyle: heading2(),
       centerTitle: false,
-      titleSpacing: AppSpeacing.appMargin,
+      titleSpacing: AppSpacing.appMargin,
       scrolledUnderElevation: 0,
     ),
     fontFamily: 'Nunito',
