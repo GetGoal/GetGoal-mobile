@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../features/landing/presentation/screens/main/main_page.dart';
 import '../features/program/presentation/screens/program_info/program_info_page.dart';
 import '../features/setting/presentation/screens/setting/setting_page.dart';
+import '../features/setting/presentation/states/setting_state.dart';
 import '../features/task/presentation/screens/task_planning/task_planning_page.dart';
 import '../shared/bloc_state.dart';
 
@@ -27,7 +28,7 @@ class RouteConfig {
             programBloc,
             programInfoBloc,
             dateTimelineBloc,
-            todoBloc
+            todoBloc,
           ],
           child: const MainPage(),
         ),
@@ -59,14 +60,12 @@ class RouteConfig {
       GoRoute(
         path: Routes.settingPage,
         name: Routes.settingPage,
-        pageBuilder: (context, state) => const MaterialPage(
-          child: SettingPage(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            languageBloc,
+          ],
+          child: const SettingPage(),
         ),
-        // builder: (context, state) => MultiBlocProvider(
-        //   providers: [
-        //   ],
-        //   child: const SettingPage(),
-        // ),
       ),
     ],
   );

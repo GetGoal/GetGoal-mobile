@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/themes/spacing.dart';
+import '../../../bloc/language/language_bloc.dart';
 
 class PreferenceSettingWidget extends StatelessWidget {
-  const PreferenceSettingWidget({super.key});
+  const PreferenceSettingWidget({
+    super.key,
+    this.bloc,
+  });
+
+  final LanguageBloc? bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +38,7 @@ class PreferenceSettingWidget extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _languagesSetting(),
+                _buildLanguagesSetting(),
               ],
             ),
           ),
@@ -39,7 +47,7 @@ class PreferenceSettingWidget extends StatelessWidget {
     );
   }
 
-  Widget _languagesSetting() {
+  Widget _buildLanguagesSetting() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -47,17 +55,53 @@ class PreferenceSettingWidget extends StatelessWidget {
           'Languages',
           style: body2(),
         ),
-        Row(
-          children: [
-            GestureDetector(child: const Text('EN')),
-            const SizedBox(width: 4),
-            const Text('/'),
-            const SizedBox(width: 4),
-            GestureDetector(
-              child: const Text('TH'),
-            ),
-          ],
-        )
+        BlocBuilder<LanguageBloc, LanguageState>(
+          builder: (context, state) {
+            if (state is LanguageStateLoadedSuccess) {
+              bool isEn = state.currentLocale == 'EN';
+
+              return Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      LocaleSettings.setLocale(AppLocale.en);
+                      if (bloc == null) return;
+                      bloc!.add(
+                        const LanguageEvent.changeLanguage(locale: 'EN'),
+                      );
+                    },
+                    child: Text(
+                      'English',
+                      style: isEn
+                          ? title1().copyWith(color: AppColors.primary)
+                          : body1(),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  const Text('|'),
+                  const SizedBox(width: 8),
+                  GestureDetector(
+                    onTap: () {
+                      LocaleSettings.setLocale(AppLocale.th);
+                      if (bloc == null) return;
+                      bloc!.add(
+                        const LanguageEvent.changeLanguage(locale: 'TH'),
+                      );
+                    },
+                    child: Text(
+                      'Thai',
+                      style: !isEn
+                          ? title1().copyWith(color: AppColors.primary)
+                          : body1(),
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return const SizedBox();
+            }
+          },
+        ),
       ],
     );
   }

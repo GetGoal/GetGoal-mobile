@@ -17,6 +17,7 @@ import '../features/program/presentation/bloc/filter_program/filter_program_bloc
 
 import '../features/program/presentation/bloc/program/program_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
+import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/task/data/repositories/task_repository_impl.dart';
 import '../features/task/data/sources/api/task_api_service.dart';
 import '../features/task/domain/repositories/task_repository.dart';
@@ -85,4 +86,8 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton(() => GetTaskByUserUsecase(getIt()));
   getIt.registerLazySingleton(() => GetTaskByProgramIdUsecase(getIt()));
   getIt.registerLazySingleton(() => JoinProgramUsecase(getIt()));
+
+  getIt.registerFactory<LanguageBloc>(
+    () => LanguageBloc(),
+  );
 }
