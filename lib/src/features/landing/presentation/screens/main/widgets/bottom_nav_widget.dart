@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../bloc/main_page/main_page_bloc.dart';
@@ -56,13 +57,13 @@ class BottomNavigation extends StatelessWidget {
             BottomNavItem(
               icon: AppIcon.bottom_nav_programs,
               onSelectedIcon: AppIcon.bottom_nav_programs_selected,
-              title: 'Programs',
+              title: Translations.of(context).program.title,
               position: 1,
               currentIndex: bottomNavSelected,
               ontap: () => bloc.add(
-                const MainPageEvent.bottomNavTapped(
+                MainPageEvent.bottomNavTapped(
                   bottomNavSelected: 1,
-                  appbarTitle: 'Programs',
+                  appbarTitle: Translations.of(context).program.title,
                 ),
               ),
             ),
