@@ -75,6 +75,7 @@ class _ProgramCreatePageState extends State<ProgramCreatePage> {
     return NormalTextInputField(
       label: 'Description',
       hintText: 'Your description',
+      maxLines: null,
     );
   }
 
