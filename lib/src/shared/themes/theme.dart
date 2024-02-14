@@ -30,5 +30,14 @@ ThemeData appTheme(BuildContext context) {
         shadowColor: Colors.transparent,
       ),
     ),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: AppColors.primary,
+      selectionColor: AppColors.primary,
+      selectionHandleColor: AppColors.primary,
+    ),
+    popupMenuTheme: const PopupMenuThemeData(
+      enableFeedback: false,
+      surfaceTintColor: Colors.transparent,
+    ),
   );
 }

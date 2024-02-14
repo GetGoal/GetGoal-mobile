@@ -7,6 +7,8 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/spacing.dart';
+import '../../../../../shared/widgets/button/circle_button.dart';
+import '../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../domain/models/program.dart';
 import '../../../domain/models/program_filter.dart';
 import '../../bloc/filter_program/filter_program_bloc.dart';
@@ -220,6 +222,14 @@ class _ProgramPageState extends State<ProgramPage> {
                         ? const Label(labelName: 'Unknow')
                         : programList[index].labels![0],
                     createdAt: programList[index].updatedAt,
+                    actionButton: CircleButton(
+                      size: 36,
+                      icon: CustomIcon(
+                        icon: AppIcon.bookmark_icon,
+                        size: 24,
+                        iconColor: AppColors.description,
+                      ),
+                    ),
                     onTab: () {
                       context.push(
                         '/program_info/${programList[index].programId}',

@@ -8,6 +8,7 @@ import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../program/presentation/screens/program/program_page.dart';
 import '../../../../task/presentation/screens/home/screens/home_page.dart';
+import '../../../../user/presentation/screens/user_profile_page.dart';
 import '../../bloc/main_page/main_page_bloc.dart';
 import 'widgets/bottom_nav_widget.dart';
 
@@ -24,6 +25,9 @@ class _MainPageState extends State<MainPage> {
   List<Widget> pages = [
     const HomePage(),
     const ProgramPage(),
+    const SizedBox(),
+    const SizedBox(),
+    const UserProfilePage(),
   ];
 
   @override

@@ -4,10 +4,24 @@ import '../../themes/color.dart';
 import '../../themes/font.dart';
 
 class MainButton extends StatelessWidget {
-  const MainButton({super.key, this.onTap, required this.buttonText});
+  const MainButton({
+    super.key,
+    this.onTap,
+    required this.buttonText,
+    this.buttonColor,
+    this.bottonStock,
+    this.textColor,
+    this.icon,
+    this.isHaveBoxShadow = false,
+  });
 
   final GestureTapCallback? onTap;
   final String buttonText;
+  final Color? buttonColor;
+  final Color? bottonStock;
+  final Color? textColor;
+  final Widget? icon;
+  final bool? isHaveBoxShadow;
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +33,22 @@ class MainButton extends StatelessWidget {
       child: Container(
         height: 56,
         decoration: BoxDecoration(
-          color: AppColors.primary,
+          boxShadow: isHaveBoxShadow! ? AppShadow.shadow : null,
+          color: buttonColor ?? AppColors.primary,
           borderRadius: BorderRadius.circular(36),
+          border:
+              bottonStock != null ? Border.all(color: AppColors.stock) : null,
         ),
         child: Center(
-          child: Text(
-            buttonText,
-            style: body1(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              icon ?? const SizedBox(),
+              Text(
+                buttonText,
+                style: body1().copyWith(color: textColor ?? AppColors.black),
+              ),
+            ],
           ),
         ),
       ),

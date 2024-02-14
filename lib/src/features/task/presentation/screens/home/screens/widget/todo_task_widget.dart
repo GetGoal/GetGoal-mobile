@@ -20,6 +20,7 @@ class TodoTask extends StatelessWidget {
     this.endTime,
     this.taskStatus,
     this.ontap,
+    this.onEdit,
   });
 
   final String? taskName;
@@ -28,41 +29,45 @@ class TodoTask extends StatelessWidget {
   final String? endTime;
   final TASKSTATUS? taskStatus;
   final GestureTapCallback? ontap;
+  final GestureTapCallback? onEdit;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        boxShadow: AppShadow.shadow,
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          children: [
-            _taskCircle(taskStatus!),
-            const SizedBox(width: 12),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _taskName(),
-                  _taskDescription(),
-                  const SizedBox(height: 4),
-                  _taskDuration(taskStatus!),
-                  const SizedBox(
-                    width: double.infinity,
-                  ),
-                ],
+    return GestureDetector(
+      onTap: ontap,
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          boxShadow: AppShadow.shadow,
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            children: [
+              _taskCircle(taskStatus!),
+              const SizedBox(width: 12),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _taskName(),
+                    _taskDescription(),
+                    const SizedBox(height: 4),
+                    _taskDuration(taskStatus!),
+                    const SizedBox(
+                      width: double.infinity,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              alignment: Alignment.topRight,
-              child: _taskEditButton(),
-            ),
-          ],
+              Container(
+                alignment: Alignment.topRight,
+                child: _taskEditButton(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -139,7 +144,7 @@ class TodoTask extends StatelessWidget {
 
   Widget _taskEditButton() {
     return GestureDetector(
-      onTap: () {},
+      onTap: onEdit,
       child: SvgPicture.asset(
         AppIcon.edit_task_icon,
         height: 16,

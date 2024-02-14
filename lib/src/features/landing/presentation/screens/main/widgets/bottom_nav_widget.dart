@@ -1,11 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../config/i18n/strings.g.dart';
+import '../../../../../../config/route_config.dart';
 import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
+import '../../../../../../shared/themes/font.dart';
+import '../../../../../../shared/widgets/icon/custom_icon.dart';
+import '../../../../../program/presentation/enum/program_form_mode.enum.dart';
+import '../../../../../task/presentation/enum/task_form_mode_enum.dart';
 import '../../../bloc/main_page/main_page_bloc.dart';
 import 'bottom_nav_item_widget.dart';
 
@@ -69,19 +75,72 @@ class BottomNavigation extends StatelessWidget {
             ),
             BottomNavItem(
               icon: AppIcon.bottom_nav_add,
-              onSelectedIcon: AppIcon.bottom_nav_add,
-              color: AppColors.primary,
+              onSelectedIcon: AppIcon.bottom_nav_calendar_selected,
+              title: 'Add',
               position: 2,
               size: 48,
-              ontap: () {},
+              color: AppColors.primary,
+              currentIndex: bottomNavSelected,
+              ontap: () => _displayCreateBottomSheet(context),
             ),
+            // Theme(
+            //   data: Theme.of(context).copyWith(
+            //     splashFactory: NoSplash.splashFactory,
+            //   ),
+            //   child: PopupMenuButton(
+            //     elevation: 1,
+            //     shadowColor: Colors.black38,
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(16),
+            //     ),
+            //     offset: Offset(kToolbarHeight, Platform.isIOS ? -96 : -72),
+            //     padding: const EdgeInsets.all(0),
+            //     icon: SvgPicture.asset(
+            //       AppIcon.bottom_nav_add,
+            //       fit: BoxFit.scaleDown,
+            //     ),
+            //     iconSize: 48,
+            //     itemBuilder: (context) => [
+            //       PopupMenuItem(
+            //         onTap: () => context.pushNamed('/program/create'),
+            //         child: Row(
+            //           children: [
+            //             CustomIcon(
+            //               icon: AppIcon.bottom_nav_add,
+            //               iconColor: AppColors.description,
+            //               size: 16,
+            //             ),
+            //             const SizedBox(width: 8),
+            //             const Text('Create program'),
+            //           ],
+            //         ),
+            //       ),
+            //       PopupMenuItem(
+            //         onTap: () => context.pushNamed('/task/create'),
+            //         child: Row(
+            //           children: [
+            //             CustomIcon(
+            //               icon: AppIcon.bottom_nav_add,
+            //               iconColor: AppColors.description,
+            //               size: 16,
+            //             ),
+            //             const SizedBox(width: 8),
+            //             const Text('Create task'),
+            //           ],
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             BottomNavItem(
               icon: AppIcon.bottom_nav_calendar,
               onSelectedIcon: AppIcon.bottom_nav_calendar_selected,
               title: 'Calendar',
               position: 3,
               currentIndex: bottomNavSelected,
-              ontap: () {},
+              ontap: () {
+                context.pushNamed('test');
+              },
             ),
             BottomNavItem(
               icon: AppIcon.bottom_nav_user,
@@ -89,10 +148,137 @@ class BottomNavigation extends StatelessWidget {
               title: 'User',
               position: 4,
               currentIndex: bottomNavSelected,
-              ontap: () {},
+              ontap: () {
+                bloc.add(
+                  const MainPageEvent.bottomNavTapped(
+                    bottomNavSelected: 4,
+                    appbarTitle: '',
+                  ),
+                );
+              },
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Future _displayCreateBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return _buildBottomSheet(context);
+      },
+    );
+  }
+
+  Widget _buildBottomSheet(BuildContext context) {
+    return Container(
+      height: 250,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                100,
+              ),
+              color: Colors.black26,
+            ),
+            height: 4,
+            width: 36,
+            child: const SizedBox(),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text('Create new ', style: heading3()),
+          ),
+
+          // Create program button
+          GestureDetector(
+            onTap: () {
+              context.pop();
+              context.pushNamed(
+                Routes.programCreatePage,
+                extra: PROGRAMFORMMODE.create,
+              );
+            },
+            behavior: HitTestBehavior.translucent,
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 24,
+                    child: CustomIcon(
+                      icon: AppIcon.bottom_nav_programs,
+                      iconColor: AppColors.description,
+                      size: 48,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Program', style: title1()),
+                      Text(
+                        'Create a program for your needs or everyone',
+                        style: description()
+                            .copyWith(color: AppColors.description),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          Container(
+            height: 1,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.black12,
+            child: const SizedBox(),
+          ),
+
+          // Create task button
+          GestureDetector(
+            onTap: () {
+              context.pop();
+              context.pushNamed(
+                Routes.taskCreatepage,
+                extra: TASKFORMMODE.create,
+              );
+            },
+            behavior: HitTestBehavior.translucent,
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 24,
+                    child: CustomIcon(
+                      icon: AppIcon.bottom_nav_add,
+                      iconColor: AppColors.description,
+                      size: 24,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('To-do task', style: title1()),
+                      Text(
+                        'Add a to-do task for yourself',
+                        style: description()
+                            .copyWith(color: AppColors.description),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

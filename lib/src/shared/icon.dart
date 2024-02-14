@@ -29,4 +29,7 @@ class AppIcon {
       'assets/icons/bottom_nav_user_selected_icon.svg';
   static const String search_icon = 'assets/icons/search_icon.svg';
   static const String setting_icon = 'assets/icons/setting_icon.svg';
+  static const String upload_icon = 'assets/icons/upload_icon.svg';
+  static const String google_icon = 'assets/icons/google_icon.svg';
+  static const String menu_icon = 'assets/icons/menu_icon.svg';
 }

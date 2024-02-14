@@ -61,6 +61,11 @@ dependencies:
   slang_flutter: ^3.28.0
   slang_build_runner: ^3.28.0
   shared_preferences: ^2.2.2
+  dotted_border: ^2.1.0
+  firebase_core: ^2.24.2
+  firebase_storage: ^11.6.0
+  image_picker: ^1.0.7
+  path: ^1.8.3
 
 dev_dependencies:
   flutter_test:

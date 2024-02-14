@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyA2_43sy3GKBLnD8KlWXMFZKyVWPLe0-qI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>169286400268</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.getgoalMobile.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>getgoal-2fccc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>getgoal-2fccc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:169286400268:ios:c0b8d3aaf569e7cdd1f129</string>
+</dict>
+</plist>

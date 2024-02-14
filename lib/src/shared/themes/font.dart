@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 
 const String fontFamily = 'Nunito';
 
+TextStyle heading1() {
+  return const TextStyle(
+    fontSize: 36,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+  );
+}
+
 TextStyle heading2() {
   return const TextStyle(
     fontSize: 32,
@@ -16,6 +25,15 @@ TextStyle heading3() {
     fontSize: 24,
     color: Colors.black,
     fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+  );
+}
+
+TextStyle heading3Regular() {
+  return const TextStyle(
+    fontSize: 24,
+    color: Colors.black,
+    fontWeight: FontWeight.normal,
     fontFamily: fontFamily,
   );
 }

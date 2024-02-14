@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
+import '../icon/custom_icon.dart';
 
 class CircleButton extends StatelessWidget {
   const CircleButton({
@@ -12,7 +13,7 @@ class CircleButton extends StatelessWidget {
   });
 
   final GestureTapCallback? onTap;
-  final SvgPicture? icon;
+  final CustomIcon? icon;
   final double? size;
   final Color? color;
   final Border? border;

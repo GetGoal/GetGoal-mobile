@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../../../../config/route_config.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/themes/spacing.dart';
 import '../../../../../landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../../../../domain/models/task.dart';
+import '../../../enum/task_form_mode_enum.dart';
 import '../bloc/date_timeline/date_timeline_bloc.dart';
 import '../bloc/todo/todo_bloc.dart';
 import 'widget/date_section_timeline_widget.dart';
@@ -149,6 +152,11 @@ class _HomePageState extends State<HomePage> {
                       taskName: tasks[index].taskName,
                       taskDescription: tasks[index].taskDescription,
                       startTime: tasks[index].startTime,
+                      ontap: () => context.pushNamed('/task/detail'),
+                      onEdit: () => context.pushNamed(
+                        Routes.taskCreatepage,
+                        extra: TASKFORMMODE.edit,
+                      ),
                     ),
                   );
                 },
