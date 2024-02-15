@@ -16,5 +16,10 @@
         "display_save_program": "Save",
         "display_applied_program": "Applied",
         "logout": "Log out"
+    },
+    "program": {
+        "search": "Search",
+        "task_overview": "Tasks Overview",
+        "start_program": "Start this program"
     }
 }

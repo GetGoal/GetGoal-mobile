@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/spacing.dart';
@@ -315,7 +316,7 @@ class _ProgramPageState extends State<ProgramPage> {
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
           isDense: true,
-          hintText: 'Search',
+          hintText: Translations.of(context).program.search,
           fillColor: AppColors.white,
           filled: true,
           prefixIconColor: AppColors.description,

@@ -16,5 +16,10 @@
         "display_save_program": "บันทึก",
         "display_applied_program": "รับสมัคร",
         "logout": "ออกจากระบบ"
+    },
+    "program": {
+        "search": "ค้นหา",
+        "task_overview": "ภาครวม",
+        "start_program": "เริ่มโปรแกรมนี้"
     }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
@@ -257,7 +258,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
           width: double.infinity,
           height: 60,
           child: Text(
-            'Tasks Overview',
+            Translations.of(context).program.task_overview,
             style: title1(),
           ),
         ),
@@ -282,7 +283,9 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
       padding: const EdgeInsets.symmetric(vertical: 24),
       margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
       child: MainButton(
-        buttonText: isTasksEmpty ? 'Back' : 'Start this program',
+        buttonText: isTasksEmpty
+            ? 'Back'
+            : Translations.of(context).program.start_program,
         onTap: () {
           if (isTasksEmpty) {
             context.pop();
