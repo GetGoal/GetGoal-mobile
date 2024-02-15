@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../config/i18n/strings.g.dart';
 import '../../../../config/route_config.dart';
 import '../../../../shared/icon.dart';
 import '../../../../shared/themes/color.dart';
@@ -79,7 +80,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             color: AppColors.red,
           ),
           child: Text(
-            'Log out',
+            Translations.of(context).user_profile.logout,
             style: description()
                 .copyWith(color: const Color.fromARGB(255, 255, 255, 255)),
           ),
@@ -115,7 +116,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               alignment: Alignment.center,
               width: 96,
               child: Text(
-                'Your program',
+                Translations.of(context).user_profile.display_your_program,
                 style: description().copyWith(
                   color:
                       selected == 0 ? AppColors.primary : AppColors.description,
@@ -136,7 +137,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ),
               width: 96,
               child: Text(
-                'Save',
+                Translations.of(context).user_profile.display_save_program,
                 style: description().copyWith(
                   color:
                       selected == 1 ? AppColors.primary : AppColors.description,
@@ -157,7 +158,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ),
               width: 96,
               child: Text(
-                'Applied',
+                Translations.of(context).user_profile.display_applied_program,
                 style: description().copyWith(
                   color:
                       selected == 2 ? AppColors.primary : AppColors.description,

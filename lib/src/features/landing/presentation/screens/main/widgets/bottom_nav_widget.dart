@@ -49,7 +49,7 @@ class BottomNavigation extends StatelessWidget {
             BottomNavItem(
               icon: AppIcon.bottom_nav_home,
               onSelectedIcon: AppIcon.bottom_nav_home_selected,
-              title: 'Home',
+              title: Translations.of(context).navbar.home,
               position: 0,
               currentIndex: bottomNavSelected,
               ontap: () => bloc.add(
@@ -63,13 +63,13 @@ class BottomNavigation extends StatelessWidget {
             BottomNavItem(
               icon: AppIcon.bottom_nav_programs,
               onSelectedIcon: AppIcon.bottom_nav_programs_selected,
-              title: Translations.of(context).program.title,
+              title: Translations.of(context).navbar.program,
               position: 1,
               currentIndex: bottomNavSelected,
               ontap: () => bloc.add(
                 MainPageEvent.bottomNavTapped(
                   bottomNavSelected: 1,
-                  appbarTitle: Translations.of(context).program.title,
+                  appbarTitle: Translations.of(context).navbar.program,
                 ),
               ),
             ),
@@ -135,7 +135,7 @@ class BottomNavigation extends StatelessWidget {
             BottomNavItem(
               icon: AppIcon.bottom_nav_calendar,
               onSelectedIcon: AppIcon.bottom_nav_calendar_selected,
-              title: 'Calendar',
+              title: Translations.of(context).navbar.calendar,
               position: 3,
               currentIndex: bottomNavSelected,
               ontap: () {
@@ -145,7 +145,7 @@ class BottomNavigation extends StatelessWidget {
             BottomNavItem(
               icon: AppIcon.bottom_nav_user,
               onSelectedIcon: AppIcon.bottom_nav_user_selected,
-              title: 'User',
+              title: Translations.of(context).navbar.user,
               position: 4,
               currentIndex: bottomNavSelected,
               ontap: () {

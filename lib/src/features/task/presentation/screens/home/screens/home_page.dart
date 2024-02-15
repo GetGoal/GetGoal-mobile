@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../config/route_config.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
@@ -123,7 +124,7 @@ class _HomePageState extends State<HomePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'To-do (${tasks.length})',
+          Translations.of(context).task.task_status_to_do,
           style: heading3(),
           textAlign: TextAlign.left,
         ),
@@ -168,7 +169,7 @@ class _HomePageState extends State<HomePage> {
   Widget _todoListEmpty() {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 1.7,
-      child: const Center(child: Text('No tasks')),
+      child: Center(child: Text(Translations.of(context).task.empty_task)),
     );
   }
 
@@ -179,7 +180,7 @@ class _HomePageState extends State<HomePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Done',
+          Translations.of(context).task.task_status_done,
           style: heading3(),
           textAlign: TextAlign.left,
         ),
@@ -190,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: Center(
                   child: Text(
-                    'Nothing done',
+                    Translations.of(context).task.empty_task_done,
                     style: body1().copyWith(color: AppColors.description),
                     textAlign: TextAlign.center,
                   ),

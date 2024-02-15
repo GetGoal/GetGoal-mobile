@@ -1,5 +1,20 @@
 {
-    "program": {
-        "title": "โปรแกรม"
+    "navbar": {
+        "program": "โปรแกรม",
+        "home": "หน้าแรก",
+        "calendar": "ปฏิทิน",
+        "user": "บัญชี"
+    },
+    "task": {
+        "task_status_to_do": "รายการที่ต้องทำ",
+        "task_status_done": "รายการที่ทำสำเร็จ",
+        "empty_task": "ไม่มีรายการที่ต้องทำ",
+        "empty_task_done": "ไม่มีรายการที่ทำเสร็จ"
+    },
+    "user_profile": {
+        "display_your_program": "โปรแกรมของฉัน",
+        "display_save_program": "บันทึก",
+        "display_applied_program": "รับสมัคร",
+        "logout": "ออกจากระบบ"
     }
 }

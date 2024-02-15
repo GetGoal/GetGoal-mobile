@@ -1,5 +1,20 @@
 {
-    "program": {
-        "title": "Programs"
+    "navbar": {
+        "program": "Program",
+        "home": "Home",
+        "calendar": "Calendar",
+        "user": "User"
+    },
+    "task": {
+        "task_status_to_do": "To-do",
+        "task_status_done": "Done",
+        "empty_task": "No tasks",
+        "empty_task_done": "Nothing done"
+    },
+    "user_profile": {
+        "display_your_program": "Your program",
+        "display_save_program": "Save",
+        "display_applied_program": "Applied",
+        "logout": "Log out"
     }
 }

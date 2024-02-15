@@ -18,7 +18,11 @@
             "name": "GetGoal-mobile-dev",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_dev.dart"
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev"
+            ]
         },
         {
             "name": "GetGoal-mobile-qa",

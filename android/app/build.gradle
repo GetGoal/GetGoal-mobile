@@ -4,17 +4,17 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-flavorDimensions "env"
-productFlavors {
-    dev {
-        dimension "env"
-        applicationId "com.example.getgoal.dev"
-    }
-    prod {
-        dimension "env"
-        applicationId "com.example.getgoal.prod"
-    }
-}
+// flavorDimensions "env"
+// productFlavors {
+//     dev {
+//         dimension "env"
+//         applicationId "com.example.getgoal.dev"
+//     }
+//     prod {
+//         dimension "env"
+//         applicationId "com.example.getgoal.prod"
+//     }
+// }
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -61,6 +61,19 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        flavorDimensions "env"
+productFlavors {
+    dev {
+        dimension "env"
+        applicationId "com.example.getgoal.dev"
+    }
+    prod {
+        dimension "env"
+        applicationId "com.example.getgoal.prod"
+    }
+}
+
     }
 
     buildTypes {

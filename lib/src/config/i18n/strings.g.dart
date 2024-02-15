@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 2 (1 per locale)
+/// Strings: 24 (12 per locale)
 ///
-/// Built on 2023-12-24 at 12:29 UTC
+/// Built on 2024-02-15 at 11:30 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -148,17 +148,48 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final Translations _root = this; // ignore: unused_field
 
 	// Translations
-	late final _StringsProgramEn program = _StringsProgramEn._(_root);
+	late final _StringsNavbarEn navbar = _StringsNavbarEn._(_root);
+	late final _StringsTaskEn task = _StringsTaskEn._(_root);
+	late final _StringsUserProfileEn user_profile = _StringsUserProfileEn._(_root);
 }
 
-// Path: program
-class _StringsProgramEn {
-	_StringsProgramEn._(this._root);
+// Path: navbar
+class _StringsNavbarEn {
+	_StringsNavbarEn._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get title => 'Programs';
+	String get program => 'Program';
+	String get home => 'Home';
+	String get calendar => 'Calendar';
+	String get user => 'User';
+}
+
+// Path: task
+class _StringsTaskEn {
+	_StringsTaskEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get task_status_to_do => 'To-do';
+	String get task_status_done => 'Done';
+	String get empty_task => 'No tasks';
+	String get empty_task_done => 'Nothing done';
+}
+
+// Path: user_profile
+class _StringsUserProfileEn {
+	_StringsUserProfileEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get display_your_program => 'Your program';
+	String get display_save_program => 'Save';
+	String get display_applied_program => 'Applied';
+	String get logout => 'Log out';
 }
 
 // Path: <root>
@@ -185,17 +216,48 @@ class _StringsTh implements Translations {
 	@override late final _StringsTh _root = this; // ignore: unused_field
 
 	// Translations
-	@override late final _StringsProgramTh program = _StringsProgramTh._(_root);
+	@override late final _StringsNavbarTh navbar = _StringsNavbarTh._(_root);
+	@override late final _StringsTaskTh task = _StringsTaskTh._(_root);
+	@override late final _StringsUserProfileTh user_profile = _StringsUserProfileTh._(_root);
 }
 
-// Path: program
-class _StringsProgramTh implements _StringsProgramEn {
-	_StringsProgramTh._(this._root);
+// Path: navbar
+class _StringsNavbarTh implements _StringsNavbarEn {
+	_StringsNavbarTh._(this._root);
 
 	@override final _StringsTh _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'โปรแกรม';
+	@override String get program => 'โปรแกรม';
+	@override String get home => 'หน้าแรก';
+	@override String get calendar => 'ปฏิทิน';
+	@override String get user => 'บัญชี';
+}
+
+// Path: task
+class _StringsTaskTh implements _StringsTaskEn {
+	_StringsTaskTh._(this._root);
+
+	@override final _StringsTh _root; // ignore: unused_field
+
+	// Translations
+	@override String get task_status_to_do => 'รายการที่ต้องทำ';
+	@override String get task_status_done => 'รายการที่ทำสำเร็จ';
+	@override String get empty_task => 'ไม่มีรายการที่ต้องทำ';
+	@override String get empty_task_done => 'ไม่มีรายการที่ทำเสร็จ';
+}
+
+// Path: user_profile
+class _StringsUserProfileTh implements _StringsUserProfileEn {
+	_StringsUserProfileTh._(this._root);
+
+	@override final _StringsTh _root; // ignore: unused_field
+
+	// Translations
+	@override String get display_your_program => 'โปรแกรมของฉัน';
+	@override String get display_save_program => 'บันทึก';
+	@override String get display_applied_program => 'รับสมัคร';
+	@override String get logout => 'ออกจากระบบ';
 }
 
 /// Flat map(s) containing all translations.
@@ -204,7 +266,18 @@ class _StringsProgramTh implements _StringsProgramEn {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'program.title': return 'Programs';
+			case 'navbar.program': return 'Program';
+			case 'navbar.home': return 'Home';
+			case 'navbar.calendar': return 'Calendar';
+			case 'navbar.user': return 'User';
+			case 'task.task_status_to_do': return 'To-do';
+			case 'task.task_status_done': return 'Done';
+			case 'task.empty_task': return 'No tasks';
+			case 'task.empty_task_done': return 'Nothing done';
+			case 'user_profile.display_your_program': return 'Your program';
+			case 'user_profile.display_save_program': return 'Save';
+			case 'user_profile.display_applied_program': return 'Applied';
+			case 'user_profile.logout': return 'Log out';
 			default: return null;
 		}
 	}
@@ -213,7 +286,18 @@ extension on Translations {
 extension on _StringsTh {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'program.title': return 'โปรแกรม';
+			case 'navbar.program': return 'โปรแกรม';
+			case 'navbar.home': return 'หน้าแรก';
+			case 'navbar.calendar': return 'ปฏิทิน';
+			case 'navbar.user': return 'บัญชี';
+			case 'task.task_status_to_do': return 'รายการที่ต้องทำ';
+			case 'task.task_status_done': return 'รายการที่ทำสำเร็จ';
+			case 'task.empty_task': return 'ไม่มีรายการที่ต้องทำ';
+			case 'task.empty_task_done': return 'ไม่มีรายการที่ทำเสร็จ';
+			case 'user_profile.display_your_program': return 'โปรแกรมของฉัน';
+			case 'user_profile.display_save_program': return 'บันทึก';
+			case 'user_profile.display_applied_program': return 'รับสมัคร';
+			case 'user_profile.logout': return 'ออกจากระบบ';
 			default: return null;
 		}
 	}
