@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -6,6 +7,8 @@ import '../../../../core/bases/base_data.dart';
 import '../../domain/models/program.dart';
 import '../../domain/repositories/program_repository.dart';
 import '../mappers/program_mapper.dart';
+import '../models/request/filter_program_request.dart';
+import '../models/request/search_program_request.dart';
 import '../sources/api/program_api_service.dart';
 
 class ProgramRepositoryImpl implements ProgramRepository {
@@ -43,11 +46,12 @@ class ProgramRepositoryImpl implements ProgramRepository {
 
   @override
   Future<DataState<List<Program>>> getProgramByLabelName(
-    String labelName,
+    List<String> labelName,
   ) async {
     try {
-      final httpResponse =
-          await _programApiService.getProgramByLabelName(labelName);
+      final httpResponse = await _programApiService.getProgramByLabelName(
+        FilterProgramRequest(listOfLabelName: labelName),
+      );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
@@ -68,6 +72,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
         );
       }
     } on DioException catch (e) {
+      log(e.message.toString());
       return DataFailed(e);
     }
   }
@@ -97,7 +102,9 @@ class ProgramRepositoryImpl implements ProgramRepository {
   @override
   Future<DataState<List<Program>>> getProramBySearch(String text) async {
     try {
-      final httpResponse = await _programApiService.getProgramBySearch(text);
+      final httpResponse = await _programApiService.getProgramBySearch(
+        SearchProgramRequest(searchText: text),
+      );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(

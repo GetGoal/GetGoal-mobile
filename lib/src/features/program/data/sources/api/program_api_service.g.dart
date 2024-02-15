@@ -58,21 +58,22 @@ class _ProgramApiService implements ProgramApiService {
 
   @override
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
-      getProgramByLabelName(String labelName) async {
+      getProgramByLabelName(FilterProgramRequest requestBody) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'filter': labelName};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(requestBody.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<List<ProgramModel>>>>(
             Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
                 .compose(
                   _dio.options,
-                  '/v1/programs/search/filter',
+                  '/v1/programs/filter',
                   queryParameters: queryParameters,
                   data: _data,
                 )
@@ -128,11 +129,12 @@ class _ProgramApiService implements ProgramApiService {
 
   @override
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getProgramBySearch(
-      String text) async {
+      SearchProgramRequest requestBody) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'text': text};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(requestBody.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<List<ProgramModel>>>>(
             Options(

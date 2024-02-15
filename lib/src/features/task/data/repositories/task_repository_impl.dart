@@ -30,7 +30,6 @@ class TaskRepositoryImpl implements TaskRepository {
           httpResponse.data.data!.map((e) => e.taskToEntity()).toList(),
         );
       } else {
-        log('kuy');
         return DataFailed(
           DioException(
             error: httpResponse.response.statusMessage,
