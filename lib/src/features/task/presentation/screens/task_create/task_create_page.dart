@@ -91,6 +91,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
       controller: _taskDescriptionInputController,
       label: 'Description',
       hintText: 'Your description',
+      maxLines: null,
       validator: taskDescriptionValidator,
     );
   }

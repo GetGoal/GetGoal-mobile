@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.2
+version: 1.0.2+a
 
 environment:
   sdk: '>=3.1.5 <4.0.0'
@@ -114,20 +114,30 @@ flutter:
   fonts:
     - family: Nunito
       fonts:
-        - asset: ./assets/fonts/Nunito-Light.ttf
-        - asset: ./assets/fonts/Nunito-LightItalic.ttf
-        - asset: ./assets/fonts/Nunito-Regular.ttf
-        - asset: ./assets/fonts/Nunito-Italic.ttf
-        - asset: ./assets/fonts/Nunito-Medium.ttf
-        - asset: ./assets/fonts/Nunito-MediumItalic.ttf
-        - asset: ./assets/fonts/Nunito-SemiBold.ttf
-        - asset: ./assets/fonts/Nunito-SemiBoldItalic.ttf
-        - asset: ./assets/fonts/Nunito-Bold.ttf
-        - asset: ./assets/fonts/Nunito-BoldItalic.ttf
-        - asset: ./assets/fonts/Nunito-ExtraBold.ttf
-        - asset: ./assets/fonts/Nunito-ExtraBoldItalic.ttf
-        - asset: ./assets/fonts/Nunito-Black.ttf
-        - asset: ./assets/fonts/Nunito-BlackItalic.ttf
+        - asset: ./assets/fonts/nunito/Nunito-Light.ttf
+        - asset: ./assets/fonts/nunito/Nunito-LightItalic.ttf
+        - asset: ./assets/fonts/nunito/Nunito-Regular.ttf
+        - asset: ./assets/fonts/nunito/Nunito-Italic.ttf
+        - asset: ./assets/fonts/nunito/Nunito-Medium.ttf
+        - asset: ./assets/fonts/nunito/Nunito-MediumItalic.ttf
+        - asset: ./assets/fonts/nunito/Nunito-SemiBold.ttf
+        - asset: ./assets/fonts/nunito/Nunito-SemiBoldItalic.ttf
+        - asset: ./assets/fonts/nunito/Nunito-Bold.ttf
+        - asset: ./assets/fonts/nunito/Nunito-BoldItalic.ttf
+        - asset: ./assets/fonts/nunito/Nunito-ExtraBold.ttf
+        - asset: ./assets/fonts/nunito/Nunito-ExtraBoldItalic.ttf
+        - asset: ./assets/fonts/nunito/Nunito-Black.ttf
+        - asset: ./assets/fonts/nunito/Nunito-BlackItalic.ttf
+        
+    - family: IBMPlexSansThai
+      fonts:
+        - asset: ./assets/fonts/ibm_plex_sans/IBMPlexSansThai-Thin.ttf
+        - asset: ./assets/fonts/ibm_plex_sans/IBMPlexSansThai-ExtraLight.ttf
+        - asset: ./assets/fonts/ibm_plex_sans/IBMPlexSansThai-Light.ttf
+        - asset: ./assets/fonts/ibm_plex_sans/IBMPlexSansThai-Regular.ttf
+        - asset: ./assets/fonts/ibm_plex_sans/IBMPlexSansThai-Medium.ttf
+        - asset: ./assets/fonts/ibm_plex_sans/IBMPlexSansThai-SemiBold.ttf
+        - asset: ./assets/fonts/ibm_plex_sans/IBMPlexSansThai-Bold.ttf
         
   #
   # For details regarding fonts from package dependencies,

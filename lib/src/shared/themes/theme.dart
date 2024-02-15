@@ -17,6 +17,7 @@ ThemeData appTheme(BuildContext context) {
       scrolledUnderElevation: 0,
     ),
     fontFamily: 'Nunito',
+    fontFamilyFallback: const ['Kanit'],
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,

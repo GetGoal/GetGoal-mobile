@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -20,16 +21,16 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<DataState<List<Task>>> getTaskByUser(String email, String date) async {
     try {
       final httpResponse = await _taskApiService.getTaskByUser(
-        TaskUserRequest(
-          params: TaskUserRequestParameters(email: email, date: date),
-        ),
+        TaskUserRequestParameters(email: email, date: date),
       );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
+        log(httpResponse.data.data.toString());
         return DataSuccess(
-          httpResponse.data.task!.tasks!.map((e) => e.taskToEntity()).toList(),
+          httpResponse.data.data!.map((e) => e.taskToEntity()).toList(),
         );
       } else {
+        log('kuy');
         return DataFailed(
           DioException(
             error: httpResponse.response.statusMessage,

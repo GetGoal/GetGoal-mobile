@@ -19,71 +19,90 @@ class _ProgramApiService implements ProgramApiService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<ProgramResponse>> getPrograms() async {
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
+      getPrograms() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<ProgramResponse>>(Options(
+        _setStreamType<HttpResponse<BaseDataResponse<List<ProgramModel>>>>(
+            Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/v1/programs',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ProgramResponse.fromJson(_result.data!);
+                .compose(
+                  _dio.options,
+                  '/v1/programs',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    final value = BaseDataResponse<List<ProgramModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<ProgramModel>(
+                  (i) => ProgramModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<ProgramResponse>> getProgramByLabelName(
-      String labelName) async {
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
+      getProgramByLabelName(String labelName) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'filter': labelName};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<ProgramResponse>>(Options(
+        _setStreamType<HttpResponse<BaseDataResponse<List<ProgramModel>>>>(
+            Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/v1/programs/search/filter',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ProgramResponse.fromJson(_result.data!);
+                .compose(
+                  _dio.options,
+                  '/v1/programs/search/filter',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    final value = BaseDataResponse<List<ProgramModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<ProgramModel>(
+                  (i) => ProgramModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<ProgramResponse2>> getProgramById(
+  Future<HttpResponse<BaseDataResponse<ProgramModel>>> getProgramById(
       String programId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<ProgramResponse2>>(Options(
+        _setStreamType<HttpResponse<BaseDataResponse<ProgramModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -99,35 +118,48 @@ class _ProgramApiService implements ProgramApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ProgramResponse2.fromJson(_result.data!);
+    final value = BaseDataResponse<ProgramModel>.fromJson(
+      _result.data!,
+      (json) => ProgramModel.fromJson(json as Map<String, dynamic>),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<ProgramResponse>> getProgramBySearch(String text) async {
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getProgramBySearch(
+      String text) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'text': text};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<ProgramResponse>>(Options(
-      method: 'GET',
+        _setStreamType<HttpResponse<BaseDataResponse<List<ProgramModel>>>>(
+            Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/v1/programs/search',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ProgramResponse.fromJson(_result.data!);
+                .compose(
+                  _dio.options,
+                  '/v1/programs/search',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    final value = BaseDataResponse<List<ProgramModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<ProgramModel>(
+                  (i) => ProgramModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

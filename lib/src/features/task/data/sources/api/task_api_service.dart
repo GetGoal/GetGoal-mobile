@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../../../../core/bases/base_data_response.dart';
 import '../../models/request/create_join_program_task_user_request.dart';
 import '../../models/request/task_user_request.dart';
 import '../../models/response/task_response.dart';
@@ -12,8 +13,8 @@ abstract class TaskApiService {
   factory TaskApiService(Dio dio) = _TaskApiService;
 
   @GET('/v1/tasks/to-do')
-  Future<HttpResponse<TaskResponse>> getTaskByUser(
-    @Body() TaskUserRequest requestBody,
+  Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> getTaskByUser(
+    @Body() TaskUserRequestParameters requestBody,
   );
 
   @GET('/v1/tasks/plan/{id}')

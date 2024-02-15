@@ -63,17 +63,16 @@ android {
         versionName flutterVersionName
 
         flavorDimensions "env"
-productFlavors {
-    dev {
-        dimension "env"
-        applicationId "com.example.getgoal.dev"
-    }
-    prod {
-        dimension "env"
-        applicationId "com.example.getgoal.prod"
-    }
-}
-
+        productFlavors {
+            dev {
+                dimension "env"
+                applicationId "com.example.getgoal.dev"
+            }
+            prod {
+                dimension "env"
+                applicationId "com.example.getgoal.prod"
+            }
+        }
     }
 
     buildTypes {

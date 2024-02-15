@@ -17,6 +17,7 @@ class NormalTextInputField extends StatelessWidget {
     this.onTap,
     this.validator,
     this.errorText,
+    this.maxLines = 1,
   });
 
   final String label;
@@ -30,6 +31,7 @@ class NormalTextInputField extends StatelessWidget {
   final VoidCallback? onTap;
   final String? Function(String?)? validator;
   final String? errorText;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class NormalTextInputField extends StatelessWidget {
 
             textInputAction: textInputAction,
 
-            maxLines: null,
+            maxLines: maxLines,
 
             // Text input field Decoration
             decoration: InputDecoration(
