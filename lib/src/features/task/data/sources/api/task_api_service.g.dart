@@ -57,14 +57,14 @@ class _TaskApiService implements TaskApiService {
   }
 
   @override
-  Future<HttpResponse<TaskResponse>> getTaskByProgramId(
+  Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> getTaskByProgramId(
       String programId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<TaskResponse>>(Options(
+        _setStreamType<HttpResponse<BaseDataResponse<List<TaskModel>>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -80,13 +80,21 @@ class _TaskApiService implements TaskApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TaskResponse.fromJson(_result.data!);
+    final value = BaseDataResponse<List<TaskModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<TaskModel>(
+                  (i) => TaskModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<TaskResponse>> joinProgram(
+  Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> joinProgram(
     String programId,
     JoinProgramRequest requestBody,
   ) async {
@@ -96,7 +104,7 @@ class _TaskApiService implements TaskApiService {
     final _data = <String, dynamic>{};
     _data.addAll(requestBody.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<TaskResponse>>(Options(
+        _setStreamType<HttpResponse<BaseDataResponse<List<TaskModel>>>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -112,7 +120,15 @@ class _TaskApiService implements TaskApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TaskResponse.fromJson(_result.data!);
+    final value = BaseDataResponse<List<TaskModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<TaskModel>(
+                  (i) => TaskModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

@@ -25,7 +25,6 @@ class TaskRepositoryImpl implements TaskRepository {
       );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        log(httpResponse.data.data.toString());
         return DataSuccess(
           httpResponse.data.data!.map((e) => e.taskToEntity()).toList(),
         );
@@ -51,7 +50,7 @@ class TaskRepositoryImpl implements TaskRepository {
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
-          httpResponse.data.task!.tasks!.map((e) => e.taskToEntity()).toList(),
+          httpResponse.data.data!.map((e) => e.taskToEntity()).toList(),
         );
       } else {
         return DataFailed(
@@ -64,6 +63,7 @@ class TaskRepositoryImpl implements TaskRepository {
         );
       }
     } on DioException catch (e) {
+      log(e.message.toString());
       return DataFailed(e);
     }
   }
@@ -80,13 +80,14 @@ class TaskRepositoryImpl implements TaskRepository {
         taskList: tasks.map((e) => e.taskToJoinProgramTaskRequest()).toList(),
       );
 
-      print(requestBody.taskList![1].startTime);
       final httpResponse =
           await _taskApiService.joinProgram(programId, requestBody);
 
-      if (httpResponse.response.statusCode == HttpStatus.ok) {
+      if (httpResponse.response.statusCode == HttpStatus.created) {
+        if (httpResponse.data.data == null) return const DataSuccess([]);
+
         return DataSuccess(
-          httpResponse.data.task!.tasks!.map((e) => e.taskToEntity()).toList(),
+          httpResponse.data.data!.map((e) => e.taskToEntity()).toList(),
         );
       } else {
         return DataFailed(
@@ -99,6 +100,7 @@ class TaskRepositoryImpl implements TaskRepository {
         );
       }
     } on DioException catch (e) {
+      log(e.message.toString());
       return DataFailed(e);
     }
   }

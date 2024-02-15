@@ -19,9 +19,12 @@ class ProgramFilterRepositoryImpl implements ProgramFilterRepository {
       final httpResponse = await _programFilterApiService.getLabels();
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(
-          httpResponse.data.data!.map((e) => e.toDomain()).toList(),
-        );
+        if (httpResponse.data.data != null) {
+          return DataSuccess(
+            httpResponse.data.data!.map((e) => e.toDomain()).toList(),
+          );
+        }
+        return const DataSuccess([]);
       } else {
         return DataFailed(
           DioException(

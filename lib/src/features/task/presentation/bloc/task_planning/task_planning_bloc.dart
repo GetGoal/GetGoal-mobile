@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -67,7 +68,6 @@ class TaskPlanningBloc extends Bloc<TaskPlanningEvent, TaskPlanningState> {
 
       emit(const TaskPlanningState.joinedProgram());
     } catch (e) {
-      _logger.e('ProgramStateError:', error: e);
       emit(const TaskPlanningState.joinedProgramError());
     }
   }

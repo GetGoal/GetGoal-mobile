@@ -43,13 +43,11 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
       listener: (context, state) {
         switch (state) {
           case TaskPlanningStateJoinedProgram():
-            log('program joined');
             context.go('/main');
             break;
           case TaskPlanningStateJoinedProgramError():
             _taskPlanningBloc
                 .add(TaskPlanningEvent.started(programId: widget.programId!));
-            log('error');
           default:
         }
       },

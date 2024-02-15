@@ -107,6 +107,9 @@ class ProgramRepositoryImpl implements ProgramRepository {
       );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
+        if (httpResponse.data.data == null) {
+          return const DataSuccess([]);
+        }
         return DataSuccess(
           httpResponse.data.data!
               .map(

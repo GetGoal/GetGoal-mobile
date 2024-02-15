@@ -18,12 +18,12 @@ abstract class TaskApiService {
   );
 
   @GET('/v1/tasks/plan/{id}')
-  Future<HttpResponse<TaskResponse>> getTaskByProgramId(
+  Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> getTaskByProgramId(
     @Path('id') String programId,
   );
 
   @POST('/v1/tasks/join-program/{id}')
-  Future<HttpResponse<TaskResponse>> joinProgram(
+  Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> joinProgram(
     @Path('id') String programId,
     @Body() JoinProgramRequest requestBody,
   );

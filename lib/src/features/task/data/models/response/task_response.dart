@@ -39,6 +39,7 @@ class TaskModel {
   TaskModel({
     this.taskId,
     this.taskName,
+    this.taskStatus,
     this.isSetNotification,
     this.startTime,
     this.category,
@@ -57,6 +58,9 @@ class TaskModel {
 
   @JsonKey(name: 'task_name')
   final String? taskName;
+
+  @JsonKey(name: 'task_status')
+  final int? taskStatus;
 
   @JsonKey(name: 'is_set_noti')
   final int? isSetNotification;

@@ -32,6 +32,7 @@ Map<String, dynamic> _$TaskInfoToJson(TaskInfo instance) => <String, dynamic>{
 TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => TaskModel(
       taskId: json['task_id'] as int?,
       taskName: json['task_name'] as String?,
+      taskStatus: json['task_status'] as int?,
       isSetNotification: json['is_set_noti'] as int?,
       startTime: json['start_time'] as String?,
       category: json['category'] as String?,
@@ -46,6 +47,7 @@ TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => TaskModel(
 Map<String, dynamic> _$TaskModelToJson(TaskModel instance) => <String, dynamic>{
       'task_id': instance.taskId,
       'task_name': instance.taskName,
+      'task_status': instance.taskStatus,
       'is_set_noti': instance.isSetNotification,
       'start_time': instance.startTime,
       'category': instance.category,
