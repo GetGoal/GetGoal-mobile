@@ -19,15 +19,15 @@ class _TaskApiService implements TaskApiService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<TaskResponse>> getTaskByUser(
-      TaskUserRequest requestBody) async {
+  Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> getTaskByUser(
+      TaskUserRequestParameters requestBody) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(requestBody.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<TaskResponse>>(Options(
+        _setStreamType<HttpResponse<BaseDataResponse<List<TaskModel>>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -43,7 +43,15 @@ class _TaskApiService implements TaskApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TaskResponse.fromJson(_result.data!);
+    final value = BaseDataResponse<List<TaskModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<TaskModel>(
+                  (i) => TaskModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

@@ -19,13 +19,13 @@ class _ProgramFilterApiService implements ProgramFilterApiService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<ProgramFilterResponse>> getLabels() async {
+  Future<HttpResponse<BaseDataResponse<List<Label>>>> getLabels() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<ProgramFilterResponse>>(Options(
+        _setStreamType<HttpResponse<BaseDataResponse<List<Label>>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -41,7 +41,14 @@ class _ProgramFilterApiService implements ProgramFilterApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ProgramFilterResponse.fromJson(_result.data!);
+    final value = BaseDataResponse<List<Label>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<Label>((i) => Label.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

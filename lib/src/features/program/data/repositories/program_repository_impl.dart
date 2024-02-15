@@ -20,7 +20,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
-          httpResponse.data.program!.programs!
+          httpResponse.data.data!
               .map(
                 (e) => e.programToEntity(),
               )
@@ -51,7 +51,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
-          httpResponse.data.program!.programs!
+          httpResponse.data.data!
               .map(
                 (e) => e.programToEntity(),
               )
@@ -78,7 +78,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
       final httpResponse = await _programApiService.getProgramById(programId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data.program!.programToEntity());
+        return DataSuccess(httpResponse.data.data!.programToEntity());
       } else {
         return DataFailed(
           DioException(
@@ -101,7 +101,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
-          httpResponse.data.program!.programs!
+          httpResponse.data.data!
               .map(
                 (e) => e.programToEntity(),
               )

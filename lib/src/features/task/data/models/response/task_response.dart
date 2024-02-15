@@ -33,25 +33,22 @@ class TaskInfo {
 
 @JsonSerializable()
 class TaskModel {
-  TaskModel({
-    required this.taskId,
-    required this.taskName,
-    required this.taskStatus,
-    required this.userAccountId,
-    required this.isSetNotification,
-    required this.startTime,
-    required this.endTime,
-    required this.programId,
-    required this.category,
-    required this.timeBeforeNotify,
-    required this.taskDescription,
-    required this.link,
-    required this.mediaUrl,
-    required this.updatedAt,
-  });
-
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
       _$TaskModelFromJson(json);
+
+  TaskModel({
+    this.taskId,
+    this.taskName,
+    this.isSetNotification,
+    this.startTime,
+    this.category,
+    this.timeBeforeNotify,
+    this.taskDescription,
+    this.link,
+    this.mediaUrl,
+    this.relatedProgramId,
+    this.ownerId,
+  });
 
   Map<String, dynamic> toJson() => _$TaskModelToJson(this);
 
@@ -61,23 +58,11 @@ class TaskModel {
   @JsonKey(name: 'task_name')
   final String? taskName;
 
-  @JsonKey(name: 'task_status')
-  final int? taskStatus;
-
-  @JsonKey(name: 'user_account_id')
-  final int? userAccountId;
-
   @JsonKey(name: 'is_set_noti')
   final int? isSetNotification;
 
   @JsonKey(name: 'start_time')
   final String? startTime;
-
-  @JsonKey(name: 'end_time')
-  final String? endTime;
-
-  @JsonKey(name: 'program_id')
-  final int? programId;
 
   @JsonKey(name: 'category')
   final String? category;
@@ -94,6 +79,9 @@ class TaskModel {
   @JsonKey(name: 'media_url')
   final String? mediaUrl;
 
-  @JsonKey(name: 'updated_at')
-  final String? updatedAt;
+  @JsonKey(name: 'related_program_id')
+  final int? relatedProgramId;
+
+  @JsonKey(name: 'owner_id')
+  final int? ownerId;
 }

@@ -10,7 +10,7 @@ extension ProgramMapper on ProgramModel {
         programDesc: programDesc ?? '',
         programImage: madiaUrl ?? '',
         expectedTime: expectedTime ?? '',
-        updatedAt: updatedAt ?? '',
+        updatedAt: updatedAt ?? DateTime.now().toString(),
         labels: labels == null
             ? []
             : labels!

@@ -180,7 +180,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
                 const SizedBox(
                   width: 4,
                 ),
-                Text(duration ?? '', style: description()),
+                Text('${duration ?? 0}', style: description()),
               ],
             ),
           ],

@@ -20,7 +20,7 @@ class ProgramFilterRepositoryImpl implements ProgramFilterRepository {
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
-          httpResponse.data.label!.labels!.map((e) => e.toDomain()).toList(),
+          httpResponse.data.data!.map((e) => e.toDomain()).toList(),
         );
       } else {
         return DataFailed(
