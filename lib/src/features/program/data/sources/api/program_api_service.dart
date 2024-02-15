@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../../../core/bases/base_data_response.dart';
+import '../../models/request/filter_program_request.dart';
+import '../../models/request/search_program_request.dart';
 import '../../models/response/program_response.dart';
 
 part 'program_api_service.g.dart';
@@ -13,10 +15,10 @@ abstract class ProgramApiService {
   @GET('/v1/programs')
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getPrograms();
 
-  @GET('/v1/programs/search/filter')
+  @POST('/v1/programs/filter')
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
       getProgramByLabelName(
-    @Query('filter') String labelName,
+    @Body() FilterProgramRequest requestBody,
   );
 
   @GET('/v1/programs/{id}')
@@ -26,6 +28,6 @@ abstract class ProgramApiService {
 
   @POST('/v1/programs/search')
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getProgramBySearch(
-    @Query('text') String text,
+    @Body() SearchProgramRequest requestBody,
   );
 }
