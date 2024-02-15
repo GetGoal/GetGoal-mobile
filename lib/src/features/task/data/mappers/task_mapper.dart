@@ -8,6 +8,7 @@ extension ProgramMapper on TaskModel {
   Task taskToEntity() => Task(
         taskId: taskId ?? 0,
         taskName: taskName ?? '',
+        taskStatus: taskStatus ?? 1,
         isSetNotification: isSetNotification ?? 0,
         startTime: startTime ?? '',
         category: category ?? '',
