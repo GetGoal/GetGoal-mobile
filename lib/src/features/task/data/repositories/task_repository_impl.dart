@@ -17,6 +17,7 @@ class TaskRepositoryImpl implements TaskRepository {
 
   final TaskApiService _taskApiService;
 
+  // Get all To-do list from user by date
   @override
   Future<DataState<List<Task>>> getTaskByUser(String email, String date) async {
     try {
@@ -40,10 +41,12 @@ class TaskRepositoryImpl implements TaskRepository {
         );
       }
     } on DioException catch (e) {
+      log(e.message.toString());
       return DataFailed(e);
     }
   }
 
+  // Get all program's tasks by program id
   @override
   Future<DataState<List<Task>>> getTaskByProgramId(String programId) async {
     try {
@@ -69,6 +72,7 @@ class TaskRepositoryImpl implements TaskRepository {
     }
   }
 
+  // Joining program
   @override
   Future<DataState<List<Task>>> joinProgram(
     List<Task> tasks,
@@ -104,5 +108,71 @@ class TaskRepositoryImpl implements TaskRepository {
       log(e.message.toString());
       return DataFailed(e);
     }
+  }
+
+  // Changing task status to done
+  @override
+  Future<DataState<Task>> changeTaskStatusToDone(String taskId) async {
+    try {
+      final httpResponse = await _taskApiService.changeTaskStatusToDone(taskId);
+
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          httpResponse.data.data!.taskToEntity(),
+        );
+      } else {
+        return DataFailed(
+          DioException(
+            error: httpResponse.response.statusMessage,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse,
+            requestOptions: httpResponse.response.requestOptions,
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      log(e.message.toString());
+      return DataFailed(e);
+    }
+  }
+
+  // Changing task status to not done
+  @override
+  Future<DataState<Task>> changeTaskStatustoNotDone(String taskId) async {
+    try {
+      final httpResponse =
+          await _taskApiService.changeTaskStatusToNotDone(taskId);
+
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          httpResponse.data.data!.taskToEntity(),
+        );
+      } else {
+        return DataFailed(
+          DioException(
+            error: httpResponse.response.statusMessage,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse,
+            requestOptions: httpResponse.response.requestOptions,
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      log(e.message.toString());
+      return DataFailed(e);
+    }
+  }
+
+  // Creating a task
+  @override
+  Future<DataState<Task>> createTask(Task task) {
+    throw UnimplementedError();
+  }
+
+  // Deleting a task
+  @override
+  Future<DataState<Task>> deleteTask(Task task) {
+    // TODO: implement deleteTask
+    throw UnimplementedError();
   }
 }

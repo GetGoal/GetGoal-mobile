@@ -21,9 +21,14 @@ import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/task/data/repositories/task_repository_impl.dart';
 import '../features/task/data/sources/api/task_api_service.dart';
 import '../features/task/domain/repositories/task_repository.dart';
+import '../features/task/domain/usecases/task/change_task_status_to_done_usecase.dart';
+import '../features/task/domain/usecases/task/change_task_status_to_not_done_usecase.dart';
+import '../features/task/domain/usecases/task/create_task_usecase.dart';
+import '../features/task/domain/usecases/task/delete_task_usecase.dart';
 import '../features/task/domain/usecases/task/get_task_by_program_id.dart';
 import '../features/task/domain/usecases/task/get_task_by_user_usecase.dart';
 import '../features/task/domain/usecases/task/join_program_usecase.dart';
+import '../features/task/presentation/bloc/task_create/task_create_bloc.dart';
 import '../features/task/presentation/bloc/task_planning/task_planning_bloc.dart';
 import '../features/task/presentation/screens/home/bloc/date_timeline/date_timeline_bloc.dart';
 import '../features/task/presentation/screens/home/bloc/todo/todo_bloc.dart';
@@ -78,14 +83,20 @@ Future<void> initializeDependencies() async {
     () => TaskRepositoryImpl(getIt()),
   );
   getIt.registerFactory<DateTimelineBloc>(() => DateTimelineBloc());
-  getIt.registerFactory<TodoBloc>(() => TodoBloc(getIt()));
+  getIt.registerFactory<TodoBloc>(() => TodoBloc(getIt(), getIt(), getIt()));
   getIt.registerFactory<TaskPlanningBloc>(
     () => TaskPlanningBloc(getIt(), getIt()),
   );
+  getIt.registerFactory<TaskCreateBloc>(() => TaskCreateBloc(getIt(), getIt()));
 
   getIt.registerLazySingleton(() => GetTaskByUserUsecase(getIt()));
   getIt.registerLazySingleton(() => GetTaskByProgramIdUsecase(getIt()));
   getIt.registerLazySingleton(() => JoinProgramUsecase(getIt()));
+  getIt.registerLazySingleton(() => ChangeTaskStatusToDoneUsecase(getIt()));
+  getIt.registerLazySingleton(() => ChangeTaskStatusToNotDoneUsecase(getIt()));
+
+  getIt.registerLazySingleton(() => CreateTaskUsecase(getIt()));
+  getIt.registerLazySingleton(() => DeleteTaskUsecase(getIt()));
 
   getIt.registerFactory<LanguageBloc>(
     () => LanguageBloc(),

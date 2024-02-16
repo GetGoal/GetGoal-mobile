@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _dateTimelineBloc.add(const DateTimelineEvent.started());
-    _todoBloc.add(const TodoEvent.started());
+    _todoBloc.add(TodoEvent.started(DateTime.now()));
     super.initState();
   }
 
@@ -160,6 +161,23 @@ class _HomePageState extends State<HomePage> {
                         Routes.taskCreatepage,
                         extra: TASKFORMMODE.edit,
                       ),
+                      onDoneTapped: () {
+                        scheduleMicrotask(
+                          () => _todoBloc.add(
+                            TodoEvent.changeTaskStatusToDone(
+                              taskId: tasks[index].taskId.toString(),
+                            ),
+                          ),
+                        );
+
+                        scheduleMicrotask(
+                          () => _todoBloc.add(
+                            TodoEvent.started(
+                              DateTime.parse(tasks[index].startTime!),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
@@ -210,6 +228,23 @@ class _HomePageState extends State<HomePage> {
                       taskStatus: getTaskStatus(tasks[index].taskStatus!),
                       taskName: tasks[index].taskName,
                       taskDescription: tasks[index].taskDescription,
+                      onUnDoneTapped: () {
+                        scheduleMicrotask(
+                          () => _todoBloc.add(
+                            TodoEvent.changeTaskStatusToNotDone(
+                              taskId: tasks[index].taskId.toString(),
+                            ),
+                          ),
+                        );
+
+                        scheduleMicrotask(
+                          () => _todoBloc.add(
+                            TodoEvent.started(
+                              DateTime.parse(tasks[index].startTime!),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
@@ -220,9 +255,9 @@ class _HomePageState extends State<HomePage> {
 
   TASKSTATUS getTaskStatus(int taskStatus) {
     switch (taskStatus) {
-      case 0:
-        return TASKSTATUS.todo;
       case 1:
+        return TASKSTATUS.todo;
+      case 2:
         return TASKSTATUS.done;
       default:
         return TASKSTATUS.todo;
