@@ -122,7 +122,7 @@ class TodoTask extends StatelessWidget {
 
   Widget _taskDescription() {
     return Text(
-      taskDescription ?? '',
+      taskDescription ?? '-',
       style: description().copyWith(color: AppColors.description),
     );
   }
@@ -142,7 +142,11 @@ class TodoTask extends StatelessWidget {
             ),
             const SizedBox(width: 4),
             Text(
-              DateFormat.jm().format(DateTime.parse(startTime!)),
+              startTime != null
+                  ? DateFormat.jm().format(
+                      DateTime.parse(startTime!),
+                    )
+                  : 'Unknown',
               style: description().copyWith(color: AppColors.description),
             ),
           ],

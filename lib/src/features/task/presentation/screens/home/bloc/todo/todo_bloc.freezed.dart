@@ -16,28 +16,31 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TodoEvent {
+  DateTime? get date => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime? date) started,
     required TResult Function(DateTime? date) dateSelectorTapped,
-    required TResult Function(String taskId) changeTaskStatusToDone,
-    required TResult Function(String taskId) changeTaskStatusToNotDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToNotDone,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime? date)? started,
     TResult? Function(DateTime? date)? dateSelectorTapped,
-    TResult? Function(String taskId)? changeTaskStatusToDone,
-    TResult? Function(String taskId)? changeTaskStatusToNotDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime? date)? started,
     TResult Function(DateTime? date)? dateSelectorTapped,
-    TResult Function(String taskId)? changeTaskStatusToDone,
-    TResult Function(String taskId)? changeTaskStatusToNotDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,12 +76,18 @@ mixin _$TodoEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $TodoEventCopyWith<TodoEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TodoEventCopyWith<$Res> {
   factory $TodoEventCopyWith(TodoEvent value, $Res Function(TodoEvent) then) =
       _$TodoEventCopyWithImpl<$Res, TodoEvent>;
+  @useResult
+  $Res call({DateTime? date});
 }
 
 /// @nodoc
@@ -90,13 +99,28 @@ class _$TodoEventCopyWithImpl<$Res, $Val extends TodoEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = freezed,
+  }) {
+    return _then(_value.copyWith(
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$TodoEventStartedImplCopyWith<$Res> {
+abstract class _$$TodoEventStartedImplCopyWith<$Res>
+    implements $TodoEventCopyWith<$Res> {
   factory _$$TodoEventStartedImplCopyWith(_$TodoEventStartedImpl value,
           $Res Function(_$TodoEventStartedImpl) then) =
       __$$TodoEventStartedImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({DateTime? date});
 }
@@ -159,8 +183,10 @@ class _$TodoEventStartedImpl implements TodoEventStarted {
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime? date) started,
     required TResult Function(DateTime? date) dateSelectorTapped,
-    required TResult Function(String taskId) changeTaskStatusToDone,
-    required TResult Function(String taskId) changeTaskStatusToNotDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToNotDone,
   }) {
     return started(date);
   }
@@ -170,8 +196,8 @@ class _$TodoEventStartedImpl implements TodoEventStarted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime? date)? started,
     TResult? Function(DateTime? date)? dateSelectorTapped,
-    TResult? Function(String taskId)? changeTaskStatusToDone,
-    TResult? Function(String taskId)? changeTaskStatusToNotDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
   }) {
     return started?.call(date);
   }
@@ -181,8 +207,8 @@ class _$TodoEventStartedImpl implements TodoEventStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime? date)? started,
     TResult Function(DateTime? date)? dateSelectorTapped,
-    TResult Function(String taskId)? changeTaskStatusToDone,
-    TResult Function(String taskId)? changeTaskStatusToNotDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -239,18 +265,22 @@ class _$TodoEventStartedImpl implements TodoEventStarted {
 abstract class TodoEventStarted implements TodoEvent {
   const factory TodoEventStarted(final DateTime? date) = _$TodoEventStartedImpl;
 
+  @override
   DateTime? get date;
+  @override
   @JsonKey(ignore: true)
   _$$TodoEventStartedImplCopyWith<_$TodoEventStartedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TodoEventDateSelectorTappedImplCopyWith<$Res> {
+abstract class _$$TodoEventDateSelectorTappedImplCopyWith<$Res>
+    implements $TodoEventCopyWith<$Res> {
   factory _$$TodoEventDateSelectorTappedImplCopyWith(
           _$TodoEventDateSelectorTappedImpl value,
           $Res Function(_$TodoEventDateSelectorTappedImpl) then) =
       __$$TodoEventDateSelectorTappedImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({DateTime? date});
 }
@@ -314,8 +344,10 @@ class _$TodoEventDateSelectorTappedImpl implements TodoEventDateSelectorTapped {
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime? date) started,
     required TResult Function(DateTime? date) dateSelectorTapped,
-    required TResult Function(String taskId) changeTaskStatusToDone,
-    required TResult Function(String taskId) changeTaskStatusToNotDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToNotDone,
   }) {
     return dateSelectorTapped(date);
   }
@@ -325,8 +357,8 @@ class _$TodoEventDateSelectorTappedImpl implements TodoEventDateSelectorTapped {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime? date)? started,
     TResult? Function(DateTime? date)? dateSelectorTapped,
-    TResult? Function(String taskId)? changeTaskStatusToDone,
-    TResult? Function(String taskId)? changeTaskStatusToNotDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
   }) {
     return dateSelectorTapped?.call(date);
   }
@@ -336,8 +368,8 @@ class _$TodoEventDateSelectorTappedImpl implements TodoEventDateSelectorTapped {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime? date)? started,
     TResult Function(DateTime? date)? dateSelectorTapped,
-    TResult Function(String taskId)? changeTaskStatusToDone,
-    TResult Function(String taskId)? changeTaskStatusToNotDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
     required TResult orElse(),
   }) {
     if (dateSelectorTapped != null) {
@@ -395,20 +427,24 @@ abstract class TodoEventDateSelectorTapped implements TodoEvent {
   const factory TodoEventDateSelectorTapped({final DateTime? date}) =
       _$TodoEventDateSelectorTappedImpl;
 
+  @override
   DateTime? get date;
+  @override
   @JsonKey(ignore: true)
   _$$TodoEventDateSelectorTappedImplCopyWith<_$TodoEventDateSelectorTappedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TodoEventChangeTaskStatusToDoneImplCopyWith<$Res> {
+abstract class _$$TodoEventChangeTaskStatusToDoneImplCopyWith<$Res>
+    implements $TodoEventCopyWith<$Res> {
   factory _$$TodoEventChangeTaskStatusToDoneImplCopyWith(
           _$TodoEventChangeTaskStatusToDoneImpl value,
           $Res Function(_$TodoEventChangeTaskStatusToDoneImpl) then) =
       __$$TodoEventChangeTaskStatusToDoneImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String taskId});
+  $Res call({DateTime? date, String taskId});
 }
 
 /// @nodoc
@@ -423,9 +459,14 @@ class __$$TodoEventChangeTaskStatusToDoneImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? date = freezed,
     Object? taskId = null,
   }) {
     return _then(_$TodoEventChangeTaskStatusToDoneImpl(
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       taskId: null == taskId
           ? _value.taskId
           : taskId // ignore: cast_nullable_to_non_nullable
@@ -438,14 +479,17 @@ class __$$TodoEventChangeTaskStatusToDoneImplCopyWithImpl<$Res>
 
 class _$TodoEventChangeTaskStatusToDoneImpl
     implements TodoEventChangeTaskStatusToDone {
-  const _$TodoEventChangeTaskStatusToDoneImpl({required this.taskId});
+  const _$TodoEventChangeTaskStatusToDoneImpl(
+      {this.date, required this.taskId});
 
+  @override
+  final DateTime? date;
   @override
   final String taskId;
 
   @override
   String toString() {
-    return 'TodoEvent.changeTaskStatusToDone(taskId: $taskId)';
+    return 'TodoEvent.changeTaskStatusToDone(date: $date, taskId: $taskId)';
   }
 
   @override
@@ -453,11 +497,12 @@ class _$TodoEventChangeTaskStatusToDoneImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoEventChangeTaskStatusToDoneImpl &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.taskId, taskId) || other.taskId == taskId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, taskId);
+  int get hashCode => Object.hash(runtimeType, date, taskId);
 
   @JsonKey(ignore: true)
   @override
@@ -472,10 +517,12 @@ class _$TodoEventChangeTaskStatusToDoneImpl
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime? date) started,
     required TResult Function(DateTime? date) dateSelectorTapped,
-    required TResult Function(String taskId) changeTaskStatusToDone,
-    required TResult Function(String taskId) changeTaskStatusToNotDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToNotDone,
   }) {
-    return changeTaskStatusToDone(taskId);
+    return changeTaskStatusToDone(date, taskId);
   }
 
   @override
@@ -483,10 +530,10 @@ class _$TodoEventChangeTaskStatusToDoneImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime? date)? started,
     TResult? Function(DateTime? date)? dateSelectorTapped,
-    TResult? Function(String taskId)? changeTaskStatusToDone,
-    TResult? Function(String taskId)? changeTaskStatusToNotDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
   }) {
-    return changeTaskStatusToDone?.call(taskId);
+    return changeTaskStatusToDone?.call(date, taskId);
   }
 
   @override
@@ -494,12 +541,12 @@ class _$TodoEventChangeTaskStatusToDoneImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime? date)? started,
     TResult Function(DateTime? date)? dateSelectorTapped,
-    TResult Function(String taskId)? changeTaskStatusToDone,
-    TResult Function(String taskId)? changeTaskStatusToNotDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
     required TResult orElse(),
   }) {
     if (changeTaskStatusToDone != null) {
-      return changeTaskStatusToDone(taskId);
+      return changeTaskStatusToDone(date, taskId);
     }
     return orElse();
   }
@@ -551,9 +598,13 @@ class _$TodoEventChangeTaskStatusToDoneImpl
 
 abstract class TodoEventChangeTaskStatusToDone implements TodoEvent {
   const factory TodoEventChangeTaskStatusToDone(
-      {required final String taskId}) = _$TodoEventChangeTaskStatusToDoneImpl;
+      {final DateTime? date,
+      required final String taskId}) = _$TodoEventChangeTaskStatusToDoneImpl;
 
+  @override
+  DateTime? get date;
   String get taskId;
+  @override
   @JsonKey(ignore: true)
   _$$TodoEventChangeTaskStatusToDoneImplCopyWith<
           _$TodoEventChangeTaskStatusToDoneImpl>
@@ -561,13 +612,15 @@ abstract class TodoEventChangeTaskStatusToDone implements TodoEvent {
 }
 
 /// @nodoc
-abstract class _$$TodoEventChagenTaskStatusToNotDoneImplCopyWith<$Res> {
+abstract class _$$TodoEventChagenTaskStatusToNotDoneImplCopyWith<$Res>
+    implements $TodoEventCopyWith<$Res> {
   factory _$$TodoEventChagenTaskStatusToNotDoneImplCopyWith(
           _$TodoEventChagenTaskStatusToNotDoneImpl value,
           $Res Function(_$TodoEventChagenTaskStatusToNotDoneImpl) then) =
       __$$TodoEventChagenTaskStatusToNotDoneImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String taskId});
+  $Res call({DateTime? date, String taskId});
 }
 
 /// @nodoc
@@ -583,9 +636,14 @@ class __$$TodoEventChagenTaskStatusToNotDoneImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? date = freezed,
     Object? taskId = null,
   }) {
     return _then(_$TodoEventChagenTaskStatusToNotDoneImpl(
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       taskId: null == taskId
           ? _value.taskId
           : taskId // ignore: cast_nullable_to_non_nullable
@@ -598,14 +656,17 @@ class __$$TodoEventChagenTaskStatusToNotDoneImplCopyWithImpl<$Res>
 
 class _$TodoEventChagenTaskStatusToNotDoneImpl
     implements TodoEventChagenTaskStatusToNotDone {
-  const _$TodoEventChagenTaskStatusToNotDoneImpl({required this.taskId});
+  const _$TodoEventChagenTaskStatusToNotDoneImpl(
+      {this.date, required this.taskId});
 
+  @override
+  final DateTime? date;
   @override
   final String taskId;
 
   @override
   String toString() {
-    return 'TodoEvent.changeTaskStatusToNotDone(taskId: $taskId)';
+    return 'TodoEvent.changeTaskStatusToNotDone(date: $date, taskId: $taskId)';
   }
 
   @override
@@ -613,11 +674,12 @@ class _$TodoEventChagenTaskStatusToNotDoneImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoEventChagenTaskStatusToNotDoneImpl &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.taskId, taskId) || other.taskId == taskId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, taskId);
+  int get hashCode => Object.hash(runtimeType, date, taskId);
 
   @JsonKey(ignore: true)
   @override
@@ -632,10 +694,12 @@ class _$TodoEventChagenTaskStatusToNotDoneImpl
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime? date) started,
     required TResult Function(DateTime? date) dateSelectorTapped,
-    required TResult Function(String taskId) changeTaskStatusToDone,
-    required TResult Function(String taskId) changeTaskStatusToNotDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToDone,
+    required TResult Function(DateTime? date, String taskId)
+        changeTaskStatusToNotDone,
   }) {
-    return changeTaskStatusToNotDone(taskId);
+    return changeTaskStatusToNotDone(date, taskId);
   }
 
   @override
@@ -643,10 +707,10 @@ class _$TodoEventChagenTaskStatusToNotDoneImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime? date)? started,
     TResult? Function(DateTime? date)? dateSelectorTapped,
-    TResult? Function(String taskId)? changeTaskStatusToDone,
-    TResult? Function(String taskId)? changeTaskStatusToNotDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult? Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
   }) {
-    return changeTaskStatusToNotDone?.call(taskId);
+    return changeTaskStatusToNotDone?.call(date, taskId);
   }
 
   @override
@@ -654,12 +718,12 @@ class _$TodoEventChagenTaskStatusToNotDoneImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime? date)? started,
     TResult Function(DateTime? date)? dateSelectorTapped,
-    TResult Function(String taskId)? changeTaskStatusToDone,
-    TResult Function(String taskId)? changeTaskStatusToNotDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToDone,
+    TResult Function(DateTime? date, String taskId)? changeTaskStatusToNotDone,
     required TResult orElse(),
   }) {
     if (changeTaskStatusToNotDone != null) {
-      return changeTaskStatusToNotDone(taskId);
+      return changeTaskStatusToNotDone(date, taskId);
     }
     return orElse();
   }
@@ -711,10 +775,13 @@ class _$TodoEventChagenTaskStatusToNotDoneImpl
 
 abstract class TodoEventChagenTaskStatusToNotDone implements TodoEvent {
   const factory TodoEventChagenTaskStatusToNotDone(
-          {required final String taskId}) =
-      _$TodoEventChagenTaskStatusToNotDoneImpl;
+      {final DateTime? date,
+      required final String taskId}) = _$TodoEventChagenTaskStatusToNotDoneImpl;
 
+  @override
+  DateTime? get date;
   String get taskId;
+  @override
   @JsonKey(ignore: true)
   _$$TodoEventChagenTaskStatusToNotDoneImplCopyWith<
           _$TodoEventChagenTaskStatusToNotDoneImpl>

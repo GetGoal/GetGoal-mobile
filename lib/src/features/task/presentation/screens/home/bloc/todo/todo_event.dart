@@ -9,9 +9,11 @@ class TodoEvent with _$TodoEvent {
     DateTime? date,
   }) = TodoEventDateSelectorTapped;
   const factory TodoEvent.changeTaskStatusToDone({
+    DateTime? date,
     required String taskId,
   }) = TodoEventChangeTaskStatusToDone;
   const factory TodoEvent.changeTaskStatusToNotDone({
+    DateTime? date,
     required String taskId,
   }) = TodoEventChagenTaskStatusToNotDone;
 }

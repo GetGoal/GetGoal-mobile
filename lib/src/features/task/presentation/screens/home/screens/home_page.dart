@@ -161,23 +161,14 @@ class _HomePageState extends State<HomePage> {
                         Routes.taskCreatepage,
                         extra: TASKFORMMODE.edit,
                       ),
-                      onDoneTapped: () {
-                        scheduleMicrotask(
-                          () => _todoBloc.add(
-                            TodoEvent.changeTaskStatusToDone(
-                              taskId: tasks[index].taskId.toString(),
-                            ),
+                      onDoneTapped: () => _todoBloc.add(
+                        TodoEvent.changeTaskStatusToDone(
+                          taskId: tasks[index].taskId.toString(),
+                          date: DateTime.parse(
+                            tasks[index].startTime.toString(),
                           ),
-                        );
-
-                        scheduleMicrotask(
-                          () => _todoBloc.add(
-                            TodoEvent.started(
-                              DateTime.parse(tasks[index].startTime!),
-                            ),
-                          ),
-                        );
-                      },
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -228,23 +219,14 @@ class _HomePageState extends State<HomePage> {
                       taskStatus: getTaskStatus(tasks[index].taskStatus!),
                       taskName: tasks[index].taskName,
                       taskDescription: tasks[index].taskDescription,
-                      onUnDoneTapped: () {
-                        scheduleMicrotask(
-                          () => _todoBloc.add(
-                            TodoEvent.changeTaskStatusToNotDone(
-                              taskId: tasks[index].taskId.toString(),
-                            ),
+                      onUnDoneTapped: () => _todoBloc.add(
+                        TodoEvent.changeTaskStatusToNotDone(
+                          taskId: tasks[index].taskId.toString(),
+                          date: DateTime.parse(
+                            tasks[index].startTime.toString(),
                           ),
-                        );
-
-                        scheduleMicrotask(
-                          () => _todoBloc.add(
-                            TodoEvent.started(
-                              DateTime.parse(tasks[index].startTime!),
-                            ),
-                          ),
-                        );
-                      },
+                        ),
+                      ),
                     ),
                   );
                 },

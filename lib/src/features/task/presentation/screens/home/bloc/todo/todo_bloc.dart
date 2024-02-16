@@ -55,11 +55,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
       taskList.data!
           .map(
-            (e) => e.taskStatus == 0 ? todoList.add(e) : doneList.add(e),
+            (e) => e.taskStatus == 1 ? todoList.add(e) : doneList.add(e),
           )
           .toList();
-
-      log(todoList.toString());
 
       emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
     } catch (e) {
@@ -89,7 +87,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
       taskList.data!
           .map(
-            (e) => e.taskStatus == 0 ? todoList.add(e) : doneList.add(e),
+            (e) => e.taskStatus == 1 ? todoList.add(e) : doneList.add(e),
           )
           .toList();
 
@@ -105,10 +103,30 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     Emitter<TodoState> emit,
   ) async {
     try {
-      emit(const TodoState.loading());
+      // emit(const TodoState.loading());
       await _changeTaskStatusToDoneUsecase.call(params: event.taskId);
+
+      final taskList = await _getTaskByUserUsecase.call(
+        params: 'kheintze0@gg.com',
+        date: formatForRequest(event.date!),
+      );
+
+      if (taskList.data!.isEmpty) {
+        emit(const TodoState.empty());
+        return;
+      }
+
+      List<Task> todoList = [];
+      List<Task> doneList = [];
+
+      taskList.data!
+          .map(
+            (e) => e.taskStatus == 1 ? todoList.add(e) : doneList.add(e),
+          )
+          .toList();
+
+      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
     } catch (e) {
-      _logger.e('ProgramStateError:', error: e);
       emit(const TodoState.error());
     }
   }
@@ -118,10 +136,30 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     Emitter<TodoState> emit,
   ) async {
     try {
-      emit(const TodoState.loading());
+      // emit(const TodoState.loading());
       await _changeTaskStatusToNotDoneUsecase.call(params: event.taskId);
+
+      final taskList = await _getTaskByUserUsecase.call(
+        params: 'kheintze0@gg.com',
+        date: formatForRequest(event.date!),
+      );
+
+      if (taskList.data!.isEmpty) {
+        emit(const TodoState.empty());
+        return;
+      }
+
+      List<Task> todoList = [];
+      List<Task> doneList = [];
+
+      taskList.data!
+          .map(
+            (e) => e.taskStatus == 1 ? todoList.add(e) : doneList.add(e),
+          )
+          .toList();
+
+      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
     } catch (e) {
-      _logger.e('ProgramStateError:', error: e);
       emit(const TodoState.error());
     }
   }
