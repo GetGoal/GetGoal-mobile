@@ -20,6 +20,54 @@
     "program": {
         "search": "ค้นหา",
         "task_overview": "ภาครวม",
-        "start_program": "เริ่มโปรแกรมนี้"
+        "start_program": "เริ่มโปรแกรมนี้",
+        "program_error": "เกิดข้อผิดพลาด\nกรุณาลองใหม่อีกครั้ง"
+    },
+    "create_button": {
+        "create_new": "สร้าง",
+        "create_program": "โปรแกรม",
+        "create_program_des": "สร้างโปรแกรมตามความต้องการของคุณหรือทุกคน",
+        "crete_task": "รายการ",
+        "crete_task_des": "สร้างงานที่ต้องทำสำหรับตัวคุณเอง"
+    },
+    "create_task": {
+        "create_task": "สร้างรายการ",
+        "task_name": "ชื่อรายการ",
+        "ex_task_name": "ตัวอย่าง การจัดเตียง",
+        "description": "คำอธิบาย",
+        "ex_description": "คำอธิบายรายการ",
+        "category": "ประเภท",
+        "ex_category": "ตัวอย่าง กิจวัตรประจำวัน",
+        "start_date": "วันที่",
+        "ex_start_date": "09/12/2024",
+        "time": "เวลา",
+        "ex_time": "8:00 AM",
+        "allow_noti": "การแจ้งเตือน",
+        "reminder": "เตือนความจำ",
+        "set_noti": "ตั้งค่าการแจ้งเตือน",
+        "create_button": "สร้าง",
+        "save_button": "บันทึก"
+    },
+    "edit_task": {
+        "task_setting": "แก้ไขรายการ"
+    },
+    "create_program": {
+        "create_program": "สร้างโปรแกรม",
+        "upload_your_image": "อัปโหลดภาพของคุณ",
+        "tap_to_upload": "แตะเพื่ออัปโหลด",
+        "file_support": "รองรับไฟล์ .JPEG .PNG",
+        "program_name": "ชื่อโปรแกรม",
+        "ex_program_name": "ตัวอย่าง สร้างเพลงด้วยตัวคุณเองใน 3 วัน",
+        "description": "คำอธิบาย",
+        "ex_description": "คำอธิบายโปรแกรม",
+        "category": "หมวดหมู่",
+        "ex_category": "ตัวอย่าง ดนตรี",
+        "expected_time": "เวลาที่คาดหวัง",
+        "ex_expected_time": "ตัวอย่าง 3 วัน",
+        "next_button": "ต่อไป",
+        "create_task_list": "สร้างรายการงาน"
+    },
+    "edit_program": {
+        "edit_program": "แก้ไขโปรแกรม"
     }
 }

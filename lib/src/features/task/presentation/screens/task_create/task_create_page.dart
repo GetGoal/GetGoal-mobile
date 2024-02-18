@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../config/route_config.dart';
 import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/icon.dart';
@@ -213,8 +214,8 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   Widget _buildTaskNameInputField() {
     return NormalTextInputField(
       controller: _taskNameInputController,
-      label: 'Task name',
-      hintText: 'Ex. Make your bed',
+      label: Translations.of(context).create_task.task_name,
+      hintText: Translations.of(context).create_task.ex_task_name,
       validator: taskNameValidator,
     );
   }
@@ -222,8 +223,8 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   Widget _buildDecriptionInputField() {
     return NormalTextInputField(
       controller: _taskDescriptionInputController,
-      label: 'Description',
-      hintText: 'Your description',
+      label: Translations.of(context).create_task.description,
+      hintText: Translations.of(context).create_task.ex_description,
       maxLines: null,
       validator: taskDescriptionValidator,
     );
@@ -232,8 +233,8 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   Widget _buildCategoryInputField() {
     return NormalTextInputField(
       controller: _taskCategoryInputController,
-      label: 'Category',
-      hintText: 'Ex. Routine',
+      label: Translations.of(context).create_task.category,
+      hintText: Translations.of(context).create_task.ex_category,
       validator: taskCategoryValidator,
     );
   }
@@ -241,9 +242,9 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   Widget _buildStartDateInputField() {
     return NormalTextInputField(
       controller: _taskStartDateInputController,
-      label: 'Starting date',
+      label: Translations.of(context).create_task.start_date,
       readOnly: true,
-      hintText: 'Ex. 09/12/2024',
+      hintText: Translations.of(context).create_task.ex_start_date,
       suffixIcon: SvgPicture.asset(
         AppIcon.calendar_icon,
         fit: BoxFit.scaleDown,
@@ -256,9 +257,9 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   Widget _buildTimeInputField() {
     return NormalTextInputField(
       controller: _taskTimeInputController,
-      label: 'Time',
+      label: Translations.of(context).create_task.time,
       readOnly: true,
-      hintText: 'Ex. 8:00 AM',
+      hintText: Translations.of(context).create_task.ex_time,
       suffixIcon: SvgPicture.asset(
         AppIcon.duration_time_icon,
         fit: BoxFit.scaleDown,
@@ -282,7 +283,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
             ),
             const SizedBox(width: 8.0),
             Text(
-              'Allow notification',
+              Translations.of(context).create_task.allow_noti,
               style: body1(),
             ),
           ],
@@ -303,10 +304,10 @@ class _TaskCreatePageState extends State<TaskCreatePage>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Reminder', style: body1()),
+        Text(Translations.of(context).create_task.reminder, style: body1()),
         const SizedBox(height: 8),
         DropdownInputField(
-          hintText: 'Set your notification',
+          hintText: Translations.of(context).create_task.set_noti,
           dropdownData: data,
           onChanged: (value) {
             _taskRemiderInputController.text = value!;
@@ -358,24 +359,24 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   String getPageTitle(TASKFORMMODE mode) {
     switch (mode) {
       case TASKFORMMODE.create:
-        return 'Create Task';
+        return Translations.of(context).create_task.create_task;
       case TASKFORMMODE.edit:
-        return 'Task Settings';
+        return Translations.of(context).edit_task.task_setting;
       default:
-        return 'Create Task';
+        return Translations.of(context).create_task.create_task;
     }
   }
 
   String getButtonName(TASKFORMMODE mode) {
     switch (mode) {
       case TASKFORMMODE.create:
-        return 'Create';
+        return Translations.of(context).create_task.create_button;
       case TASKFORMMODE.edit:
-        return 'Save';
+        return Translations.of(context).create_task.save_button;
       case TASKFORMMODE.programCreate:
-        return 'Save';
+        return Translations.of(context).create_task.save_button;
       default:
-        return 'Create';
+        return Translations.of(context).create_task.create_button;
     }
   }
 

@@ -7,10 +7,7 @@ mixin TaskValidationMixin {
   }
 
   String? taskDescriptionValidator(String? value) {
-    if (value!.isEmpty) {
-      return 'Please enter your task description';
-    }
-    if (value.length > 250) {
+    if (value!.length > 250) {
       return 'Please enter fewer than 250 words';
     }
     return null;

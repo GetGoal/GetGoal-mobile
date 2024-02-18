@@ -192,7 +192,8 @@ class BottomNavigation extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text('Create new ', style: heading3()),
+            child: Text(Translations.of(context).create_button.create_new,
+                style: heading3()),
           ),
 
           // Create program button
@@ -221,9 +222,13 @@ class BottomNavigation extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Program', style: title1()),
                       Text(
-                        'Create a program for your needs or everyone',
+                          Translations.of(context).create_button.create_program,
+                          style: title1()),
+                      Text(
+                        Translations.of(context)
+                            .create_button
+                            .create_program_des,
                         style: description()
                             .copyWith(color: AppColors.description),
                       ),
@@ -268,9 +273,10 @@ class BottomNavigation extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('To-do task', style: title1()),
+                      Text(Translations.of(context).create_button.crete_task,
+                          style: title1()),
                       Text(
-                        'Add a to-do task for yourself',
+                        Translations.of(context).create_button.crete_task_des,
                         style: description()
                             .copyWith(color: AppColors.description),
                       ),

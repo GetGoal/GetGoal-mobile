@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../config/route_config.dart';
 import '../../../../../core/di.dart';
 import '../../../../../shared/app_cache.dart';
@@ -39,7 +40,7 @@ class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
   @override
   Widget build(BuildContext context) {
     return GetGoalSubScaffold(
-      appbarTitle: 'Create Task list',
+      appbarTitle: Translations.of(context).create_program.create_task_list,
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(20),
@@ -137,7 +138,7 @@ class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
         CreateProgramUsecase _crete = CreateProgramUsecase(getIt());
         _crete.call(params: AppCache.programCreate);
       },
-      buttonText: 'Create program',
+      buttonText: Translations.of(context).create_program.create_program,
     );
   }
 }

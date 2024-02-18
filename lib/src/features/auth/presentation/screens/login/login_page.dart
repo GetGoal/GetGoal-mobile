@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../shared/icon.dart';
+import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
@@ -15,7 +16,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +75,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildEmailTextFieldInput() {
-    return const NormalTextInputField(label: 'Your Email');
+    return NormalTextInputField(
+      label: 'Your Email',
+      validator: loginEmailValidator,
+    );
   }
 
   Widget _buildPasswordTextFieldInput() {

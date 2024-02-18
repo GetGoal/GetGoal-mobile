@@ -20,6 +20,54 @@
     "program": {
         "search": "Search",
         "task_overview": "Tasks Overview",
-        "start_program": "Start this program"
+        "start_program": "Start this program",
+        "program_error": "Sorry, some error occur.\nPlease retry"
+    },
+    "create_button": {
+        "create_new": "Create new",
+        "create_program": "Program",
+        "create_program_des": "Create a program for your needs or everyone",
+        "crete_task": "To-do task",
+        "crete_task_des": "Add a to-do task for yourself"
+    },
+    "create_task": {
+        "create_task": "Create Task",
+        "task_name": "Task name",
+        "ex_task_name": "Ex. Make your bed",
+        "description": "Description",
+        "ex_description": "Your description",
+        "category": "Category",
+        "ex_category": "Ex. Routine",
+        "start_date": "Start date",
+        "ex_start_date": "Ex. 09/12/2024",
+        "time": "Time",
+        "ex_time": "Ex. 8:00 AM",
+        "allow_noti": "Allow notification",
+        "reminder": "Reminder",
+        "set_noti": "Set your notification",
+        "create_button": "Create",
+        "save_button": "Save"
+    },
+    "edit_task": {
+        "task_setting": "Task Settings"
+    },
+    "create_program": {
+        "create_program": "Create Program",
+        "upload_your_image": "Upload your image",
+        "tap_to_upload": "Tap to upload",
+        "file_support": "File support .JPEG .PNG",
+        "program_name": "Program name",
+        "ex_program_name": "Ex. Make your own music in 3 Days",
+        "description": "Description",
+        "ex_description": "Your description",
+        "category": "Category",
+        "ex_category": "Ex. Music",
+        "expected_time": "Expected time",
+        "ex_expected_time": "Ex. 3 Days",
+        "next_button": "Next",
+        "create_task_list": "Create Task List"
+    },
+    "edit_program": {
+        "edit_program": "Program Settings"
     }
 }

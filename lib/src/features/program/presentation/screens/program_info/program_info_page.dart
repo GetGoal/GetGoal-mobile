@@ -120,12 +120,12 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
     return GetGoalSubScaffold(
       body: SizedBox(
         height: MediaQuery.of(context).size.height / 1.5,
-        child: const Center(
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Sorry, some error occur.\nPlease retry',
+                Translations.of(context).program.program_error,
                 textAlign: TextAlign.center,
               ),
             ],

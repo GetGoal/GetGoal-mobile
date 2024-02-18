@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../config/route_config.dart';
 import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/icon.dart';
+import '../../../../../shared/mixins/validation/program_validation_mixin.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/circle_button.dart';
@@ -32,7 +34,8 @@ class ProgramCreatePage extends StatefulWidget {
   final PROGRAMFORMMODE? mode;
 }
 
-class _ProgramCreatePageState extends State<ProgramCreatePage> {
+class _ProgramCreatePageState extends State<ProgramCreatePage>
+    with ProgramValidationMixin {
   final _formKey = GlobalKey<FormState>();
   final _programNameTextInputController = TextEditingController();
   final _programDescriptionTextInputController = TextEditingController();
@@ -87,7 +90,7 @@ class _ProgramCreatePageState extends State<ProgramCreatePage> {
 
   Widget _buildUploadFileInput() {
     return UploadFileInput(
-      label: 'Upload your image',
+      label: Translations.of(context).create_program.upload_your_image,
       onTap: () async {
         final image =
             await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -136,39 +139,43 @@ class _ProgramCreatePageState extends State<ProgramCreatePage> {
   Widget _buildProgramNameFieldInput() {
     return NormalTextInputField(
       controller: _programNameTextInputController,
-      label: 'Program name',
-      hintText: 'Ex. Make your own music in 3 Days',
+      label: Translations.of(context).create_program.program_name,
+      hintText: Translations.of(context).create_program.ex_program_name,
+      validator: programNameValidator,
     );
   }
 
   Widget _buildDescriptionFieldInput() {
     return NormalTextInputField(
       controller: _programDescriptionTextInputController,
-      label: 'Description',
-      hintText: 'Your description',
+      label: Translations.of(context).create_program.description,
+      hintText: Translations.of(context).create_program.ex_description,
       maxLines: null,
+      validator: programDescriptionValidator,
     );
   }
 
   Widget _buildCategoryFieldInput() {
     return NormalTextInputField(
       controller: _programCategoryTextInputController,
-      label: 'Category',
-      hintText: 'Ex. Music',
+      label: Translations.of(context).create_program.category,
+      hintText: Translations.of(context).create_program.ex_category,
+      validator: programCategoryValidator,
     );
   }
 
   Widget _buildExpectedTimeFieldInput() {
     return NormalTextInputField(
       controller: _programExpectedTimeTextInputController,
-      label: 'Expected time',
-      hintText: 'Ex. 3 Days',
+      label: Translations.of(context).create_program.expected_time,
+      hintText: Translations.of(context).create_program.ex_expected_time,
+      validator: programExpectedTimeValidator,
     );
   }
 
   Widget _buildNextPageButton() {
     return MainButton(
-      buttonText: 'Next',
+      buttonText: Translations.of(context).create_program.next_button,
       onTap: () {
         if (_formKey.currentState!.validate()) {
           final ProgramCreate program = ProgramCreate(
@@ -192,9 +199,9 @@ class _ProgramCreatePageState extends State<ProgramCreatePage> {
   String getTitleName(PROGRAMFORMMODE mode) {
     switch (mode) {
       case PROGRAMFORMMODE.create:
-        return 'Create Program';
+        return Translations.of(context).create_program.create_program;
       case PROGRAMFORMMODE.edit:
-        return 'Program Settings';
+        return Translations.of(context).edit_program.edit_program;
       default:
         return 'Unknown';
     }

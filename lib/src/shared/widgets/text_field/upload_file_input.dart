@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../config/i18n/strings.g.dart';
 import '../../icon.dart';
 import '../../themes/color.dart';
 import '../../themes/font.dart';
@@ -47,11 +48,11 @@ class UploadFileInput extends StatelessWidget {
                   style: title1().copyWith(color: AppColors.primary),
                 ),
                 Text(
-                  'Tap to upload',
+                  Translations.of(context).create_program.tap_to_upload,
                   style: description().copyWith(color: AppColors.description),
                 ),
                 Text(
-                  'File support .JPEG .PNG',
+                  Translations.of(context).create_program.file_support,
                   style: description().copyWith(color: AppColors.description),
                 ),
               ],
