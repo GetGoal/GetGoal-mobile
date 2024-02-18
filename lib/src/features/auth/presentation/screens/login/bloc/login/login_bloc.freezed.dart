@@ -329,7 +329,7 @@ mixin _$LoginState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loginSuccess,
-    required TResult Function() loginError,
+    required TResult Function(String? message) loginError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -337,7 +337,7 @@ mixin _$LoginState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loginSuccess,
-    TResult? Function()? loginError,
+    TResult? Function(String? message)? loginError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -345,7 +345,7 @@ mixin _$LoginState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loginSuccess,
-    TResult Function()? loginError,
+    TResult Function(String? message)? loginError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -435,7 +435,7 @@ class _$LoginStateInitialImpl implements LoginStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loginSuccess,
-    required TResult Function() loginError,
+    required TResult Function(String? message) loginError,
   }) {
     return initial();
   }
@@ -446,7 +446,7 @@ class _$LoginStateInitialImpl implements LoginStateInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loginSuccess,
-    TResult? Function()? loginError,
+    TResult? Function(String? message)? loginError,
   }) {
     return initial?.call();
   }
@@ -457,7 +457,7 @@ class _$LoginStateInitialImpl implements LoginStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loginSuccess,
-    TResult Function()? loginError,
+    TResult Function(String? message)? loginError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -549,7 +549,7 @@ class _$LoginStateLoadingImpl implements LoginStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loginSuccess,
-    required TResult Function() loginError,
+    required TResult Function(String? message) loginError,
   }) {
     return loading();
   }
@@ -560,7 +560,7 @@ class _$LoginStateLoadingImpl implements LoginStateLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loginSuccess,
-    TResult? Function()? loginError,
+    TResult? Function(String? message)? loginError,
   }) {
     return loading?.call();
   }
@@ -571,7 +571,7 @@ class _$LoginStateLoadingImpl implements LoginStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loginSuccess,
-    TResult Function()? loginError,
+    TResult Function(String? message)? loginError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -666,7 +666,7 @@ class _$LoginStateLoginSuccessImpl implements LoginStateLoginSuccess {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loginSuccess,
-    required TResult Function() loginError,
+    required TResult Function(String? message) loginError,
   }) {
     return loginSuccess();
   }
@@ -677,7 +677,7 @@ class _$LoginStateLoginSuccessImpl implements LoginStateLoginSuccess {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loginSuccess,
-    TResult? Function()? loginError,
+    TResult? Function(String? message)? loginError,
   }) {
     return loginSuccess?.call();
   }
@@ -688,7 +688,7 @@ class _$LoginStateLoginSuccessImpl implements LoginStateLoginSuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loginSuccess,
-    TResult Function()? loginError,
+    TResult Function(String? message)? loginError,
     required TResult orElse(),
   }) {
     if (loginSuccess != null) {
@@ -744,6 +744,8 @@ abstract class _$$LoginStateLoginErrorImplCopyWith<$Res> {
   factory _$$LoginStateLoginErrorImplCopyWith(_$LoginStateLoginErrorImpl value,
           $Res Function(_$LoginStateLoginErrorImpl) then) =
       __$$LoginStateLoginErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -753,27 +755,52 @@ class __$$LoginStateLoginErrorImplCopyWithImpl<$Res>
   __$$LoginStateLoginErrorImplCopyWithImpl(_$LoginStateLoginErrorImpl _value,
       $Res Function(_$LoginStateLoginErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$LoginStateLoginErrorImpl(
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$LoginStateLoginErrorImpl implements LoginStateLoginError {
-  const _$LoginStateLoginErrorImpl();
+  const _$LoginStateLoginErrorImpl({this.message});
+
+  @override
+  final String? message;
 
   @override
   String toString() {
-    return 'LoginState.loginError()';
+    return 'LoginState.loginError(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoginStateLoginErrorImpl);
+            other is _$LoginStateLoginErrorImpl &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoginStateLoginErrorImplCopyWith<_$LoginStateLoginErrorImpl>
+      get copyWith =>
+          __$$LoginStateLoginErrorImplCopyWithImpl<_$LoginStateLoginErrorImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -781,9 +808,9 @@ class _$LoginStateLoginErrorImpl implements LoginStateLoginError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loginSuccess,
-    required TResult Function() loginError,
+    required TResult Function(String? message) loginError,
   }) {
-    return loginError();
+    return loginError(message);
   }
 
   @override
@@ -792,9 +819,9 @@ class _$LoginStateLoginErrorImpl implements LoginStateLoginError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loginSuccess,
-    TResult? Function()? loginError,
+    TResult? Function(String? message)? loginError,
   }) {
-    return loginError?.call();
+    return loginError?.call(message);
   }
 
   @override
@@ -803,11 +830,11 @@ class _$LoginStateLoginErrorImpl implements LoginStateLoginError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loginSuccess,
-    TResult Function()? loginError,
+    TResult Function(String? message)? loginError,
     required TResult orElse(),
   }) {
     if (loginError != null) {
-      return loginError();
+      return loginError(message);
     }
     return orElse();
   }
@@ -851,5 +878,11 @@ class _$LoginStateLoginErrorImpl implements LoginStateLoginError {
 }
 
 abstract class LoginStateLoginError implements LoginState {
-  const factory LoginStateLoginError() = _$LoginStateLoginErrorImpl;
+  const factory LoginStateLoginError({final String? message}) =
+      _$LoginStateLoginErrorImpl;
+
+  String? get message;
+  @JsonKey(ignore: true)
+  _$$LoginStateLoginErrorImplCopyWith<_$LoginStateLoginErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

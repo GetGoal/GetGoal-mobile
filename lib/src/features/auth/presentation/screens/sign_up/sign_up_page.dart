@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../config/route_config.dart';
 import '../../../../../shared/app_cache.dart';
+import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
@@ -17,9 +18,10 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends State<SignUpPage> with AuthValidationMixin {
   CreateAccountBloc get _createAccountBloc => context.read<CreateAccountBloc>();
 
+  final _formKey = GlobalKey<FormState>();
   final _firstNameTextField = TextEditingController();
   final _lastNameTextField = TextEditingController();
   final _emailTextField = TextEditingController();
@@ -32,17 +34,20 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              _buildFirstNameTextFieldInput(),
-              const SizedBox(height: 20),
-              _buildLastNameTextFieldInput(),
-              const SizedBox(height: 20),
-              _buildEmailTextFieldInput(),
-              const SizedBox(height: 20),
-              _buildPasswordTextFieldInput(),
-              const SizedBox(height: 20),
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                _buildFirstNameTextFieldInput(),
+                const SizedBox(height: 20),
+                _buildLastNameTextFieldInput(),
+                const SizedBox(height: 20),
+                _buildEmailTextFieldInput(),
+                const SizedBox(height: 20),
+                _buildPasswordTextFieldInput(),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),
@@ -55,6 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
       controller: _firstNameTextField,
       label: 'First name',
       hintText: 'Your first name',
+      validator: firstNameValidator,
     );
   }
 
@@ -63,6 +69,7 @@ class _SignUpPageState extends State<SignUpPage> {
       controller: _lastNameTextField,
       label: 'Last name',
       hintText: 'Your Last name',
+      validator: lastNameValidator,
     );
   }
 
@@ -71,6 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
       controller: _emailTextField,
       label: 'Email Address',
       hintText: 'example@mail.com',
+      validator: emailValidator,
     );
   }
 
@@ -79,6 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
       controller: _passwordTextField,
       label: 'Password',
       isPassword: true,
+      validator: passwordValidator,
     );
   }
 
@@ -95,7 +104,6 @@ class _SignUpPageState extends State<SignUpPage> {
           }
         },
         builder: (context, state) {
-          print(state);
           switch (state) {
             case CreateAccountStateInitial():
               return MainButton(buttonText: 'Continue', onTap: registerAccount);
@@ -114,13 +122,15 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void registerAccount() {
-    final user = CreateUser(
-      firstName: _firstNameTextField.text,
-      lastName: _lastNameTextField.text,
-      email: _emailTextField.text,
-      password: _passwordTextField.text,
-    );
-    AppCache.userEmail = _emailTextField.text;
-    _createAccountBloc.add(CreateAccountEvent.onCreate(user: user));
+    if (_formKey.currentState!.validate()) {
+      final user = CreateUser(
+        firstName: _firstNameTextField.text,
+        lastName: _lastNameTextField.text,
+        email: _emailTextField.text,
+        password: _passwordTextField.text,
+      );
+      AppCache.userEmail = _emailTextField.text;
+      _createAccountBloc.add(CreateAccountEvent.onCreate(user: user));
+    }
   }
 }

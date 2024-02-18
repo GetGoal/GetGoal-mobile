@@ -19,9 +19,10 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
   LoginBloc get _loginBloc => context.read<LoginBloc>();
 
+  final _formKey = GlobalKey<FormState>();
   final _emailInputController = TextEditingController();
   final _passwordInputController = TextEditingController();
 
@@ -39,21 +40,24 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildTextHeader(),
-            const SizedBox(height: 40),
-            _buildGoogleLoginButton(),
-            const SizedBox(height: 20),
-            Text('Or', style: description()),
-            const SizedBox(height: 20),
-            _buildEmailTextFieldInput(),
-            const SizedBox(height: 20),
-            _buildPasswordTextFieldInput(),
-            const SizedBox(height: 32),
-            _buildSubmitButton(),
-          ],
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildTextHeader(),
+              const SizedBox(height: 40),
+              _buildGoogleLoginButton(),
+              const SizedBox(height: 20),
+              Text('Or', style: description()),
+              const SizedBox(height: 20),
+              _buildEmailTextFieldInput(),
+              const SizedBox(height: 20),
+              _buildPasswordTextFieldInput(),
+              const SizedBox(height: 32),
+              _buildSubmitButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -93,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
     return NormalTextInputField(
       controller: _emailInputController,
       label: 'Your Email',
+      validator: emailValidator,
     );
   }
 
@@ -104,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
           controller: _passwordInputController,
           label: 'Password',
           isPassword: true,
+          validator: passwordValidator,
         ),
         const SizedBox(height: 8),
         GestureDetector(
@@ -148,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: login,
                 );
               default:
-                return const MainButton(buttonText: 'Login');
+                return const MainButton(buttonText: 'fsf');
             }
           },
         ),
@@ -180,11 +186,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void login() {
-    _loginBloc.add(
-      LoginEvent.onLogin(
-        email: _emailInputController.text,
-        password: _passwordInputController.text,
-      ),
-    );
+    if (_formKey.currentState!.validate()) {
+      _loginBloc.add(
+        LoginEvent.onLogin(
+          email: _emailInputController.text,
+          password: _passwordInputController.text,
+        ),
+      );
+    }
   }
 }

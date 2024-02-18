@@ -51,7 +51,7 @@ class NormalTextInputField extends StatelessWidget {
 
             obscureText: isPassword!,
 
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            // autovalidateMode: AutovalidateMode.onUserInteraction,
 
             // Input validation
             validator: validator != null ? validator! : null,
