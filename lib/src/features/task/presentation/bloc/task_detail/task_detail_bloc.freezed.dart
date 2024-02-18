@@ -16,49 +16,55 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TaskDetailEvent {
+  String get taskId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() edit,
-    required TResult Function() delete,
+    required TResult Function(String taskId) started,
+    required TResult Function(String taskId) onTappedEdit,
+    required TResult Function(String taskId) onTappedDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? edit,
-    TResult? Function()? delete,
+    TResult? Function(String taskId)? started,
+    TResult? Function(String taskId)? onTappedEdit,
+    TResult? Function(String taskId)? onTappedDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? edit,
-    TResult Function()? delete,
+    TResult Function(String taskId)? started,
+    TResult Function(String taskId)? onTappedEdit,
+    TResult Function(String taskId)? onTappedDelete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TaskDetailEventStart value) started,
-    required TResult Function(TaskDetailEventEdit value) edit,
-    required TResult Function(TaskDetailEventDelete value) delete,
+    required TResult Function(TaskDetailEventStarted value) started,
+    required TResult Function(TaskDetailEventOnTappedEdit value) onTappedEdit,
+    required TResult Function(TaskDetailEventOnTappedDelete value)
+        onTappedDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskDetailEventStart value)? started,
-    TResult? Function(TaskDetailEventEdit value)? edit,
-    TResult? Function(TaskDetailEventDelete value)? delete,
+    TResult? Function(TaskDetailEventStarted value)? started,
+    TResult? Function(TaskDetailEventOnTappedEdit value)? onTappedEdit,
+    TResult? Function(TaskDetailEventOnTappedDelete value)? onTappedDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TaskDetailEventStart value)? started,
-    TResult Function(TaskDetailEventEdit value)? edit,
-    TResult Function(TaskDetailEventDelete value)? delete,
+    TResult Function(TaskDetailEventStarted value)? started,
+    TResult Function(TaskDetailEventOnTappedEdit value)? onTappedEdit,
+    TResult Function(TaskDetailEventOnTappedDelete value)? onTappedDelete,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $TaskDetailEventCopyWith<TaskDetailEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -67,6 +73,8 @@ abstract class $TaskDetailEventCopyWith<$Res> {
   factory $TaskDetailEventCopyWith(
           TaskDetailEvent value, $Res Function(TaskDetailEvent) then) =
       _$TaskDetailEventCopyWithImpl<$Res, TaskDetailEvent>;
+  @useResult
+  $Res call({String taskId});
 }
 
 /// @nodoc
@@ -78,74 +86,117 @@ class _$TaskDetailEventCopyWithImpl<$Res, $Val extends TaskDetailEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? taskId = null,
+  }) {
+    return _then(_value.copyWith(
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$TaskDetailEventStartImplCopyWith<$Res> {
-  factory _$$TaskDetailEventStartImplCopyWith(_$TaskDetailEventStartImpl value,
-          $Res Function(_$TaskDetailEventStartImpl) then) =
-      __$$TaskDetailEventStartImplCopyWithImpl<$Res>;
+abstract class _$$TaskDetailEventStartedImplCopyWith<$Res>
+    implements $TaskDetailEventCopyWith<$Res> {
+  factory _$$TaskDetailEventStartedImplCopyWith(
+          _$TaskDetailEventStartedImpl value,
+          $Res Function(_$TaskDetailEventStartedImpl) then) =
+      __$$TaskDetailEventStartedImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String taskId});
 }
 
 /// @nodoc
-class __$$TaskDetailEventStartImplCopyWithImpl<$Res>
-    extends _$TaskDetailEventCopyWithImpl<$Res, _$TaskDetailEventStartImpl>
-    implements _$$TaskDetailEventStartImplCopyWith<$Res> {
-  __$$TaskDetailEventStartImplCopyWithImpl(_$TaskDetailEventStartImpl _value,
-      $Res Function(_$TaskDetailEventStartImpl) _then)
+class __$$TaskDetailEventStartedImplCopyWithImpl<$Res>
+    extends _$TaskDetailEventCopyWithImpl<$Res, _$TaskDetailEventStartedImpl>
+    implements _$$TaskDetailEventStartedImplCopyWith<$Res> {
+  __$$TaskDetailEventStartedImplCopyWithImpl(
+      _$TaskDetailEventStartedImpl _value,
+      $Res Function(_$TaskDetailEventStartedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? taskId = null,
+  }) {
+    return _then(_$TaskDetailEventStartedImpl(
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$TaskDetailEventStartImpl implements TaskDetailEventStart {
-  const _$TaskDetailEventStartImpl();
+class _$TaskDetailEventStartedImpl implements TaskDetailEventStarted {
+  const _$TaskDetailEventStartedImpl({required this.taskId});
+
+  @override
+  final String taskId;
 
   @override
   String toString() {
-    return 'TaskDetailEvent.started()';
+    return 'TaskDetailEvent.started(taskId: $taskId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskDetailEventStartImpl);
+            other is _$TaskDetailEventStartedImpl &&
+            (identical(other.taskId, taskId) || other.taskId == taskId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, taskId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TaskDetailEventStartedImplCopyWith<_$TaskDetailEventStartedImpl>
+      get copyWith => __$$TaskDetailEventStartedImplCopyWithImpl<
+          _$TaskDetailEventStartedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() edit,
-    required TResult Function() delete,
+    required TResult Function(String taskId) started,
+    required TResult Function(String taskId) onTappedEdit,
+    required TResult Function(String taskId) onTappedDelete,
   }) {
-    return started();
+    return started(taskId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? edit,
-    TResult? Function()? delete,
+    TResult? Function(String taskId)? started,
+    TResult? Function(String taskId)? onTappedEdit,
+    TResult? Function(String taskId)? onTappedDelete,
   }) {
-    return started?.call();
+    return started?.call(taskId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? edit,
-    TResult Function()? delete,
+    TResult Function(String taskId)? started,
+    TResult Function(String taskId)? onTappedEdit,
+    TResult Function(String taskId)? onTappedDelete,
     required TResult orElse(),
   }) {
     if (started != null) {
-      return started();
+      return started(taskId);
     }
     return orElse();
   }
@@ -153,9 +204,10 @@ class _$TaskDetailEventStartImpl implements TaskDetailEventStart {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TaskDetailEventStart value) started,
-    required TResult Function(TaskDetailEventEdit value) edit,
-    required TResult Function(TaskDetailEventDelete value) delete,
+    required TResult Function(TaskDetailEventStarted value) started,
+    required TResult Function(TaskDetailEventOnTappedEdit value) onTappedEdit,
+    required TResult Function(TaskDetailEventOnTappedDelete value)
+        onTappedDelete,
   }) {
     return started(this);
   }
@@ -163,9 +215,9 @@ class _$TaskDetailEventStartImpl implements TaskDetailEventStart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskDetailEventStart value)? started,
-    TResult? Function(TaskDetailEventEdit value)? edit,
-    TResult? Function(TaskDetailEventDelete value)? delete,
+    TResult? Function(TaskDetailEventStarted value)? started,
+    TResult? Function(TaskDetailEventOnTappedEdit value)? onTappedEdit,
+    TResult? Function(TaskDetailEventOnTappedDelete value)? onTappedDelete,
   }) {
     return started?.call(this);
   }
@@ -173,9 +225,9 @@ class _$TaskDetailEventStartImpl implements TaskDetailEventStart {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TaskDetailEventStart value)? started,
-    TResult Function(TaskDetailEventEdit value)? edit,
-    TResult Function(TaskDetailEventDelete value)? delete,
+    TResult Function(TaskDetailEventStarted value)? started,
+    TResult Function(TaskDetailEventOnTappedEdit value)? onTappedEdit,
+    TResult Function(TaskDetailEventOnTappedDelete value)? onTappedDelete,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -185,76 +237,115 @@ class _$TaskDetailEventStartImpl implements TaskDetailEventStart {
   }
 }
 
-abstract class TaskDetailEventStart implements TaskDetailEvent {
-  const factory TaskDetailEventStart() = _$TaskDetailEventStartImpl;
+abstract class TaskDetailEventStarted implements TaskDetailEvent {
+  const factory TaskDetailEventStarted({required final String taskId}) =
+      _$TaskDetailEventStartedImpl;
+
+  @override
+  String get taskId;
+  @override
+  @JsonKey(ignore: true)
+  _$$TaskDetailEventStartedImplCopyWith<_$TaskDetailEventStartedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TaskDetailEventEditImplCopyWith<$Res> {
-  factory _$$TaskDetailEventEditImplCopyWith(_$TaskDetailEventEditImpl value,
-          $Res Function(_$TaskDetailEventEditImpl) then) =
-      __$$TaskDetailEventEditImplCopyWithImpl<$Res>;
+abstract class _$$TaskDetailEventOnTappedEditImplCopyWith<$Res>
+    implements $TaskDetailEventCopyWith<$Res> {
+  factory _$$TaskDetailEventOnTappedEditImplCopyWith(
+          _$TaskDetailEventOnTappedEditImpl value,
+          $Res Function(_$TaskDetailEventOnTappedEditImpl) then) =
+      __$$TaskDetailEventOnTappedEditImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String taskId});
 }
 
 /// @nodoc
-class __$$TaskDetailEventEditImplCopyWithImpl<$Res>
-    extends _$TaskDetailEventCopyWithImpl<$Res, _$TaskDetailEventEditImpl>
-    implements _$$TaskDetailEventEditImplCopyWith<$Res> {
-  __$$TaskDetailEventEditImplCopyWithImpl(_$TaskDetailEventEditImpl _value,
-      $Res Function(_$TaskDetailEventEditImpl) _then)
+class __$$TaskDetailEventOnTappedEditImplCopyWithImpl<$Res>
+    extends _$TaskDetailEventCopyWithImpl<$Res,
+        _$TaskDetailEventOnTappedEditImpl>
+    implements _$$TaskDetailEventOnTappedEditImplCopyWith<$Res> {
+  __$$TaskDetailEventOnTappedEditImplCopyWithImpl(
+      _$TaskDetailEventOnTappedEditImpl _value,
+      $Res Function(_$TaskDetailEventOnTappedEditImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? taskId = null,
+  }) {
+    return _then(_$TaskDetailEventOnTappedEditImpl(
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$TaskDetailEventEditImpl implements TaskDetailEventEdit {
-  const _$TaskDetailEventEditImpl();
+class _$TaskDetailEventOnTappedEditImpl implements TaskDetailEventOnTappedEdit {
+  const _$TaskDetailEventOnTappedEditImpl({required this.taskId});
+
+  @override
+  final String taskId;
 
   @override
   String toString() {
-    return 'TaskDetailEvent.edit()';
+    return 'TaskDetailEvent.onTappedEdit(taskId: $taskId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskDetailEventEditImpl);
+            other is _$TaskDetailEventOnTappedEditImpl &&
+            (identical(other.taskId, taskId) || other.taskId == taskId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, taskId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TaskDetailEventOnTappedEditImplCopyWith<_$TaskDetailEventOnTappedEditImpl>
+      get copyWith => __$$TaskDetailEventOnTappedEditImplCopyWithImpl<
+          _$TaskDetailEventOnTappedEditImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() edit,
-    required TResult Function() delete,
+    required TResult Function(String taskId) started,
+    required TResult Function(String taskId) onTappedEdit,
+    required TResult Function(String taskId) onTappedDelete,
   }) {
-    return edit();
+    return onTappedEdit(taskId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? edit,
-    TResult? Function()? delete,
+    TResult? Function(String taskId)? started,
+    TResult? Function(String taskId)? onTappedEdit,
+    TResult? Function(String taskId)? onTappedDelete,
   }) {
-    return edit?.call();
+    return onTappedEdit?.call(taskId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? edit,
-    TResult Function()? delete,
+    TResult Function(String taskId)? started,
+    TResult Function(String taskId)? onTappedEdit,
+    TResult Function(String taskId)? onTappedDelete,
     required TResult orElse(),
   }) {
-    if (edit != null) {
-      return edit();
+    if (onTappedEdit != null) {
+      return onTappedEdit(taskId);
     }
     return orElse();
   }
@@ -262,109 +353,150 @@ class _$TaskDetailEventEditImpl implements TaskDetailEventEdit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TaskDetailEventStart value) started,
-    required TResult Function(TaskDetailEventEdit value) edit,
-    required TResult Function(TaskDetailEventDelete value) delete,
+    required TResult Function(TaskDetailEventStarted value) started,
+    required TResult Function(TaskDetailEventOnTappedEdit value) onTappedEdit,
+    required TResult Function(TaskDetailEventOnTappedDelete value)
+        onTappedDelete,
   }) {
-    return edit(this);
+    return onTappedEdit(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskDetailEventStart value)? started,
-    TResult? Function(TaskDetailEventEdit value)? edit,
-    TResult? Function(TaskDetailEventDelete value)? delete,
+    TResult? Function(TaskDetailEventStarted value)? started,
+    TResult? Function(TaskDetailEventOnTappedEdit value)? onTappedEdit,
+    TResult? Function(TaskDetailEventOnTappedDelete value)? onTappedDelete,
   }) {
-    return edit?.call(this);
+    return onTappedEdit?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TaskDetailEventStart value)? started,
-    TResult Function(TaskDetailEventEdit value)? edit,
-    TResult Function(TaskDetailEventDelete value)? delete,
+    TResult Function(TaskDetailEventStarted value)? started,
+    TResult Function(TaskDetailEventOnTappedEdit value)? onTappedEdit,
+    TResult Function(TaskDetailEventOnTappedDelete value)? onTappedDelete,
     required TResult orElse(),
   }) {
-    if (edit != null) {
-      return edit(this);
+    if (onTappedEdit != null) {
+      return onTappedEdit(this);
     }
     return orElse();
   }
 }
 
-abstract class TaskDetailEventEdit implements TaskDetailEvent {
-  const factory TaskDetailEventEdit() = _$TaskDetailEventEditImpl;
+abstract class TaskDetailEventOnTappedEdit implements TaskDetailEvent {
+  const factory TaskDetailEventOnTappedEdit({required final String taskId}) =
+      _$TaskDetailEventOnTappedEditImpl;
+
+  @override
+  String get taskId;
+  @override
+  @JsonKey(ignore: true)
+  _$$TaskDetailEventOnTappedEditImplCopyWith<_$TaskDetailEventOnTappedEditImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TaskDetailEventDeleteImplCopyWith<$Res> {
-  factory _$$TaskDetailEventDeleteImplCopyWith(
-          _$TaskDetailEventDeleteImpl value,
-          $Res Function(_$TaskDetailEventDeleteImpl) then) =
-      __$$TaskDetailEventDeleteImplCopyWithImpl<$Res>;
+abstract class _$$TaskDetailEventOnTappedDeleteImplCopyWith<$Res>
+    implements $TaskDetailEventCopyWith<$Res> {
+  factory _$$TaskDetailEventOnTappedDeleteImplCopyWith(
+          _$TaskDetailEventOnTappedDeleteImpl value,
+          $Res Function(_$TaskDetailEventOnTappedDeleteImpl) then) =
+      __$$TaskDetailEventOnTappedDeleteImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String taskId});
 }
 
 /// @nodoc
-class __$$TaskDetailEventDeleteImplCopyWithImpl<$Res>
-    extends _$TaskDetailEventCopyWithImpl<$Res, _$TaskDetailEventDeleteImpl>
-    implements _$$TaskDetailEventDeleteImplCopyWith<$Res> {
-  __$$TaskDetailEventDeleteImplCopyWithImpl(_$TaskDetailEventDeleteImpl _value,
-      $Res Function(_$TaskDetailEventDeleteImpl) _then)
+class __$$TaskDetailEventOnTappedDeleteImplCopyWithImpl<$Res>
+    extends _$TaskDetailEventCopyWithImpl<$Res,
+        _$TaskDetailEventOnTappedDeleteImpl>
+    implements _$$TaskDetailEventOnTappedDeleteImplCopyWith<$Res> {
+  __$$TaskDetailEventOnTappedDeleteImplCopyWithImpl(
+      _$TaskDetailEventOnTappedDeleteImpl _value,
+      $Res Function(_$TaskDetailEventOnTappedDeleteImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? taskId = null,
+  }) {
+    return _then(_$TaskDetailEventOnTappedDeleteImpl(
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$TaskDetailEventDeleteImpl implements TaskDetailEventDelete {
-  const _$TaskDetailEventDeleteImpl();
+class _$TaskDetailEventOnTappedDeleteImpl
+    implements TaskDetailEventOnTappedDelete {
+  const _$TaskDetailEventOnTappedDeleteImpl({required this.taskId});
+
+  @override
+  final String taskId;
 
   @override
   String toString() {
-    return 'TaskDetailEvent.delete()';
+    return 'TaskDetailEvent.onTappedDelete(taskId: $taskId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskDetailEventDeleteImpl);
+            other is _$TaskDetailEventOnTappedDeleteImpl &&
+            (identical(other.taskId, taskId) || other.taskId == taskId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, taskId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TaskDetailEventOnTappedDeleteImplCopyWith<
+          _$TaskDetailEventOnTappedDeleteImpl>
+      get copyWith => __$$TaskDetailEventOnTappedDeleteImplCopyWithImpl<
+          _$TaskDetailEventOnTappedDeleteImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() edit,
-    required TResult Function() delete,
+    required TResult Function(String taskId) started,
+    required TResult Function(String taskId) onTappedEdit,
+    required TResult Function(String taskId) onTappedDelete,
   }) {
-    return delete();
+    return onTappedDelete(taskId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? edit,
-    TResult? Function()? delete,
+    TResult? Function(String taskId)? started,
+    TResult? Function(String taskId)? onTappedEdit,
+    TResult? Function(String taskId)? onTappedDelete,
   }) {
-    return delete?.call();
+    return onTappedDelete?.call(taskId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? edit,
-    TResult Function()? delete,
+    TResult Function(String taskId)? started,
+    TResult Function(String taskId)? onTappedEdit,
+    TResult Function(String taskId)? onTappedDelete,
     required TResult orElse(),
   }) {
-    if (delete != null) {
-      return delete();
+    if (onTappedDelete != null) {
+      return onTappedDelete(taskId);
     }
     return orElse();
   }
@@ -372,40 +504,50 @@ class _$TaskDetailEventDeleteImpl implements TaskDetailEventDelete {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TaskDetailEventStart value) started,
-    required TResult Function(TaskDetailEventEdit value) edit,
-    required TResult Function(TaskDetailEventDelete value) delete,
+    required TResult Function(TaskDetailEventStarted value) started,
+    required TResult Function(TaskDetailEventOnTappedEdit value) onTappedEdit,
+    required TResult Function(TaskDetailEventOnTappedDelete value)
+        onTappedDelete,
   }) {
-    return delete(this);
+    return onTappedDelete(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskDetailEventStart value)? started,
-    TResult? Function(TaskDetailEventEdit value)? edit,
-    TResult? Function(TaskDetailEventDelete value)? delete,
+    TResult? Function(TaskDetailEventStarted value)? started,
+    TResult? Function(TaskDetailEventOnTappedEdit value)? onTappedEdit,
+    TResult? Function(TaskDetailEventOnTappedDelete value)? onTappedDelete,
   }) {
-    return delete?.call(this);
+    return onTappedDelete?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TaskDetailEventStart value)? started,
-    TResult Function(TaskDetailEventEdit value)? edit,
-    TResult Function(TaskDetailEventDelete value)? delete,
+    TResult Function(TaskDetailEventStarted value)? started,
+    TResult Function(TaskDetailEventOnTappedEdit value)? onTappedEdit,
+    TResult Function(TaskDetailEventOnTappedDelete value)? onTappedDelete,
     required TResult orElse(),
   }) {
-    if (delete != null) {
-      return delete(this);
+    if (onTappedDelete != null) {
+      return onTappedDelete(this);
     }
     return orElse();
   }
 }
 
-abstract class TaskDetailEventDelete implements TaskDetailEvent {
-  const factory TaskDetailEventDelete() = _$TaskDetailEventDeleteImpl;
+abstract class TaskDetailEventOnTappedDelete implements TaskDetailEvent {
+  const factory TaskDetailEventOnTappedDelete({required final String taskId}) =
+      _$TaskDetailEventOnTappedDeleteImpl;
+
+  @override
+  String get taskId;
+  @override
+  @JsonKey(ignore: true)
+  _$$TaskDetailEventOnTappedDeleteImplCopyWith<
+          _$TaskDetailEventOnTappedDeleteImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -414,7 +556,7 @@ mixin _$TaskDetailState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loadedSuccess,
+    required TResult Function(Task task) loadedSuccess,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -422,7 +564,7 @@ mixin _$TaskDetailState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loadedSuccess,
+    TResult? Function(Task task)? loadedSuccess,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -430,7 +572,7 @@ mixin _$TaskDetailState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loadedSuccess,
+    TResult Function(Task task)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -439,7 +581,7 @@ mixin _$TaskDetailState {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskDetailStateInitial value) initial,
     required TResult Function(TaskDetailStateLoading value) loading,
-    required TResult Function(TaskDetailStateLoadedSucess value) loadedSuccess,
+    required TResult Function(TaskDetailStateLoadedSuccess value) loadedSuccess,
     required TResult Function(TaskDetailStateError value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -447,7 +589,7 @@ mixin _$TaskDetailState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskDetailStateInitial value)? initial,
     TResult? Function(TaskDetailStateLoading value)? loading,
-    TResult? Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult? Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(TaskDetailStateError value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -455,7 +597,7 @@ mixin _$TaskDetailState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskDetailStateInitial value)? initial,
     TResult Function(TaskDetailStateLoading value)? loading,
-    TResult Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult Function(TaskDetailStateError value)? error,
     required TResult orElse(),
   }) =>
@@ -523,7 +665,7 @@ class _$TaskDetailStateInitialImpl implements TaskDetailStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loadedSuccess,
+    required TResult Function(Task task) loadedSuccess,
     required TResult Function() error,
   }) {
     return initial();
@@ -534,7 +676,7 @@ class _$TaskDetailStateInitialImpl implements TaskDetailStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loadedSuccess,
+    TResult? Function(Task task)? loadedSuccess,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -545,7 +687,7 @@ class _$TaskDetailStateInitialImpl implements TaskDetailStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loadedSuccess,
+    TResult Function(Task task)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -560,7 +702,7 @@ class _$TaskDetailStateInitialImpl implements TaskDetailStateInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskDetailStateInitial value) initial,
     required TResult Function(TaskDetailStateLoading value) loading,
-    required TResult Function(TaskDetailStateLoadedSucess value) loadedSuccess,
+    required TResult Function(TaskDetailStateLoadedSuccess value) loadedSuccess,
     required TResult Function(TaskDetailStateError value) error,
   }) {
     return initial(this);
@@ -571,7 +713,7 @@ class _$TaskDetailStateInitialImpl implements TaskDetailStateInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskDetailStateInitial value)? initial,
     TResult? Function(TaskDetailStateLoading value)? loading,
-    TResult? Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult? Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(TaskDetailStateError value)? error,
   }) {
     return initial?.call(this);
@@ -582,7 +724,7 @@ class _$TaskDetailStateInitialImpl implements TaskDetailStateInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskDetailStateInitial value)? initial,
     TResult Function(TaskDetailStateLoading value)? loading,
-    TResult Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult Function(TaskDetailStateError value)? error,
     required TResult orElse(),
   }) {
@@ -640,7 +782,7 @@ class _$TaskDetailStateLoadingImpl implements TaskDetailStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loadedSuccess,
+    required TResult Function(Task task) loadedSuccess,
     required TResult Function() error,
   }) {
     return loading();
@@ -651,7 +793,7 @@ class _$TaskDetailStateLoadingImpl implements TaskDetailStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loadedSuccess,
+    TResult? Function(Task task)? loadedSuccess,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -662,7 +804,7 @@ class _$TaskDetailStateLoadingImpl implements TaskDetailStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loadedSuccess,
+    TResult Function(Task task)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -677,7 +819,7 @@ class _$TaskDetailStateLoadingImpl implements TaskDetailStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskDetailStateInitial value) initial,
     required TResult Function(TaskDetailStateLoading value) loading,
-    required TResult Function(TaskDetailStateLoadedSucess value) loadedSuccess,
+    required TResult Function(TaskDetailStateLoadedSuccess value) loadedSuccess,
     required TResult Function(TaskDetailStateError value) error,
   }) {
     return loading(this);
@@ -688,7 +830,7 @@ class _$TaskDetailStateLoadingImpl implements TaskDetailStateLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskDetailStateInitial value)? initial,
     TResult? Function(TaskDetailStateLoading value)? loading,
-    TResult? Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult? Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(TaskDetailStateError value)? error,
   }) {
     return loading?.call(this);
@@ -699,7 +841,7 @@ class _$TaskDetailStateLoadingImpl implements TaskDetailStateLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskDetailStateInitial value)? initial,
     TResult Function(TaskDetailStateLoading value)? loading,
-    TResult Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult Function(TaskDetailStateError value)? error,
     required TResult orElse(),
   }) {
@@ -715,53 +857,91 @@ abstract class TaskDetailStateLoading implements TaskDetailState {
 }
 
 /// @nodoc
-abstract class _$$TaskDetailStateLoadedSucessImplCopyWith<$Res> {
-  factory _$$TaskDetailStateLoadedSucessImplCopyWith(
-          _$TaskDetailStateLoadedSucessImpl value,
-          $Res Function(_$TaskDetailStateLoadedSucessImpl) then) =
-      __$$TaskDetailStateLoadedSucessImplCopyWithImpl<$Res>;
+abstract class _$$TaskDetailStateLoadedSuccessImplCopyWith<$Res> {
+  factory _$$TaskDetailStateLoadedSuccessImplCopyWith(
+          _$TaskDetailStateLoadedSuccessImpl value,
+          $Res Function(_$TaskDetailStateLoadedSuccessImpl) then) =
+      __$$TaskDetailStateLoadedSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Task task});
+
+  $TaskCopyWith<$Res> get task;
 }
 
 /// @nodoc
-class __$$TaskDetailStateLoadedSucessImplCopyWithImpl<$Res>
+class __$$TaskDetailStateLoadedSuccessImplCopyWithImpl<$Res>
     extends _$TaskDetailStateCopyWithImpl<$Res,
-        _$TaskDetailStateLoadedSucessImpl>
-    implements _$$TaskDetailStateLoadedSucessImplCopyWith<$Res> {
-  __$$TaskDetailStateLoadedSucessImplCopyWithImpl(
-      _$TaskDetailStateLoadedSucessImpl _value,
-      $Res Function(_$TaskDetailStateLoadedSucessImpl) _then)
+        _$TaskDetailStateLoadedSuccessImpl>
+    implements _$$TaskDetailStateLoadedSuccessImplCopyWith<$Res> {
+  __$$TaskDetailStateLoadedSuccessImplCopyWithImpl(
+      _$TaskDetailStateLoadedSuccessImpl _value,
+      $Res Function(_$TaskDetailStateLoadedSuccessImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? task = null,
+  }) {
+    return _then(_$TaskDetailStateLoadedSuccessImpl(
+      task: null == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as Task,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskCopyWith<$Res> get task {
+    return $TaskCopyWith<$Res>(_value.task, (value) {
+      return _then(_value.copyWith(task: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$TaskDetailStateLoadedSucessImpl implements TaskDetailStateLoadedSucess {
-  const _$TaskDetailStateLoadedSucessImpl();
+class _$TaskDetailStateLoadedSuccessImpl
+    implements TaskDetailStateLoadedSuccess {
+  const _$TaskDetailStateLoadedSuccessImpl({required this.task});
+
+  @override
+  final Task task;
 
   @override
   String toString() {
-    return 'TaskDetailState.loadedSuccess()';
+    return 'TaskDetailState.loadedSuccess(task: $task)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskDetailStateLoadedSucessImpl);
+            other is _$TaskDetailStateLoadedSuccessImpl &&
+            (identical(other.task, task) || other.task == task));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, task);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TaskDetailStateLoadedSuccessImplCopyWith<
+          _$TaskDetailStateLoadedSuccessImpl>
+      get copyWith => __$$TaskDetailStateLoadedSuccessImplCopyWithImpl<
+          _$TaskDetailStateLoadedSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loadedSuccess,
+    required TResult Function(Task task) loadedSuccess,
     required TResult Function() error,
   }) {
-    return loadedSuccess();
+    return loadedSuccess(task);
   }
 
   @override
@@ -769,10 +949,10 @@ class _$TaskDetailStateLoadedSucessImpl implements TaskDetailStateLoadedSucess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loadedSuccess,
+    TResult? Function(Task task)? loadedSuccess,
     TResult? Function()? error,
   }) {
-    return loadedSuccess?.call();
+    return loadedSuccess?.call(task);
   }
 
   @override
@@ -780,12 +960,12 @@ class _$TaskDetailStateLoadedSucessImpl implements TaskDetailStateLoadedSucess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loadedSuccess,
+    TResult Function(Task task)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loadedSuccess != null) {
-      return loadedSuccess();
+      return loadedSuccess(task);
     }
     return orElse();
   }
@@ -795,7 +975,7 @@ class _$TaskDetailStateLoadedSucessImpl implements TaskDetailStateLoadedSucess {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskDetailStateInitial value) initial,
     required TResult Function(TaskDetailStateLoading value) loading,
-    required TResult Function(TaskDetailStateLoadedSucess value) loadedSuccess,
+    required TResult Function(TaskDetailStateLoadedSuccess value) loadedSuccess,
     required TResult Function(TaskDetailStateError value) error,
   }) {
     return loadedSuccess(this);
@@ -806,7 +986,7 @@ class _$TaskDetailStateLoadedSucessImpl implements TaskDetailStateLoadedSucess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskDetailStateInitial value)? initial,
     TResult? Function(TaskDetailStateLoading value)? loading,
-    TResult? Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult? Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(TaskDetailStateError value)? error,
   }) {
     return loadedSuccess?.call(this);
@@ -817,7 +997,7 @@ class _$TaskDetailStateLoadedSucessImpl implements TaskDetailStateLoadedSucess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskDetailStateInitial value)? initial,
     TResult Function(TaskDetailStateLoading value)? loading,
-    TResult Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult Function(TaskDetailStateError value)? error,
     required TResult orElse(),
   }) {
@@ -828,9 +1008,15 @@ class _$TaskDetailStateLoadedSucessImpl implements TaskDetailStateLoadedSucess {
   }
 }
 
-abstract class TaskDetailStateLoadedSucess implements TaskDetailState {
-  const factory TaskDetailStateLoadedSucess() =
-      _$TaskDetailStateLoadedSucessImpl;
+abstract class TaskDetailStateLoadedSuccess implements TaskDetailState {
+  const factory TaskDetailStateLoadedSuccess({required final Task task}) =
+      _$TaskDetailStateLoadedSuccessImpl;
+
+  Task get task;
+  @JsonKey(ignore: true)
+  _$$TaskDetailStateLoadedSuccessImplCopyWith<
+          _$TaskDetailStateLoadedSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -874,7 +1060,7 @@ class _$TaskDetailStateErrorImpl implements TaskDetailStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loadedSuccess,
+    required TResult Function(Task task) loadedSuccess,
     required TResult Function() error,
   }) {
     return error();
@@ -885,7 +1071,7 @@ class _$TaskDetailStateErrorImpl implements TaskDetailStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loadedSuccess,
+    TResult? Function(Task task)? loadedSuccess,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -896,7 +1082,7 @@ class _$TaskDetailStateErrorImpl implements TaskDetailStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loadedSuccess,
+    TResult Function(Task task)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -911,7 +1097,7 @@ class _$TaskDetailStateErrorImpl implements TaskDetailStateError {
   TResult map<TResult extends Object?>({
     required TResult Function(TaskDetailStateInitial value) initial,
     required TResult Function(TaskDetailStateLoading value) loading,
-    required TResult Function(TaskDetailStateLoadedSucess value) loadedSuccess,
+    required TResult Function(TaskDetailStateLoadedSuccess value) loadedSuccess,
     required TResult Function(TaskDetailStateError value) error,
   }) {
     return error(this);
@@ -922,7 +1108,7 @@ class _$TaskDetailStateErrorImpl implements TaskDetailStateError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TaskDetailStateInitial value)? initial,
     TResult? Function(TaskDetailStateLoading value)? loading,
-    TResult? Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult? Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult? Function(TaskDetailStateError value)? error,
   }) {
     return error?.call(this);
@@ -933,7 +1119,7 @@ class _$TaskDetailStateErrorImpl implements TaskDetailStateError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskDetailStateInitial value)? initial,
     TResult Function(TaskDetailStateLoading value)? loading,
-    TResult Function(TaskDetailStateLoadedSucess value)? loadedSuccess,
+    TResult Function(TaskDetailStateLoadedSuccess value)? loadedSuccess,
     TResult Function(TaskDetailStateError value)? error,
     required TResult orElse(),
   }) {

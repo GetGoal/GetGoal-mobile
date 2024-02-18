@@ -9,6 +9,7 @@ import '../../domain/models/task.dart';
 import '../../domain/repositories/task_repository.dart';
 import '../mappers/task_mapper.dart';
 import '../models/request/create_join_program_task_user_request.dart';
+import '../models/request/task_request.dart';
 import '../models/request/task_user_request.dart';
 import '../sources/api/task_api_service.dart';
 
@@ -165,14 +166,116 @@ class TaskRepositoryImpl implements TaskRepository {
 
   // Creating a task
   @override
-  Future<DataState<Task>> createTask(Task task) {
-    throw UnimplementedError();
+  Future<DataState<Task>> createTask(Task task) async {
+    try {
+      final TaskRequest requestBody = TaskRequest(
+        taskName: task.taskName,
+        taskDesc: task.taskDescription,
+        isSetNoti: task.isSetNotification,
+        startTime: task.startTime,
+        category: task.category,
+        timeBeforeNotify: task.timeBeforeNotify,
+      );
+
+      print(requestBody.toJson());
+
+      final httpResponse = await _taskApiService.createTask(requestBody);
+
+      if (httpResponse.response.statusCode == HttpStatus.created) {
+        return const DataSuccess(Task());
+      } else {
+        return DataFailed(
+          DioException(
+            error: httpResponse.response.statusMessage,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse,
+            requestOptions: httpResponse.response.requestOptions,
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      log(e.message.toString());
+      return DataFailed(e);
+    }
   }
 
   // Deleting a task
   @override
-  Future<DataState<Task>> deleteTask(Task task) {
-    // TODO: implement deleteTask
-    throw UnimplementedError();
+  Future<DataState<Task>> deleteTask(String taskId) async {
+    try {
+      final httpResponse = await _taskApiService.deleteTask(taskId);
+
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          httpResponse.data.data!.taskToEntity(),
+        );
+      } else {
+        return DataFailed(
+          DioException(
+            error: httpResponse.response.statusMessage,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse,
+            requestOptions: httpResponse.response.requestOptions,
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      log(e.message.toString());
+      return DataFailed(e);
+    }
+  }
+
+  // Get task by task id
+  @override
+  Future<DataState<Task>> getTaskById(String taskId) async {
+    try {
+      final httpResponse = await _taskApiService.getTaskById(taskId);
+
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          httpResponse.data.data!.taskToEntity(),
+        );
+      } else {
+        return DataFailed(
+          DioException(
+            error: httpResponse.response.statusMessage,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse,
+            requestOptions: httpResponse.response.requestOptions,
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      log(e.message.toString());
+      return DataFailed(e);
+    }
+  }
+
+  @override
+  Future<DataState<Task>> editTask(Task task, String taskId) async {
+    try {
+      final httpResponse = await _taskApiService.updateTask(
+        taskId,
+        task.taskToTaskRequest(),
+      );
+
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          httpResponse.data.data!.taskToEntity(),
+        );
+      } else {
+        return DataFailed(
+          DioException(
+            error: httpResponse.response.statusMessage,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse,
+            requestOptions: httpResponse.response.requestOptions,
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      log(e.message.toString());
+      return DataFailed(e);
+    }
   }
 }

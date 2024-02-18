@@ -12,11 +12,13 @@ class TaskPlanningCard extends StatelessWidget {
     required this.taskNumber,
     required this.taskName,
     this.startTime,
+    this.onEdit,
   });
 
   final int taskNumber;
   final String taskName;
   final String? startTime;
+  final Function()? onEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -121,16 +123,19 @@ class TaskPlanningCard extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget _editButton() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      SvgPicture.asset(
-        AppIcon.edit_task_icon,
-        height: 16,
+  Widget _editButton() {
+    return GestureDetector(
+      onTap: onEdit,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            AppIcon.edit_task_icon,
+            height: 16,
+          ),
+        ],
       ),
-    ],
-  );
+    );
+  }
 }

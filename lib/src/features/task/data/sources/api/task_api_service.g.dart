@@ -94,7 +94,39 @@ class _TaskApiService implements TaskApiService {
   }
 
   @override
-  Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> createTask(
+  Future<HttpResponse<BaseDataResponse<TaskModel>>> getTaskById(
+      String taskId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<BaseDataResponse<TaskModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/v1/tasks/${taskId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseDataResponse<TaskModel>.fromJson(
+      _result.data!,
+      (json) => TaskModel.fromJson(json as Map<String, dynamic>),
+    );
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<BaseDataResponse<TaskModel>>> createTask(
       TaskRequest task) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -102,8 +134,8 @@ class _TaskApiService implements TaskApiService {
     final _data = <String, dynamic>{};
     _data.addAll(task.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<BaseDataResponse<List<TaskModel>>>>(Options(
-      method: 'GET',
+        _setStreamType<HttpResponse<BaseDataResponse<TaskModel>>>(Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
@@ -118,14 +150,9 @@ class _TaskApiService implements TaskApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseDataResponse<List<TaskModel>>.fromJson(
+    final value = BaseDataResponse<TaskModel>.fromJson(
       _result.data!,
-      (json) => json is List<dynamic>
-          ? json
-              .map<TaskModel>(
-                  (i) => TaskModel.fromJson(i as Map<String, dynamic>))
-              .toList()
-          : List.empty(),
+      (json) => TaskModel.fromJson(json as Map<String, dynamic>),
     );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -186,7 +213,42 @@ class _TaskApiService implements TaskApiService {
     )
             .compose(
               _dio.options,
-              '/v1/tasks/done/${taskId}',
+              '/v1/tasks/${taskId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseDataResponse<TaskModel>.fromJson(
+      _result.data!,
+      (json) => TaskModel.fromJson(json as Map<String, dynamic>),
+    );
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<BaseDataResponse<TaskModel>>> updateTask(
+    String taskId,
+    TaskRequest requestBody,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(requestBody.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<BaseDataResponse<TaskModel>>>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/v1/tasks/${taskId}',
               queryParameters: queryParameters,
               data: _data,
             )

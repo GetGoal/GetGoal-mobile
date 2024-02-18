@@ -15,6 +15,7 @@ import '../../../../../../shared/themes/spacing.dart';
 import '../../../../../landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../../../../domain/models/task.dart';
 import '../../../enum/task_form_mode_enum.dart';
+import '../../task_create/task_create_page.dart';
 import '../bloc/date_timeline/date_timeline_bloc.dart';
 import '../bloc/todo/todo_bloc.dart';
 import 'widget/date_section_timeline_widget.dart';
@@ -156,10 +157,20 @@ class _HomePageState extends State<HomePage> {
                       taskName: tasks[index].taskName,
                       taskDescription: tasks[index].taskDescription,
                       startTime: tasks[index].startTime,
-                      ontap: () => context.pushNamed('/task/detail'),
+                      ontap: () => context.pushNamed(
+                        Routes.taskDetailPage,
+                        pathParameters: {
+                          'id': tasks[index].taskId.toString(),
+                        },
+                      ),
                       onEdit: () => context.pushNamed(
                         Routes.taskCreatepage,
-                        extra: TASKFORMMODE.edit,
+                        extra: TaskCreatePageData(
+                          mode: TASKFORMMODE.edit,
+                          taskId: tasks[index].taskId.toString(),
+                        ),
+                        //   extra: TASKFORMMODE.edit,
+                        //   queryParameters: {'id': tasks[index].taskId.toString()},
                       ),
                       onDoneTapped: () => _todoBloc.add(
                         TodoEvent.changeTaskStatusToDone(

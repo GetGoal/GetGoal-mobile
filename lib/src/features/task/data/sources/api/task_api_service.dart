@@ -23,8 +23,13 @@ abstract class TaskApiService {
     @Path('id') String programId,
   );
 
-  @GET('/v1/tasks')
-  Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> createTask(
+  @GET('/v1/tasks/{id}')
+  Future<HttpResponse<BaseDataResponse<TaskModel>>> getTaskById(
+    @Path('id') String taskId,
+  );
+
+  @POST('/v1/tasks')
+  Future<HttpResponse<BaseDataResponse<TaskModel>>> createTask(
     @Body() TaskRequest task,
   );
 
@@ -34,9 +39,15 @@ abstract class TaskApiService {
     @Body() JoinProgramRequest requestBody,
   );
 
-  @PUT('/v1/tasks/done/{id}')
+  @PUT('/v1/tasks/{id}')
   Future<HttpResponse<BaseDataResponse<TaskModel>>> changeTaskStatusToDone(
     @Path('id') String taskId,
+  );
+
+  @PUT('/v1/tasks/{id}')
+  Future<HttpResponse<BaseDataResponse<TaskModel>>> updateTask(
+    @Path('id') String taskId,
+    @Body() TaskRequest requestBody,
   );
 
   @PUT('/v1/tasks/un-done/{id}')

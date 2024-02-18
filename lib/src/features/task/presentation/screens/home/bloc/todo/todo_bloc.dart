@@ -91,6 +91,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           )
           .toList();
 
+      print(taskList.data);
+
       emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
     } catch (e) {
       _logger.e('ProgramStateError:', error: e);

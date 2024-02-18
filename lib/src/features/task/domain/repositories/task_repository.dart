@@ -8,6 +8,9 @@ abstract class TaskRepository {
   // Get all program's tasks by program id
   Future<DataState<List<Task>>> getTaskByProgramId(String programId);
 
+  // Get Task by task id
+  Future<DataState<Task>> getTaskById(String taskId);
+
   // Joining program
   Future<DataState<List<Task>>> joinProgram(
     List<Task> tasks,
@@ -25,5 +28,8 @@ abstract class TaskRepository {
   Future<DataState<Task>> createTask(Task task);
 
   // Deleting Task
-  Future<DataState<Task>> deleteTask(Task task);
+  Future<DataState<Task>> deleteTask(String taskId);
+
+  // Editing Task
+  Future<DataState<Task>> editTask(Task task, String taskId);
 }

@@ -10,22 +10,25 @@ class GetGoalCheckbox extends StatelessWidget {
     this.width = 16,
     this.height = 16,
     this.value = false,
+    this.onTap,
   });
 
   final double? width;
   final double? height;
   final bool value;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4.0),
-        border: Border.all(
-          color: value ? AppColors.primary : AppColors.stock,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4.0),
+          border: Border.all(
+            color: value ? AppColors.primary : AppColors.stock,
+          ),
         ),
-      ),
-      child: GestureDetector(
         child: value
             ? Container(
                 decoration: BoxDecoration(

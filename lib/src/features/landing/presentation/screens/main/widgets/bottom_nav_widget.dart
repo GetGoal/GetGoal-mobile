@@ -12,6 +12,7 @@ import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../program/presentation/enum/program_form_mode.enum.dart';
 import '../../../../../task/presentation/enum/task_form_mode_enum.dart';
+import '../../../../../task/presentation/screens/task_create/task_create_page.dart';
 import '../../../bloc/main_page/main_page_bloc.dart';
 import 'bottom_nav_item_widget.dart';
 
@@ -246,7 +247,8 @@ class BottomNavigation extends StatelessWidget {
               context.pop();
               context.pushNamed(
                 Routes.taskCreatepage,
-                extra: TASKFORMMODE.create,
+                // extra: TASKFORMMODE.create,
+                extra: TaskCreatePageData(mode: TASKFORMMODE.create),
               );
             },
             behavior: HitTestBehavior.translucent,

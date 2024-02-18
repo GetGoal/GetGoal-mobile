@@ -11,7 +11,6 @@ class TaskRequest {
     required this.startTime,
     required this.category,
     required this.timeBeforeNotify,
-    required this.email,
   });
 
   factory TaskRequest.fromJson(
@@ -28,7 +27,7 @@ class TaskRequest {
   final String? taskDesc;
 
   @JsonKey(name: 'is_set_noti')
-  final String? isSetNoti;
+  final int? isSetNoti;
 
   @JsonKey(name: 'start_time')
   final String? startTime;
@@ -37,8 +36,5 @@ class TaskRequest {
   final String? category;
 
   @JsonKey(name: 'time_before_notify')
-  final String? timeBeforeNotify;
-
-  @JsonKey(name: 'email')
-  final String? email;
+  final int? timeBeforeNotify;
 }

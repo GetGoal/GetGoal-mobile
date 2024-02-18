@@ -38,7 +38,7 @@ class ProgramInfoBloc extends Bloc<ProgramInfoEvent, ProgramInfoState> {
         return;
       }
 
-      emit(ProgramInfoState.loadedSuccess(program: program.data));
+      emit(ProgramInfoState.loadedSuccess(program: program.data!));
     } catch (e) {
       _logger.e('ProgramInfoStateError:', error: e);
       emit(const ProgramInfoState.error());
