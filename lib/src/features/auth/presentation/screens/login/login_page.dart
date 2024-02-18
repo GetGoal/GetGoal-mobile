@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../config/route_config.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
+import 'bloc/login/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,7 +19,19 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
+class _LoginPageState extends State<LoginPage> {
+  LoginBloc get _loginBloc => context.read<LoginBloc>();
+
+  final _emailInputController = TextEditingController();
+  final _passwordInputController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailInputController.dispose();
+    _passwordInputController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,8 +91,8 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
 
   Widget _buildEmailTextFieldInput() {
     return NormalTextInputField(
+      controller: _emailInputController,
       label: 'Your Email',
-      validator: loginEmailValidator,
     );
   }
 
@@ -85,7 +100,11 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const NormalTextInputField(label: 'Password'),
+        NormalTextInputField(
+          controller: _passwordInputController,
+          label: 'Password',
+          isPassword: true,
+        ),
         const SizedBox(height: 8),
         GestureDetector(
           child: Text(
@@ -100,10 +119,37 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
   Widget _buildSubmitButton() {
     return Column(
       children: [
-        MainButton(
-          buttonText: 'Continue',
-          onTap: () {
-            context.go('/main');
+        BlocConsumer<LoginBloc, LoginState>(
+          listener: (context, state) {
+            switch (state) {
+              case LoginStateLoginSuccess():
+                context.go(Routes.mainPage);
+                break;
+              default:
+            }
+          },
+          builder: (context, state) {
+            switch (state) {
+              case LoginStateInitial():
+                return MainButton(
+                  buttonText: 'Login',
+                  onTap: login,
+                );
+
+              case LoginStateLoading():
+                return const MainButton(isLoading: true);
+
+              case LoginStateLoginSuccess():
+                return const MainButton(isLoading: true);
+
+              case LoginStateLoginError():
+                return MainButton(
+                  buttonText: 'Login',
+                  onTap: login,
+                );
+              default:
+                return const MainButton(buttonText: 'Login');
+            }
           },
         ),
         const SizedBox(height: 8),
@@ -130,6 +176,15 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
           ],
         ),
       ],
+    );
+  }
+
+  void login() {
+    _loginBloc.add(
+      LoginEvent.onLogin(
+        email: _emailInputController.text,
+        password: _passwordInputController.text,
+      ),
     );
   }
 }

@@ -1,6 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../features/auth/data/repositories/auth_repository_impl.dart';
+import '../features/auth/data/sources/api/auth_api_service.dart';
+import '../features/auth/domain/repositories/auth_repository.dart';
+import '../features/auth/domain/usecase/auth/create_account_usecase.dart';
+import '../features/auth/domain/usecase/auth/login_usecase.dart';
+import '../features/auth/domain/usecase/auth/verify_account_usecase.dart';
+import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
+import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
+import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
 import '../features/landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../features/program/data/repositories/program_filter_repository_impl.dart';
 import '../features/program/data/repositories/program_repository_impl.dart';
@@ -115,4 +124,17 @@ Future<void> initializeDependencies() async {
   getIt.registerFactory<LanguageBloc>(
     () => LanguageBloc(),
   );
+
+  getIt.registerFactory<CreateAccountBloc>(() => CreateAccountBloc(getIt()));
+  getIt.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(AuthApiService(dio)),
+  );
+  getIt.registerLazySingleton(() => CreateAccountUsecase(getIt()));
+
+  getIt.registerFactory<VerifyAccountBloc>(() => VerifyAccountBloc(getIt()));
+
+  getIt.registerLazySingleton(() => VerfifyAccountUsecase(getIt()));
+
+  getIt.registerFactory<LoginBloc>(() => LoginBloc(getIt()));
+  getIt.registerLazySingleton(() => LoginUsecase(getIt()));
 }

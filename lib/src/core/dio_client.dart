@@ -27,6 +27,7 @@ Dio buildClient(String baseUrl) {
         //   return handler.resolve(await dio.fetch(e.requestOptions));
         // }
         // return handler.next(e);
+        handler.reject(e);
       },
     ),
   );

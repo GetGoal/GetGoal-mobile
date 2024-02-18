@@ -34,17 +34,32 @@ class RouteConfig {
       GoRoute(
         path: Routes.loginPage,
         name: Routes.loginPage,
-        builder: (context, state) => const LoginPage(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            loginBloc,
+          ],
+          child: const LoginPage(),
+        ),
       ),
       GoRoute(
         path: Routes.signUpPage,
         name: Routes.signUpPage,
-        builder: (context, state) => const SignUpPage(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            createAccountBloc,
+          ],
+          child: const SignUpPage(),
+        ),
       ),
       GoRoute(
         path: Routes.verificationPage,
         name: Routes.verificationPage,
-        builder: (context, state) => const VerificationPage(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            verifyAccountBloc,
+          ],
+          child: const VerificationPage(),
+        ),
       ),
       GoRoute(
         name: Routes.mainPage,

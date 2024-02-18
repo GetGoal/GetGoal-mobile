@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../../../../core/bases/base_data.dart';
+import '../../../../core/bases/base_data_response.dart';
 import '../../domain/models/program_filter.dart';
 import '../../domain/repositories/program_filter_repository.dart';
 import '../mappers/program_filter_mapper.dart';
@@ -26,17 +27,10 @@ class ProgramFilterRepositoryImpl implements ProgramFilterRepository {
         }
         return const DataSuccess([]);
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 }

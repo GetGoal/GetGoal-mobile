@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../config/route_config.dart';
+import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
+import '../../../domain/entity/create_user.dart';
+import 'bloc/create_account/create_account_bloc.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -13,6 +18,13 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  CreateAccountBloc get _createAccountBloc => context.read<CreateAccountBloc>();
+
+  final _firstNameTextField = TextEditingController();
+  final _lastNameTextField = TextEditingController();
+  final _emailTextField = TextEditingController();
+  final _passwordTextField = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return GetGoalSubScaffold(
@@ -30,8 +42,6 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(height: 20),
               _buildPasswordTextFieldInput(),
               const SizedBox(height: 20),
-              _buildConfirmPasswordTextFieldInput(),
-              const SizedBox(height: 40),
             ],
           ),
         ),
@@ -42,6 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _buildFirstNameTextFieldInput() {
     return NormalTextInputField(
+      controller: _firstNameTextField,
       label: 'First name',
       hintText: 'Your first name',
     );
@@ -49,6 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _buildLastNameTextFieldInput() {
     return NormalTextInputField(
+      controller: _lastNameTextField,
       label: 'Last name',
       hintText: 'Your Last name',
     );
@@ -56,6 +68,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _buildEmailTextFieldInput() {
     return NormalTextInputField(
+      controller: _emailTextField,
       label: 'Email Address',
       hintText: 'example@mail.com',
     );
@@ -63,23 +76,51 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _buildPasswordTextFieldInput() {
     return NormalTextInputField(
+      controller: _passwordTextField,
       label: 'Password',
+      isPassword: true,
     );
-  }
-
-  Widget _buildConfirmPasswordTextFieldInput() {
-    return NormalTextInputField(label: 'Confirm password');
   }
 
   Widget _buildSubmitButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 40, right: 20, left: 20),
-      child: MainButton(
-        buttonText: 'Continue',
-        onTap: () {
-          context.pushNamed('/verification');
+      child: BlocConsumer<CreateAccountBloc, CreateAccountState>(
+        listener: (context, state) {
+          switch (state) {
+            case CreateAccountStateCreated():
+              context.pushNamed(Routes.verificationPage);
+              break;
+            default:
+          }
+        },
+        builder: (context, state) {
+          print(state);
+          switch (state) {
+            case CreateAccountStateInitial():
+              return MainButton(buttonText: 'Continue', onTap: registerAccount);
+            case CreateAccountStateLoading():
+              return const MainButton(isLoading: true);
+            case CreateAccountStateCreated():
+              return const MainButton(isLoading: true);
+            case CreateAccountStateError():
+              return MainButton(buttonText: 'Continue', onTap: registerAccount);
+            default:
+              return const MainButton(buttonText: 'Continue');
+          }
         },
       ),
     );
+  }
+
+  void registerAccount() {
+    final user = CreateUser(
+      firstName: _firstNameTextField.text,
+      lastName: _lastNameTextField.text,
+      email: _emailTextField.text,
+      password: _passwordTextField.text,
+    );
+    AppCache.userEmail = _emailTextField.text;
+    _createAccountBloc.add(CreateAccountEvent.onCreate(user: user));
   }
 }
