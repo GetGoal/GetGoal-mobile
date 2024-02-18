@@ -18,6 +18,7 @@ class NormalTextInputField extends StatelessWidget {
     this.validator,
     this.errorText,
     this.maxLines = 1,
+    this.isPassword = false,
   });
 
   final String label;
@@ -32,6 +33,7 @@ class NormalTextInputField extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? errorText;
   final int? maxLines;
+  final bool? isPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,10 @@ class NormalTextInputField extends StatelessWidget {
         const SizedBox(height: 8.0),
         SizedBox(
           child: TextFormField(
+            autocorrect: false,
+
+            obscureText: isPassword!,
+
             autovalidateMode: AutovalidateMode.onUserInteraction,
 
             // Input validation

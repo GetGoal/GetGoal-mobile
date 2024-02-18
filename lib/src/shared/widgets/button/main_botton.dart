@@ -7,27 +7,29 @@ class MainButton extends StatelessWidget {
   const MainButton({
     super.key,
     this.onTap,
-    required this.buttonText,
+    this.buttonText,
     this.buttonColor,
     this.bottonStock,
     this.textColor,
     this.icon,
     this.isHaveBoxShadow = false,
+    this.isLoading = false,
   });
 
   final GestureTapCallback? onTap;
-  final String buttonText;
+  final String? buttonText;
   final Color? buttonColor;
   final Color? bottonStock;
   final Color? textColor;
   final Widget? icon;
   final bool? isHaveBoxShadow;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onTap == null) return;
+        if (onTap == null || isLoading!) return;
         onTap!();
       },
       child: Container(
@@ -44,10 +46,20 @@ class MainButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               icon ?? const SizedBox(),
-              Text(
-                buttonText,
-                style: body1().copyWith(color: textColor ?? AppColors.black),
-              ),
+              isLoading!
+                  ? SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: CircularProgressIndicator(
+                        color: AppColors.white,
+                        strokeWidth: 3,
+                      ),
+                    )
+                  : Text(
+                      buttonText ?? '',
+                      style:
+                          body1().copyWith(color: textColor ?? AppColors.black),
+                    ),
             ],
           ),
         ),

@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/bases/base_data.dart';
 
+import '../../../../core/bases/base_data_response.dart';
 import '../../domain/models/task.dart';
 import '../../domain/repositories/task_repository.dart';
 import '../mappers/task_mapper.dart';
@@ -32,18 +33,11 @@ class TaskRepositoryImpl implements TaskRepository {
           httpResponse.data.data!.map((e) => e.taskToEntity()).toList(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -58,18 +52,11 @@ class TaskRepositoryImpl implements TaskRepository {
           httpResponse.data.data!.map((e) => e.taskToEntity()).toList(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -96,18 +83,11 @@ class TaskRepositoryImpl implements TaskRepository {
           httpResponse.data.data!.map((e) => e.taskToEntity()).toList(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -122,18 +102,11 @@ class TaskRepositoryImpl implements TaskRepository {
           httpResponse.data.data!.taskToEntity(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -149,18 +122,11 @@ class TaskRepositoryImpl implements TaskRepository {
           httpResponse.data.data!.taskToEntity(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -184,18 +150,11 @@ class TaskRepositoryImpl implements TaskRepository {
       if (httpResponse.response.statusCode == HttpStatus.created) {
         return const DataSuccess(Task());
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -210,18 +169,11 @@ class TaskRepositoryImpl implements TaskRepository {
           httpResponse.data.data!.taskToEntity(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -236,18 +188,11 @@ class TaskRepositoryImpl implements TaskRepository {
           httpResponse.data.data!.taskToEntity(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -264,18 +209,11 @@ class TaskRepositoryImpl implements TaskRepository {
           httpResponse.data.data!.taskToEntity(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 }

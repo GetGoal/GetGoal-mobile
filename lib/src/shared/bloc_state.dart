@@ -2,6 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/di.dart';
 
+import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
+import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
+import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
 import '../features/landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 import '../features/program/presentation/bloc/program/program_bloc.dart';
@@ -44,4 +47,16 @@ final taskDetailBloc = BlocProvider(
 
 final taskCreateBloc = BlocProvider(
   create: (context) => getIt<TaskCreateBloc>(),
+);
+
+final createAccountBloc = BlocProvider(
+  create: (context) => getIt<CreateAccountBloc>(),
+);
+
+final verifyAccountBloc = BlocProvider(
+  create: (context) => getIt<VerifyAccountBloc>(),
+);
+
+final loginBloc = BlocProvider(
+  create: (context) => getIt<LoginBloc>(),
 );

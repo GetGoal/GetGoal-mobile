@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../../../../core/bases/base_data.dart';
+import '../../../../core/bases/base_data_response.dart';
 import '../../../../shared/app_cache.dart';
 import '../../../task/data/mappers/task_mapper.dart';
 import '../../domain/models/program.dart';
@@ -34,17 +35,10 @@ class ProgramRepositoryImpl implements ProgramRepository {
               .toList(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -66,18 +60,11 @@ class ProgramRepositoryImpl implements ProgramRepository {
               .toList(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -89,17 +76,10 @@ class ProgramRepositoryImpl implements ProgramRepository {
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(httpResponse.data.data!.programToEntity());
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -122,17 +102,10 @@ class ProgramRepositoryImpl implements ProgramRepository {
               .toList(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -159,18 +132,11 @@ class ProgramRepositoryImpl implements ProgramRepository {
       if (httpResponse.response.statusCode == HttpStatus.created) {
         return DataSuccess(Program());
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
       log(e.message.toString());
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 }

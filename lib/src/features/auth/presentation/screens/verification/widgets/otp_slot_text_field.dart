@@ -9,15 +9,18 @@ class OtpSlotTextField extends StatelessWidget {
     super.key,
     required this.focusNode,
     this.onChanged,
+    this.controller,
   });
 
   final FocusNode focusNode;
   final Function(String)? onChanged;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: TextField(
+        controller: controller,
         style: heading1(),
         textAlign: TextAlign.center,
         decoration: InputDecoration(
