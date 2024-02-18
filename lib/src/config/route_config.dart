@@ -6,12 +6,14 @@ import '../features/auth/presentation/screens/login/login_page.dart';
 import '../features/auth/presentation/screens/sign_up/sign_up_page.dart';
 import '../features/auth/presentation/screens/verification/verification_page.dart';
 import '../features/landing/presentation/screens/main/main_page.dart';
+import '../features/program/domain/models/program_create.dart';
 import '../features/program/presentation/enum/program_form_mode.enum.dart';
 import '../features/program/presentation/screens/program_create/program_create_page.dart';
 import '../features/program/presentation/screens/program_create/program_task_create.dart';
 import '../features/program/presentation/screens/program_info/program_info_page.dart';
 import '../features/setting/presentation/screens/setting/setting_page.dart';
 import '../features/setting/presentation/states/setting_state.dart';
+import '../features/task/domain/models/task.dart';
 import '../features/task/presentation/enum/task_form_mode_enum.dart';
 import '../features/task/presentation/screens/task_create/task_create_page.dart';
 import '../features/task/presentation/screens/task_detail/task_detail_page.dart';
@@ -101,14 +103,27 @@ class RouteConfig {
       GoRoute(
         path: Routes.taskCreatepage,
         name: Routes.taskCreatepage,
-        builder: (context, state) => TaskCreatePage(
-          mode: state.extra as TASKFORMMODE,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            taskCreateBloc,
+          ],
+          child: TaskCreatePage(
+            pageData: state.extra as TaskCreatePageData,
+          ),
         ),
       ),
       GoRoute(
-        path: Routes.taskDetailPage,
+        path: '${Routes.taskDetailPage}/:id',
         name: Routes.taskDetailPage,
-        builder: (context, state) => const TaskDetailPage(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            taskDetailBloc,
+          ],
+          child: TaskDetailPage(
+            taskId: state.pathParameters['id'],
+          ),
+        ),
+        // builder: (context, state) => const TaskDetailPage(),
       ),
       GoRoute(
         path: Routes.programCreatePage,

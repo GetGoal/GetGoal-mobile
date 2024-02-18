@@ -1,20 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
+import '../../../../../shared/widgets/error_screen_widget.dart';
+import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
+import '../../../domain/models/task.dart';
+import '../../bloc/task_detail/task_detail_bloc.dart';
 
 class TaskDetailPage extends StatefulWidget {
-  const TaskDetailPage({super.key});
+  const TaskDetailPage({
+    super.key,
+    this.taskId,
+  });
+
+  final String? taskId;
 
   @override
   State<TaskDetailPage> createState() => _TaskDetailPageState();
 }
 
 class _TaskDetailPageState extends State<TaskDetailPage> {
+  TaskDetailBloc get _taskDetailBloc => context.read<TaskDetailBloc>();
+
+  @override
+  void initState() {
+    _taskDetailBloc.add(TaskDetailEvent.started(taskId: widget.taskId!));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetGoalSubScaffold(
@@ -25,27 +44,47 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.all(AppSpacing.appMargin),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTaskTitle(),
-                const SizedBox(height: 20),
-                _buildTaskDescription(),
-                const SizedBox(height: 20),
-                _buildTaskStartDate(),
-                const SizedBox(height: 20),
-                _buildTaskReminder(),
-                const SizedBox(height: 20),
-              ],
+            child: BlocConsumer<TaskDetailBloc, TaskDetailState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                switch (state) {
+                  case TaskDetailStateInitial():
+                    return const LoadingScreen();
+                  case TaskDetailStateLoading():
+                    return const LoadingScreen();
+                  case TaskDetailStateLoadedSuccess(:final task):
+                    return _buildTaskDetailLoadedSuccess(task);
+                  case TaskDetailStateError():
+                    return const ErrorScreen();
+                  default:
+                    return const SizedBox();
+                }
+              },
             ),
           ),
         ),
       ),
-      bottomNavigationBar: _buildButtonSection(),
+      bottomNavigationBar: _buildButtonSection(widget.taskId!),
     );
   }
 
-  Widget _buildTaskTitle() {
+  Widget _buildTaskDetailLoadedSuccess(Task task) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTaskTitle(task.taskName!),
+        const SizedBox(height: 20),
+        _buildTaskDescription(task.taskDescription!),
+        const SizedBox(height: 20),
+        _buildTaskStartDate(task.startTime!),
+        const SizedBox(height: 20),
+        _buildTaskReminder(task.timeBeforeNotify!),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildTaskTitle(String taskName) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -56,15 +95,12 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
         const SizedBox(
           height: 4,
         ),
-        Text(
-          'Tune Your Guitar',
-          style: heading3(),
-        ),
+        Text(taskName, style: heading3()),
       ],
     );
   }
 
-  Widget _buildTaskDescription() {
+  Widget _buildTaskDescription(String taskDesc) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -75,15 +111,12 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
         const SizedBox(
           height: 4,
         ),
-        Text(
-          "Embark on a musical odyssey with 'Harmonious Journeys: A Melodic Expedition'. Dive into the world of acoustic guitar with captivating stories, expert tips, and soul-stirring melodies. Join us on this enchanting adventure as we explore the beauty of acoustic sounds and uncover the secrets to creating timeless tunes. ",
-          style: body2(),
-        ),
+        Text(taskDesc, style: body2()),
       ],
     );
   }
 
-  Widget _buildTaskStartDate() {
+  Widget _buildTaskStartDate(String taskStartTime) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -95,14 +128,14 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
           height: 4,
         ),
         Text(
-          DateFormat.yMd().add_jm().format(DateTime.now()),
+          DateFormat.yMd().add_jm().format(DateTime.parse(taskStartTime)),
           style: body2(),
         ),
       ],
     );
   }
 
-  Widget _buildTaskReminder() {
+  Widget _buildTaskReminder(int taskNoti) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -113,12 +146,12 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
         const SizedBox(
           height: 4,
         ),
-        Text('5 Minute before start', style: body2()),
+        Text('$taskNoti Minute before start', style: body2()),
       ],
     );
   }
 
-  Widget _buildButtonSection() {
+  Widget _buildButtonSection(String taskId) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 24),
       margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
@@ -135,7 +168,11 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
             buttonColor: AppColors.white,
             bottonStock: AppColors.stock,
             textColor: AppColors.red,
-            onTap: () {},
+            onTap: () {
+              _taskDetailBloc
+                  .add(TaskDetailEvent.onTappedDelete(taskId: taskId));
+              context.pop();
+            },
           ),
         ],
       ),

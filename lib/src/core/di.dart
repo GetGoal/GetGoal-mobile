@@ -9,6 +9,7 @@ import '../features/program/data/sources/api/program_filter_api_service.dart';
 import '../features/program/domain/repositories/program_filter_repository.dart';
 import '../features/program/domain/repositories/program_repository.dart';
 import '../features/program/domain/usecases/label/get_program_filter_usecase.dart';
+import '../features/program/domain/usecases/program/create_program_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_id_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_search_usecase.dart';
@@ -21,9 +22,17 @@ import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/task/data/repositories/task_repository_impl.dart';
 import '../features/task/data/sources/api/task_api_service.dart';
 import '../features/task/domain/repositories/task_repository.dart';
+import '../features/task/domain/usecases/task/change_task_status_to_done_usecase.dart';
+import '../features/task/domain/usecases/task/change_task_status_to_not_done_usecase.dart';
+import '../features/task/domain/usecases/task/create_task_usecase.dart';
+import '../features/task/domain/usecases/task/delete_task_usecase.dart';
 import '../features/task/domain/usecases/task/get_task_by_program_id.dart';
+import '../features/task/domain/usecases/task/get_task_by_task_Id_usecase.dart';
 import '../features/task/domain/usecases/task/get_task_by_user_usecase.dart';
 import '../features/task/domain/usecases/task/join_program_usecase.dart';
+import '../features/task/domain/usecases/task/update_task_usecase.dart';
+import '../features/task/presentation/bloc/task_create/task_create_bloc.dart';
+import '../features/task/presentation/bloc/task_detail/task_detail_bloc.dart';
 import '../features/task/presentation/bloc/task_planning/task_planning_bloc.dart';
 import '../features/task/presentation/screens/home/bloc/date_timeline/date_timeline_bloc.dart';
 import '../features/task/presentation/screens/home/bloc/todo/todo_bloc.dart';
@@ -65,6 +74,8 @@ Future<void> initializeDependencies() async {
   );
   getIt.registerLazySingleton(() => GetProgramByLabelNameUsecase(getIt()));
   getIt.registerLazySingleton(() => GetProgramBySearchUsecase(getIt()));
+  getIt.registerLazySingleton(() => CreateProgramUsecase(getIt()));
+
   getIt.registerFactory<ProgramBloc>(
     () => ProgramBloc(getIt(), getIt(), getIt()),
   );
@@ -78,14 +89,28 @@ Future<void> initializeDependencies() async {
     () => TaskRepositoryImpl(getIt()),
   );
   getIt.registerFactory<DateTimelineBloc>(() => DateTimelineBloc());
-  getIt.registerFactory<TodoBloc>(() => TodoBloc(getIt()));
+  getIt.registerFactory<TodoBloc>(() => TodoBloc(getIt(), getIt(), getIt()));
   getIt.registerFactory<TaskPlanningBloc>(
     () => TaskPlanningBloc(getIt(), getIt()),
   );
+  getIt.registerFactory<TaskCreateBloc>(
+    () => TaskCreateBloc(
+      getIt(),
+      getIt(),
+      getIt(),
+    ),
+  );
+  getIt.registerFactory<TaskDetailBloc>(() => TaskDetailBloc(getIt(), getIt()));
 
   getIt.registerLazySingleton(() => GetTaskByUserUsecase(getIt()));
   getIt.registerLazySingleton(() => GetTaskByProgramIdUsecase(getIt()));
   getIt.registerLazySingleton(() => JoinProgramUsecase(getIt()));
+  getIt.registerLazySingleton(() => ChangeTaskStatusToDoneUsecase(getIt()));
+  getIt.registerLazySingleton(() => ChangeTaskStatusToNotDoneUsecase(getIt()));
+  getIt.registerLazySingleton(() => CreateTaskUsecase(getIt()));
+  getIt.registerLazySingleton(() => DeleteTaskUsecase(getIt()));
+  getIt.registerLazySingleton(() => GetTaskByTaskIdUsecase(getIt()));
+  getIt.registerLazySingleton(() => UpdateTaskUsecase(getIt()));
 
   getIt.registerFactory<LanguageBloc>(
     () => LanguageBloc(),

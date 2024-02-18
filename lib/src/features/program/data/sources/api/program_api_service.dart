@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../../../core/bases/base_data_response.dart';
+import '../../models/request/create_program_request.dart';
 import '../../models/request/filter_program_request.dart';
 import '../../models/request/search_program_request.dart';
 import '../../models/response/program_response.dart';
@@ -29,5 +30,10 @@ abstract class ProgramApiService {
   @POST('/v1/programs/search')
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getProgramBySearch(
     @Body() SearchProgramRequest requestBody,
+  );
+
+  @POST('/v1/programs')
+  Future<HttpResponse<BaseDataResponse<ProgramModel>>> createProgram(
+    @Body() CreateProgramRequest requestBody,
   );
 }

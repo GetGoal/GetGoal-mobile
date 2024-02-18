@@ -4,9 +4,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../../../../core/bases/base_data.dart';
+import '../../../../shared/app_cache.dart';
+import '../../../task/data/mappers/task_mapper.dart';
 import '../../domain/models/program.dart';
+import '../../domain/models/program_create.dart';
 import '../../domain/repositories/program_repository.dart';
 import '../mappers/program_mapper.dart';
+import '../models/request/create_program_request.dart';
 import '../models/request/filter_program_request.dart';
 import '../models/request/search_program_request.dart';
 import '../sources/api/program_api_service.dart';
@@ -107,6 +111,9 @@ class ProgramRepositoryImpl implements ProgramRepository {
       );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
+        if (httpResponse.data.data == null) {
+          return const DataSuccess([]);
+        }
         return DataSuccess(
           httpResponse.data.data!
               .map(
@@ -125,6 +132,44 @@ class ProgramRepositoryImpl implements ProgramRepository {
         );
       }
     } on DioException catch (e) {
+      return DataFailed(e);
+    }
+  }
+
+  @override
+  Future<DataState<Program>> createProgram(ProgramCreate program) async {
+    try {
+      final requestBody = CreateProgramRequest(
+        programName: program.programName,
+        programDesc: program.programDescription,
+        mediaUrl: 'fdskfdsjfk;sjdklfks;l',
+        expectedTime: program.expectedTime,
+        tasks: AppCache.programTaskCreateList
+            .map((e) => e.taskToTaskRequest())
+            .toList(),
+        labels: program.category!
+            .map((e) => LabelRequest(labelName: e.labelName))
+            .toList(),
+      );
+
+      print(requestBody.programDesc);
+
+      final httpResponse = await _programApiService.createProgram(requestBody);
+
+      if (httpResponse.response.statusCode == HttpStatus.created) {
+        return DataSuccess(Program());
+      } else {
+        return DataFailed(
+          DioException(
+            error: httpResponse.response.statusMessage,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse,
+            requestOptions: httpResponse.response.requestOptions,
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      log(e.message.toString());
       return DataFailed(e);
     }
   }

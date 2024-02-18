@@ -14,11 +14,13 @@ class GetGoalSubScaffold extends StatelessWidget {
     required this.body,
     this.appbarTitle,
     this.bottomNavigationBar,
+    this.onGoBack,
   });
 
   final Widget body;
   final String? appbarTitle;
   final Widget? bottomNavigationBar;
+  final Function()? onGoBack;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class GetGoalSubScaffold extends StatelessWidget {
         title: Row(
           children: [
             CircleButton(
-              onTap: () => context.pop(),
+              onTap: onGoBack ?? () => context.pop(),
               icon: const CustomIcon(
                 icon: AppIcon.back_icon,
                 size: 24,

@@ -230,7 +230,7 @@ mixin _$ProgramInfoState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Program? program) loadedSuccess,
+    required TResult Function(Program program) loadedSuccess,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -238,7 +238,7 @@ mixin _$ProgramInfoState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Program? program)? loadedSuccess,
+    TResult? Function(Program program)? loadedSuccess,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -246,7 +246,7 @@ mixin _$ProgramInfoState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Program? program)? loadedSuccess,
+    TResult Function(Program program)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -340,7 +340,7 @@ class _$ProgramInfoStateInitialImpl implements ProgramInfoStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Program? program) loadedSuccess,
+    required TResult Function(Program program) loadedSuccess,
     required TResult Function() error,
   }) {
     return initial();
@@ -351,7 +351,7 @@ class _$ProgramInfoStateInitialImpl implements ProgramInfoStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Program? program)? loadedSuccess,
+    TResult? Function(Program program)? loadedSuccess,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -362,7 +362,7 @@ class _$ProgramInfoStateInitialImpl implements ProgramInfoStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Program? program)? loadedSuccess,
+    TResult Function(Program program)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -458,7 +458,7 @@ class _$ProgramInfoStateLoadingImpl implements ProgramInfoStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Program? program) loadedSuccess,
+    required TResult Function(Program program) loadedSuccess,
     required TResult Function() error,
   }) {
     return loading();
@@ -469,7 +469,7 @@ class _$ProgramInfoStateLoadingImpl implements ProgramInfoStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Program? program)? loadedSuccess,
+    TResult? Function(Program program)? loadedSuccess,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -480,7 +480,7 @@ class _$ProgramInfoStateLoadingImpl implements ProgramInfoStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Program? program)? loadedSuccess,
+    TResult Function(Program program)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -540,9 +540,9 @@ abstract class _$$ProgramInfoStateLoadedSuccessImplCopyWith<$Res> {
           $Res Function(_$ProgramInfoStateLoadedSuccessImpl) then) =
       __$$ProgramInfoStateLoadedSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Program? program});
+  $Res call({Program program});
 
-  $ProgramCopyWith<$Res>? get program;
+  $ProgramCopyWith<$Res> get program;
 }
 
 /// @nodoc
@@ -558,24 +558,20 @@ class __$$ProgramInfoStateLoadedSuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? program = freezed,
+    Object? program = null,
   }) {
     return _then(_$ProgramInfoStateLoadedSuccessImpl(
-      program: freezed == program
+      program: null == program
           ? _value.program
           : program // ignore: cast_nullable_to_non_nullable
-              as Program?,
+              as Program,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ProgramCopyWith<$Res>? get program {
-    if (_value.program == null) {
-      return null;
-    }
-
-    return $ProgramCopyWith<$Res>(_value.program!, (value) {
+  $ProgramCopyWith<$Res> get program {
+    return $ProgramCopyWith<$Res>(_value.program, (value) {
       return _then(_value.copyWith(program: value));
     });
   }
@@ -588,7 +584,7 @@ class _$ProgramInfoStateLoadedSuccessImpl
   const _$ProgramInfoStateLoadedSuccessImpl({required this.program});
 
   @override
-  final Program? program;
+  final Program program;
 
   @override
   String toString() {
@@ -619,7 +615,7 @@ class _$ProgramInfoStateLoadedSuccessImpl
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Program? program) loadedSuccess,
+    required TResult Function(Program program) loadedSuccess,
     required TResult Function() error,
   }) {
     return loadedSuccess(program);
@@ -630,7 +626,7 @@ class _$ProgramInfoStateLoadedSuccessImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Program? program)? loadedSuccess,
+    TResult? Function(Program program)? loadedSuccess,
     TResult? Function()? error,
   }) {
     return loadedSuccess?.call(program);
@@ -641,7 +637,7 @@ class _$ProgramInfoStateLoadedSuccessImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Program? program)? loadedSuccess,
+    TResult Function(Program program)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -692,9 +688,9 @@ class _$ProgramInfoStateLoadedSuccessImpl
 
 abstract class ProgramInfoStateLoadedSuccess implements ProgramInfoState {
   const factory ProgramInfoStateLoadedSuccess(
-      {required final Program? program}) = _$ProgramInfoStateLoadedSuccessImpl;
+      {required final Program program}) = _$ProgramInfoStateLoadedSuccessImpl;
 
-  Program? get program;
+  Program get program;
   @JsonKey(ignore: true)
   _$$ProgramInfoStateLoadedSuccessImplCopyWith<
           _$ProgramInfoStateLoadedSuccessImpl>
@@ -743,7 +739,7 @@ class _$ProgramInfoStateErrorImpl implements ProgramInfoStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Program? program) loadedSuccess,
+    required TResult Function(Program program) loadedSuccess,
     required TResult Function() error,
   }) {
     return error();
@@ -754,7 +750,7 @@ class _$ProgramInfoStateErrorImpl implements ProgramInfoStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Program? program)? loadedSuccess,
+    TResult? Function(Program program)? loadedSuccess,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -765,7 +761,7 @@ class _$ProgramInfoStateErrorImpl implements ProgramInfoStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Program? program)? loadedSuccess,
+    TResult Function(Program program)? loadedSuccess,
     TResult Function()? error,
     required TResult orElse(),
   }) {

@@ -67,7 +67,6 @@ class TaskPlanningBloc extends Bloc<TaskPlanningEvent, TaskPlanningState> {
 
       emit(const TaskPlanningState.joinedProgram());
     } catch (e) {
-      _logger.e('ProgramStateError:', error: e);
       emit(const TaskPlanningState.joinedProgramError());
     }
   }

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,12 +9,14 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../config/route_config.dart';
+import '../../../../../../shared/bloc_state.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/themes/spacing.dart';
 import '../../../../../landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../../../../domain/models/task.dart';
 import '../../../enum/task_form_mode_enum.dart';
+import '../../task_create/task_create_page.dart';
 import '../bloc/date_timeline/date_timeline_bloc.dart';
 import '../bloc/todo/todo_bloc.dart';
 import 'widget/date_section_timeline_widget.dart';
@@ -34,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _dateTimelineBloc.add(const DateTimelineEvent.started());
-    _todoBloc.add(const TodoEvent.started());
+    _todoBloc.add(TodoEvent.started(DateTime.now()));
     super.initState();
   }
 
@@ -153,10 +158,28 @@ class _HomePageState extends State<HomePage> {
                       taskName: tasks[index].taskName,
                       taskDescription: tasks[index].taskDescription,
                       startTime: tasks[index].startTime,
-                      ontap: () => context.pushNamed('/task/detail'),
+                      ontap: () => context.pushNamed(
+                        Routes.taskDetailPage,
+                        pathParameters: {
+                          'id': tasks[index].taskId.toString(),
+                        },
+                      ),
                       onEdit: () => context.pushNamed(
                         Routes.taskCreatepage,
-                        extra: TASKFORMMODE.edit,
+                        extra: TaskCreatePageData(
+                          mode: TASKFORMMODE.edit,
+                          taskId: tasks[index].taskId.toString(),
+                        ),
+                        //   extra: TASKFORMMODE.edit,
+                        //   queryParameters: {'id': tasks[index].taskId.toString()},
+                      ),
+                      onDoneTapped: () => _todoBloc.add(
+                        TodoEvent.changeTaskStatusToDone(
+                          taskId: tasks[index].taskId.toString(),
+                          date: DateTime.parse(
+                            tasks[index].startTime.toString(),
+                          ),
+                        ),
                       ),
                     ),
                   );
@@ -208,6 +231,14 @@ class _HomePageState extends State<HomePage> {
                       taskStatus: getTaskStatus(tasks[index].taskStatus!),
                       taskName: tasks[index].taskName,
                       taskDescription: tasks[index].taskDescription,
+                      onUnDoneTapped: () => _todoBloc.add(
+                        TodoEvent.changeTaskStatusToNotDone(
+                          taskId: tasks[index].taskId.toString(),
+                          date: DateTime.parse(
+                            tasks[index].startTime.toString(),
+                          ),
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -218,9 +249,9 @@ class _HomePageState extends State<HomePage> {
 
   TASKSTATUS getTaskStatus(int taskStatus) {
     switch (taskStatus) {
-      case 0:
-        return TASKSTATUS.todo;
       case 1:
+        return TASKSTATUS.todo;
+      case 2:
         return TASKSTATUS.done;
       default:
         return TASKSTATUS.todo;
