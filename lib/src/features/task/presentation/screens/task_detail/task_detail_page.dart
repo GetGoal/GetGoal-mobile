@@ -158,11 +158,11 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          MainButton(
-            buttonText: 'Edit',
-            onTap: () {},
-          ),
-          const SizedBox(height: 16),
+          // MainButton(
+          //   buttonText: 'Edit',
+          //   onTap: () {},
+          // ),
+          // const SizedBox(height: 16),
           MainButton(
             buttonText: 'Delete',
             buttonColor: AppColors.white,
@@ -174,6 +174,7 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
               context.pop();
             },
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );
