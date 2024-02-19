@@ -28,7 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       emit(const LoginState.loading());
       final loginData = LoginEntity(
-        email: event.email,
+        email: event.email.trim(),
         password: event.password,
       );
       final res = await _loginUsecase.call(params: loginData);
