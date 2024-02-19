@@ -96,35 +96,35 @@ class ProgramCard extends StatelessWidget {
   Widget _programMetaData() {
     return Row(
       children: [
-        Row(
-          children: [
-            Container(
-              width: 24,
-              height: 24,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Text(
-              'Thana Sriwichai',
-              style: description(),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            GestureDetector(
-              child: Text(
-                'Follow',
-                style: description().copyWith(color: AppColors.primary),
-              ),
-            ),
-          ],
-        ),
-        const Spacer(),
+        // Row(
+        //   children: [
+        //     Container(
+        //       width: 24,
+        //       height: 24,
+        //       decoration: const BoxDecoration(
+        //         shape: BoxShape.circle,
+        //         color: Colors.black,
+        //       ),
+        //     ),
+        //     const SizedBox(
+        //       width: 8,
+        //     ),
+        //     Text(
+        //       'Thana Sriwichai',
+        //       style: description(),
+        //     ),
+        //     const SizedBox(
+        //       width: 8,
+        //     ),
+        //     GestureDetector(
+        //       child: Text(
+        //         'Follow',
+        //         style: description().copyWith(color: AppColors.primary),
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        // const Spacer(),
         Row(
           children: [
             SvgPicture.asset(
