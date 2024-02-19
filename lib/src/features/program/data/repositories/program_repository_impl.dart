@@ -134,7 +134,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
       final requestBody = CreateProgramRequest(
         programName: program.programName,
         programDesc: program.programDescription,
-        mediaUrl: 'downloadUrl',
+        mediaUrl: downloadUrl,
         expectedTime: program.expectedTime,
         tasks: AppCache.programTaskCreateList
             .map((e) => e.taskToTaskRequest())
