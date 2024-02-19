@@ -20,6 +20,8 @@ import '../../../../../shared/widgets/text_field/upload_file_input.dart';
 import '../../../domain/models/program.dart';
 import '../../../domain/models/program_create.dart';
 import '../../enum/program_form_mode.enum.dart';
+import 'package:path/path.dart' as p;
+
 import 'program_task_create.dart';
 
 class ProgramCreatePage extends StatefulWidget {
@@ -41,7 +43,7 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
   final _programDescriptionTextInputController = TextEditingController();
   final _programCategoryTextInputController = TextEditingController();
   final _programExpectedTimeTextInputController = TextEditingController();
-  final String _imagePath = '';
+  String _imagePath = '';
   File _imageFile = File('');
 
   @override
@@ -94,8 +96,11 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
       onTap: () async {
         final image =
             await ImagePicker().pickImage(source: ImageSource.gallery);
+        // final path = p.basename(image!.path).replaceFirst('image_picker_', '');
+
         setState(() {
           _imageFile = File(image!.path);
+          _imagePath = image.path;
         });
       },
     );

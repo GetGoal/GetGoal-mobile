@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../../../main_qa.dart';
 import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../config/route_config.dart';
+import '../../../../../../core/secure_store.dart';
 import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../program/presentation/enum/program_form_mode.enum.dart';
 import '../../../../../task/presentation/enum/task_form_mode_enum.dart';
+import '../../../../../task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../../../../../task/presentation/screens/task_create/task_create_page.dart';
 import '../../../bloc/main_page/main_page_bloc.dart';
 import 'bottom_nav_item_widget.dart';
@@ -20,11 +23,13 @@ class BottomNavigation extends StatelessWidget {
   const BottomNavigation({
     super.key,
     required this.bottomNavSelected,
-    required this.bloc,
+    this.mainPageBloc,
+    this.todoBloc,
   });
 
   final int bottomNavSelected;
-  final MainPageBloc bloc;
+  final MainPageBloc? mainPageBloc;
+  final TodoBloc? todoBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +58,7 @@ class BottomNavigation extends StatelessWidget {
               title: Translations.of(context).navbar.home,
               position: 0,
               currentIndex: bottomNavSelected,
-              ontap: () => bloc.add(
+              ontap: () => mainPageBloc!.add(
                 MainPageEvent.bottomNavTapped(
                   bottomNavSelected: 0,
                   appbarTitle:
@@ -67,7 +72,7 @@ class BottomNavigation extends StatelessWidget {
               title: Translations.of(context).navbar.program,
               position: 1,
               currentIndex: bottomNavSelected,
-              ontap: () => bloc.add(
+              ontap: () => mainPageBloc!.add(
                 MainPageEvent.bottomNavTapped(
                   bottomNavSelected: 1,
                   appbarTitle: Translations.of(context).navbar.program,
@@ -150,7 +155,7 @@ class BottomNavigation extends StatelessWidget {
               position: 4,
               currentIndex: bottomNavSelected,
               ontap: () {
-                bloc.add(
+                mainPageBloc!.add(
                   const MainPageEvent.bottomNavTapped(
                     bottomNavSelected: 4,
                     appbarTitle: '',
@@ -192,8 +197,10 @@ class BottomNavigation extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(Translations.of(context).create_button.create_new,
-                style: heading3()),
+            child: Text(
+              Translations.of(context).create_button.create_new,
+              style: heading3(),
+            ),
           ),
 
           // Create program button
@@ -223,8 +230,9 @@ class BottomNavigation extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                          Translations.of(context).create_button.create_program,
-                          style: title1()),
+                        Translations.of(context).create_button.create_program,
+                        style: title1(),
+                      ),
                       Text(
                         Translations.of(context)
                             .create_button
@@ -248,13 +256,17 @@ class BottomNavigation extends StatelessWidget {
 
           // Create task button
           GestureDetector(
-            onTap: () {
+            onTap: () async {
               context.pop();
-              context.pushNamed(
+              bool? isRefresh = await context.pushNamed(
                 Routes.taskCreatepage,
                 // extra: TASKFORMMODE.create,
                 extra: TaskCreatePageData(mode: TASKFORMMODE.create),
               );
+
+              if (isRefresh!) {
+                todoBloc!.add(TodoEvent.started(DateTime.now()));
+              }
             },
             behavior: HitTestBehavior.translucent,
             child: Container(
@@ -273,8 +285,10 @@ class BottomNavigation extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(Translations.of(context).create_button.crete_task,
-                          style: title1()),
+                      Text(
+                        Translations.of(context).create_button.crete_task,
+                        style: title1(),
+                      ),
                       Text(
                         Translations.of(context).create_button.crete_task_des,
                         style: description()
