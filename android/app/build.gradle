@@ -94,4 +94,7 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation("com.google.firebase:firebase-appcheck")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+}
