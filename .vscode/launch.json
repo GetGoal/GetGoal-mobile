@@ -8,25 +8,41 @@
             "name": "GetGoal-mobile-local",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart"
+            "program": "lib/main_local.dart",
+            "args": [
+                "--flavor",
+                "dev"
+            ]
         },
         {
             "name": "GetGoal-mobile-dev",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_dev.dart"
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev"
+            ]
         },
         {
             "name": "GetGoal-mobile-qa",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_qa.dart"
+            "program": "lib/main_qa.dart",
+            "args": [
+                "--flavor",
+                "qa"
+            ]
         },
         {
             "name": "GetGoal-mobile-prod",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_prod.dart"
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "prod"
+            ]
         },
         {
             "name": "GetGoal-mobile (profile mode)",

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -65,8 +66,11 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
     try {
       emit(const ProgramState.loading());
 
+      final listOfLabelName = <String>[];
+      listOfLabelName.add(event.labelName);
+
       final programList =
-          await _getProgramByLabelName.call(params: event.labelName);
+          await _getProgramByLabelName.call(params: listOfLabelName);
 
       if (programList.data!.isEmpty) {
         emit(const ProgramState.programEmpty());

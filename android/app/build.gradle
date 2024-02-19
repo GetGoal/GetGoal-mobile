@@ -4,6 +4,18 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+// flavorDimensions "env"
+// productFlavors {
+//     dev {
+//         dimension "env"
+//         applicationId "com.example.getgoal.dev"
+//     }
+//     prod {
+//         dimension "env"
+//         applicationId "com.example.getgoal.prod"
+//     }
+// }
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -49,6 +61,24 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        flavorDimensions "env"
+        productFlavors {
+            dev {
+                dimension "env"
+                applicationId "com.example.getgoal.dev"
+                resValue "string", "app_name", "GetGoal-Dev"
+            }
+            qa {
+                dimension "env"
+                applicationId "com.example.getgoal.qa"
+                resValue "string", "app_name", "GetGoal-QA"
+            }
+            prod {
+                dimension "env"
+                applicationId "com.example.getgoal.prod"
+            }
+        }
     }
 
     buildTypes {
@@ -64,4 +94,12 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    // implementation("com.google.firebase:firebase-appcheck")
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+
+    // Add the dependencies for the App Check libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-appcheck-debug")
+}

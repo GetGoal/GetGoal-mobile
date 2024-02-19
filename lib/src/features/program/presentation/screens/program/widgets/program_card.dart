@@ -22,6 +22,7 @@ class ProgramCard extends StatelessWidget {
     this.rating,
     this.createdAt,
     this.onTab,
+    this.actionButton,
   });
 
   final String? programImage;
@@ -33,6 +34,7 @@ class ProgramCard extends StatelessWidget {
   final double? rating;
   final String? createdAt;
   final Function? onTab;
+  final Widget? actionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -84,14 +86,7 @@ class ProgramCard extends StatelessWidget {
           alignment: AlignmentDirectional.topEnd,
           child: Container(
             margin: const EdgeInsets.all(8),
-            child: CircleButton(
-              size: 36,
-              icon: SvgPicture.asset(
-                AppIcon.bookmark_icon,
-                height: 24,
-                fit: BoxFit.scaleDown,
-              ),
-            ),
+            child: actionButton,
           ),
         ),
       ],
@@ -101,35 +96,35 @@ class ProgramCard extends StatelessWidget {
   Widget _programMetaData() {
     return Row(
       children: [
-        Row(
-          children: [
-            Container(
-              width: 24,
-              height: 24,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Text(
-              'Thana Sriwichai',
-              style: description(),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            GestureDetector(
-              child: Text(
-                'Follow',
-                style: description().copyWith(color: AppColors.primary),
-              ),
-            ),
-          ],
-        ),
-        const Spacer(),
+        // Row(
+        //   children: [
+        //     Container(
+        //       width: 24,
+        //       height: 24,
+        //       decoration: const BoxDecoration(
+        //         shape: BoxShape.circle,
+        //         color: Colors.black,
+        //       ),
+        //     ),
+        //     const SizedBox(
+        //       width: 8,
+        //     ),
+        //     Text(
+        //       'Thana Sriwichai',
+        //       style: description(),
+        //     ),
+        //     const SizedBox(
+        //       width: 8,
+        //     ),
+        //     GestureDetector(
+        //       child: Text(
+        //         'Follow',
+        //         style: description().copyWith(color: AppColors.primary),
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        // const Spacer(),
         Row(
           children: [
             SvgPicture.asset(

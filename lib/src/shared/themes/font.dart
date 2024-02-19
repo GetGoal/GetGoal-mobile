@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 
 const String fontFamily = 'Nunito';
+const List<String> fontFamilyFallback = ['IBMPlexSansThai'];
+
+TextStyle heading1() {
+  return const TextStyle(
+    fontSize: 36,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
 
 TextStyle heading2() {
   return const TextStyle(
@@ -8,6 +19,7 @@ TextStyle heading2() {
     color: Colors.black,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }
 
@@ -17,6 +29,17 @@ TextStyle heading3() {
     color: Colors.black,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
+TextStyle heading3Regular() {
+  return const TextStyle(
+    fontSize: 24,
+    color: Colors.black,
+    fontWeight: FontWeight.normal,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }
 
@@ -26,6 +49,7 @@ TextStyle title1() {
     color: Colors.black,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }
 
@@ -35,6 +59,7 @@ TextStyle body1() {
     color: Colors.black,
     fontWeight: FontWeight.normal,
     fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }
 
@@ -44,6 +69,7 @@ TextStyle body2() {
     color: Colors.black,
     fontWeight: FontWeight.normal,
     fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }
 
@@ -53,5 +79,6 @@ TextStyle description() {
     color: Colors.black,
     fontWeight: FontWeight.normal,
     fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
   );
 }

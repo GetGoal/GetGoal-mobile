@@ -6,6 +6,7 @@ import '../../icon.dart';
 import '../../themes/color.dart';
 import '../../themes/font.dart';
 import '../button/circle_button.dart';
+import '../icon/custom_icon.dart';
 
 class GetGoalSubScaffold extends StatelessWidget {
   const GetGoalSubScaffold({
@@ -13,24 +14,26 @@ class GetGoalSubScaffold extends StatelessWidget {
     required this.body,
     this.appbarTitle,
     this.bottomNavigationBar,
+    this.onGoBack,
   });
 
   final Widget body;
   final String? appbarTitle;
   final Widget? bottomNavigationBar;
+  final Function()? onGoBack;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Row(
           children: [
             CircleButton(
-              onTap: () => context.pop(),
-              icon: SvgPicture.asset(
-                AppIcon.back_icon,
-                fit: BoxFit.scaleDown,
-                height: 24,
+              onTap: onGoBack ?? () => context.pop(),
+              icon: const CustomIcon(
+                icon: AppIcon.back_icon,
+                size: 24,
               ),
               border: Border.all(color: AppColors.stock),
             ),

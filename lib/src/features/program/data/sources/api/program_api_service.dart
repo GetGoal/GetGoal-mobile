@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../../../../core/bases/base_data_response.dart';
+import '../../models/request/create_program_request.dart';
+import '../../models/request/filter_program_request.dart';
+import '../../models/request/search_program_request.dart';
 import '../../models/response/program_response.dart';
 
 part 'program_api_service.g.dart';
@@ -10,20 +14,31 @@ abstract class ProgramApiService {
   factory ProgramApiService(Dio dio) = _ProgramApiService;
 
   @GET('/v1/programs')
-  Future<HttpResponse<ProgramResponse>> getPrograms();
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getPrograms();
 
-  @GET('/v1/programs/search/filter')
-  Future<HttpResponse<ProgramResponse>> getProgramByLabelName(
-    @Query('filter') String labelName,
+  @POST('/v1/programs/filter')
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
+      getProgramByLabelName(
+    @Body() FilterProgramRequest requestBody,
   );
 
   @GET('/v1/programs/{id}')
-  Future<HttpResponse<ProgramResponse2>> getProgramById(
+  Future<HttpResponse<BaseDataResponse<ProgramModel>>> getProgramById(
     @Path('id') String programId,
   );
 
-  @GET('/v1/programs/search')
-  Future<HttpResponse<ProgramResponse>> getProgramBySearch(
-    @Query('text') String text,
+  @POST('/v1/programs/search')
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getProgramBySearch(
+    @Body() SearchProgramRequest requestBody,
+  );
+
+  @POST('/v1/programs')
+  Future<HttpResponse<BaseDataResponse<ProgramModel>>> createProgram(
+    @Body() CreateProgramRequest requestBody,
+  );
+
+  @DELETE('/v1/programs/{id}')
+  Future<HttpResponse<BaseDataResponse>> deleteProgram(
+    @Path('id') String programId,
   );
 }

@@ -20,6 +20,9 @@ class TodoTask extends StatelessWidget {
     this.endTime,
     this.taskStatus,
     this.ontap,
+    this.onEdit,
+    this.onDoneTapped,
+    this.onUnDoneTapped,
   });
 
   final String? taskName;
@@ -28,41 +31,47 @@ class TodoTask extends StatelessWidget {
   final String? endTime;
   final TASKSTATUS? taskStatus;
   final GestureTapCallback? ontap;
+  final GestureTapCallback? onEdit;
+  final GestureTapCallback? onDoneTapped;
+  final GestureTapCallback? onUnDoneTapped;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        boxShadow: AppShadow.shadow,
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          children: [
-            _taskCircle(taskStatus!),
-            const SizedBox(width: 12),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _taskName(),
-                  _taskDescription(),
-                  const SizedBox(height: 4),
-                  _taskDuration(taskStatus!),
-                  const SizedBox(
-                    width: double.infinity,
-                  ),
-                ],
+    return GestureDetector(
+      onTap: ontap,
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          boxShadow: AppShadow.shadow,
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            children: [
+              _taskCircle(taskStatus!),
+              const SizedBox(width: 12),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _taskName(),
+                    _taskDescription(),
+                    const SizedBox(height: 4),
+                    _taskDuration(taskStatus!),
+                    const SizedBox(
+                      width: double.infinity,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              alignment: Alignment.topRight,
-              child: _taskEditButton(),
-            ),
-          ],
+              Container(
+                alignment: Alignment.topRight,
+                child: _taskEditButton(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -71,26 +80,32 @@ class TodoTask extends StatelessWidget {
   Widget _taskCircle(TASKSTATUS taskstatus) {
     switch (taskstatus) {
       case TASKSTATUS.todo:
-        return Container(
-          width: 24,
-          height: 62,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: AppColors.primary),
+        return GestureDetector(
+          onTap: onDoneTapped,
+          child: Container(
+            width: 24,
+            height: 62,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColors.primary),
+            ),
           ),
         );
       case TASKSTATUS.done:
-        return Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            color: AppColors.secondary,
-            shape: BoxShape.circle,
-          ),
-          child: SvgPicture.asset(
-            AppIcon.check_icon,
-            fit: BoxFit.scaleDown,
-            height: 24,
+        return GestureDetector(
+          onTap: onUnDoneTapped,
+          child: Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: AppColors.secondary,
+              shape: BoxShape.circle,
+            ),
+            child: SvgPicture.asset(
+              AppIcon.check_icon,
+              fit: BoxFit.scaleDown,
+              height: 24,
+            ),
           ),
         );
       default:
@@ -107,7 +122,7 @@ class TodoTask extends StatelessWidget {
 
   Widget _taskDescription() {
     return Text(
-      taskDescription ?? '',
+      taskDescription ?? '-',
       style: description().copyWith(color: AppColors.description),
     );
   }
@@ -127,7 +142,11 @@ class TodoTask extends StatelessWidget {
             ),
             const SizedBox(width: 4),
             Text(
-              DateFormat.jm().format(DateTime.parse(startTime!)),
+              startTime != null
+                  ? DateFormat.jm().format(
+                      DateTime.parse(startTime!),
+                    )
+                  : 'Unknown',
               style: description().copyWith(color: AppColors.description),
             ),
           ],
@@ -139,7 +158,7 @@ class TodoTask extends StatelessWidget {
 
   Widget _taskEditButton() {
     return GestureDetector(
-      onTap: () {},
+      onTap: onEdit,
       child: SvgPicture.asset(
         AppIcon.edit_task_icon,
         height: 16,

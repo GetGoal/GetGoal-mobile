@@ -32,8 +32,8 @@ class CacheImage extends StatelessWidget {
         child: Container(
           width: 500,
           height: 144,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(radius ?? 0)),
             color: Colors.white,
           ),
         ),

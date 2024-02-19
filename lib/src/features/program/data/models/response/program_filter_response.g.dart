@@ -37,11 +37,12 @@ Map<String, dynamic> _$ProgramFilterInfoToJson(ProgramFilterInfo instance) =>
 Label _$LabelFromJson(Map<String, dynamic> json) => Label(
       labelId: json['label_id'] as int?,
       labelName: json['label_name'] as String?,
-      updatedAt: json['updated_at'] as String?,
+      programId:
+          (json['program_id'] as List<dynamic>?)?.map((e) => e as int).toList(),
     );
 
 Map<String, dynamic> _$LabelToJson(Label instance) => <String, dynamic>{
       'label_id': instance.labelId,
       'label_name': instance.labelName,
-      'updated_at': instance.updatedAt,
+      'program_id': instance.programId,
     };

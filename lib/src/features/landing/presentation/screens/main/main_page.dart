@@ -7,7 +7,9 @@ import '../../../../../config/route_config.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../program/presentation/screens/program/program_page.dart';
+import '../../../../task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../../../../task/presentation/screens/home/screens/home_page.dart';
+import '../../../../user/presentation/screens/user_profile_page.dart';
 import '../../bloc/main_page/main_page_bloc.dart';
 import 'widgets/bottom_nav_widget.dart';
 
@@ -20,10 +22,14 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   MainPageBloc get _mainPageBloc => context.read<MainPageBloc>();
+  TodoBloc get _todoBloc => context.read<TodoBloc>();
 
   List<Widget> pages = [
     const HomePage(),
     const ProgramPage(),
+    const SizedBox(),
+    const SizedBox(),
+    const UserProfilePage(),
   ];
 
   @override
@@ -53,7 +59,8 @@ class _MainPageState extends State<MainPage> {
           body: pages[state.bottomNavSelected],
           bottomNavigationBar: BottomNavigation(
             bottomNavSelected: state.bottomNavSelected,
-            bloc: _mainPageBloc,
+            mainPageBloc: _mainPageBloc,
+            todoBloc: _todoBloc,
           ),
         );
       },

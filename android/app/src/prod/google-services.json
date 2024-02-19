@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "888666473575",
+    "project_id": "getgoal-prod",
+    "storage_bucket": "getgoal-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888666473575:android:01e65072f14303034fc0c2",
+        "android_client_info": {
+          "package_name": "com.example.getgoal.prod"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcjHNyPexEsYuG4-2A9XLocbW-BkNvNFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

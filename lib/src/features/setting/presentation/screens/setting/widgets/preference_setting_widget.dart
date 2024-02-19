@@ -24,7 +24,7 @@ class PreferenceSettingWidget extends StatelessWidget {
         children: [
           SizedBox(
             child: Text(
-              'Preferences',
+              Translations.of(context).setting.preferences,
               style: title1(),
             ),
           ),
@@ -38,7 +38,7 @@ class PreferenceSettingWidget extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _buildLanguagesSetting(),
+                _buildLanguagesSetting(context),
               ],
             ),
           ),
@@ -47,12 +47,12 @@ class PreferenceSettingWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildLanguagesSetting() {
+  Widget _buildLanguagesSetting(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Languages',
+          Translations.of(context).setting.languages,
           style: body2(),
         ),
         BlocBuilder<LanguageBloc, LanguageState>(
@@ -71,7 +71,7 @@ class PreferenceSettingWidget extends StatelessWidget {
                       );
                     },
                     child: Text(
-                      'English',
+                      Translations.of(context).setting.english,
                       style: isEn
                           ? title1().copyWith(color: AppColors.primary)
                           : body1(),
@@ -89,7 +89,7 @@ class PreferenceSettingWidget extends StatelessWidget {
                       );
                     },
                     child: Text(
-                      'Thai',
+                      Translations.of(context).setting.thai,
                       style: !isEn
                           ? title1().copyWith(color: AppColors.primary)
                           : body1(),

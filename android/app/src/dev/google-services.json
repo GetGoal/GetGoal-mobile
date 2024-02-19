@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "169286400268",
+    "project_id": "getgoal-2fccc",
+    "storage_bucket": "getgoal-2fccc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169286400268:android:d65b562a7a9edeb9d1f129",
+        "android_client_info": {
+          "package_name": "com.example.getgoal.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBloRPGqKcYkUxhQCh9onQmMqRSPnXWn8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -75,7 +75,7 @@ class ProgramModel {
   @JsonKey(name: 'rating')
   final double? rating;
 
-  @JsonKey(name: 'program_description')
+  @JsonKey(name: 'program_desc')
   final String? programDesc;
 
   @JsonKey(name: 'media_url')

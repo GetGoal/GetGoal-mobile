@@ -40,7 +40,7 @@ class Label {
   Label({
     required this.labelId,
     required this.labelName,
-    required this.updatedAt,
+    required this.programId,
   });
 
   factory Label.fromJson(Map<String, dynamic> json) => _$LabelFromJson(json);
@@ -51,6 +51,6 @@ class Label {
   final int? labelId;
   @JsonKey(name: 'label_name')
   final String? labelName;
-  @JsonKey(name: 'updated_at')
-  final String? updatedAt;
+  @JsonKey(name: 'program_id')
+  final List<int>? programId;
 }

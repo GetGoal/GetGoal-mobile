@@ -1,12 +1,25 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/bases/base_data.dart';
+import '../../../../core/bases/base_data_response.dart';
+import '../../../../shared/app_cache.dart';
+import '../../../task/data/mappers/task_mapper.dart';
 import '../../domain/models/program.dart';
+import '../../domain/models/program_create.dart';
 import '../../domain/repositories/program_repository.dart';
 import '../mappers/program_mapper.dart';
+import '../models/request/create_program_request.dart';
+import '../models/request/filter_program_request.dart';
+import '../models/request/search_program_request.dart';
 import '../sources/api/program_api_service.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as p;
 
 class ProgramRepositoryImpl implements ProgramRepository {
   ProgramRepositoryImpl(this._programApiService);
@@ -20,55 +33,43 @@ class ProgramRepositoryImpl implements ProgramRepository {
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
-          httpResponse.data.program!.programs!
+          httpResponse.data.data!
               .map(
                 (e) => e.programToEntity(),
               )
               .toList(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
   @override
   Future<DataState<List<Program>>> getProgramByLabelName(
-    String labelName,
+    List<String> labelName,
   ) async {
     try {
-      final httpResponse =
-          await _programApiService.getProgramByLabelName(labelName);
+      final httpResponse = await _programApiService.getProgramByLabelName(
+        FilterProgramRequest(listOfLabelName: labelName),
+      );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
-          httpResponse.data.program!.programs!
+          httpResponse.data.data!
               .map(
                 (e) => e.programToEntity(),
               )
               .toList(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
-      return DataFailed(e);
+      log(e.message.toString());
+      return DataFailed(BaseDataResponse());
     }
   }
 
@@ -78,47 +79,123 @@ class ProgramRepositoryImpl implements ProgramRepository {
       final httpResponse = await _programApiService.getProgramById(programId);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data.program!.programToEntity());
+        return DataSuccess(httpResponse.data.data!.programToEntity());
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
     }
   }
 
   @override
   Future<DataState<List<Program>>> getProramBySearch(String text) async {
     try {
-      final httpResponse = await _programApiService.getProgramBySearch(text);
+      final httpResponse = await _programApiService.getProgramBySearch(
+        SearchProgramRequest(searchText: text),
+      );
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
+        if (httpResponse.data.data == null) {
+          return const DataSuccess([]);
+        }
         return DataSuccess(
-          httpResponse.data.program!.programs!
+          httpResponse.data.data!
               .map(
                 (e) => e.programToEntity(),
               )
               .toList(),
         );
       } else {
-        return DataFailed(
-          DioException(
-            error: httpResponse.response.statusMessage,
-            response: httpResponse.response,
-            type: DioExceptionType.badResponse,
-            requestOptions: httpResponse.response.requestOptions,
-          ),
-        );
+        return DataFailed(BaseDataResponse());
       }
     } on DioException catch (e) {
-      return DataFailed(e);
+      return DataFailed(BaseDataResponse());
+    }
+  }
+
+  @override
+  Future<BaseDataResponse<Program>> createProgram(ProgramCreate program) async {
+    try {
+      // Directory appDocDir = await getApplicationDocumentsDirectory();
+      // String filePath = '${appDocDir.absolute.path}/${program.imagePath}';
+      final path =
+          p.basename(program.imagePath!).replaceFirst('image_picker_', '');
+
+      final file = await File(program.imagePath!).create();
+      final firebaseStorage = FirebaseStorage.instance;
+      final snapshot = await firebaseStorage
+          .ref()
+          .child('media/program/$path')
+          .putFile(file);
+
+      final downloadUrl = await snapshot.ref.getDownloadURL();
+
+      final requestBody = CreateProgramRequest(
+        programName: program.programName,
+        programDesc: program.programDescription,
+        mediaUrl: downloadUrl,
+        expectedTime: program.expectedTime,
+        tasks: AppCache.programTaskCreateList
+            .map((e) => e.taskToTaskRequest())
+            .toList(),
+        labels: program.category!
+            .map((e) => LabelRequest(labelName: e.labelName))
+            .toList(),
+      );
+
+      final res = await _programApiService.createProgram(requestBody);
+
+      final programRes = res.data.data!.programToEntity();
+
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: programRes,
+        error: res.data.error,
+      );
+
+      AppCache.programCreate = const ProgramCreate();
+      AppCache.programTaskCreateList = [];
+
+      return data;
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
+
+  // Delete program
+  @override
+  Future<BaseDataResponse> deleteProgram(String programId) async {
+    try {
+      final res = await _programApiService.deleteProgram(programId);
+
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: null,
+        error: res.data.error,
+      );
+      return data;
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
     }
   }
 }
