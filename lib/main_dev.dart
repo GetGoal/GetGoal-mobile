@@ -23,7 +23,6 @@ void main() async {
   // END: Initialize Firebase
 
   HttpOverrides.global = MyHttpOverrides();
-  WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.setLocale(await LocaleConfig.getCurrentLocale());
   runApp(
     TranslationProvider(

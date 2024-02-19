@@ -67,6 +67,12 @@ android {
             dev {
                 dimension "env"
                 applicationId "com.example.getgoal.dev"
+                resValue "string", "app_name", "GetGoal-Dev"
+            }
+            qa {
+                dimension "env"
+                applicationId "com.example.getgoal.qa"
+                resValue "string", "app_name", "GetGoal-QA"
             }
             prod {
                 dimension "env"

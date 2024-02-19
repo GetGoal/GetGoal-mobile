@@ -16,7 +16,6 @@ AppLocale? currentLocale;
 void main() async {
   await dotenv.load(fileName: '.env');
   AppEnvironment.setupEnv(Environment.local);
-  WidgetsFlutterBinding.ensureInitialized();
 
   // START: Initialize Firebase
   await Firebase.initializeApp(
@@ -26,7 +25,6 @@ void main() async {
 
   await initializeDependencies();
   HttpOverrides.global = MyHttpOverrides();
-  WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.setLocale(await LocaleConfig.getCurrentLocale());
   runApp(
     TranslationProvider(

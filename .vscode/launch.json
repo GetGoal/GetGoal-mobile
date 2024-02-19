@@ -28,7 +28,11 @@
             "name": "GetGoal-mobile-qa",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_qa.dart"
+            "program": "lib/main_qa.dart",
+            "args": [
+                "--flavor",
+                "qa"
+            ]
         },
         {
             "name": "GetGoal-mobile-prod",
