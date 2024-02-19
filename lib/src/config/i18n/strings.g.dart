@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 116 (58 per locale)
 ///
-/// Built on 2024-02-19 at 20:26 UTC
+/// Built on 2024-02-19 at 20:50 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -301,7 +301,7 @@ class _StringsSettingEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get setting => 'Setting';
+	String get setting => 'Settings';
 	String get preferences => 'Preferences';
 	String get languages => 'languages';
 	String get english => 'English';
@@ -551,7 +551,7 @@ extension on Translations {
 			case 'create_program.next_button': return 'Next';
 			case 'create_program.create_task_list': return 'Create Task List';
 			case 'edit_program.edit_program': return 'Program Settings';
-			case 'setting.setting': return 'Setting';
+			case 'setting.setting': return 'Settings';
 			case 'setting.preferences': return 'Preferences';
 			case 'setting.languages': return 'languages';
 			case 'setting.english': return 'English';

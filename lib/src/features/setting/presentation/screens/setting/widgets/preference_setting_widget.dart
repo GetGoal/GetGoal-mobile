@@ -38,7 +38,7 @@ class PreferenceSettingWidget extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _buildLanguagesSetting(),
+                _buildLanguagesSetting(context),
               ],
             ),
           ),
@@ -47,7 +47,7 @@ class PreferenceSettingWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildLanguagesSetting() {
+  Widget _buildLanguagesSetting(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../bloc/language/language_bloc.dart';
 import 'widgets/preference_setting_widget.dart';
@@ -24,7 +25,7 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return GetGoalSubScaffold(
-      appbarTitle: 'Settings',
+      appbarTitle: Translations.of(context).setting.setting,
       body: Column(
         children: [
           PreferenceSettingWidget(
