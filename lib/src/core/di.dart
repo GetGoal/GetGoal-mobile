@@ -6,6 +6,7 @@ import '../features/auth/data/sources/api/auth_api_service.dart';
 import '../features/auth/domain/repositories/auth_repository.dart';
 import '../features/auth/domain/usecase/auth/create_account_usecase.dart';
 import '../features/auth/domain/usecase/auth/login_usecase.dart';
+import '../features/auth/domain/usecase/auth/logout_usecase.dart';
 import '../features/auth/domain/usecase/auth/verify_account_usecase.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
@@ -19,14 +20,17 @@ import '../features/program/domain/repositories/program_filter_repository.dart';
 import '../features/program/domain/repositories/program_repository.dart';
 import '../features/program/domain/usecases/label/get_program_filter_usecase.dart';
 import '../features/program/domain/usecases/program/create_program_usecase.dart';
+import '../features/program/domain/usecases/program/delete_program_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_id_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_search_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_usecase.dart';
+import '../features/program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 
 import '../features/program/presentation/bloc/program/program_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
+import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/task/data/repositories/task_repository_impl.dart';
 import '../features/task/data/sources/api/task_api_service.dart';
@@ -45,6 +49,12 @@ import '../features/task/presentation/bloc/task_detail/task_detail_bloc.dart';
 import '../features/task/presentation/bloc/task_planning/task_planning_bloc.dart';
 import '../features/task/presentation/screens/home/bloc/date_timeline/date_timeline_bloc.dart';
 import '../features/task/presentation/screens/home/bloc/todo/todo_bloc.dart';
+import '../features/user/data/repositories/user_repository_impl.dart';
+import '../features/user/data/sources/api/user_api_service.dart';
+import '../features/user/domain/repositories/user_repository.dart';
+import '../features/user/domain/usecases/get_user_program_usecase.dart';
+import '../features/user/presentation/screens/bloc/logout/logout_bloc.dart';
+import '../features/user/presentation/screens/bloc/user_program/user_program_bloc.dart';
 import 'dio_client.dart';
 import 'env.dart';
 
@@ -92,6 +102,11 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton(() => GetProgramByIdUsecase(getIt()));
   getIt.registerFactory<ProgramInfoBloc>(() => ProgramInfoBloc(getIt()));
 
+  getIt.registerFactory<DeleteProgramBloc>(() => DeleteProgramBloc(getIt()));
+  getIt.registerLazySingleton(() => DeleteProgramUsecase(getIt()));
+
+  getIt.registerFactory<CreateProgramBloc>(() => CreateProgramBloc(getIt()));
+
   //to-do feature
   getIt.registerLazySingleton<TaskApiService>(() => TaskApiService(dio));
   getIt.registerLazySingleton<TaskRepository>(
@@ -136,5 +151,14 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton(() => VerfifyAccountUsecase(getIt()));
 
   getIt.registerFactory<LoginBloc>(() => LoginBloc(getIt()));
+  getIt.registerFactory<LogoutBloc>(() => LogoutBloc(getIt()));
   getIt.registerLazySingleton(() => LoginUsecase(getIt()));
+  getIt.registerLazySingleton(() => LogoutUsecase(getIt()));
+
+  // User feature
+  getIt.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(UserApiService(dio)),
+  );
+  getIt.registerFactory<UserProgramBloc>(() => UserProgramBloc(getIt()));
+  getIt.registerLazySingleton(() => GetUserProgramUsecase(getIt()));
 }

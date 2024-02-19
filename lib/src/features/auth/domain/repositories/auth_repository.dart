@@ -13,4 +13,7 @@ abstract class AuthRepository {
 
   // Login
   Future<BaseDataResponse<TokenEntity>> login(LoginEntity loginData);
+
+  // Logout
+  Future<BaseDataResponse> logout();
 }

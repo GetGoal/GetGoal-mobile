@@ -4,11 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../config/route_config.dart';
+import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
+import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import 'bloc/login/login_bloc.dart';
 
@@ -130,6 +132,14 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
             switch (state) {
               case LoginStateLoginSuccess():
                 context.go(Routes.mainPage);
+                break;
+              case LoginStateLoginError(:final message):
+                showDialog(
+                  context: context,
+                  builder: (context) => ErrorDialog(
+                    errorMessage: message,
+                  ),
+                );
                 break;
               default:
             }

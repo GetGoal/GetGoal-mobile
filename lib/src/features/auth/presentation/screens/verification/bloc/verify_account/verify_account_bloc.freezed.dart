@@ -325,7 +325,7 @@ mixin _$VerifyAccountState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() verified,
-    required TResult Function() verifiedError,
+    required TResult Function(String? message) verifiedError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -333,7 +333,7 @@ mixin _$VerifyAccountState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? verified,
-    TResult? Function()? verifiedError,
+    TResult? Function(String? message)? verifiedError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -341,7 +341,7 @@ mixin _$VerifyAccountState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? verified,
-    TResult Function()? verifiedError,
+    TResult Function(String? message)? verifiedError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -436,7 +436,7 @@ class _$VerifyAccountStateInitialImpl implements VerifyAccountStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() verified,
-    required TResult Function() verifiedError,
+    required TResult Function(String? message) verifiedError,
   }) {
     return initial();
   }
@@ -447,7 +447,7 @@ class _$VerifyAccountStateInitialImpl implements VerifyAccountStateInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? verified,
-    TResult? Function()? verifiedError,
+    TResult? Function(String? message)? verifiedError,
   }) {
     return initial?.call();
   }
@@ -458,7 +458,7 @@ class _$VerifyAccountStateInitialImpl implements VerifyAccountStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? verified,
-    TResult Function()? verifiedError,
+    TResult Function(String? message)? verifiedError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -555,7 +555,7 @@ class _$VerifyAccountStateLoadingImpl implements VerifyAccountStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() verified,
-    required TResult Function() verifiedError,
+    required TResult Function(String? message) verifiedError,
   }) {
     return loading();
   }
@@ -566,7 +566,7 @@ class _$VerifyAccountStateLoadingImpl implements VerifyAccountStateLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? verified,
-    TResult? Function()? verifiedError,
+    TResult? Function(String? message)? verifiedError,
   }) {
     return loading?.call();
   }
@@ -577,7 +577,7 @@ class _$VerifyAccountStateLoadingImpl implements VerifyAccountStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? verified,
-    TResult Function()? verifiedError,
+    TResult Function(String? message)? verifiedError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -674,7 +674,7 @@ class _$VerifyAccountStateVerifiedImpl implements VerifyAccountStateVerified {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() verified,
-    required TResult Function() verifiedError,
+    required TResult Function(String? message) verifiedError,
   }) {
     return verified();
   }
@@ -685,7 +685,7 @@ class _$VerifyAccountStateVerifiedImpl implements VerifyAccountStateVerified {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? verified,
-    TResult? Function()? verifiedError,
+    TResult? Function(String? message)? verifiedError,
   }) {
     return verified?.call();
   }
@@ -696,7 +696,7 @@ class _$VerifyAccountStateVerifiedImpl implements VerifyAccountStateVerified {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? verified,
-    TResult Function()? verifiedError,
+    TResult Function(String? message)? verifiedError,
     required TResult orElse(),
   }) {
     if (verified != null) {
@@ -754,6 +754,8 @@ abstract class _$$VerifyAccountStateVirifiedErrorImplCopyWith<$Res> {
           _$VerifyAccountStateVirifiedErrorImpl value,
           $Res Function(_$VerifyAccountStateVirifiedErrorImpl) then) =
       __$$VerifyAccountStateVirifiedErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -765,28 +767,53 @@ class __$$VerifyAccountStateVirifiedErrorImplCopyWithImpl<$Res>
       _$VerifyAccountStateVirifiedErrorImpl _value,
       $Res Function(_$VerifyAccountStateVirifiedErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$VerifyAccountStateVirifiedErrorImpl(
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$VerifyAccountStateVirifiedErrorImpl
     implements VerifyAccountStateVirifiedError {
-  const _$VerifyAccountStateVirifiedErrorImpl();
+  const _$VerifyAccountStateVirifiedErrorImpl({this.message});
+
+  @override
+  final String? message;
 
   @override
   String toString() {
-    return 'VerifyAccountState.verifiedError()';
+    return 'VerifyAccountState.verifiedError(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VerifyAccountStateVirifiedErrorImpl);
+            other is _$VerifyAccountStateVirifiedErrorImpl &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VerifyAccountStateVirifiedErrorImplCopyWith<
+          _$VerifyAccountStateVirifiedErrorImpl>
+      get copyWith => __$$VerifyAccountStateVirifiedErrorImplCopyWithImpl<
+          _$VerifyAccountStateVirifiedErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -794,9 +821,9 @@ class _$VerifyAccountStateVirifiedErrorImpl
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() verified,
-    required TResult Function() verifiedError,
+    required TResult Function(String? message) verifiedError,
   }) {
-    return verifiedError();
+    return verifiedError(message);
   }
 
   @override
@@ -805,9 +832,9 @@ class _$VerifyAccountStateVirifiedErrorImpl
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? verified,
-    TResult? Function()? verifiedError,
+    TResult? Function(String? message)? verifiedError,
   }) {
-    return verifiedError?.call();
+    return verifiedError?.call(message);
   }
 
   @override
@@ -816,11 +843,11 @@ class _$VerifyAccountStateVirifiedErrorImpl
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? verified,
-    TResult Function()? verifiedError,
+    TResult Function(String? message)? verifiedError,
     required TResult orElse(),
   }) {
     if (verifiedError != null) {
-      return verifiedError();
+      return verifiedError(message);
     }
     return orElse();
   }
@@ -865,6 +892,12 @@ class _$VerifyAccountStateVirifiedErrorImpl
 }
 
 abstract class VerifyAccountStateVirifiedError implements VerifyAccountState {
-  const factory VerifyAccountStateVirifiedError() =
+  const factory VerifyAccountStateVirifiedError({final String? message}) =
       _$VerifyAccountStateVirifiedErrorImpl;
+
+  String? get message;
+  @JsonKey(ignore: true)
+  _$$VerifyAccountStateVirifiedErrorImplCopyWith<
+          _$VerifyAccountStateVirifiedErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

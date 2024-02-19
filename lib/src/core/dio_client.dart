@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import 'secure_store.dart';
+
 Future<String> refreshToken() async {
   return 'your_new_access_token';
 }
@@ -9,10 +11,12 @@ Dio buildClient(String baseUrl) {
 
   dio.interceptors.add(
     InterceptorsWrapper(
-      onRequest: (options, handler) {
+      onRequest: (options, handler) async {
         // Add the access token to the request header
         options.headers['Authorization'] =
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNob3Rpd2l0LnNvdXlhbkBtYWlsLmttdXR0LmFjLnRoIiwidXNlcl9pZCI6NywiZmlyc3RfbmFtZSI6IkNob3Rpd2l0IiwibGFzdF9uYW1lIjoiU291eWFuIiwiZXhwIjo0ODYxNzgwNDE4fQ.PoUJp91-dCCJewM2chrg6Iw54A8WVk32HIIF_wLto5c';
+            'Bearer ${await SecureStorage().readSecureData('access_token')}';
+        options.headers['RefreshToken'] =
+            await SecureStorage().readSecureData('refresh_token');
         return handler.next(options);
       },
       onError: (DioException e, handler) async {

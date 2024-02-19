@@ -28,4 +28,7 @@ abstract class AuthApiService {
   Future<HttpResponse<BaseDataResponse<LoginSuccessResponse>>> login(
     @Body() LoginRequest requestBody,
   );
+
+  @POST('/v1/auth/sign-out')
+  Future<HttpResponse<BaseDataResponse>> logout();
 }

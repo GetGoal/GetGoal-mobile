@@ -132,4 +132,29 @@ class AuthRepositoryImpl implements AuthRepository {
       );
     }
   }
+
+  @override
+  Future<BaseDataResponse> logout() async {
+    try {
+      final res = await _authApiService.logout();
+
+      return BaseDataResponse(
+        code: res.data.code,
+        count: res.data.count,
+        message: res.data.message,
+        data: null,
+        error: res.data.error,
+      );
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
 }

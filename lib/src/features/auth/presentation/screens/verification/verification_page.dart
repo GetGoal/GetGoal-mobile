@@ -7,6 +7,7 @@ import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
+import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import 'bloc/verify_account/verify_account_bloc.dart';
 import 'widgets/otp_slot_text_field.dart';
@@ -198,7 +199,13 @@ class _VerificationPageState extends State<VerificationPage> {
           case VerifyAccountStateVerified():
             context.go(Routes.loginPage);
             break;
-          case VerifyAccountStateVirifiedError():
+          case VerifyAccountStateVirifiedError(:final message):
+            showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(
+                errorMessage: message,
+              ),
+            );
             break;
           default:
         }

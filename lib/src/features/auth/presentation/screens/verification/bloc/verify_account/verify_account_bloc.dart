@@ -26,7 +26,7 @@ class VerifyAccountBloc extends Bloc<VerifyAccountEvent, VerifyAccountState> {
       emit(const VerifyAccountState.loading());
       final res = await _verfifyAccountUsecase.call(params: event.code);
       if (res.code != 200) {
-        emit(const VerifyAccountState.verifiedError());
+        emit(VerifyAccountState.verifiedError(message: res.error));
         return;
       }
 

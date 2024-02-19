@@ -5,6 +5,7 @@ class VerifyAccountState with _$VerifyAccountState {
   const factory VerifyAccountState.initial() = VerifyAccountStateInitial;
   const factory VerifyAccountState.loading() = VerifyAccountStateLoading;
   const factory VerifyAccountState.verified() = VerifyAccountStateVerified;
-  const factory VerifyAccountState.verifiedError() =
-      VerifyAccountStateVirifiedError;
+  const factory VerifyAccountState.verifiedError({
+    String? message,
+  }) = VerifyAccountStateVirifiedError;
 }
