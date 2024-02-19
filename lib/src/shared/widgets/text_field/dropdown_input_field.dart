@@ -9,15 +9,21 @@ class DropdownInputField extends StatelessWidget {
     this.hintText,
     required this.dropdownData,
     this.onChanged,
+    this.dropdownKey,
+    this.value,
   });
 
   final String? hintText;
   final List<String> dropdownData;
   final Function(String?)? onChanged;
+  final Key? dropdownKey;
+  final String? value;
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
+      key: dropdownKey,
+      value: value,
       hint: Text('$hintText'),
       elevation: 1,
       borderRadius: BorderRadius.circular(16),
