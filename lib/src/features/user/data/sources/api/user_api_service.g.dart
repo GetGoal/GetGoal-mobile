@@ -34,7 +34,7 @@ class _UserApiService implements UserApiService {
     )
                 .compose(
                   _dio.options,
-                  '/v1/programs',
+                  '/v1/programs/user',
                   queryParameters: queryParameters,
                   data: _data,
                 )
@@ -51,6 +51,39 @@ class _UserApiService implements UserApiService {
                   (i) => ProgramModel.fromJson(i as Map<String, dynamic>))
               .toList()
           : List.empty(),
+    );
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<BaseDataResponse<UserProfileResponse>>>
+      getUserProfile() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<BaseDataResponse<UserProfileResponse>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/v1/users/profile',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    final value = BaseDataResponse<UserProfileResponse>.fromJson(
+      _result.data!,
+      (json) => UserProfileResponse.fromJson(json as Map<String, dynamic>),
     );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;

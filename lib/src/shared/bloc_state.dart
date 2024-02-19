@@ -17,6 +17,7 @@ import '../features/task/presentation/bloc/task_planning/task_planning_bloc.dart
 import '../features/task/presentation/screens/home/bloc/date_timeline/date_timeline_bloc.dart';
 import '../features/task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../features/user/presentation/screens/bloc/logout/logout_bloc.dart';
+import '../features/user/presentation/screens/bloc/user_profile/user_profile_bloc.dart';
 import '../features/user/presentation/screens/bloc/user_program/user_program_bloc.dart';
 
 final mainPageBloc = BlocProvider(
@@ -79,4 +80,8 @@ final deleteProgramBloc = BlocProvider(
 
 final createProgramBloc = BlocProvider(
   create: (context) => getIt<CreateProgramBloc>(),
+);
+
+final userProfileBloc = BlocProvider(
+  create: (context) => getIt<UserProfileBloc>(),
 );

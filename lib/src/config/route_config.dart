@@ -75,6 +75,7 @@ class RouteConfig {
             userProgramBloc,
             logoutBloc,
             deleteProgramBloc,
+            userProfileBloc,
           ],
           child: const MainPage(),
         ),
@@ -94,12 +95,12 @@ class RouteConfig {
       GoRoute(
         path: Routes.userProfilePage,
         name: Routes.userProfilePage,
-        // builder: (context, state) => const UserProfilePage(),
         builder: (context, state) => MultiBlocProvider(
           providers: [
             userProgramBloc,
             logoutBloc,
             deleteProgramBloc,
+            userProfileBloc,
           ],
           child: const UserProfilePage(),
         ),

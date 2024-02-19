@@ -52,8 +52,10 @@ import '../features/task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../features/user/data/repositories/user_repository_impl.dart';
 import '../features/user/data/sources/api/user_api_service.dart';
 import '../features/user/domain/repositories/user_repository.dart';
+import '../features/user/domain/usecases/get_user_profile_usecase.dart';
 import '../features/user/domain/usecases/get_user_program_usecase.dart';
 import '../features/user/presentation/screens/bloc/logout/logout_bloc.dart';
+import '../features/user/presentation/screens/bloc/user_profile/user_profile_bloc.dart';
 import '../features/user/presentation/screens/bloc/user_program/user_program_bloc.dart';
 import 'dio_client.dart';
 import 'env.dart';
@@ -159,6 +161,9 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton<UserRepository>(
     () => UserRepositoryImpl(UserApiService(dio)),
   );
-  getIt.registerFactory<UserProgramBloc>(() => UserProgramBloc(getIt()));
   getIt.registerLazySingleton(() => GetUserProgramUsecase(getIt()));
+  getIt.registerLazySingleton(() => GetUserProfileUsecase(getIt()));
+
+  getIt.registerFactory<UserProgramBloc>(() => UserProgramBloc(getIt()));
+  getIt.registerFactory<UserProfileBloc>(() => UserProfileBloc(getIt()));
 }

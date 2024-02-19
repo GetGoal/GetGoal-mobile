@@ -19,6 +19,7 @@ import '../../../program/presentation/bloc/delete_program/delete_program_bloc.da
 import '../../../program/presentation/enum/program_form_mode.enum.dart';
 import '../../../program/presentation/screens/program/widgets/program_card.dart';
 import 'bloc/logout/logout_bloc.dart';
+import 'bloc/user_profile/user_profile_bloc.dart';
 import 'bloc/user_program/user_program_bloc.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -32,31 +33,39 @@ class _UserProfilePageState extends State<UserProfilePage> {
   UserProgramBloc get _userProgramBloc => context.read<UserProgramBloc>();
   LogoutBloc get _logoutBloc => context.read<LogoutBloc>();
   DeleteProgramBloc get _deleteProgramBloc => context.read<DeleteProgramBloc>();
+  UserProfileBloc get _userProfileBloc => context.read<UserProfileBloc>();
 
   @override
   void initState() {
     _userProgramBloc.add(const UserProgramEvent.started());
+    _userProfileBloc.add(const UserProfileEvent.started());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(
-            AppSpacing.appMargin,
-          ),
-          child: Column(
-            children: [
-              _buildUserProfileInfo(),
-              const SizedBox(height: 8),
-              _buildLogoutButton(),
-              const SizedBox(height: 40),
-              _buildMenuSelector(),
-              _buildFeedSection(),
-            ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          _userProgramBloc.add(const UserProgramEvent.started());
+          _userProfileBloc.add(const UserProfileEvent.started());
+        },
+        child: SingleChildScrollView(
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(
+              AppSpacing.appMargin,
+            ),
+            child: Column(
+              children: [
+                _buildUserProfileInfo(),
+                const SizedBox(height: 8),
+                _buildLogoutButton(),
+                const SizedBox(height: 40),
+                _buildMenuSelector(),
+                _buildFeedSection(),
+              ],
+            ),
           ),
         ),
       ),
@@ -76,7 +85,26 @@ class _UserProfilePageState extends State<UserProfilePage> {
           ),
         ),
         const SizedBox(height: 8),
-        Text('Thana Sriwichai', style: title1()),
+        BlocConsumer<UserProfileBloc, UserProfileState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            switch (state) {
+              case UserProfileStateInitial():
+                return const SizedBox();
+              case UserProfileStateLoading():
+                return const SizedBox();
+              case UserProfileStateLoadedSuccess(:final user):
+                return Text(
+                  '${user.firstName} ${user.lastName}',
+                  style: title1(),
+                );
+              case UserProfileStateError():
+                return Text('Error', style: title1());
+              default:
+                return const SizedBox();
+            }
+          },
+        ),
       ],
     );
   }
