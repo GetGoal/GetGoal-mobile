@@ -2,7 +2,9 @@ part of 'task_create_bloc.dart';
 
 @freezed
 class TaskCreateState with _$TaskCreateState {
-  const factory TaskCreateState.initial() = TaskCreateStateInitial;
+  const factory TaskCreateState.initial({
+    Task? task,
+  }) = TaskCreateStateInitial;
   const factory TaskCreateState.loading() = TaskCreateStateLoading;
   const factory TaskCreateState.loadedSuccess({
     Task? task,

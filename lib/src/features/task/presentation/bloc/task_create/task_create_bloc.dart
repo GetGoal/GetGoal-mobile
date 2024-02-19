@@ -35,6 +35,7 @@ class TaskCreateBloc extends Bloc<TaskCreateEvent, TaskCreateState> {
       emit(const TaskCreateState.loading());
       if (event.taskId != null) {
         final task = await _getTaskByTaskIdUsecase.call(params: event.taskId!);
+        emit(TaskCreateState.initial(task: task.data!));
         emit(TaskCreateState.loadedSuccess(task: task.data!));
         return;
       }

@@ -101,27 +101,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
                   current is! TaskCreateStateError,
               listener: (context, state) {
                 switch (state) {
-                  case TaskCreateStateCreated():
-                    context.pop(true);
-                    break;
-                  case TaskCreateStateError(:final message):
-                    showDialog(
-                      context: context,
-                      builder: (context) => ErrorDialog(
-                        errorMessage: message,
-                      ),
-                    );
-                    break;
-                  default:
-                }
-              },
-              builder: (context, state) {
-                switch (state) {
-                  case TaskCreateStateInitial():
-                    return _buildTaskCreateLoading();
-                  case TaskCreateStateLoading():
-                    return _buildTaskCreateLoading();
-                  case TaskCreateStateLoadedSuccess(:final task):
+                  case TaskCreateStateInitial(:final task):
                     if (task != null) {
                       _taskNameInputController.text = task.taskName!;
                       _taskDescriptionInputController.text =
@@ -205,6 +185,28 @@ class _TaskCreatePageState extends State<TaskCreatePage>
                           ? '${widget.pageData!.task!.timeBeforeNotify} Minute before start'
                           : 'None';
                     }
+                    break;
+                  case TaskCreateStateCreated():
+                    context.pop(true);
+                    break;
+                  case TaskCreateStateError(:final message):
+                    showDialog(
+                      context: context,
+                      builder: (context) => ErrorDialog(
+                        errorMessage: message,
+                      ),
+                    );
+                    break;
+                  default:
+                }
+              },
+              builder: (context, state) {
+                switch (state) {
+                  case TaskCreateStateInitial():
+                    return _buildTaskCreateLoading();
+                  case TaskCreateStateLoading():
+                    return _buildTaskCreateLoading();
+                  case TaskCreateStateLoadedSuccess():
                     return _buildTaskCreateLoadedSuccess();
                   case TaskCreateStateError():
                     return Container();
@@ -254,6 +256,36 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   }
 
   Widget _buildTaskNameInputField() {
+    // return BlocConsumer<TaskNameFieldBloc, TaskNameFieldState>(
+    //   listener: (context, state) {},
+    //   builder: (context, state) {
+    //     switch (state) {
+    //       case TaskNameFieldStateInitial():
+    //         return NormalTextInputField(
+    //           controller: _taskNameInputController,
+    //           label: Translations.of(context).create_task.task_name,
+    //           hintText: Translations.of(context).create_task.ex_task_name,
+    //           validator: taskNameValidator,
+    //         );
+    //       case TaskNameFieldStateChanged(:final value):
+    //         _taskNameInputController.text = value!;
+
+    //         return NormalTextInputField(
+    //           controller: _taskNameInputController,
+    //           label: Translations.of(context).create_task.task_name,
+    //           hintText: Translations.of(context).create_task.ex_task_name,
+    //           validator: taskNameValidator,
+    //           onFieldSubmitted: (value) {
+    //             _taskNameFieldBloc
+    //                 .add(TaskNameFieldEvent.onSaved(value: value));
+    //           },
+    //         );
+    //       default:
+    //         return const SizedBox();
+    //     }
+    //   },
+    // );
+
     return NormalTextInputField(
       controller: _taskNameInputController,
       label: Translations.of(context).create_task.task_name,

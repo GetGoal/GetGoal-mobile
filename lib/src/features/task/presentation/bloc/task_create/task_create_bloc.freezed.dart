@@ -542,7 +542,7 @@ abstract class TaskCreateEventOnEdit implements TaskCreateEvent {
 mixin _$TaskCreateState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(Task? task) initial,
     required TResult Function() loading,
     required TResult Function(Task? task) loadedSuccess,
     required TResult Function(String? message) error,
@@ -551,7 +551,7 @@ mixin _$TaskCreateState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(Task? task)? initial,
     TResult? Function()? loading,
     TResult? Function(Task? task)? loadedSuccess,
     TResult? Function(String? message)? error,
@@ -560,7 +560,7 @@ mixin _$TaskCreateState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(Task? task)? initial,
     TResult Function()? loading,
     TResult Function(Task? task)? loadedSuccess,
     TResult Function(String? message)? error,
@@ -622,6 +622,10 @@ abstract class _$$TaskCreateStateInitialImplCopyWith<$Res> {
           _$TaskCreateStateInitialImpl value,
           $Res Function(_$TaskCreateStateInitialImpl) then) =
       __$$TaskCreateStateInitialImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Task? task});
+
+  $TaskCopyWith<$Res>? get task;
 }
 
 /// @nodoc
@@ -632,56 +636,92 @@ class __$$TaskCreateStateInitialImplCopyWithImpl<$Res>
       _$TaskCreateStateInitialImpl _value,
       $Res Function(_$TaskCreateStateInitialImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? task = freezed,
+  }) {
+    return _then(_$TaskCreateStateInitialImpl(
+      task: freezed == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as Task?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskCopyWith<$Res>? get task {
+    if (_value.task == null) {
+      return null;
+    }
+
+    return $TaskCopyWith<$Res>(_value.task!, (value) {
+      return _then(_value.copyWith(task: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$TaskCreateStateInitialImpl implements TaskCreateStateInitial {
-  const _$TaskCreateStateInitialImpl();
+  const _$TaskCreateStateInitialImpl({this.task});
+
+  @override
+  final Task? task;
 
   @override
   String toString() {
-    return 'TaskCreateState.initial()';
+    return 'TaskCreateState.initial(task: $task)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskCreateStateInitialImpl);
+            other is _$TaskCreateStateInitialImpl &&
+            (identical(other.task, task) || other.task == task));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, task);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TaskCreateStateInitialImplCopyWith<_$TaskCreateStateInitialImpl>
+      get copyWith => __$$TaskCreateStateInitialImplCopyWithImpl<
+          _$TaskCreateStateInitialImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(Task? task) initial,
     required TResult Function() loading,
     required TResult Function(Task? task) loadedSuccess,
     required TResult Function(String? message) error,
     required TResult Function() created,
   }) {
-    return initial();
+    return initial(task);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(Task? task)? initial,
     TResult? Function()? loading,
     TResult? Function(Task? task)? loadedSuccess,
     TResult? Function(String? message)? error,
     TResult? Function()? created,
   }) {
-    return initial?.call();
+    return initial?.call(task);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(Task? task)? initial,
     TResult Function()? loading,
     TResult Function(Task? task)? loadedSuccess,
     TResult Function(String? message)? error,
@@ -689,7 +729,7 @@ class _$TaskCreateStateInitialImpl implements TaskCreateStateInitial {
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(task);
     }
     return orElse();
   }
@@ -736,7 +776,13 @@ class _$TaskCreateStateInitialImpl implements TaskCreateStateInitial {
 }
 
 abstract class TaskCreateStateInitial implements TaskCreateState {
-  const factory TaskCreateStateInitial() = _$TaskCreateStateInitialImpl;
+  const factory TaskCreateStateInitial({final Task? task}) =
+      _$TaskCreateStateInitialImpl;
+
+  Task? get task;
+  @JsonKey(ignore: true)
+  _$$TaskCreateStateInitialImplCopyWith<_$TaskCreateStateInitialImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -780,7 +826,7 @@ class _$TaskCreateStateLoadingImpl implements TaskCreateStateLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(Task? task) initial,
     required TResult Function() loading,
     required TResult Function(Task? task) loadedSuccess,
     required TResult Function(String? message) error,
@@ -792,7 +838,7 @@ class _$TaskCreateStateLoadingImpl implements TaskCreateStateLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(Task? task)? initial,
     TResult? Function()? loading,
     TResult? Function(Task? task)? loadedSuccess,
     TResult? Function(String? message)? error,
@@ -804,7 +850,7 @@ class _$TaskCreateStateLoadingImpl implements TaskCreateStateLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(Task? task)? initial,
     TResult Function()? loading,
     TResult Function(Task? task)? loadedSuccess,
     TResult Function(String? message)? error,
@@ -946,7 +992,7 @@ class _$TaskCreateStateLoadedSuccessImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(Task? task) initial,
     required TResult Function() loading,
     required TResult Function(Task? task) loadedSuccess,
     required TResult Function(String? message) error,
@@ -958,7 +1004,7 @@ class _$TaskCreateStateLoadedSuccessImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(Task? task)? initial,
     TResult? Function()? loading,
     TResult? Function(Task? task)? loadedSuccess,
     TResult? Function(String? message)? error,
@@ -970,7 +1016,7 @@ class _$TaskCreateStateLoadedSuccessImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(Task? task)? initial,
     TResult Function()? loading,
     TResult Function(Task? task)? loadedSuccess,
     TResult Function(String? message)? error,
@@ -1101,7 +1147,7 @@ class _$TaskCreateStateErrorImpl implements TaskCreateStateError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(Task? task) initial,
     required TResult Function() loading,
     required TResult Function(Task? task) loadedSuccess,
     required TResult Function(String? message) error,
@@ -1113,7 +1159,7 @@ class _$TaskCreateStateErrorImpl implements TaskCreateStateError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(Task? task)? initial,
     TResult? Function()? loading,
     TResult? Function(Task? task)? loadedSuccess,
     TResult? Function(String? message)? error,
@@ -1125,7 +1171,7 @@ class _$TaskCreateStateErrorImpl implements TaskCreateStateError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(Task? task)? initial,
     TResult Function()? loading,
     TResult Function(Task? task)? loadedSuccess,
     TResult Function(String? message)? error,
@@ -1230,7 +1276,7 @@ class _$TaskCreateStateCreatedImpl implements TaskCreateStateCreated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(Task? task) initial,
     required TResult Function() loading,
     required TResult Function(Task? task) loadedSuccess,
     required TResult Function(String? message) error,
@@ -1242,7 +1288,7 @@ class _$TaskCreateStateCreatedImpl implements TaskCreateStateCreated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(Task? task)? initial,
     TResult? Function()? loading,
     TResult? Function(Task? task)? loadedSuccess,
     TResult? Function(String? message)? error,
@@ -1254,7 +1300,7 @@ class _$TaskCreateStateCreatedImpl implements TaskCreateStateCreated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(Task? task)? initial,
     TResult Function()? loading,
     TResult Function(Task? task)? loadedSuccess,
     TResult Function(String? message)? error,

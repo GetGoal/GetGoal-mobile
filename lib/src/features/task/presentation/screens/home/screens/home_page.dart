@@ -158,21 +158,35 @@ class _HomePageState extends State<HomePage> {
                       taskName: tasks[index].taskName,
                       taskDescription: tasks[index].taskDescription,
                       startTime: tasks[index].startTime,
-                      ontap: () => context.pushNamed(
-                        Routes.taskDetailPage,
-                        pathParameters: {
-                          'id': tasks[index].taskId.toString(),
-                        },
-                      ),
-                      onEdit: () => context.pushNamed(
-                        Routes.taskCreatepage,
-                        extra: TaskCreatePageData(
-                          mode: TASKFORMMODE.edit,
-                          taskId: tasks[index].taskId.toString(),
-                        ),
-                        //   extra: TASKFORMMODE.edit,
-                        //   queryParameters: {'id': tasks[index].taskId.toString()},
-                      ),
+                      ontap: () {
+                        context.pushNamed(
+                          Routes.taskDetailPage,
+                          pathParameters: {
+                            'id': tasks[index].taskId.toString(),
+                          },
+                        );
+                      },
+                      onEdit: () async {
+                        bool? isRefreash = await context.pushNamed(
+                          Routes.taskCreatepage,
+                          extra: TaskCreatePageData(
+                            mode: TASKFORMMODE.edit,
+                            taskId: tasks[index].taskId.toString(),
+                          ),
+                          //   extra: TASKFORMMODE.edit,
+                          //   queryParameters: {'id': tasks[index].taskId.toString()},
+                        );
+
+                        if (isRefreash!) {
+                          _todoBloc.add(
+                            TodoEvent.started(
+                              DateTime.parse(
+                                tasks[index].startTime.toString(),
+                              ),
+                            ),
+                          );
+                        }
+                      },
                       onDoneTapped: () => _todoBloc.add(
                         TodoEvent.changeTaskStatusToDone(
                           taskId: tasks[index].taskId.toString(),
