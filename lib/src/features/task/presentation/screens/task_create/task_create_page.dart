@@ -14,6 +14,7 @@ import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/checkbox/getgoal_checkbox.dart';
+import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../../shared/widgets/text_field/dropdown_input_field.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
@@ -53,6 +54,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   TaskCreateBloc get _taskCreateBloc => context.read<TaskCreateBloc>();
 
   final _formKey = GlobalKey<FormState>();
+  final _dropdownKey = GlobalKey<FormFieldState>();
   final _taskNameInputController = TextEditingController();
   final _taskDescriptionInputController = TextEditingController();
   final _taskCategoryInputController = TextEditingController();
@@ -62,6 +64,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   bool _isAllowNoti = false;
   String _selectedTime = '';
   String _selectedDate = '';
+  String _selectedReminder = 'None';
 
   @override
   void initState() {
@@ -94,7 +97,24 @@ class _TaskCreatePageState extends State<TaskCreatePage>
           child: Form(
             key: _formKey,
             child: BlocConsumer<TaskCreateBloc, TaskCreateState>(
-              listener: (context, state) {},
+              buildWhen: (previous, current) =>
+                  current is! TaskCreateStateError,
+              listener: (context, state) {
+                switch (state) {
+                  case TaskCreateStateCreated():
+                    context.pop(true);
+                    break;
+                  case TaskCreateStateError(:final message):
+                    showDialog(
+                      context: context,
+                      builder: (context) => ErrorDialog(
+                        errorMessage: message,
+                      ),
+                    );
+                    break;
+                  default:
+                }
+              },
               builder: (context, state) {
                 switch (state) {
                   case TaskCreateStateInitial():
@@ -127,8 +147,17 @@ class _TaskCreatePageState extends State<TaskCreatePage>
                       _taskTimeInputController.text =
                           formatedTime.format(context);
                       _isAllowNoti = task.isSetNotification == 1 ? true : false;
-                      _taskRemiderInputController.text =
-                          '${task.timeBeforeNotify} Minute before start';
+
+                      // _taskRemiderInputController.text =
+                      //     '${task.timeBeforeNotify} Minute before start';
+
+                      _selectedReminder = task.timeBeforeNotify != 0
+                          ? '${task.timeBeforeNotify} Minute before start'
+                          : 'None';
+
+                      // _dropdownKey.currentState!.didChange(
+                      //   '${task.timeBeforeNotify} Minute before start',
+                      // );
                     }
                     if (widget.pageData!.task != null) {
                       _taskNameInputController.text =
@@ -138,15 +167,22 @@ class _TaskCreatePageState extends State<TaskCreatePage>
                       _taskCategoryInputController.text =
                           widget.pageData!.task!.category!;
                       _taskStartDateInputController.text =
-                          DateFormat.yMd('th_TH').format(DateTime.parse(
-                              widget.pageData!.task!.startTime!));
+                          DateFormat.yMd('th_TH').format(
+                        DateTime.parse(
+                          widget.pageData!.task!.startTime!,
+                        ),
+                      );
                       List time = DateFormat.Hm()
-                          .format((DateTime.parse(
-                              widget.pageData!.task!.startTime!)))
+                          .format(
+                            (DateTime.parse(
+                              widget.pageData!.task!.startTime!,
+                            )),
+                          )
                           .split(':');
                       _selectedDate = formatDate(
                         DateFormat.yMd('th_TH').format(
-                            DateTime.parse(widget.pageData!.task!.startTime!)),
+                          DateTime.parse(widget.pageData!.task!.startTime!),
+                        ),
                       );
                       TimeOfDay formatedTime = TimeOfDay(
                         hour: int.parse(time[0]),
@@ -157,12 +193,17 @@ class _TaskCreatePageState extends State<TaskCreatePage>
 
                       _taskTimeInputController.text =
                           formatedTime.format(context);
+
                       _isAllowNoti =
                           widget.pageData!.task!.isSetNotification == 1
                               ? true
                               : false;
-                      _taskRemiderInputController.text =
-                          '${widget.pageData!.task!.timeBeforeNotify} Minute before start';
+
+                      _selectedReminder = widget
+                                  .pageData!.task!.timeBeforeNotify !=
+                              0
+                          ? '${widget.pageData!.task!.timeBeforeNotify} Minute before start'
+                          : 'None';
                     }
                     return _buildTaskCreateLoadedSuccess();
                   case TaskCreateStateError():
@@ -202,9 +243,10 @@ class _TaskCreatePageState extends State<TaskCreatePage>
         const SizedBox(height: 20),
         _buildTimeInputField(),
         const SizedBox(height: 20),
-        _buildNotificationCheckbox(),
-        const SizedBox(height: 20),
-        _isAllowNoti ? _buildReminderField() : const SizedBox(),
+        // _buildNotificationCheckbox(),
+        // const SizedBox(height: 20),
+        // _isAllowNoti ? _buildReminderField() : const SizedBox(),
+        _buildReminderField(),
         const SizedBox(height: 40),
         _buildSubmitButton(),
       ],
@@ -277,7 +319,9 @@ class _TaskCreatePageState extends State<TaskCreatePage>
             GetGoalCheckbox(
               value: _isAllowNoti,
               onTap: () {
-                _isAllowNoti = !_isAllowNoti;
+                setState(() {
+                  _isAllowNoti = !_isAllowNoti;
+                });
                 _taskRemiderInputController.text = '';
               },
             ),
@@ -294,6 +338,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
 
   Widget _buildReminderField() {
     List<String> data = <String>[
+      'None',
       '5 Minute before start',
       '10 Minute before start',
       '15 Minute before start',
@@ -307,10 +352,14 @@ class _TaskCreatePageState extends State<TaskCreatePage>
         Text(Translations.of(context).create_task.reminder, style: body1()),
         const SizedBox(height: 8),
         DropdownInputField(
+          key: _dropdownKey,
+          value: _selectedReminder,
           hintText: Translations.of(context).create_task.set_noti,
           dropdownData: data,
           onChanged: (value) {
             _taskRemiderInputController.text = value!;
+            _selectedReminder = value;
+            _isAllowNoti = true;
           },
         ),
       ],
@@ -326,8 +375,8 @@ class _TaskCreatePageState extends State<TaskCreatePage>
           taskDescription: _taskDescriptionInputController.text,
           category: _taskCategoryInputController.text,
           startTime: '${_selectedDate}T${_selectedTime}Z',
-          isSetNotification: _isAllowNoti ? 1 : 0,
-          timeBeforeNotify: _isAllowNoti
+          isSetNotification: _selectedReminder != 'None' ? 1 : 0,
+          timeBeforeNotify: _selectedReminder != 'None'
               ? int.parse(_taskRemiderInputController.text.split(' ')[0])
               : 0,
         );
@@ -408,7 +457,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
     if (time != null) {
       // setState(() {
       _selectedTime =
-          '${time.hour < 10 ? '0${time.hour}' : time.hour}:${time.minute}:00';
+          '${time.hour < 10 ? '0${time.hour}' : time.hour}:${time.minute < 10 ? '0${time.minute}' : time.minute}:00';
       _taskTimeInputController.text = time.format(context);
       // });
     }

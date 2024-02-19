@@ -39,7 +39,7 @@ abstract class TaskApiService {
     @Body() JoinProgramRequest requestBody,
   );
 
-  @PUT('/v1/tasks/{id}')
+  @PUT('/v1/tasks/done/{id}')
   Future<HttpResponse<BaseDataResponse<TaskModel>>> changeTaskStatusToDone(
     @Path('id') String taskId,
   );

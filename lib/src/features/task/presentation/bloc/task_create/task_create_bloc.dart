@@ -61,7 +61,17 @@ class TaskCreateBloc extends Bloc<TaskCreateEvent, TaskCreateState> {
       final res = await _createTaskUsecase.call(
         params: task,
       );
-      print(res.data);
+
+      if (res.data == null) {
+        emit(
+          const TaskCreateState.error(
+            message: 'Something went wrong. Please try again',
+          ),
+        );
+        return;
+      }
+
+      emit(const TaskCreateState.created());
     } catch (e) {
       emit(const TaskCreateState.error(message: 'error'));
     }
@@ -85,7 +95,8 @@ class TaskCreateBloc extends Bloc<TaskCreateEvent, TaskCreateState> {
         params: task,
         taskId: event.taskId,
       );
-      print(res.data);
+
+      emit(const TaskCreateState.created());
     } catch (e) {
       emit(const TaskCreateState.error(message: 'error'));
     }

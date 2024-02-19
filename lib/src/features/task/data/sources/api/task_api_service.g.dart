@@ -213,7 +213,7 @@ class _TaskApiService implements TaskApiService {
     )
             .compose(
               _dio.options,
-              '/v1/tasks/${taskId}',
+              '/v1/tasks/done/${taskId}',
               queryParameters: queryParameters,
               data: _data,
             )

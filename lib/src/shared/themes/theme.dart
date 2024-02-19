@@ -8,7 +8,10 @@ ThemeData appTheme(BuildContext context) {
   return ThemeData(
     useMaterial3: true,
     primaryColor: AppColors.primary,
-    colorScheme: ColorScheme.fromSwatch().copyWith(primary: AppColors.primary),
+    colorScheme:
+        ColorScheme.fromSwatch(primarySwatch: AppColors.primaryWhite).copyWith(
+      primary: AppColors.primary,
+    ),
     scaffoldBackgroundColor: AppColors.white,
     appBarTheme: AppBarTheme(
       color: AppColors.white,
