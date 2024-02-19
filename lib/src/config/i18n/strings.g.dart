@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 106 (53 per locale)
+/// Strings: 116 (58 per locale)
 ///
-/// Built on 2024-02-19 at 09:16 UTC
+/// Built on 2024-02-19 at 20:26 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -157,6 +157,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsEditTaskEn edit_task = _StringsEditTaskEn._(_root);
 	late final _StringsCreateProgramEn create_program = _StringsCreateProgramEn._(_root);
 	late final _StringsEditProgramEn edit_program = _StringsEditProgramEn._(_root);
+	late final _StringsSettingEn setting = _StringsSettingEn._(_root);
 }
 
 // Path: navbar
@@ -293,6 +294,20 @@ class _StringsEditProgramEn {
 	String get edit_program => 'Program Settings';
 }
 
+// Path: setting
+class _StringsSettingEn {
+	_StringsSettingEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get setting => 'Setting';
+	String get preferences => 'Preferences';
+	String get languages => 'languages';
+	String get english => 'English';
+	String get thai => 'Thai';
+}
+
 // Path: <root>
 class _StringsTh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
@@ -326,6 +341,7 @@ class _StringsTh implements Translations {
 	@override late final _StringsEditTaskTh edit_task = _StringsEditTaskTh._(_root);
 	@override late final _StringsCreateProgramTh create_program = _StringsCreateProgramTh._(_root);
 	@override late final _StringsEditProgramTh edit_program = _StringsEditProgramTh._(_root);
+	@override late final _StringsSettingTh setting = _StringsSettingTh._(_root);
 }
 
 // Path: navbar
@@ -462,6 +478,20 @@ class _StringsEditProgramTh implements _StringsEditProgramEn {
 	@override String get edit_program => 'แก้ไขโปรแกรม';
 }
 
+// Path: setting
+class _StringsSettingTh implements _StringsSettingEn {
+	_StringsSettingTh._(this._root);
+
+	@override final _StringsTh _root; // ignore: unused_field
+
+	// Translations
+	@override String get setting => 'การตั้งค่า';
+	@override String get preferences => 'การตั้งค่า';
+	@override String get languages => 'ภาษา';
+	@override String get english => 'อังกฤษ';
+	@override String get thai => 'ไทย';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -521,6 +551,11 @@ extension on Translations {
 			case 'create_program.next_button': return 'Next';
 			case 'create_program.create_task_list': return 'Create Task List';
 			case 'edit_program.edit_program': return 'Program Settings';
+			case 'setting.setting': return 'Setting';
+			case 'setting.preferences': return 'Preferences';
+			case 'setting.languages': return 'languages';
+			case 'setting.english': return 'English';
+			case 'setting.thai': return 'Thai';
 			default: return null;
 		}
 	}
@@ -582,6 +617,11 @@ extension on _StringsTh {
 			case 'create_program.next_button': return 'ต่อไป';
 			case 'create_program.create_task_list': return 'สร้างรายการงาน';
 			case 'edit_program.edit_program': return 'แก้ไขโปรแกรม';
+			case 'setting.setting': return 'การตั้งค่า';
+			case 'setting.preferences': return 'การตั้งค่า';
+			case 'setting.languages': return 'ภาษา';
+			case 'setting.english': return 'อังกฤษ';
+			case 'setting.thai': return 'ไทย';
 			default: return null;
 		}
 	}

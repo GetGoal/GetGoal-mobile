@@ -69,5 +69,12 @@
     },
     "edit_program": {
         "edit_program": "Program Settings"
+    },
+    "setting": {
+        "setting": "Setting",
+        "preferences": "Preferences",
+        "languages": "languages",
+        "english": "English",
+        "thai": "Thai"
     }
 }

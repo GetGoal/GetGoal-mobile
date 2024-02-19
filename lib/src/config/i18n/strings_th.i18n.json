@@ -69,5 +69,12 @@
     },
     "edit_program": {
         "edit_program": "แก้ไขโปรแกรม"
+    },
+    "setting": {
+        "setting": "การตั้งค่า",
+        "preferences": "การตั้งค่า",
+        "languages": "ภาษา",
+        "english": "อังกฤษ",
+        "thai": "ไทย"
     }
 }
