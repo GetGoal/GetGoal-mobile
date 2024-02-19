@@ -53,7 +53,9 @@ class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
           child: Column(
             children: [
               _buildProgramTaskSection(),
-              _buildCreateTaskButton(),
+              AppCache.programTaskCreateList.length < 9
+                  ? _buildCreateTaskButton()
+                  : const SizedBox(),
               const SizedBox(height: 40),
               _buildSubmitButton(),
             ],
