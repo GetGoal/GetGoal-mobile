@@ -72,6 +72,9 @@ class RouteConfig {
             programInfoBloc,
             dateTimelineBloc,
             todoBloc,
+            userProgramBloc,
+            logoutBloc,
+            deleteProgramBloc,
           ],
           child: const MainPage(),
         ),
@@ -91,7 +94,15 @@ class RouteConfig {
       GoRoute(
         path: Routes.userProfilePage,
         name: Routes.userProfilePage,
-        builder: (context, state) => const UserProfilePage(),
+        // builder: (context, state) => const UserProfilePage(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            userProgramBloc,
+            logoutBloc,
+            deleteProgramBloc,
+          ],
+          child: const UserProfilePage(),
+        ),
       ),
       GoRoute(
         path: '${Routes.taskPlanningPage}/:id',
@@ -150,7 +161,12 @@ class RouteConfig {
       GoRoute(
         path: Routes.programTaskCreatePage,
         name: Routes.programTaskCreatePage,
-        builder: (context, state) => const ProgramTaskCreate(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            createProgramBloc,
+          ],
+          child: const ProgramTaskCreate(),
+        ),
       ),
       GoRoute(
         path: '/test',

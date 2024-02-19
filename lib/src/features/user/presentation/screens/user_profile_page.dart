@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,11 +10,16 @@ import '../../../../shared/themes/color.dart';
 import '../../../../shared/themes/font.dart';
 import '../../../../shared/themes/spacing.dart';
 import '../../../../shared/widgets/button/circle_button.dart';
+import '../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../shared/widgets/image/cache_image.dart';
+import '../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../program/domain/models/program.dart';
+import '../../../program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../../../program/presentation/enum/program_form_mode.enum.dart';
 import '../../../program/presentation/screens/program/widgets/program_card.dart';
+import 'bloc/logout/logout_bloc.dart';
+import 'bloc/user_program/user_program_bloc.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({super.key});
@@ -23,6 +29,16 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+  UserProgramBloc get _userProgramBloc => context.read<UserProgramBloc>();
+  LogoutBloc get _logoutBloc => context.read<LogoutBloc>();
+  DeleteProgramBloc get _deleteProgramBloc => context.read<DeleteProgramBloc>();
+
+  @override
+  void initState() {
+    _userProgramBloc.add(const UserProgramEvent.started());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +51,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
           child: Column(
             children: [
               _buildUserProfileInfo(),
+              const SizedBox(height: 8),
+              _buildLogoutButton(),
               const SizedBox(height: 40),
               _buildMenuSelector(),
               _buildFeedSection(),
@@ -59,33 +77,58 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ),
         const SizedBox(height: 8),
         Text('Thana Sriwichai', style: title1()),
-        const SizedBox(height: 8),
-        // Container(
-        //   padding:
-        //       const EdgeInsets.only(top: 4, bottom: 4, right: 16, left: 16),
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(100),
-        //     color: AppColors.primary,
-        //   ),
-        //   child: Text(
-        //     'Follow',
-        //     style: description().copyWith(color: const Color(0xFFC67E11)),
-        //   ),
-        // ),
-        Container(
-          padding:
-              const EdgeInsets.only(top: 4, bottom: 4, right: 16, left: 16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            color: AppColors.red,
-          ),
-          child: Text(
-            Translations.of(context).user_profile.logout,
-            style: description()
-                .copyWith(color: const Color.fromARGB(255, 255, 255, 255)),
-          ),
-        ),
       ],
+    );
+  }
+
+  Widget _buildLogoutButton() {
+    return BlocConsumer<LogoutBloc, LogoutState>(
+      listener: (context, state) {
+        switch (state) {
+          case LogoutStateloaggedOut():
+            context.go(Routes.loginPage);
+            break;
+          case LogoutStateLoggedOutError(:final message):
+            showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(errorMessage: message),
+            );
+          default:
+        }
+      },
+      buildWhen: (previous, current) => current is LogoutStateInitial,
+      builder: (context, state) {
+        switch (state) {
+          case LogoutStateInitial():
+            return GestureDetector(
+              onTap: () => _logoutBloc.add(const LogoutEvent.onLogout()),
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 4,
+                  bottom: 4,
+                  right: 16,
+                  left: 16,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: AppColors.red,
+                ),
+                child: Text(
+                  Translations.of(context).user_profile.logout,
+                  style: description().copyWith(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                  ),
+                ),
+              ),
+            );
+
+          case LogoutStateLoading():
+          case LogoutStateloaggedOut():
+          case LogoutStateLoggedOutError():
+          default:
+            return const SizedBox();
+        }
+      },
     );
   }
 
@@ -172,69 +215,101 @@ class _UserProfilePageState extends State<UserProfilePage> {
   }
 
   Widget _buildFeedSection() {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
-      shrinkWrap: true,
-      itemCount: 2,
-      itemBuilder: (context, index) {
-        return ProgramCard(
-          onTab: () {},
-          programImage:
-              'https://images.unsplash.com/photo-1682686580452-37f1892ee5e8?q=80&w=1975&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-          programName: 'programList[index].programName',
-          programDesc: 'programList[index].programDesc',
-          rating: 3,
-          duration: '3 Days',
-          label: const Label(labelName: 'Unknow'),
-          createdAt: DateTime.now().toString(),
-          actionButton: Theme(
-            data: Theme.of(context).copyWith(
-              splashFactory: NoSplash.splashFactory,
-            ),
-            child: PopupMenuButton(
-              elevation: 1,
-              shadowColor: Colors.black38,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              padding: const EdgeInsets.all(0),
-              icon: CircleButton(
-                icon: CustomIcon(
-                  icon: AppIcon.menu_icon,
-                  iconColor: AppColors.description,
-                ),
-              ),
-              itemBuilder: (context) => [
-                PopupMenuItem(
-                  onTap: () => context.pushNamed(
-                    Routes.programCreatePage,
-                    extra: PROGRAMFORMMODE.edit,
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    child: Row(
-                      children: [
-                        Text('Edit'),
+    return BlocConsumer<UserProgramBloc, UserProgramState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        switch (state) {
+          case UserProgramStateInitial():
+            return const SizedBox();
+
+          case UserProgramStateLoading():
+            return const SizedBox();
+
+          case UserProgramStateLoadedSuccess(:final programList):
+            return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: programList.length,
+              itemBuilder: (context, index) {
+                return ProgramCard(
+                  onTab: () {},
+                  programImage: programList[index].programImage,
+                  programName: programList[index].programName,
+                  programDesc: programList[index].programDesc,
+                  rating: programList[index].rating,
+                  duration: programList[index].expectedTime,
+                  label:
+                      Label(labelName: programList[index].labels![0].labelName),
+                  createdAt: DateTime.now().toString(),
+                  actionButton: Theme(
+                    data: Theme.of(context).copyWith(
+                      splashFactory: NoSplash.splashFactory,
+                    ),
+                    child: PopupMenuButton(
+                      elevation: 1,
+                      shadowColor: Colors.black38,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      padding: const EdgeInsets.all(0),
+                      icon: CircleButton(
+                        icon: CustomIcon(
+                          icon: AppIcon.menu_icon,
+                          iconColor: AppColors.description,
+                        ),
+                      ),
+                      itemBuilder: (context) => [
+                        // Edit program
+                        PopupMenuItem(
+                          onTap: () => context.pushNamed(
+                            Routes.programCreatePage,
+                            extra: PROGRAMFORMMODE.edit,
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            child: Row(
+                              children: [
+                                Text('Edit'),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        // Delete program
+                        PopupMenuItem(
+                          onTap: () {
+                            _deleteProgramBloc.add(
+                              DeleteProgramEvent.onDelete(
+                                programId:
+                                    programList[index].programId.toString(),
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Delete',
+                                  style: TextStyle(color: AppColors.red),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                ),
-                PopupMenuItem(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Row(
-                      children: [
-                        Text('Delete', style: TextStyle(color: AppColors.red)),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
+                );
+              },
+            );
+
+          case UserProgramStateError():
+            return const SizedBox();
+
+          default:
+            return const SizedBox();
+        }
       },
     );
   }
