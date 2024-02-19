@@ -36,4 +36,9 @@ abstract class ProgramApiService {
   Future<HttpResponse<BaseDataResponse<ProgramModel>>> createProgram(
     @Body() CreateProgramRequest requestBody,
   );
+
+  @DELETE('/v1/programs/{id}')
+  Future<HttpResponse<BaseDataResponse>> deleteProgram(
+    @Path('id') String programId,
+  );
 }

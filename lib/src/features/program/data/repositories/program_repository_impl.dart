@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/bases/base_data.dart';
 import '../../../../core/bases/base_data_response.dart';
@@ -15,6 +18,8 @@ import '../models/request/create_program_request.dart';
 import '../models/request/filter_program_request.dart';
 import '../models/request/search_program_request.dart';
 import '../sources/api/program_api_service.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as p;
 
 class ProgramRepositoryImpl implements ProgramRepository {
   ProgramRepositoryImpl(this._programApiService);
@@ -110,12 +115,26 @@ class ProgramRepositoryImpl implements ProgramRepository {
   }
 
   @override
-  Future<DataState<Program>> createProgram(ProgramCreate program) async {
+  Future<BaseDataResponse<Program>> createProgram(ProgramCreate program) async {
     try {
+      // Directory appDocDir = await getApplicationDocumentsDirectory();
+      // String filePath = '${appDocDir.absolute.path}/${program.imagePath}';
+      final path =
+          p.basename(program.imagePath!).replaceFirst('image_picker_', '');
+
+      final file = await File(program.imagePath!).create();
+      final firebaseStorage = FirebaseStorage.instance;
+      final snapshot = await firebaseStorage
+          .ref()
+          .child('media/program/$path')
+          .putFile(file);
+
+      final downloadUrl = await snapshot.ref.getDownloadURL();
+
       final requestBody = CreateProgramRequest(
         programName: program.programName,
         programDesc: program.programDescription,
-        mediaUrl: 'fdskfdsjfk;sjdklfks;l',
+        mediaUrl: downloadUrl,
         expectedTime: program.expectedTime,
         tasks: AppCache.programTaskCreateList
             .map((e) => e.taskToTaskRequest())
@@ -125,18 +144,55 @@ class ProgramRepositoryImpl implements ProgramRepository {
             .toList(),
       );
 
-      print(requestBody.programDesc);
+      final res = await _programApiService.createProgram(requestBody);
 
-      final httpResponse = await _programApiService.createProgram(requestBody);
+      final programRes = res.data.data!.programToEntity();
 
-      if (httpResponse.response.statusCode == HttpStatus.created) {
-        return DataSuccess(Program());
-      } else {
-        return DataFailed(BaseDataResponse());
-      }
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: programRes,
+        error: res.data.error,
+      );
+
+      return data;
     } on DioException catch (e) {
-      log(e.message.toString());
-      return DataFailed(BaseDataResponse());
+      final data = jsonDecode(e.response.toString());
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
+
+  // Delete program
+  @override
+  Future<BaseDataResponse> deleteProgram(String programId) async {
+    try {
+      final res = await _programApiService.deleteProgram(programId);
+
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: null,
+        error: res.data.error,
+      );
+      return data;
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
     }
   }
 }
