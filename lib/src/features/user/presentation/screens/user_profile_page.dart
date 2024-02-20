@@ -312,6 +312,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     programList[index].programId.toString(),
                               ),
                             );
+
+                            _userProgramBloc
+                                .add(const UserProgramEvent.started());
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
