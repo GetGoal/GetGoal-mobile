@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 116 (58 per locale)
+/// Strings: 118 (59 per locale)
 ///
-/// Built on 2024-02-19 at 20:50 UTC
+/// Built on 2024-02-20 at 09:21 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -183,6 +183,7 @@ class _StringsTaskEn {
 	String get task_status_to_do => 'To-do';
 	String get task_status_done => 'Done';
 	String get empty_task => 'No tasks';
+	String get empty_task_todo => 'Wow! There aren\'t any tasks left to do.\nGreat job! <3';
 	String get empty_task_done => 'Nothing done';
 }
 
@@ -367,6 +368,7 @@ class _StringsTaskTh implements _StringsTaskEn {
 	@override String get task_status_to_do => 'รายการที่ต้องทำ';
 	@override String get task_status_done => 'รายการที่ทำสำเร็จ';
 	@override String get empty_task => 'ไม่มีรายการที่ต้องทำ';
+	@override String get empty_task_todo => 'สุดยอด! ไม่มีรายการที่ต้องทำแล้ว.\nเก่งมาก! <3';
 	@override String get empty_task_done => 'ไม่มีรายการที่ทำเสร็จ';
 }
 
@@ -505,6 +507,7 @@ extension on Translations {
 			case 'task.task_status_to_do': return 'To-do';
 			case 'task.task_status_done': return 'Done';
 			case 'task.empty_task': return 'No tasks';
+			case 'task.empty_task_todo': return 'Wow! There aren\'t any tasks left to do.\nGreat job! <3';
 			case 'task.empty_task_done': return 'Nothing done';
 			case 'user_profile.display_your_program': return 'Your program';
 			case 'user_profile.display_save_program': return 'Save';
@@ -571,6 +574,7 @@ extension on _StringsTh {
 			case 'task.task_status_to_do': return 'รายการที่ต้องทำ';
 			case 'task.task_status_done': return 'รายการที่ทำสำเร็จ';
 			case 'task.empty_task': return 'ไม่มีรายการที่ต้องทำ';
+			case 'task.empty_task_todo': return 'สุดยอด! ไม่มีรายการที่ต้องทำแล้ว.\nเก่งมาก! <3';
 			case 'task.empty_task_done': return 'ไม่มีรายการที่ทำเสร็จ';
 			case 'user_profile.display_your_program': return 'โปรแกรมของฉัน';
 			case 'user_profile.display_save_program': return 'บันทึก';

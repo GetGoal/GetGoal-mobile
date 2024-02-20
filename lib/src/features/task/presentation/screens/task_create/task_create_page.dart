@@ -409,7 +409,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
           startTime: '${_selectedDate}T${_selectedTime}Z',
           isSetNotification: _selectedReminder != 'None' ? 1 : 0,
           timeBeforeNotify: _selectedReminder != 'None'
-              ? int.parse(_taskRemiderInputController.text.split(' ')[0])
+              ? int.parse(_selectedReminder.split(' ')[0])
               : 0,
         );
         if (_formKey.currentState!.validate()) {
