@@ -171,7 +171,7 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
             onTap: () {
               _taskDetailBloc
                   .add(TaskDetailEvent.onTappedDelete(taskId: taskId));
-              context.pop();
+              context.pop(true);
             },
           ),
           const SizedBox(height: 20),

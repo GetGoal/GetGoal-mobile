@@ -158,13 +158,22 @@ class _HomePageState extends State<HomePage> {
                       taskName: tasks[index].taskName,
                       taskDescription: tasks[index].taskDescription,
                       startTime: tasks[index].startTime,
-                      ontap: () {
-                        context.pushNamed(
+                      ontap: () async {
+                        bool? isRefreash = await context.pushNamed(
                           Routes.taskDetailPage,
                           pathParameters: {
                             'id': tasks[index].taskId.toString(),
                           },
                         );
+                        if (isRefreash!) {
+                          _todoBloc.add(
+                            TodoEvent.started(
+                              DateTime.parse(
+                                tasks[index].startTime.toString(),
+                              ),
+                            ),
+                          );
+                        }
                       },
                       onEdit: () async {
                         bool? isRefreash = await context.pushNamed(
