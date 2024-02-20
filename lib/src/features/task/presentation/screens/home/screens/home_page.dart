@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: Center(
                   child: Text(
-                    "Wow! There aren't any tasks left to do.\nGreat job! <3",
+                    Translations.of(context).task.empty_task_todo,
                     style: body1().copyWith(color: AppColors.description),
                     textAlign: TextAlign.center,
                   ),
