@@ -7,12 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:888666473575:android:01e65072f14303034fc0c2",
+        "mobilesdk_app_id": "1:888666473575:android:ac1d364337ad98c44fc0c2",
         "android_client_info": {
-          "package_name": "com.example.getgoal.prod"
+          "package_name": "com.example.getgoal.dev"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "888666473575-bip45lct6f05hjne35tbl9a4l0lta3f7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.getgoal.dev",
+            "certificate_hash": "f236a6861dab2736dba546b4dc04a388228edc08"
+          }
+        },
+        {
+          "client_id": "888666473575-dbt7o1qgcarori859esbam10qmlatcla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAcjHNyPexEsYuG4-2A9XLocbW-BkNvNFY"
@@ -20,7 +33,63 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888666473575-dbt7o1qgcarori859esbam10qmlatcla.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "888666473575-aiss404ol0dhvuvmts9l19jf46k8u9ta.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.getgoalMobile.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888666473575:android:01e65072f14303034fc0c2",
+        "android_client_info": {
+          "package_name": "com.example.getgoal.prod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888666473575-c5j571gpl3nlrdq3550dnsgdiv6d1qat.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.getgoal.prod",
+            "certificate_hash": "c60a6c99980a3c4edc6a18e611f125c5d9399bc2"
+          }
+        },
+        {
+          "client_id": "888666473575-dbt7o1qgcarori859esbam10qmlatcla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcjHNyPexEsYuG4-2A9XLocbW-BkNvNFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888666473575-dbt7o1qgcarori859esbam10qmlatcla.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "888666473575-aiss404ol0dhvuvmts9l19jf46k8u9ta.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.getgoalMobile.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }
