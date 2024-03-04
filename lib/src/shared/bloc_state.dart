@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/di.dart';
 
+import '../features/auth/presentation/screens/login/bloc/google_login/google_sign_in_bloc.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
@@ -64,6 +65,10 @@ final verifyAccountBloc = BlocProvider(
 
 final loginBloc = BlocProvider(
   create: (context) => getIt<LoginBloc>(),
+);
+
+final googleSignInBloc = BlocProvider(
+  create: (context) => getIt<GoogleSignInBloc>(),
 );
 
 final logoutBloc = BlocProvider(

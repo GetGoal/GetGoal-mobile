@@ -37,6 +37,7 @@ class RouteConfig {
         builder: (context, state) => MultiBlocProvider(
           providers: [
             loginBloc,
+            googleSignInBloc,
           ],
           child: const LoginPage(),
         ),
