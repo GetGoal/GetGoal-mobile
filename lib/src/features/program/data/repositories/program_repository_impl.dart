@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/bases/base_data.dart';
 import '../../../../core/bases/base_data_response.dart';
@@ -42,7 +40,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
       } else {
         return DataFailed(BaseDataResponse());
       }
-    } on DioException catch (e) {
+    } on DioException {
       return DataFailed(BaseDataResponse());
     }
   }
@@ -83,7 +81,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
       } else {
         return DataFailed(BaseDataResponse());
       }
-    } on DioException catch (e) {
+    } on DioException {
       return DataFailed(BaseDataResponse());
     }
   }
@@ -109,7 +107,7 @@ class ProgramRepositoryImpl implements ProgramRepository {
       } else {
         return DataFailed(BaseDataResponse());
       }
-    } on DioException catch (e) {
+    } on DioException {
       return DataFailed(BaseDataResponse());
     }
   }

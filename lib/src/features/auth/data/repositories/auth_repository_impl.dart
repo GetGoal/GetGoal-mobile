@@ -1,22 +1,16 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
-
-import '../../../../core/bases/base_data.dart';
 
 import '../../../../core/bases/base_data_response.dart';
 import '../../../../shared/app_cache.dart';
 import '../../domain/entity/create_user.dart';
 import '../../domain/entity/login_entity.dart';
 import '../../domain/entity/token_entity.dart';
-import '../../domain/entity/verify_user.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../models/request/login_request.dart';
 import '../models/request/register_request.dart';
 import '../models/request/verify_request.dart';
-import '../models/response/login_success_response.dart';
 import '../sources/api/auth_api_service.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

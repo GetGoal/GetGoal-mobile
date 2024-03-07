@@ -2,26 +2,19 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../config/route_config.dart';
-import '../../../../../core/di.dart';
 import '../../../../../shared/app_cache.dart';
-import '../../../../../shared/bloc_state.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
-import '../../../../task/domain/models/task.dart';
 import '../../../../task/presentation/enum/task_form_mode_enum.dart';
 import '../../../../task/presentation/screens/task_create/task_create_page.dart';
 import '../../../../task/presentation/screens/task_planning/widgets/task_planning_card_widget.dart';
-import '../../../domain/models/program_create.dart';
-import '../../../domain/usecases/program/create_program_usecase.dart';
-import '../../enum/program_form_mode.enum.dart';
 import 'bloc/program_create/program_create_bloc.dart';
 
 class ProgramTaskCreate extends StatefulWidget {

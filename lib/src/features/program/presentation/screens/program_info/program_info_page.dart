@@ -40,7 +40,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
       (state) {
         if (state is ProgramInfoStateLoadedSuccess) {
           setState(() {
-            tasks = state.program!.tasks!;
+            tasks = state.program.tasks!;
           });
         }
       },
@@ -63,7 +63,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
           case ProgramInfoStateLoading():
             return const LoadingScreen();
           case ProgramInfoStateLoadedSuccess(:final program):
-            return _programInfoLoadedSuccess(program!);
+            return _programInfoLoadedSuccess(program);
           case ProgramInfoStateError():
             return _programInfoError();
           default:

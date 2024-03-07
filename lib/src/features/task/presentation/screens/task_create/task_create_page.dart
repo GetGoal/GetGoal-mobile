@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../config/i18n/strings.g.dart';
-import '../../../../../config/route_config.dart';
 import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/task_validation_mixin.dart';
@@ -18,7 +17,6 @@ import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../../shared/widgets/text_field/dropdown_input_field.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
-import '../../../../program/presentation/screens/program_create/program_task_create.dart';
 import '../../../domain/models/task.dart';
 import '../../bloc/task_create/task_create_bloc.dart';
 import '../../enum/task_form_mode_enum.dart';

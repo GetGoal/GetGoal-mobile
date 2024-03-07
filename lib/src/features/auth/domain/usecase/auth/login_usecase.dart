@@ -1,4 +1,3 @@
-import '../../../../../core/bases/base_data.dart';
 import '../../../../../core/bases/base_data_response.dart';
 import '../../../../../core/bases/base_usecase.dart';
 

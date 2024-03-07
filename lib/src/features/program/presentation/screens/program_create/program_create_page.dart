@@ -20,9 +20,7 @@ import '../../../../../shared/widgets/text_field/upload_file_input.dart';
 import '../../../domain/models/program.dart';
 import '../../../domain/models/program_create.dart';
 import '../../enum/program_form_mode.enum.dart';
-import 'package:path/path.dart' as p;
 
-import 'program_task_create.dart';
 
 class ProgramCreatePage extends StatefulWidget {
   const ProgramCreatePage({

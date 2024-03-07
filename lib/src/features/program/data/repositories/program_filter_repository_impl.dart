@@ -29,7 +29,7 @@ class ProgramFilterRepositoryImpl implements ProgramFilterRepository {
       } else {
         return DataFailed(BaseDataResponse());
       }
-    } on DioException catch (e) {
+    } on DioException {
       return DataFailed(BaseDataResponse());
     }
   }
