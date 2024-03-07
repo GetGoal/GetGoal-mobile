@@ -14,7 +14,7 @@ import 'src/core/network.dart';
 
 void main() async {
   AppEnvironment.setupEnv(Environment.prod);
-  await initializeDependencies();
+  await initServiceLocator();
   WidgetsFlutterBinding.ensureInitialized();
 
   // START: Initialize Firebase

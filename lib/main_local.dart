@@ -22,13 +22,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await FirebaseAppCheck.instance.activate(
     androidProvider: AndroidProvider.debug,
     appleProvider: AppleProvider.debug,
   );
   // END: Initialize Firebase
 
-  await initializeDependencies();
+  await initServiceLocator();
   HttpOverrides.global = MyHttpOverrides();
   LocaleSettings.setLocale(await LocaleConfig.getCurrentLocale());
   runApp(

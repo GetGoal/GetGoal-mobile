@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 
+import 'env.dart';
 import 'secure_store.dart';
 
 Future<String> refreshToken() async {
   return 'your_new_access_token';
 }
 
-Dio buildClient(String baseUrl) {
-  final dio = Dio()..options = BaseOptions(baseUrl: baseUrl);
+Dio buildClient() {
+  final dio = Dio()..options = BaseOptions(baseUrl: AppEnvironment.baseApiUrl);
 
   dio.interceptors.add(
     InterceptorsWrapper(
