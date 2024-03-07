@@ -62,19 +62,19 @@ Future<void> initServiceLocator() async {
   getIt.registerSingleton<Dio>(dio);
 
   // Initialize API services
-  await initApiService();
+  await _initApiService();
 
   // Initialize repositories
-  await initRepositories();
+  await _initRepositories();
 
   // Initialize use case
-  await initUsecases();
+  await _initUsecases();
 
   // Initialize Bloc
-  await initBlocs();
+  await _initBlocs();
 }
 
-Future<void> initApiService() async {
+Future<void> _initApiService() async {
   // Initialize API service for program feature
   getIt.registerLazySingleton<ProgramFilterApiService>(
     () => ProgramFilterApiService(getIt()),
@@ -99,7 +99,7 @@ Future<void> initApiService() async {
   );
 }
 
-Future<void> initRepositories() async {
+Future<void> _initRepositories() async {
   // Initialize repository for program feature
   getIt.registerLazySingleton<ProgramFilterRepository>(
     () => ProgramFilterRepositoryImpl(getIt()),
@@ -124,7 +124,7 @@ Future<void> initRepositories() async {
   );
 }
 
-Future<void> initUsecases() async {
+Future<void> _initUsecases() async {
   // Initialize for program feature
   getIt.registerLazySingleton<GetProgramFilterUsecase>(
     () => GetProgramFilterUsecase(getIt()),
@@ -194,7 +194,7 @@ Future<void> initUsecases() async {
   );
 }
 
-Future<void> initBlocs() async {
+Future<void> _initBlocs() async {
   // Initialize Bloc for main page
   getIt.registerFactory<MainPageBloc>(
     () => MainPageBloc(),
