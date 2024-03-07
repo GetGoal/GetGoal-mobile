@@ -104,8 +104,6 @@ class AuthRepositoryImpl implements AuthRepository {
         password: loginData.password,
       );
 
-      log(requestBody.password.toString());
-
       final res = await _authApiService.login(requestBody);
 
       final token = TokenEntity(
