@@ -41,13 +41,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return data;
     } on DioException catch (e) {
       final data = jsonDecode(e.response.toString());
-      var a = BaseDataResponse(
-        code: data['code'],
-        message: data['message'],
-        count: data['count'],
-        data: data['data'],
-        error: data['error'],
-      );
+
       return BaseDataResponse(
         code: data['code'],
         message: data['message'],

@@ -92,7 +92,7 @@ class TaskCreateBloc extends Bloc<TaskCreateEvent, TaskCreateState> {
         timeBeforeNotify: event.task.timeBeforeNotify,
       );
 
-      final res = await _updateTaskUsecase.call(
+      await _updateTaskUsecase.call(
         params: task,
         taskId: event.taskId,
       );
