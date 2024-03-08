@@ -12,7 +12,7 @@ part of 'delete_program_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DeleteProgramEvent {
@@ -104,7 +104,7 @@ class _$DeleteProgramEventStartedImpl implements DeleteProgramEventStarted {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteProgramEventStartedImpl);
@@ -228,7 +228,7 @@ class _$DeleteProgramEventOnDeleteImpl implements DeleteProgramEventOnDelete {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteProgramEventOnDeleteImpl &&
@@ -421,7 +421,7 @@ class _$DeleteProgramStateInitialImpl implements DeleteProgramStateInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteProgramStateInitialImpl);
@@ -539,7 +539,7 @@ class _$DeleteProgramStateLoadingImpl implements DeleteProgramStateLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteProgramStateLoadingImpl);
@@ -657,7 +657,7 @@ class _$DeleteProgramStateDeletedImpl implements DeleteProgramStateDeleted {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteProgramStateDeletedImpl);
@@ -794,7 +794,7 @@ class _$DeleteProgramStateDeleteErrorImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteProgramStateDeleteErrorImpl &&

@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-import '../../../domain/models/program.dart';
+import '../../../domain/entities/program.dart';
 import '../../../domain/usecases/program/get_program_by_id_usecase.dart';
 
 part 'program_info_event.dart';

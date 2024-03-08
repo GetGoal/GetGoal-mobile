@@ -1,6 +1,6 @@
 import '../../../../../core/bases/base_data.dart';
 import '../../../../../core/bases/base_usecase.dart';
-import '../../models/program_filter.dart';
+import '../../entities/program_filter.dart';
 import '../../repositories/program_filter_repository.dart';
 
 class GetProgramFilterUsecase

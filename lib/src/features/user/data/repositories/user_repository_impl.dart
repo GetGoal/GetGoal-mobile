@@ -4,8 +4,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/bases/base_data_response.dart';
 import '../../../program/data/mappers/program_mapper.dart';
-import '../../../program/domain/models/program.dart';
-
+import '../../../program/domain/entities/program.dart';
 import '../../domain/entities/user_profile_entity.dart';
 import '../../domain/repositories/user_repository.dart';
 
@@ -67,7 +66,6 @@ class UserRepositoryImpl implements UserRepository {
     } on DioException catch (e) {
       final data = jsonDecode(e.response.toString());
 
-      print(data['code']);
       return BaseDataResponse(
         code: data['code'],
         message: data['message'],

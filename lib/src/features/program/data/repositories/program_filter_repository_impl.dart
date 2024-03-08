@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/bases/base_data.dart';
 import '../../../../core/bases/base_data_response.dart';
-import '../../domain/models/program_filter.dart';
+import '../../domain/entities/program_filter.dart';
 import '../../domain/repositories/program_filter_repository.dart';
 import '../mappers/program_filter_mapper.dart';
 import '../sources/api/program_filter_api_service.dart';

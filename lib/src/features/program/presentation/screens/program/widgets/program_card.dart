@@ -6,7 +6,7 @@ import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/widgets/image/cache_image.dart';
-import '../../../../domain/models/program.dart';
+import '../../../../domain/entities/program.dart';
 import 'program_label.dart';
 
 class ProgramCard extends StatelessWidget {

@@ -3,21 +3,21 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as p;
 
 import '../../../../core/bases/base_data.dart';
 import '../../../../core/bases/base_data_response.dart';
 import '../../../../shared/app_cache.dart';
 import '../../../task/data/mappers/task_mapper.dart';
-import '../../domain/models/program.dart';
-import '../../domain/models/program_create.dart';
+import '../../domain/entities/program.dart';
+import '../../domain/entities/program_create.dart';
 import '../../domain/repositories/program_repository.dart';
 import '../mappers/program_mapper.dart';
 import '../models/request/create_program_request.dart';
 import '../models/request/filter_program_request.dart';
 import '../models/request/search_program_request.dart';
 import '../sources/api/program_api_service.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:path/path.dart' as p;
 
 class ProgramRepositoryImpl implements ProgramRepository {
   ProgramRepositoryImpl(this._programApiService);

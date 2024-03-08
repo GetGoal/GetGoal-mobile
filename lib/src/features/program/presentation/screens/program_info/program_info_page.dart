@@ -14,7 +14,7 @@ import '../../../../../shared/widgets/image/cache_image.dart';
 import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../task/domain/models/task.dart';
-import '../../../domain/models/program.dart';
+import '../../../domain/entities/program.dart';
 import '../../bloc/program_info/program_info_bloc.dart';
 import '../program/widgets/program_label.dart';
 import 'widgets/task_card_widget.dart';

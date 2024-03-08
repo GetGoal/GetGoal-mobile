@@ -12,7 +12,7 @@ import '../../../../shared/widgets/button/circle_button.dart';
 import '../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../shared/widgets/image/cache_image.dart';
-import '../../../program/domain/models/program.dart';
+import '../../../program/domain/entities/program.dart';
 import '../../../program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../../../program/presentation/enum/program_form_mode.enum.dart';
 import '../../../program/presentation/screens/program/widgets/program_card.dart';

@@ -17,10 +17,9 @@ import '../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import '../../../../../shared/widgets/text_field/upload_file_input.dart';
-import '../../../domain/models/program.dart';
-import '../../../domain/models/program_create.dart';
+import '../../../domain/entities/program.dart';
+import '../../../domain/entities/program_create.dart';
 import '../../enum/program_form_mode.enum.dart';
-
 
 class ProgramCreatePage extends StatefulWidget {
   const ProgramCreatePage({
