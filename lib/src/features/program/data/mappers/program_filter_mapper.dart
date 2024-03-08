@@ -1,4 +1,4 @@
-import '../../domain/models/program_filter.dart';
+import '../../domain/entities/program_filter.dart';
 import '../models/response/program_filter_response.dart';
 
 extension ProgramFilterMapper on Label {
