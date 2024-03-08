@@ -5,13 +5,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'src/app.dart';
 import 'src/config/firebase/dev/firebase_options.dart';
 import 'src/config/i18n/strings.g.dart';
 import 'src/config/local_config.dart';
 import 'src/core/di.dart';
 import 'src/core/env.dart';
 import 'src/core/network.dart';
+import 'src/get_goal_app.dart';
 
 AppLocale? currentLocale;
 void main() async {

@@ -5,4 +5,10 @@ class AppCache {
   static late String userEmail;
   static late ProgramCreate programCreate;
   static List<Task> programTaskCreateList = [];
+
+  static void removeAllAppCacheData() {
+    userEmail = '';
+    programCreate = const ProgramCreate();
+    programTaskCreateList = [];
+  }
 }
