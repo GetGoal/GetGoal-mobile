@@ -10,7 +10,7 @@ import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/themes/spacing.dart';
 import '../../../../../landing/presentation/bloc/main_page/main_page_bloc.dart';
-import '../../../../domain/models/task.dart';
+import '../../../../domain/entities/task.dart';
 import '../../../enum/task_form_mode_enum.dart';
 import '../../task_create/task_create_page.dart';
 import '../bloc/date_timeline/date_timeline_bloc.dart';

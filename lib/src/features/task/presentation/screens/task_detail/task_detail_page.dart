@@ -10,7 +10,7 @@ import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/error_screen_widget.dart';
 import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
-import '../../../domain/models/task.dart';
+import '../../../domain/entities/task.dart';
 import '../../bloc/task_detail/task_detail_bloc.dart';
 
 class TaskDetailPage extends StatefulWidget {

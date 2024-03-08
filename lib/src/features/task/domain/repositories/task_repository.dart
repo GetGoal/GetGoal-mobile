@@ -1,5 +1,5 @@
 import '../../../../core/bases/base_data.dart';
-import '../models/task.dart';
+import '../entities/task.dart';
 
 abstract class TaskRepository {
   // Get all To-do list from user by date

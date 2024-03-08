@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-import '../../domain/models/task.dart';
+import '../../domain/entities/task.dart';
 import '../models/request/create_join_program_task_user_request.dart';
 import '../models/request/task_request.dart';
 import '../models/response/task_response.dart';

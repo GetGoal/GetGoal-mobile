@@ -1,5 +1,5 @@
-import '../features/program/domain/models/program_create.dart';
-import '../features/task/domain/models/task.dart';
+import '../features/program/domain/entities/program_create.dart';
+import '../features/task/domain/entities/task.dart';
 
 class AppCache {
   static late String userEmail;

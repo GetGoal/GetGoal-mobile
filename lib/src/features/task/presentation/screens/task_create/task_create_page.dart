@@ -17,7 +17,7 @@ import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../../shared/widgets/text_field/dropdown_input_field.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
-import '../../../domain/models/task.dart';
+import '../../../domain/entities/task.dart';
 import '../../bloc/task_create/task_create_bloc.dart';
 import '../../enum/task_form_mode_enum.dart';
 
