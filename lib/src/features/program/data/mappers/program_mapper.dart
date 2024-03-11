@@ -1,5 +1,5 @@
 import '../../../task/data/mappers/task_mapper.dart';
-import '../../domain/models/program.dart';
+import '../../domain/entities/program.dart';
 import '../models/response/program_response.dart';
 
 extension ProgramMapper on ProgramModel {

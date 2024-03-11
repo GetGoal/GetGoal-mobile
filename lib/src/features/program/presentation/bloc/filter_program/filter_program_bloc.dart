@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../domain/models/program_filter.dart';
+import '../../../domain/entities/program_filter.dart';
 import '../../../domain/usecases/label/get_program_filter_usecase.dart';
 
 part 'filter_program_bloc.freezed.dart';

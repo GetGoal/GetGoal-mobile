@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../../../../core/bases/base_data.dart';
-import '../../../../../../../core/bases/base_data_response.dart';
 import '../../../../../domain/entity/create_user.dart';
 import '../../../../../domain/usecase/auth/create_account_usecase.dart';
 

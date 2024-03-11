@@ -4,17 +4,17 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'src/app.dart';
 import 'src/config/firebase/qa/firebase_options.dart';
 import 'src/config/i18n/strings.g.dart';
 import 'src/config/local_config.dart';
 import 'src/core/di.dart';
 import 'src/core/env.dart';
 import 'src/core/network.dart';
+import 'src/get_goal_app.dart';
 
 void main() async {
   AppEnvironment.setupEnv(Environment.qa);
-  await initializeDependencies();
+  await initServiceLocator();
   WidgetsFlutterBinding.ensureInitialized();
 
   // START: Initialize Firebase

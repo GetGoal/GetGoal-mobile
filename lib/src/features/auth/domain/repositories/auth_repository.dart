@@ -1,4 +1,3 @@
-import '../../../../core/bases/base_data.dart';
 import '../../../../core/bases/base_data_response.dart';
 import '../entity/create_user.dart';
 import '../entity/login_entity.dart';

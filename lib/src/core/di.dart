@@ -20,17 +20,11 @@ import '../features/program/domain/repositories/program_filter_repository.dart';
 import '../features/program/domain/repositories/program_repository.dart';
 import '../features/program/domain/usecases/label/get_program_filter_usecase.dart';
 import '../features/program/domain/usecases/program/create_program_usecase.dart';
-import '../features/program/domain/usecases/program/delete_program_usecase.dart';
-import '../features/program/domain/usecases/program/get_program_by_id_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_search_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_usecase.dart';
-import '../features/program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
-
 import '../features/program/presentation/bloc/program/program_bloc.dart';
-import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
-import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/task/data/repositories/task_repository_impl.dart';
 import '../features/task/data/sources/api/task_api_service.dart';
@@ -58,112 +52,203 @@ import '../features/user/presentation/screens/bloc/logout/logout_bloc.dart';
 import '../features/user/presentation/screens/bloc/user_profile/user_profile_bloc.dart';
 import '../features/user/presentation/screens/bloc/user_program/user_program_bloc.dart';
 import 'dio_client.dart';
-import 'env.dart';
 
 final getIt = GetIt.instance;
 
-Future<void> initializeDependencies() async {
-  final dio = buildClient(AppEnvironment.baseApiUrl);
+Future<void> initServiceLocator() async {
+  final dio = buildClient();
 
-  //Dio
-  getIt.registerSingleton<Dio>(Dio());
+  // Register Dio
+  getIt.registerSingleton<Dio>(dio);
 
-  getIt.registerFactory<MainPageBloc>(
-    () => MainPageBloc(),
-  );
+  // Initialize API services
+  await _initApiService();
 
-  //Program feature
+  // Initialize repositories
+  await _initRepositories();
+
+  // Initialize use case
+  await _initUsecases();
+
+  // Initialize Bloc
+  await _initBlocs();
+}
+
+Future<void> _initApiService() async {
+  // Initialize API service for program feature
   getIt.registerLazySingleton<ProgramFilterApiService>(
-    () => ProgramFilterApiService(dio),
+    () => ProgramFilterApiService(getIt()),
   );
+  getIt.registerLazySingleton<ProgramApiService>(
+    () => ProgramApiService(getIt()),
+  );
+
+  // Initialize API service for task feature
+  getIt.registerLazySingleton<TaskApiService>(
+    () => TaskApiService(getIt()),
+  );
+
+  // Initialize API service for authentication feature
+  getIt.registerLazySingleton<AuthApiService>(
+    () => AuthApiService(getIt()),
+  );
+
+  // Initialize API service for user feature
+  getIt.registerLazySingleton<UserApiService>(
+    () => UserApiService(getIt()),
+  );
+}
+
+Future<void> _initRepositories() async {
+  // Initialize repository for program feature
   getIt.registerLazySingleton<ProgramFilterRepository>(
     () => ProgramFilterRepositoryImpl(getIt()),
   );
-  getIt.registerLazySingleton<GetProgramFilterUsecase>(
-    () => GetProgramFilterUsecase(getIt()),
-  );
-  getIt.registerFactory<FilterProgramBloc>(
-    () => FilterProgramBloc(getIt()),
-  );
-
-  getIt.registerLazySingleton<ProgramApiService>(() => ProgramApiService(dio));
   getIt.registerLazySingleton<ProgramRepository>(
     () => ProgramRepositoryImpl(getIt()),
+  );
+
+  // Initialize repository for task feature
+  getIt.registerLazySingleton<TaskRepository>(
+    () => TaskRepositoryImpl(getIt()),
+  );
+
+  // Initialize repository for authentication feature
+  getIt.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(getIt()),
+  );
+
+  // Initialize repository for user feature
+  getIt.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(getIt()),
+  );
+}
+
+Future<void> _initUsecases() async {
+  // Initialize for program feature
+  getIt.registerLazySingleton<GetProgramFilterUsecase>(
+    () => GetProgramFilterUsecase(getIt()),
   );
   getIt.registerLazySingleton<GetProgramUsecase>(
     () => GetProgramUsecase(getIt()),
   );
-  getIt.registerLazySingleton(() => GetProgramByLabelNameUsecase(getIt()));
-  getIt.registerLazySingleton(() => GetProgramBySearchUsecase(getIt()));
-  getIt.registerLazySingleton(() => CreateProgramUsecase(getIt()));
+  getIt.registerLazySingleton(
+    () => GetProgramByLabelNameUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => GetProgramBySearchUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => CreateProgramUsecase(getIt()),
+  );
 
+// Initialize for task feature
+  getIt.registerLazySingleton(
+    () => GetTaskByUserUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => GetTaskByProgramIdUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => JoinProgramUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => ChangeTaskStatusToDoneUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => ChangeTaskStatusToNotDoneUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => CreateTaskUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => DeleteTaskUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => GetTaskByTaskIdUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => UpdateTaskUsecase(getIt()),
+  );
+
+  // Initialize usecase for authentication feature
+  getIt.registerLazySingleton(
+    () => CreateAccountUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => VerfifyAccountUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => LoginUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => LogoutUsecase(getIt()),
+  );
+
+  // Initialize usecase for user feature
+  getIt.registerLazySingleton(
+    () => GetUserProgramUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => GetUserProfileUsecase(getIt()),
+  );
+}
+
+Future<void> _initBlocs() async {
+  // Initialize Bloc for main page
+  getIt.registerFactory<MainPageBloc>(
+    () => MainPageBloc(),
+  );
+
+  // Initialize Bloc for program feature
+  getIt.registerFactory<FilterProgramBloc>(
+    () => FilterProgramBloc(getIt()),
+  );
   getIt.registerFactory<ProgramBloc>(
     () => ProgramBloc(getIt(), getIt(), getIt()),
   );
 
-  getIt.registerLazySingleton(() => GetProgramByIdUsecase(getIt()));
-  getIt.registerFactory<ProgramInfoBloc>(() => ProgramInfoBloc(getIt()));
-
-  getIt.registerFactory<DeleteProgramBloc>(() => DeleteProgramBloc(getIt()));
-  getIt.registerLazySingleton(() => DeleteProgramUsecase(getIt()));
-
-  getIt.registerFactory<CreateProgramBloc>(() => CreateProgramBloc(getIt()));
-
-  //to-do feature
-  getIt.registerLazySingleton<TaskApiService>(() => TaskApiService(dio));
-  getIt.registerLazySingleton<TaskRepository>(
-    () => TaskRepositoryImpl(getIt()),
+  // Initialize Bloc for task feature
+  getIt.registerFactory<DateTimelineBloc>(
+    () => DateTimelineBloc(),
   );
-  getIt.registerFactory<DateTimelineBloc>(() => DateTimelineBloc());
-  getIt.registerFactory<TodoBloc>(() => TodoBloc(getIt(), getIt(), getIt()));
+  getIt.registerFactory<TodoBloc>(
+    () => TodoBloc(getIt(), getIt(), getIt()),
+  );
   getIt.registerFactory<TaskPlanningBloc>(
     () => TaskPlanningBloc(getIt(), getIt()),
   );
   getIt.registerFactory<TaskCreateBloc>(
-    () => TaskCreateBloc(
-      getIt(),
-      getIt(),
-      getIt(),
-    ),
+    () => TaskCreateBloc(getIt(), getIt(), getIt()),
   );
-  getIt.registerFactory<TaskDetailBloc>(() => TaskDetailBloc(getIt(), getIt()));
+  getIt.registerFactory<TaskDetailBloc>(
+    () => TaskDetailBloc(getIt(), getIt()),
+  );
 
-  getIt.registerLazySingleton(() => GetTaskByUserUsecase(getIt()));
-  getIt.registerLazySingleton(() => GetTaskByProgramIdUsecase(getIt()));
-  getIt.registerLazySingleton(() => JoinProgramUsecase(getIt()));
-  getIt.registerLazySingleton(() => ChangeTaskStatusToDoneUsecase(getIt()));
-  getIt.registerLazySingleton(() => ChangeTaskStatusToNotDoneUsecase(getIt()));
-  getIt.registerLazySingleton(() => CreateTaskUsecase(getIt()));
-  getIt.registerLazySingleton(() => DeleteTaskUsecase(getIt()));
-  getIt.registerLazySingleton(() => GetTaskByTaskIdUsecase(getIt()));
-  getIt.registerLazySingleton(() => UpdateTaskUsecase(getIt()));
-
+  // Initialize Bloc for setting feature
   getIt.registerFactory<LanguageBloc>(
     () => LanguageBloc(),
   );
 
-  getIt.registerFactory<CreateAccountBloc>(() => CreateAccountBloc(getIt()));
-  getIt.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(AuthApiService(dio)),
+  // Initialize Bloc for authentication feature
+  getIt.registerFactory<CreateAccountBloc>(
+    () => CreateAccountBloc(getIt()),
   );
-  getIt.registerLazySingleton(() => CreateAccountUsecase(getIt()));
-
-  getIt.registerFactory<VerifyAccountBloc>(() => VerifyAccountBloc(getIt()));
-
-  getIt.registerLazySingleton(() => VerfifyAccountUsecase(getIt()));
-
-  getIt.registerFactory<LoginBloc>(() => LoginBloc(getIt()));
-  getIt.registerFactory<LogoutBloc>(() => LogoutBloc(getIt()));
-  getIt.registerLazySingleton(() => LoginUsecase(getIt()));
-  getIt.registerLazySingleton(() => LogoutUsecase(getIt()));
-
-  // User feature
-  getIt.registerLazySingleton<UserRepository>(
-    () => UserRepositoryImpl(UserApiService(dio)),
+  getIt.registerFactory<VerifyAccountBloc>(
+    () => VerifyAccountBloc(getIt()),
   );
-  getIt.registerLazySingleton(() => GetUserProgramUsecase(getIt()));
-  getIt.registerLazySingleton(() => GetUserProfileUsecase(getIt()));
+  getIt.registerFactory<LoginBloc>(
+    () => LoginBloc(getIt()),
+  );
+  getIt.registerFactory<LogoutBloc>(
+    () => LogoutBloc(getIt()),
+  );
 
-  getIt.registerFactory<UserProgramBloc>(() => UserProgramBloc(getIt()));
-  getIt.registerFactory<UserProfileBloc>(() => UserProfileBloc(getIt()));
+  // Initialize Bloc for user feature
+  getIt.registerFactory<UserProgramBloc>(
+    () => UserProgramBloc(getIt()),
+  );
+  getIt.registerFactory<UserProfileBloc>(
+    () => UserProfileBloc(getIt()),
+  );
 }

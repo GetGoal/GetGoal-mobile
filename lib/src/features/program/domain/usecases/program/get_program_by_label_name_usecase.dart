@@ -1,6 +1,6 @@
 import '../../../../../core/bases/base_data.dart';
 import '../../../../../core/bases/base_usecase.dart';
-import '../../models/program.dart';
+import '../../entities/program.dart';
 import '../../repositories/program_repository.dart';
 
 class GetProgramByLabelNameUsecase

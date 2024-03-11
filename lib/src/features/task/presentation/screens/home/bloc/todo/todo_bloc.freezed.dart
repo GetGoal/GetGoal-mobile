@@ -12,7 +12,7 @@ part of 'todo_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TodoEvent {
@@ -161,7 +161,7 @@ class _$TodoEventStartedImpl implements TodoEventStarted {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoEventStartedImpl &&
@@ -322,7 +322,7 @@ class _$TodoEventDateSelectorTappedImpl implements TodoEventDateSelectorTapped {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoEventDateSelectorTappedImpl &&
@@ -493,7 +493,7 @@ class _$TodoEventChangeTaskStatusToDoneImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoEventChangeTaskStatusToDoneImpl &&
@@ -670,7 +670,7 @@ class _$TodoEventChagenTaskStatusToNotDoneImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoEventChagenTaskStatusToNotDoneImpl &&
@@ -893,7 +893,7 @@ class _$TodoStateInitialImpl implements TodoStateInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$TodoStateInitialImpl);
   }
@@ -1014,7 +1014,7 @@ class _$TodoStateLoadingImpl implements TodoStateLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$TodoStateLoadingImpl);
   }
@@ -1176,7 +1176,7 @@ class _$TodoStateLoadedSuccessImpl implements TodoStateLoadedSuccess {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoStateLoadedSuccessImpl &&
@@ -1318,7 +1318,7 @@ class _$TodoStateLoadedEmptyImpl implements TodoStateLoadedEmpty {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoStateLoadedEmptyImpl);
@@ -1440,7 +1440,7 @@ class _$TodoStateErrorImpl implements TodoStateError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$TodoStateErrorImpl);
   }

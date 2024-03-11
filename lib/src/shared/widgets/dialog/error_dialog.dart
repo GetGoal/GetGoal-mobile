@@ -30,7 +30,7 @@ class ErrorDialog extends StatelessWidget {
                 'Close',
                 style: body1().copyWith(color: AppColors.primary),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../domain/models/task.dart';
+import '../../../domain/entities/task.dart';
 import '../../../domain/usecases/task/create_task_usecase.dart';
-import '../../../domain/usecases/task/get_task_by_task_Id_usecase.dart';
+import '../../../domain/usecases/task/get_task_by_task_id_usecase.dart';
 import '../../../domain/usecases/task/update_task_usecase.dart';
 
 part 'task_create_event.dart';
@@ -92,7 +92,7 @@ class TaskCreateBloc extends Bloc<TaskCreateEvent, TaskCreateState> {
         timeBeforeNotify: event.task.timeBeforeNotify,
       );
 
-      final res = await _updateTaskUsecase.call(
+      await _updateTaskUsecase.call(
         params: task,
         taskId: event.taskId,
       );

@@ -13,8 +13,8 @@ import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/image/cache_image.dart';
 import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
-import '../../../../task/domain/models/task.dart';
-import '../../../domain/models/program.dart';
+import '../../../../task/domain/entities/task.dart';
+import '../../../domain/entities/program.dart';
 import '../../bloc/program_info/program_info_bloc.dart';
 import '../program/widgets/program_label.dart';
 import 'widgets/task_card_widget.dart';
@@ -40,7 +40,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
       (state) {
         if (state is ProgramInfoStateLoadedSuccess) {
           setState(() {
-            tasks = state.program!.tasks!;
+            tasks = state.program.tasks!;
           });
         }
       },
@@ -63,7 +63,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
           case ProgramInfoStateLoading():
             return const LoadingScreen();
           case ProgramInfoStateLoadedSuccess(:final program):
-            return _programInfoLoadedSuccess(program!);
+            return _programInfoLoadedSuccess(program);
           case ProgramInfoStateError():
             return _programInfoError();
           default:

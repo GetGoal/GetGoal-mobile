@@ -21,7 +21,7 @@ class _AuthApiService implements AuthApiService {
   @override
   Future<HttpResponse<BaseDataResponse<dynamic>>> register(
       RegisterRequest requestBody) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -54,7 +54,7 @@ class _AuthApiService implements AuthApiService {
   @override
   Future<HttpResponse<BaseDataResponse<dynamic>>> verify(
       VerifyRequest requestBody) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -87,7 +87,7 @@ class _AuthApiService implements AuthApiService {
   @override
   Future<HttpResponse<BaseDataResponse<LoginSuccessResponse>>> login(
       LoginRequest requestBody) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -120,10 +120,10 @@ class _AuthApiService implements AuthApiService {
 
   @override
   Future<HttpResponse<BaseDataResponse<dynamic>>> logout() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<dynamic>>>(Options(
       method: 'POST',

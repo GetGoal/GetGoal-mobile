@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -9,7 +7,7 @@ import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
-import '../../../domain/models/task.dart';
+import '../../../domain/entities/task.dart';
 import '../../bloc/task_planning/task_planning_bloc.dart';
 import 'widgets/task_planning_card_widget.dart';
 

@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../../../../main_qa.dart';
 import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../config/route_config.dart';
-import '../../../../../../core/secure_store.dart';
 import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';

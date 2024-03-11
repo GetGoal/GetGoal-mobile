@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/i18n/strings.g.dart';
@@ -13,8 +12,7 @@ import '../../../../shared/widgets/button/circle_button.dart';
 import '../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../shared/widgets/image/cache_image.dart';
-import '../../../../shared/widgets/loading_screen_widget.dart';
-import '../../../program/domain/models/program.dart';
+import '../../../program/domain/entities/program.dart';
 import '../../../program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../../../program/presentation/enum/program_form_mode.enum.dart';
 import '../../../program/presentation/screens/program/widgets/program_card.dart';

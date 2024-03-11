@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-import '../../../domain/models/task.dart';
+import '../../../domain/entities/task.dart';
 import '../../../domain/usecases/task/get_task_by_program_id.dart';
 import '../../../domain/usecases/task/join_program_usecase.dart';
 

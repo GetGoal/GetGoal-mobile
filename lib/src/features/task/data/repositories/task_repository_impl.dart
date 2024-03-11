@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import '../../../../core/bases/base_data.dart';
 
 import '../../../../core/bases/base_data_response.dart';
-import '../../domain/models/task.dart';
+import '../../domain/entities/task.dart';
 import '../../domain/repositories/task_repository.dart';
 import '../mappers/task_mapper.dart';
 import '../models/request/create_join_program_task_user_request.dart';
@@ -142,8 +142,6 @@ class TaskRepositoryImpl implements TaskRepository {
         category: task.category,
         timeBeforeNotify: task.timeBeforeNotify,
       );
-
-      print(requestBody.toJson());
 
       final httpResponse = await _taskApiService.createTask(requestBody);
 
