@@ -13,6 +13,16 @@ TextStyle title1Bold() {
   );
 }
 
+TextStyle title2Bold() {
+  return const TextStyle(
+    fontSize: 22,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
 TextStyle bodyRegular() {
   return const TextStyle(
     fontSize: 17,
