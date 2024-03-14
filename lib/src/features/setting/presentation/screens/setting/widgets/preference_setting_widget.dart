@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../shared/themes/color.dart';
