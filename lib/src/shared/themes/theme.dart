@@ -12,9 +12,9 @@ ThemeData appTheme(BuildContext context) {
         ColorScheme.fromSwatch(primarySwatch: AppColors.primaryWhite).copyWith(
       primary: AppColors.primary,
     ),
-    scaffoldBackgroundColor: AppColors.white,
+    scaffoldBackgroundColor: AppColors.background,
     appBarTheme: AppBarTheme(
-      color: AppColors.white,
+      color: Colors.transparent,
       elevation: 0,
       titleTextStyle: heading2(),
       centerTitle: false,
