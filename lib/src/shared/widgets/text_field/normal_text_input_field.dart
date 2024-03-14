@@ -46,7 +46,7 @@ class NormalTextInputField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: body1(),
+          style: subHeadlineBold().copyWith(color: AppColors.description),
         ),
         const SizedBox(height: 8.0),
         SizedBox(
@@ -54,6 +54,7 @@ class NormalTextInputField extends StatelessWidget {
             onFieldSubmitted: onFieldSubmitted,
             onSaved: onSaved,
             autocorrect: false,
+            style: subHeadlineRegular().copyWith(color: AppColors.white),
 
             obscureText: isPassword!,
 
@@ -81,8 +82,11 @@ class NormalTextInputField extends StatelessWidget {
               isDense: true,
               hintText: hintText,
 
+              hintStyle: subHeadlineRegular().copyWith(color: AppColors.white),
+              errorStyle: subHeadlineRegular().copyWith(color: AppColors.red),
+
               // Background color
-              fillColor: AppColors.white,
+              fillColor: AppColors.secondary,
               filled: true,
               contentPadding: const EdgeInsets.all(16),
 
@@ -112,7 +116,7 @@ class NormalTextInputField extends StatelessWidget {
                 ),
                 // Style
                 borderSide: BorderSide(
-                  color: AppColors.stock,
+                  color: AppColors.description,
                   width: 1,
                 ),
               ),
@@ -125,7 +129,7 @@ class NormalTextInputField extends StatelessWidget {
                   ),
                 ),
                 borderSide: BorderSide(
-                  color: AppColors.primary,
+                  color: AppColors.primary2,
                   width: 1,
                 ),
               ),
