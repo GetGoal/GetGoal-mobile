@@ -6,9 +6,9 @@ class AppColors {
   static Color secondary = HexColor.fromHex('222227');
   static Color white = HexColor.fromHex('FFFFFF');
   static Color black = HexColor.fromHex('000000');
-  static Color stock = HexColor.fromHex('EAEBEC');
+  static Color stock = HexColor.fromHex('292929');
   static Color description = HexColor.fromHex('8C8C8C');
-  static Color red = HexColor.fromHex('F04438');
+  static Color red = HexColor.fromHex('AD1F1F');
   static Color background = HexColor.fromHex('0A0A10');
 
   static MaterialColor primaryWhite = const MaterialColor(

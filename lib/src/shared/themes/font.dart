@@ -13,6 +13,16 @@ TextStyle title1Bold() {
   );
 }
 
+TextStyle title2Bold() {
+  return const TextStyle(
+    fontSize: 22,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
 TextStyle bodyRegular() {
   return const TextStyle(
     fontSize: 17,
@@ -26,6 +36,26 @@ TextStyle bodyRegular() {
 TextStyle bodyBold() {
   return const TextStyle(
     fontSize: 17,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
+TextStyle subHeadlineRegular() {
+  return const TextStyle(
+    fontSize: 15,
+    color: Colors.black,
+    fontWeight: FontWeight.normal,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
+TextStyle subHeadlineBold() {
+  return const TextStyle(
+    fontSize: 15,
     color: Colors.black,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,

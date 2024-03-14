@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/themes/spacing.dart';
+import '../../../../../../shared/widgets/text/get_goal_gradient_text.dart';
 import '../../../bloc/language/language_bloc.dart';
 
 class PreferenceSettingWidget extends StatelessWidget {
@@ -71,11 +71,10 @@ class PreferenceSettingWidget extends StatelessWidget {
                         const LanguageEvent.changeLanguage(locale: 'EN'),
                       );
                     },
-                    child: GradientText(
+                    child: GetGoalGradientText(
                       Translations.of(context).setting.english,
-                      gradientDirection: GradientDirection.ttb,
                       style: isEn ? bodyBold() : bodyRegular(),
-                      colors: isEn
+                      gradient: isEn
                           ? [AppColors.primary, AppColors.primary2]
                           : [AppColors.white, AppColors.white],
                     ),
@@ -94,11 +93,10 @@ class PreferenceSettingWidget extends StatelessWidget {
                         const LanguageEvent.changeLanguage(locale: 'TH'),
                       );
                     },
-                    child: GradientText(
+                    child: GetGoalGradientText(
                       Translations.of(context).setting.thai,
-                      gradientDirection: GradientDirection.ttb,
                       style: !isEn ? bodyBold() : bodyRegular(),
-                      colors: !isEn
+                      gradient: !isEn
                           ? [AppColors.primary, AppColors.primary2]
                           : [AppColors.white, AppColors.white],
                     ),

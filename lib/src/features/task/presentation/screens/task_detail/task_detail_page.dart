@@ -166,7 +166,6 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
           MainButton(
             buttonText: 'Delete',
             buttonColor: AppColors.white,
-            bottonStock: AppColors.stock,
             textColor: AppColors.red,
             onTap: () {
               _taskDetailBloc
