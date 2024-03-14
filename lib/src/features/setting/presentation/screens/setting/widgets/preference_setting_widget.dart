@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../shared/themes/color.dart';
@@ -25,7 +26,7 @@ class PreferenceSettingWidget extends StatelessWidget {
           SizedBox(
             child: Text(
               Translations.of(context).setting.preferences,
-              style: title1(),
+              style: bodyBold().copyWith(color: AppColors.white),
             ),
           ),
           const SizedBox(height: 8),
@@ -33,8 +34,8 @@ class PreferenceSettingWidget extends StatelessWidget {
             padding: EdgeInsets.all(AppSpacing.appMargin),
             decoration: BoxDecoration(
               boxShadow: AppShadow.shadow,
-              borderRadius: const BorderRadius.all(Radius.circular(24)),
-              color: AppColors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              color: AppColors.secondary,
             ),
             child: Column(
               children: [
@@ -53,7 +54,7 @@ class PreferenceSettingWidget extends StatelessWidget {
       children: [
         Text(
           Translations.of(context).setting.languages,
-          style: body2(),
+          style: bodyRegular().copyWith(color: AppColors.white),
         ),
         BlocBuilder<LanguageBloc, LanguageState>(
           builder: (context, state) {
@@ -70,15 +71,20 @@ class PreferenceSettingWidget extends StatelessWidget {
                         const LanguageEvent.changeLanguage(locale: 'EN'),
                       );
                     },
-                    child: Text(
+                    child: GradientText(
                       Translations.of(context).setting.english,
-                      style: isEn
-                          ? title1().copyWith(color: AppColors.primary)
-                          : body1(),
+                      gradientDirection: GradientDirection.ttb,
+                      style: isEn ? bodyBold() : bodyRegular(),
+                      colors: isEn
+                          ? [AppColors.primary, AppColors.primary2]
+                          : [AppColors.white, AppColors.white],
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Text('|'),
+                  Text(
+                    '/',
+                    style: bodyRegular().copyWith(color: AppColors.white),
+                  ),
                   const SizedBox(width: 8),
                   GestureDetector(
                     onTap: () {
@@ -88,11 +94,13 @@ class PreferenceSettingWidget extends StatelessWidget {
                         const LanguageEvent.changeLanguage(locale: 'TH'),
                       );
                     },
-                    child: Text(
+                    child: GradientText(
                       Translations.of(context).setting.thai,
-                      style: !isEn
-                          ? title1().copyWith(color: AppColors.primary)
-                          : body1(),
+                      gradientDirection: GradientDirection.ttb,
+                      style: !isEn ? bodyBold() : bodyRegular(),
+                      colors: !isEn
+                          ? [AppColors.primary, AppColors.primary2]
+                          : [AppColors.white, AppColors.white],
                     ),
                   ),
                 ],

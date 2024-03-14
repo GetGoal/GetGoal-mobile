@@ -30,16 +30,17 @@ class GetGoalSubScaffold extends StatelessWidget {
           children: [
             CircleButton(
               onTap: onGoBack ?? () => context.pop(),
-              icon: const CustomIcon(
+              icon: CustomIcon(
                 icon: AppIcon.back_icon,
                 size: 24,
+                iconColor: AppColors.white,
               ),
-              border: Border.all(color: AppColors.stock),
+              color: AppColors.secondary,
             ),
             const SizedBox(width: 16),
             Text(
               appbarTitle ?? '',
-              style: heading2(),
+              style: title1Bold().copyWith(color: AppColors.white),
             ),
           ],
         ),

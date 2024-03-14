@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../themes/color.dart';
 import '../icon/custom_icon.dart';
 
 class CircleButton extends StatelessWidget {
@@ -23,12 +24,15 @@ class CircleButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        clipBehavior: Clip.antiAlias,
         width: size,
         height: size,
-        decoration: BoxDecoration(
-          border: border,
-          color: color,
-          shape: BoxShape.circle,
+        decoration: ShapeDecoration(
+          color: const Color(0xFF222227),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(36),
+          ),
+          shadows: AppShadow.shadow,
         ),
         child: icon,
       ),

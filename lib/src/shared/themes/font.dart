@@ -3,6 +3,36 @@ import 'package:flutter/material.dart';
 const String fontFamily = 'Nunito';
 const List<String> fontFamilyFallback = ['IBMPlexSansThai'];
 
+TextStyle title1Bold() {
+  return const TextStyle(
+    fontSize: 34,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
+TextStyle bodyRegular() {
+  return const TextStyle(
+    fontSize: 17,
+    color: Colors.black,
+    fontWeight: FontWeight.normal,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
+TextStyle bodyBold() {
+  return const TextStyle(
+    fontSize: 17,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
 TextStyle heading1() {
   return const TextStyle(
     fontSize: 36,
