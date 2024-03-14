@@ -32,8 +32,6 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
-      height: Platform.isIOS ? 96 : 72,
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
@@ -41,14 +39,16 @@ class BottomNavigation extends StatelessWidget {
             width: 0.5,
           ),
         ),
-        color: AppColors.white,
-        boxShadow: AppShadow.shadow,
+        color: Colors.transparent,
       ),
-      child: SizedBox(
-        height: 48,
+      child: Container(
+        height: Platform.isIOS ? 96 : 72,
+        alignment: Alignment.center,
+        padding:
+            const EdgeInsets.only(left: 24, top: 16, right: 24, bottom: 24),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BottomNavItem(
               icon: AppIcon.bottom_nav_home,
@@ -79,11 +79,11 @@ class BottomNavigation extends StatelessWidget {
             ),
             BottomNavItem(
               icon: AppIcon.bottom_nav_add,
-              onSelectedIcon: AppIcon.bottom_nav_calendar_selected,
+              onSelectedIcon: AppIcon.bottom_nav_add,
               title: 'Add',
               position: 2,
-              size: 48,
-              color: AppColors.primary,
+              size: 56,
+              isDisableColor: true,
               currentIndex: bottomNavSelected,
               ontap: () => _displayCreateBottomSheet(context),
             ),

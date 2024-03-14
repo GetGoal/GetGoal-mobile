@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
+import '../../../../../../shared/widgets/text/get_goal_gradient_text.dart';
 
 class BottomNavItem extends StatelessWidget {
   const BottomNavItem({
@@ -14,6 +15,7 @@ class BottomNavItem extends StatelessWidget {
     this.currentIndex,
     this.size = 24,
     this.color,
+    this.isDisableColor = false,
     this.ontap,
   });
 
@@ -24,6 +26,7 @@ class BottomNavItem extends StatelessWidget {
   final int? currentIndex;
   final double? size;
   final Color? color;
+  final bool? isDisableColor;
   final GestureTapCallback? ontap;
 
   @override
@@ -34,7 +37,7 @@ class BottomNavItem extends StatelessWidget {
       onTap: ontap,
       child: Column(
         children: [
-          isCurrentPage
+          isCurrentPage || isDisableColor!
               ? SvgPicture.asset(
                   onSelectedIcon,
                   fit: BoxFit.scaleDown,
@@ -52,13 +55,16 @@ class BottomNavItem extends StatelessWidget {
           position == 2 ? const SizedBox() : const SizedBox(height: 4),
           position == 2
               ? const SizedBox()
-              : Text(
+              : GetGoalGradientText(
                   title ?? '',
                   style: description().copyWith(
                     color: isCurrentPage
                         ? AppColors.primary
                         : AppColors.description,
                   ),
+                  gradient: isCurrentPage
+                      ? [AppColors.primary, AppColors.primary2]
+                      : [AppColors.description, AppColors.description],
                 ),
         ],
       ),
