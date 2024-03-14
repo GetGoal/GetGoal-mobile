@@ -34,7 +34,7 @@ import '../features/task/domain/usecases/task/change_task_status_to_not_done_use
 import '../features/task/domain/usecases/task/create_task_usecase.dart';
 import '../features/task/domain/usecases/task/delete_task_usecase.dart';
 import '../features/task/domain/usecases/task/get_task_by_program_id.dart';
-import '../features/task/domain/usecases/task/get_task_by_task_Id_usecase.dart';
+import '../features/task/domain/usecases/task/get_task_by_task_id_usecase.dart';
 import '../features/task/domain/usecases/task/get_task_by_user_usecase.dart';
 import '../features/task/domain/usecases/task/join_program_usecase.dart';
 import '../features/task/domain/usecases/task/update_task_usecase.dart';
