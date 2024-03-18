@@ -146,25 +146,6 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
                 },
-                onEdit: () async {
-                  bool? isRefreash = await context.pushNamed(
-                    Routes.taskCreatepage,
-                    extra: TaskCreatePageData(
-                      mode: TASKFORMMODE.edit,
-                      taskId: taskList[index].taskId.toString(),
-                    ),
-                  );
-
-                  if (isRefreash!) {
-                    _todoBloc.add(
-                      TodoEvent.started(
-                        DateTime.parse(
-                          taskList[index].startTime.toString(),
-                        ),
-                      ),
-                    );
-                  }
-                },
                 onDoneTapped: () => _todoBloc.add(
                   TodoEvent.changeTaskStatusToDone(
                     taskId: taskList[index].taskId.toString(),
