@@ -6,6 +6,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../../../../../shared/themes/color.dart';
 import '../../../../../../../shared/themes/font.dart';
 import '../../../../../../../shared/themes/spacing.dart';
+import '../../../../../../../shared/utils/date_format.dart';
 import '../../bloc/date_timeline/date_timeline_bloc.dart';
 
 class DateSelectorTimeline extends StatelessWidget {
@@ -94,24 +95,47 @@ class DateSelectorTimeline extends StatelessWidget {
               padding: const EdgeInsets.only(right: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  // boxShadow: AppShadow.shadow,
-                  borderRadius: BorderRadius.circular(16),
-                  border: _isSameDate(date, selectedDate)
-                      ? null
-                      : Border.all(color: AppColors.stock),
-                  color: _isSameDate(date, selectedDate)
-                      ? AppColors.primary
-                      : AppColors.white,
+                  boxShadow: _isSameDate(date, selectedDate) || _isToday(date)
+                      ? AppShadow.shadow
+                      : null,
+                  borderRadius: BorderRadius.circular(24),
+                  color: _isToday(date)
+                      ? AppColors.secondary
+                      : AppColors.background,
+                  gradient: _isSameDate(date, selectedDate)
+                      ? LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomRight,
+                          colors: [AppColors.primary, AppColors.primary2],
+                        )
+                      : null,
                 ),
-                width: 60,
-                height: 72,
+                width: 48,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '${DateFormat("E").format(date)}\n${date.day}',
-                      style: body2(),
-                      textAlign: TextAlign.center,
+                      DateFormat('E').format(date),
+                      style: _isSameDate(date, selectedDate)
+                          ? caption1Bold().copyWith(
+                              color: _isSameDate(date, selectedDate)
+                                  ? AppColors.white
+                                  : AppColors.description,
+                            )
+                          : caption1Regular().copyWith(
+                              color: _isSameDate(date, selectedDate)
+                                  ? AppColors.white
+                                  : AppColors.description,
+                            ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '${date.day}',
+                      style: bodyBold().copyWith(
+                        color: _isSameDate(date, selectedDate)
+                            ? AppColors.white
+                            : AppColors.description,
+                      ),
                     ),
                   ],
                 ),
@@ -127,5 +151,13 @@ class DateSelectorTimeline extends StatelessWidget {
     return date.year == selectedDate.year &&
         date.month == selectedDate.month &&
         date.day == selectedDate.day;
+  }
+
+  bool _isToday(DateTime date) {
+    if (formatForRequest(DateTime.now()).compareTo(formatForRequest(date)) ==
+        0) {
+      return true;
+    }
+    return false;
   }
 }

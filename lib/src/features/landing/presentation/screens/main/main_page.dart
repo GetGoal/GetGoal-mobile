@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../../config/route_config.dart';
 import '../../../../../shared/icon.dart';
+import '../../../../../shared/themes/color.dart';
+import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../program/presentation/screens/program/program_page.dart';
 import '../../../../task/presentation/screens/home/bloc/todo/todo_bloc.dart';
@@ -44,17 +44,36 @@ class _MainPageState extends State<MainPage> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: state.bottomNavSelected == 0 ? 72 : null,
             title: Padding(
               padding: EdgeInsets.only(
                 top: AppSpacing.appMargin,
               ),
-              child: Text(state.appbarTitle),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  state.bottomNavSelected == 0
+                      ? Text(
+                          'Welcome back, Richard',
+                          style: bodyRegular().copyWith(color: AppColors.white),
+                        )
+                      : const SizedBox(),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        state.appbarTitle,
+                        style: title1Bold().copyWith(color: AppColors.white),
+                      ),
+                      const Spacer(),
+                      state.bottomNavSelected == 0
+                          ? _buildNotificationIconAction()
+                          : const SizedBox(),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            actions: [
-              state.bottomNavSelected == 0
-                  ? _settingIconAction()
-                  : const SizedBox(),
-            ],
           ),
           body: pages[state.bottomNavSelected],
           bottomNavigationBar: BottomNavigation(
@@ -67,22 +86,14 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Widget _settingIconAction() {
-    return Container(
-      margin: EdgeInsets.only(
-        top: AppSpacing.appMargin,
-        right: AppSpacing.appMargin,
-      ),
-      child: GestureDetector(
-        onTap: () {
-          context.push(Routes.settingPage);
-        },
-        child: SizedBox(
-          child: SvgPicture.asset(
-            AppIcon.setting_icon,
-            width: 32,
-            fit: BoxFit.scaleDown,
-          ),
+  Widget _buildNotificationIconAction() {
+    return GestureDetector(
+      onTap: () {},
+      child: SizedBox(
+        child: SvgPicture.asset(
+          AppIcon.notification_icon,
+          width: 36,
+          fit: BoxFit.scaleDown,
         ),
       ),
     );

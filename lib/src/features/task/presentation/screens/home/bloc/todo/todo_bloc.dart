@@ -58,7 +58,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           )
           .toList();
 
-      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
+      emit(TodoState.loadedSuccess(todoList: [...todoList, ...doneList]));
     } catch (e) {
       emit(const TodoState.error());
     }
@@ -90,9 +90,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           )
           .toList();
 
-      print(taskList.data);
+      // print(taskList.data);
 
-      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
+      emit(TodoState.loadedSuccess(todoList: [...todoList, ...doneList]));
     } catch (e) {
       _logger.e('ProgramStateError:', error: e);
       emit(const TodoState.error());
@@ -126,7 +126,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           )
           .toList();
 
-      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
+      emit(TodoState.loadedSuccess(todoList: [...todoList, ...doneList]));
     } catch (e) {
       emit(const TodoState.error());
     }
@@ -159,7 +159,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           )
           .toList();
 
-      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
+      emit(TodoState.loadedSuccess(todoList: [...todoList, ...doneList]));
     } catch (e) {
       emit(const TodoState.error());
     }

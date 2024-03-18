@@ -794,8 +794,7 @@ mixin _$TodoState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Task> todoList, List<Task> doneList)
-        loadedSuccess,
+    required TResult Function(List<Task> todoList) loadedSuccess,
     required TResult Function() empty,
     required TResult Function() error,
   }) =>
@@ -804,7 +803,7 @@ mixin _$TodoState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult? Function(List<Task> todoList)? loadedSuccess,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) =>
@@ -813,7 +812,7 @@ mixin _$TodoState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult Function(List<Task> todoList)? loadedSuccess,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
@@ -906,8 +905,7 @@ class _$TodoStateInitialImpl implements TodoStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Task> todoList, List<Task> doneList)
-        loadedSuccess,
+    required TResult Function(List<Task> todoList) loadedSuccess,
     required TResult Function() empty,
     required TResult Function() error,
   }) {
@@ -919,7 +917,7 @@ class _$TodoStateInitialImpl implements TodoStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult? Function(List<Task> todoList)? loadedSuccess,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) {
@@ -931,7 +929,7 @@ class _$TodoStateInitialImpl implements TodoStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult Function(List<Task> todoList)? loadedSuccess,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
@@ -1027,8 +1025,7 @@ class _$TodoStateLoadingImpl implements TodoStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Task> todoList, List<Task> doneList)
-        loadedSuccess,
+    required TResult Function(List<Task> todoList) loadedSuccess,
     required TResult Function() empty,
     required TResult Function() error,
   }) {
@@ -1040,7 +1037,7 @@ class _$TodoStateLoadingImpl implements TodoStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult? Function(List<Task> todoList)? loadedSuccess,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) {
@@ -1052,7 +1049,7 @@ class _$TodoStateLoadingImpl implements TodoStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult Function(List<Task> todoList)? loadedSuccess,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
@@ -1115,7 +1112,7 @@ abstract class _$$TodoStateLoadedSuccessImplCopyWith<$Res> {
           $Res Function(_$TodoStateLoadedSuccessImpl) then) =
       __$$TodoStateLoadedSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Task> todoList, List<Task> doneList});
+  $Res call({List<Task> todoList});
 }
 
 /// @nodoc
@@ -1131,16 +1128,11 @@ class __$$TodoStateLoadedSuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? todoList = null,
-    Object? doneList = null,
   }) {
     return _then(_$TodoStateLoadedSuccessImpl(
       todoList: null == todoList
           ? _value._todoList
           : todoList // ignore: cast_nullable_to_non_nullable
-              as List<Task>,
-      doneList: null == doneList
-          ? _value._doneList
-          : doneList // ignore: cast_nullable_to_non_nullable
               as List<Task>,
     ));
   }
@@ -1149,10 +1141,8 @@ class __$$TodoStateLoadedSuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TodoStateLoadedSuccessImpl implements TodoStateLoadedSuccess {
-  const _$TodoStateLoadedSuccessImpl(
-      {required final List<Task> todoList, required final List<Task> doneList})
-      : _todoList = todoList,
-        _doneList = doneList;
+  const _$TodoStateLoadedSuccessImpl({required final List<Task> todoList})
+      : _todoList = todoList;
 
   final List<Task> _todoList;
   @override
@@ -1162,17 +1152,9 @@ class _$TodoStateLoadedSuccessImpl implements TodoStateLoadedSuccess {
     return EqualUnmodifiableListView(_todoList);
   }
 
-  final List<Task> _doneList;
-  @override
-  List<Task> get doneList {
-    if (_doneList is EqualUnmodifiableListView) return _doneList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_doneList);
-  }
-
   @override
   String toString() {
-    return 'TodoState.loadedSuccess(todoList: $todoList, doneList: $doneList)';
+    return 'TodoState.loadedSuccess(todoList: $todoList)';
   }
 
   @override
@@ -1180,15 +1162,12 @@ class _$TodoStateLoadedSuccessImpl implements TodoStateLoadedSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoStateLoadedSuccessImpl &&
-            const DeepCollectionEquality().equals(other._todoList, _todoList) &&
-            const DeepCollectionEquality().equals(other._doneList, _doneList));
+            const DeepCollectionEquality().equals(other._todoList, _todoList));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_todoList),
-      const DeepCollectionEquality().hash(_doneList));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_todoList));
 
   @JsonKey(ignore: true)
   @override
@@ -1202,12 +1181,11 @@ class _$TodoStateLoadedSuccessImpl implements TodoStateLoadedSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Task> todoList, List<Task> doneList)
-        loadedSuccess,
+    required TResult Function(List<Task> todoList) loadedSuccess,
     required TResult Function() empty,
     required TResult Function() error,
   }) {
-    return loadedSuccess(todoList, doneList);
+    return loadedSuccess(todoList);
   }
 
   @override
@@ -1215,11 +1193,11 @@ class _$TodoStateLoadedSuccessImpl implements TodoStateLoadedSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult? Function(List<Task> todoList)? loadedSuccess,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) {
-    return loadedSuccess?.call(todoList, doneList);
+    return loadedSuccess?.call(todoList);
   }
 
   @override
@@ -1227,13 +1205,13 @@ class _$TodoStateLoadedSuccessImpl implements TodoStateLoadedSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult Function(List<Task> todoList)? loadedSuccess,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loadedSuccess != null) {
-      return loadedSuccess(todoList, doneList);
+      return loadedSuccess(todoList);
     }
     return orElse();
   }
@@ -1280,12 +1258,10 @@ class _$TodoStateLoadedSuccessImpl implements TodoStateLoadedSuccess {
 }
 
 abstract class TodoStateLoadedSuccess implements TodoState {
-  const factory TodoStateLoadedSuccess(
-      {required final List<Task> todoList,
-      required final List<Task> doneList}) = _$TodoStateLoadedSuccessImpl;
+  const factory TodoStateLoadedSuccess({required final List<Task> todoList}) =
+      _$TodoStateLoadedSuccessImpl;
 
   List<Task> get todoList;
-  List<Task> get doneList;
   @JsonKey(ignore: true)
   _$$TodoStateLoadedSuccessImplCopyWith<_$TodoStateLoadedSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1332,8 +1308,7 @@ class _$TodoStateLoadedEmptyImpl implements TodoStateLoadedEmpty {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Task> todoList, List<Task> doneList)
-        loadedSuccess,
+    required TResult Function(List<Task> todoList) loadedSuccess,
     required TResult Function() empty,
     required TResult Function() error,
   }) {
@@ -1345,7 +1320,7 @@ class _$TodoStateLoadedEmptyImpl implements TodoStateLoadedEmpty {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult? Function(List<Task> todoList)? loadedSuccess,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) {
@@ -1357,7 +1332,7 @@ class _$TodoStateLoadedEmptyImpl implements TodoStateLoadedEmpty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult Function(List<Task> todoList)? loadedSuccess,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
@@ -1453,8 +1428,7 @@ class _$TodoStateErrorImpl implements TodoStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Task> todoList, List<Task> doneList)
-        loadedSuccess,
+    required TResult Function(List<Task> todoList) loadedSuccess,
     required TResult Function() empty,
     required TResult Function() error,
   }) {
@@ -1466,7 +1440,7 @@ class _$TodoStateErrorImpl implements TodoStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult? Function(List<Task> todoList)? loadedSuccess,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) {
@@ -1478,7 +1452,7 @@ class _$TodoStateErrorImpl implements TodoStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Task> todoList, List<Task> doneList)? loadedSuccess,
+    TResult Function(List<Task> todoList)? loadedSuccess,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
