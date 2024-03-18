@@ -6,6 +6,7 @@ import '../../../config/i18n/strings.g.dart';
 import '../../icon.dart';
 import '../../themes/color.dart';
 import '../../themes/font.dart';
+import '../text/get_goal_gradient_text.dart';
 
 class UploadFileInput extends StatelessWidget {
   const UploadFileInput({
@@ -43,17 +44,21 @@ class UploadFileInput extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   height: 32,
                 ),
-                Text(
+                GetGoalGradientText(
                   label,
-                  style: title1().copyWith(color: AppColors.primary),
+                  style: bodyBold(),
                 ),
                 Text(
                   Translations.of(context).create_program.tap_to_upload,
-                  style: description().copyWith(color: AppColors.description),
+                  style: caption1Regular().copyWith(
+                    color: AppColors.description,
+                  ),
                 ),
                 Text(
                   Translations.of(context).create_program.file_support,
-                  style: description().copyWith(color: AppColors.description),
+                  style: caption1Regular().copyWith(
+                    color: AppColors.description,
+                  ),
                 ),
               ],
             ),
