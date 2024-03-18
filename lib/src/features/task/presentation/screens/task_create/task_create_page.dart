@@ -12,7 +12,6 @@ import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
-import '../../../../../shared/widgets/checkbox/getgoal_checkbox.dart';
 import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../../shared/widgets/text_field/dropdown_input_field.dart';
@@ -68,7 +67,6 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   void initState() {
     _taskCreateBloc
         .add(TaskCreateEvent.started(taskId: widget.pageData!.taskId));
-
     super.initState();
   }
 
@@ -126,16 +124,9 @@ class _TaskCreatePageState extends State<TaskCreatePage>
                           formatedTime.format(context);
                       _isAllowNoti = task.isSetNotification == 1 ? true : false;
 
-                      // _taskRemiderInputController.text =
-                      //     '${task.timeBeforeNotify} Minute before start';
-
                       _selectedReminder = task.timeBeforeNotify != 0
                           ? '${task.timeBeforeNotify} Minute before start'
                           : 'None';
-
-                      // _dropdownKey.currentState!.didChange(
-                      //   '${task.timeBeforeNotify} Minute before start',
-                      // );
                     }
                     if (widget.pageData!.task != null) {
                       _taskNameInputController.text =
@@ -184,9 +175,11 @@ class _TaskCreatePageState extends State<TaskCreatePage>
                           : 'None';
                     }
                     break;
+
                   case TaskCreateStateCreated():
                     context.pop(true);
                     break;
+
                   case TaskCreateStateError(:final message):
                     showDialog(
                       context: context,
@@ -202,12 +195,16 @@ class _TaskCreatePageState extends State<TaskCreatePage>
                 switch (state) {
                   case TaskCreateStateInitial():
                     return _buildTaskCreateLoading();
+
                   case TaskCreateStateLoading():
                     return _buildTaskCreateLoading();
+
                   case TaskCreateStateLoadedSuccess():
                     return _buildTaskCreateLoadedSuccess();
+
                   case TaskCreateStateError():
                     return Container();
+
                   default:
                     return const SizedBox();
                 }
@@ -243,9 +240,6 @@ class _TaskCreatePageState extends State<TaskCreatePage>
         const SizedBox(height: 20),
         _buildTimeInputField(),
         const SizedBox(height: 20),
-        // _buildNotificationCheckbox(),
-        // const SizedBox(height: 20),
-        // _isAllowNoti ? _buildReminderField() : const SizedBox(),
         _buildReminderField(),
         const SizedBox(height: 40),
         _buildSubmitButton(),
@@ -254,36 +248,6 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   }
 
   Widget _buildTaskNameInputField() {
-    // return BlocConsumer<TaskNameFieldBloc, TaskNameFieldState>(
-    //   listener: (context, state) {},
-    //   builder: (context, state) {
-    //     switch (state) {
-    //       case TaskNameFieldStateInitial():
-    //         return NormalTextInputField(
-    //           controller: _taskNameInputController,
-    //           label: Translations.of(context).create_task.task_name,
-    //           hintText: Translations.of(context).create_task.ex_task_name,
-    //           validator: taskNameValidator,
-    //         );
-    //       case TaskNameFieldStateChanged(:final value):
-    //         _taskNameInputController.text = value!;
-
-    //         return NormalTextInputField(
-    //           controller: _taskNameInputController,
-    //           label: Translations.of(context).create_task.task_name,
-    //           hintText: Translations.of(context).create_task.ex_task_name,
-    //           validator: taskNameValidator,
-    //           onFieldSubmitted: (value) {
-    //             _taskNameFieldBloc
-    //                 .add(TaskNameFieldEvent.onSaved(value: value));
-    //           },
-    //         );
-    //       default:
-    //         return const SizedBox();
-    //     }
-    //   },
-    // );
-
     return NormalTextInputField(
       controller: _taskNameInputController,
       label: Translations.of(context).create_task.task_name,
@@ -341,31 +305,6 @@ class _TaskCreatePageState extends State<TaskCreatePage>
     );
   }
 
-  Widget _buildNotificationCheckbox() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            GetGoalCheckbox(
-              value: _isAllowNoti,
-              onTap: () {
-                setState(() {
-                  _isAllowNoti = !_isAllowNoti;
-                });
-                _taskRemiderInputController.text = '';
-              },
-            ),
-            const SizedBox(width: 8.0),
-            Text(
-              Translations.of(context).create_task.allow_noti,
-              style: body1(),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   Widget _buildReminderField() {
     List<String> data = <String>[
       'None',
@@ -379,7 +318,10 @@ class _TaskCreatePageState extends State<TaskCreatePage>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(Translations.of(context).create_task.reminder, style: body1()),
+        Text(
+          Translations.of(context).create_task.reminder,
+          style: subHeadlineBold().copyWith(color: AppColors.description),
+        ),
         const SizedBox(height: 8),
         DropdownInputField(
           key: _dropdownKey,
@@ -485,11 +427,9 @@ class _TaskCreatePageState extends State<TaskCreatePage>
     );
 
     if (time != null) {
-      // setState(() {
       _selectedTime =
           '${time.hour < 10 ? '0${time.hour}' : time.hour}:${time.minute < 10 ? '0${time.minute}' : time.minute}:00';
       _taskTimeInputController.text = time.format(context);
-      // });
     }
   }
 
