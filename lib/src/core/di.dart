@@ -20,11 +20,13 @@ import '../features/program/domain/repositories/program_filter_repository.dart';
 import '../features/program/domain/repositories/program_repository.dart';
 import '../features/program/domain/usecases/label/get_program_filter_usecase.dart';
 import '../features/program/domain/usecases/program/create_program_usecase.dart';
+import '../features/program/domain/usecases/program/get_program_by_id_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_search_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_usecase.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 import '../features/program/presentation/bloc/program/program_bloc.dart';
+import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/task/data/repositories/task_repository_impl.dart';
 import '../features/task/data/sources/api/task_api_service.dart';
@@ -141,6 +143,9 @@ Future<void> _initUsecases() async {
   getIt.registerLazySingleton(
     () => CreateProgramUsecase(getIt()),
   );
+  getIt.registerLazySingleton(
+    () => GetProgramByIdUsecase(getIt()),
+  );
 
 // Initialize for task feature
   getIt.registerLazySingleton(
@@ -206,6 +211,9 @@ Future<void> _initBlocs() async {
   );
   getIt.registerFactory<ProgramBloc>(
     () => ProgramBloc(getIt(), getIt(), getIt()),
+  );
+  getIt.registerFactory<ProgramInfoBloc>(
+    () => ProgramInfoBloc(getIt()),
   );
 
   // Initialize Bloc for task feature
