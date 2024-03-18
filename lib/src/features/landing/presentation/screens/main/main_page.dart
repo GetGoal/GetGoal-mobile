@@ -66,7 +66,7 @@ class _MainPageState extends State<MainPage> {
                                 return const SizedBox();
                               case UserProfileStateLoadedSuccess(:final user):
                                 return Text(
-                                  'Welcome back, ${user.firstName} ${user.lastName}',
+                                  'Welcome back, ${user.firstName}',
                                   style: bodyRegular()
                                       .copyWith(color: AppColors.white),
                                 );
