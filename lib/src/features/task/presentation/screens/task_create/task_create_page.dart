@@ -58,7 +58,6 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   final _taskStartDateInputController = TextEditingController();
   final _taskTimeInputController = TextEditingController();
   final _taskRemiderInputController = TextEditingController();
-  bool _isAllowNoti = false;
   String _selectedTime = '';
   String _selectedDate = '';
   String _selectedReminder = 'None';
@@ -122,7 +121,6 @@ class _TaskCreatePageState extends State<TaskCreatePage>
 
                       _taskTimeInputController.text =
                           formatedTime.format(context);
-                      _isAllowNoti = task.isSetNotification == 1 ? true : false;
 
                       _selectedReminder = task.timeBeforeNotify != 0
                           ? '${task.timeBeforeNotify} Minute before start'
@@ -162,11 +160,6 @@ class _TaskCreatePageState extends State<TaskCreatePage>
 
                       _taskTimeInputController.text =
                           formatedTime.format(context);
-
-                      _isAllowNoti =
-                          widget.pageData!.task!.isSetNotification == 1
-                              ? true
-                              : false;
 
                       _selectedReminder = widget
                                   .pageData!.task!.timeBeforeNotify !=
@@ -331,7 +324,6 @@ class _TaskCreatePageState extends State<TaskCreatePage>
           onChanged: (value) {
             _taskRemiderInputController.text = value!;
             _selectedReminder = value;
-            _isAllowNoti = true;
           },
         ),
       ],
