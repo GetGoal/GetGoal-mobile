@@ -16,7 +16,7 @@ ThemeData appTheme(BuildContext context) {
     appBarTheme: AppBarTheme(
       color: Colors.transparent,
       elevation: 0,
-      titleTextStyle: heading2(),
+      titleTextStyle: title1Bold(),
       centerTitle: false,
       titleSpacing: AppSpacing.appMargin,
       scrolledUnderElevation: 0,
