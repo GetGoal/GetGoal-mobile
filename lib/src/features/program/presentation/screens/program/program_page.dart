@@ -289,10 +289,10 @@ class _ProgramPageState extends State<ProgramPage> {
   Widget _programSearchEmpty() {
     return Column(
       children: [
-        _searchBar(),
-        const Text(
+        Text(
           "Sorry, we couldn't find anything that includes \nall the words you searched for.",
           textAlign: TextAlign.center,
+          style: footnoteRegular().copyWith(color: AppColors.description),
         ),
       ],
     );
