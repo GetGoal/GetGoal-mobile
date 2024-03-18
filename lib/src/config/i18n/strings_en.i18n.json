@@ -19,6 +19,7 @@
         "logout": "Log out"
     },
     "program": {
+        "page_description": "Find a training program that's all about what you love and where you want to go!",
         "search": "Search",
         "task_overview": "Tasks Overview",
         "start_program": "Start this program",

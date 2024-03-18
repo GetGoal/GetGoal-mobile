@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 118 (59 per locale)
+/// Strings: 120 (60 per locale)
 ///
-/// Built on 2024-03-08 at 09:09 UTC
+/// Built on 2024-03-18 at 17:05 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -207,6 +207,7 @@ class _StringsProgramEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get page_description => 'Find a training program that\'s all about what you love and where you want to go!';
 	String get search => 'Search';
 	String get task_overview => 'Tasks Overview';
 	String get start_program => 'Start this program';
@@ -392,6 +393,7 @@ class _StringsProgramTh implements _StringsProgramEn {
 	@override final _StringsTh _root; // ignore: unused_field
 
 	// Translations
+	@override String get page_description => 'ค้นหาโปรแกรมที่คุณต้องพร้อมกับทำสิ่งที่คุณรัก!';
 	@override String get search => 'ค้นหา';
 	@override String get task_overview => 'ภาครวม';
 	@override String get start_program => 'เริ่มโปรแกรมนี้';
@@ -513,6 +515,7 @@ extension on Translations {
 			case 'user_profile.display_save_program': return 'Save';
 			case 'user_profile.display_applied_program': return 'Applied';
 			case 'user_profile.logout': return 'Log out';
+			case 'program.page_description': return 'Find a training program that\'s all about what you love and where you want to go!';
 			case 'program.search': return 'Search';
 			case 'program.task_overview': return 'Tasks Overview';
 			case 'program.start_program': return 'Start this program';
@@ -580,6 +583,7 @@ extension on _StringsTh {
 			case 'user_profile.display_save_program': return 'บันทึก';
 			case 'user_profile.display_applied_program': return 'รับสมัคร';
 			case 'user_profile.logout': return 'ออกจากระบบ';
+			case 'program.page_description': return 'ค้นหาโปรแกรมที่คุณต้องพร้อมกับทำสิ่งที่คุณรัก!';
 			case 'program.search': return 'ค้นหา';
 			case 'program.task_overview': return 'ภาครวม';
 			case 'program.start_program': return 'เริ่มโปรแกรมนี้';
