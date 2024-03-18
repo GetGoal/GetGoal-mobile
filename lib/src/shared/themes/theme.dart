@@ -7,7 +7,7 @@ import 'spacing.dart';
 ThemeData appTheme(BuildContext context) {
   return ThemeData(
     useMaterial3: true,
-    primaryColor: AppColors.primary,
+    primaryColor: AppColors.primary2,
     colorScheme:
         ColorScheme.fromSwatch(primarySwatch: AppColors.primaryWhite).copyWith(
       primary: AppColors.primary,
@@ -25,7 +25,7 @@ ThemeData appTheme(BuildContext context) {
     fontFamilyFallback: const ['Kanit'],
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.primary2,
         elevation: 0,
         textStyle: TextStyle(
           color: AppColors.black,
@@ -37,9 +37,9 @@ ThemeData appTheme(BuildContext context) {
       ),
     ),
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: AppColors.primary,
-      selectionColor: AppColors.primary,
-      selectionHandleColor: AppColors.primary,
+      cursorColor: AppColors.primary2,
+      selectionColor: AppColors.primary2,
+      selectionHandleColor: AppColors.primary2,
     ),
     popupMenuTheme: const PopupMenuThemeData(
       enableFeedback: false,
