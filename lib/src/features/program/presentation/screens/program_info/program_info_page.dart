@@ -99,15 +99,15 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
             child: Column(
               children: [
                 _programImage(program.programImage!),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 _programHeader(
                   label: program.labels![0],
                   programName: program.programName,
                   duration: program.expectedTime,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 _programDescription(program.programDesc),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 _taskOverview(program.tasks),
               ],
             ),
@@ -252,7 +252,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Tasks Overview', style: bodyBold()),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         Column(
           children: List<TaskCard>.generate(tasks!.length, (index) {
             return TaskCard(
@@ -270,7 +270,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
     bool isTasksEmpty = tasks.isEmpty;
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24),
+      padding: const EdgeInsets.only(bottom: 24, top: 16),
       margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
       child: MainButton(
         buttonText: isTasksEmpty
