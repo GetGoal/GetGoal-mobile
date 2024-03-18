@@ -35,7 +35,7 @@ class BottomNavigation extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: AppColors.stock,
+            color: AppColors.strock,
             width: 0.5,
           ),
         ),
