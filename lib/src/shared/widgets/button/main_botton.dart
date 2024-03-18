@@ -9,7 +9,7 @@ class MainButton extends StatelessWidget {
     this.onTap,
     this.buttonText,
     this.buttonColor = const <Color>[],
-    this.isHaveStrock = false,
+    this.isHaveStroke = false,
     this.textColor,
     this.icon,
     this.isHaveBoxShadow = true,
@@ -19,7 +19,7 @@ class MainButton extends StatelessWidget {
   final GestureTapCallback? onTap;
   final String? buttonText;
   final List<Color>? buttonColor;
-  final bool? isHaveStrock;
+  final bool? isHaveStroke;
   final Color? textColor;
   final Widget? icon;
   final bool? isHaveBoxShadow;
@@ -47,7 +47,7 @@ class MainButton extends StatelessWidget {
                 : buttonColor!,
           ),
           borderRadius: BorderRadius.circular(36),
-          border: isHaveStrock! ? Border.all(color: AppColors.primary2) : null,
+          border: isHaveStroke! ? Border.all(color: AppColors.primary2) : null,
         ),
         child: Center(
           child: Row(
