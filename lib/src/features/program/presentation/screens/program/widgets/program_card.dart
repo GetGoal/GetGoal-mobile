@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
+import '../../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../../shared/widgets/image/cache_image.dart';
 import '../../../../domain/entities/program.dart';
 import 'program_label.dart';
@@ -44,27 +44,63 @@ class ProgramCard extends StatelessWidget {
         onTab!();
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: AppShadow.shadow,
-        ),
-        child: Container(
-          margin: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              _programImage(),
-              const SizedBox(height: 16),
-              _programMetaData(),
-              const SizedBox(height: 8),
-              _programDetail(),
-              const SizedBox(height: 16),
-              _programMoreInfo(),
-            ],
-          ),
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 265,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // _programCreatedby(),
+                  // const SizedBox(height: 4),
+                  _programName(),
+                  const SizedBox(height: 8),
+                  _programExpectedTime(),
+                  const SizedBox(height: 8),
+                  _programDescription(),
+                  const SizedBox(height: 8),
+                  _programMetaData(),
+                ],
+              ),
+            ),
+            const Spacer(),
+            _programImage(),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _programName() {
+    return Text(
+      programName ?? '',
+      style: subHeadlineBold(),
+    );
+  }
+
+  Widget _programDescription() {
+    return Text(
+      programDesc ?? '',
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
+      style: footnoteRegular().copyWith(color: AppColors.description),
+    );
+  }
+
+  Widget _programMetaData() {
+    return Row(
+      children: [
+        ProgramLebel(
+          title: label?.labelName ?? '',
+        ),
+        const SizedBox(width: 8),
+        Text(
+          DateFormat('yMMMd').format(DateTime.parse(createdAt!)),
+          style: caption2Regular().copyWith(color: AppColors.description),
+        ),
+      ],
     );
   }
 
@@ -72,7 +108,8 @@ class ProgramCard extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 144,
+          height: 96,
+          width: 96,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -81,115 +118,22 @@ class ProgramCard extends StatelessWidget {
             radius: 16,
           ),
         ),
-        Align(
-          alignment: AlignmentDirectional.topEnd,
-          child: Container(
-            margin: const EdgeInsets.all(8),
-            child: actionButton,
-          ),
-        ),
       ],
     );
   }
 
-  Widget _programMetaData() {
+  Widget _programExpectedTime() {
     return Row(
       children: [
-        // Row(
-        //   children: [
-        //     Container(
-        //       width: 24,
-        //       height: 24,
-        //       decoration: const BoxDecoration(
-        //         shape: BoxShape.circle,
-        //         color: Colors.black,
-        //       ),
-        //     ),
-        //     const SizedBox(
-        //       width: 8,
-        //     ),
-        //     Text(
-        //       'Thana Sriwichai',
-        //       style: description(),
-        //     ),
-        //     const SizedBox(
-        //       width: 8,
-        //     ),
-        //     GestureDetector(
-        //       child: Text(
-        //         'Follow',
-        //         style: description().copyWith(color: AppColors.primary),
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        // const Spacer(),
-        Row(
-          children: [
-            SvgPicture.asset(
-              AppIcon.program_duration_icon,
-              height: 16,
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            Text('$duration', style: description()),
-          ],
+        const CustomIcon(icon: AppIcon.program_duration_icon, size: 16),
+        const SizedBox(
+          width: 4,
         ),
-      ],
-    );
-  }
-
-  Widget _programDetail() {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '$programName',
-            style: title1(),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
+        Text(
+          duration ?? '',
+          style: caption1Regular().copyWith(
+            color: AppColors.white,
           ),
-          const SizedBox(height: 4),
-          Text(
-            '$programDesc',
-            style: body2(),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            textAlign: TextAlign.left,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _programMoreInfo() {
-    return Row(
-      children: [
-        Row(
-          children: [
-            ProgramLebel(
-              title: '${label!.labelName}',
-            ),
-            const SizedBox(width: 8),
-            Text(DateFormat('yMMMd').format(DateTime.parse(createdAt!))),
-          ],
-        ),
-        const Spacer(),
-        Row(
-          children: [
-            Icon(
-              Icons.star_rounded,
-              color: AppColors.primary,
-              size: 24,
-            ),
-            Text(
-              '$rating',
-              style: TextStyle(color: AppColors.primary),
-            ),
-          ],
         ),
       ],
     );

@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../themes/color.dart';
+
 class CacheImage extends StatelessWidget {
   const CacheImage({super.key, this.programImage, this.radius});
 
@@ -17,6 +19,7 @@ class CacheImage extends StatelessWidget {
       imageUrl: programImage!,
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
+          boxShadow: AppShadow.shadow,
           borderRadius: BorderRadius.all(Radius.circular(radius ?? 0)),
           image: DecorationImage(
             image: imageProvider,
@@ -39,7 +42,7 @@ class CacheImage extends StatelessWidget {
         ),
       ),
       errorWidget: (context, url, error) =>
-          const Center(child: Icon(Icons.error)),
+          Center(child: Icon(Icons.error, color: AppColors.description)),
       fit: BoxFit.cover,
     );
   }

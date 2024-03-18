@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../shared/themes/color.dart';
+import '../../../../../../shared/themes/font.dart';
 
 class ProgramLebel extends StatelessWidget {
   const ProgramLebel({super.key, required this.title});
@@ -11,7 +12,14 @@ class ProgramLebel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primary,
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors.primary,
+            AppColors.primary2,
+          ],
+        ),
         borderRadius: BorderRadius.circular(12),
       ),
       height: 24,
@@ -20,7 +28,7 @@ class ProgramLebel extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             title,
-            style: const TextStyle(fontSize: 12),
+            style: caption1Regular(),
           ),
         ),
       ),
