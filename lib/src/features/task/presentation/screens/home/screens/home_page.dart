@@ -11,8 +11,6 @@ import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/themes/spacing.dart';
 import '../../../../../landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../../../../domain/entities/task.dart';
-import '../../../enum/task_form_mode_enum.dart';
-import '../../task_create/task_create_page.dart';
 import '../bloc/date_timeline/date_timeline_bloc.dart';
 import '../bloc/todo/todo_bloc.dart';
 import 'widget/date_section_timeline_widget.dart';
@@ -42,10 +40,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 16),
+        const SizedBox(height: 24),
         _dateSectionBar(),
-        const SizedBox(height: 40),
+        const SizedBox(height: 24),
+        Container(
+          padding: EdgeInsets.all(AppSpacing.appMargin),
+          child: Text(
+            'Tasks',
+            style: title2Bold().copyWith(
+              color: AppColors.white,
+            ),
+          ),
+        ),
         _todoSection(),
       ],
     );
@@ -76,8 +84,8 @@ class _HomePageState extends State<HomePage> {
             return _todoLoading();
           case TodoStateLoading():
             return _todoLoading();
-          case TodoStateLoadedSuccess(:final todoList, :final doneList):
-            return _todoListLoadedSuccess(todoList, doneList);
+          case TodoStateLoadedSuccess(:final todoList):
+            return _buildTodoSection(todoList);
           case TodoStateLoadedEmpty():
             return _todoListEmpty();
           case TodoStateError():
@@ -93,176 +101,83 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
       child: Center(
         child: CircularProgressIndicator(
-          color: AppColors.primary,
+          color: AppColors.primary2,
         ),
       ),
     );
   }
 
-  Widget _todoListLoadedSuccess(List<Task> todoList, List<Task> doneList) {
+  Widget _buildTodoSection(List<Task> taskList) {
     return Expanded(
       child: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _todoList(todoList),
-              const SizedBox(height: 20),
-              _doneList(doneList),
-              const SizedBox(height: 40),
-            ],
+          child: ListView.separated(
+            separatorBuilder: (context, index) => Divider(
+              color: AppColors.stroke,
+            ),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: taskList.length,
+            itemBuilder: (context, index) {
+              return TodoTask(
+                taskStatus: getTaskStatus(taskList[index].taskStatus!),
+                taskName: taskList[index].taskName,
+                taskDescription: taskList[index].taskDescription,
+                startTime: taskList[index].startTime,
+                category: taskList[index].category,
+                ontap: () async {
+                  bool? isRefreash = await context.pushNamed(
+                    Routes.taskDetailPage,
+                    pathParameters: {
+                      'id': taskList[index].taskId.toString(),
+                    },
+                  );
+
+                  if (isRefreash!) {
+                    _todoBloc.add(
+                      TodoEvent.started(
+                        DateTime.parse(
+                          taskList[index].startTime.toString(),
+                        ),
+                      ),
+                    );
+                  }
+                },
+                onDoneTapped: () => _todoBloc.add(
+                  TodoEvent.changeTaskStatusToDone(
+                    taskId: taskList[index].taskId.toString(),
+                    date: DateTime.parse(
+                      taskList[index].startTime.toString(),
+                    ),
+                  ),
+                ),
+                onUnDoneTapped: () => _todoBloc.add(
+                  TodoEvent.changeTaskStatusToNotDone(
+                    taskId: taskList[index].taskId.toString(),
+                    date: DateTime.parse(
+                      taskList[index].startTime.toString(),
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),
     );
   }
 
-  Widget _todoList(List<Task> tasks) {
-    bool isTaskEmpty = tasks.isEmpty;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          Translations.of(context).task.task_status_to_do,
-          style: heading3(),
-          textAlign: TextAlign.left,
-        ),
-        const SizedBox(height: 16),
-        isTaskEmpty
-            ? SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.2,
-                child: Center(
-                  child: Text(
-                    Translations.of(context).task.empty_task_todo,
-                    style: body1().copyWith(color: AppColors.description),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
-            : ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: tasks.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    child: TodoTask(
-                      taskStatus: getTaskStatus(tasks[index].taskStatus!),
-                      taskName: tasks[index].taskName,
-                      taskDescription: tasks[index].taskDescription,
-                      startTime: tasks[index].startTime,
-                      ontap: () async {
-                        bool? isRefreash = await context.pushNamed(
-                          Routes.taskDetailPage,
-                          pathParameters: {
-                            'id': tasks[index].taskId.toString(),
-                          },
-                        );
-                        if (isRefreash!) {
-                          _todoBloc.add(
-                            TodoEvent.started(
-                              DateTime.parse(
-                                tasks[index].startTime.toString(),
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                      onEdit: () async {
-                        bool? isRefreash = await context.pushNamed(
-                          Routes.taskCreatepage,
-                          extra: TaskCreatePageData(
-                            mode: TASKFORMMODE.edit,
-                            taskId: tasks[index].taskId.toString(),
-                          ),
-                          //   extra: TASKFORMMODE.edit,
-                          //   queryParameters: {'id': tasks[index].taskId.toString()},
-                        );
-
-                        if (isRefreash!) {
-                          _todoBloc.add(
-                            TodoEvent.started(
-                              DateTime.parse(
-                                tasks[index].startTime.toString(),
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                      onDoneTapped: () => _todoBloc.add(
-                        TodoEvent.changeTaskStatusToDone(
-                          taskId: tasks[index].taskId.toString(),
-                          date: DateTime.parse(
-                            tasks[index].startTime.toString(),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-      ],
-    );
-  }
-
   Widget _todoListEmpty() {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.7,
-      child: Center(child: Text(Translations.of(context).task.empty_task)),
-    );
-  }
-
-  Widget _doneList(List<Task> tasks) {
-    bool isTaskEmpty = tasks.isEmpty;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          Translations.of(context).task.task_status_done,
-          style: heading3(),
-          textAlign: TextAlign.left,
+    return Expanded(
+      child: Center(
+        child: Text(
+          Translations.of(context).task.empty_task,
+          style: body1().copyWith(
+            color: AppColors.description,
+          ),
         ),
-        const SizedBox(height: 16),
-        isTaskEmpty
-            ? SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.2,
-                child: Center(
-                  child: Text(
-                    Translations.of(context).task.empty_task_done,
-                    style: body1().copyWith(color: AppColors.description),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
-            : ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: tasks.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    child: TodoTask(
-                      taskStatus: getTaskStatus(tasks[index].taskStatus!),
-                      taskName: tasks[index].taskName,
-                      taskDescription: tasks[index].taskDescription,
-                      onUnDoneTapped: () => _todoBloc.add(
-                        TodoEvent.changeTaskStatusToNotDone(
-                          taskId: tasks[index].taskId.toString(),
-                          date: DateTime.parse(
-                            tasks[index].startTime.toString(),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-      ],
+      ),
     );
   }
 

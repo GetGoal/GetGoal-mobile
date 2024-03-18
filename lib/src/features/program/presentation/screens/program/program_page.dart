@@ -340,7 +340,7 @@ class _ProgramPageState extends State<ProgramPage> {
                 ),
           enabledBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(36)),
-            borderSide: BorderSide(color: AppColors.stock, width: 1),
+            borderSide: BorderSide(color: AppColors.stroke, width: 1),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(36)),

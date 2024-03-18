@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../config/route_config.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
@@ -12,6 +13,8 @@ import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../domain/entities/task.dart';
 import '../../bloc/task_detail/task_detail_bloc.dart';
+import '../../enum/task_form_mode_enum.dart';
+import '../task_create/task_create_page.dart';
 
 class TaskDetailPage extends StatefulWidget {
   const TaskDetailPage({
@@ -90,12 +93,12 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
       children: [
         Text(
           'Task name',
-          style: body1().copyWith(color: AppColors.description),
+          style: bodyBold().copyWith(color: AppColors.description),
         ),
         const SizedBox(
           height: 4,
         ),
-        Text(taskName, style: heading3()),
+        Text(taskName, style: bodyRegular().copyWith(color: AppColors.white)),
       ],
     );
   }
@@ -106,12 +109,12 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
       children: [
         Text(
           'Description',
-          style: body1().copyWith(color: AppColors.description),
+          style: bodyBold().copyWith(color: AppColors.description),
         ),
         const SizedBox(
           height: 4,
         ),
-        Text(taskDesc, style: body2()),
+        Text(taskDesc, style: bodyRegular().copyWith(color: AppColors.white)),
       ],
     );
   }
@@ -122,14 +125,14 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
       children: [
         Text(
           'Date',
-          style: body1().copyWith(color: AppColors.description),
+          style: bodyBold().copyWith(color: AppColors.description),
         ),
         const SizedBox(
           height: 4,
         ),
         Text(
           DateFormat.yMd().add_jm().format(DateTime.parse(taskStartTime)),
-          style: body2(),
+          style: bodyRegular().copyWith(color: AppColors.white),
         ),
       ],
     );
@@ -141,12 +144,13 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
       children: [
         Text(
           'Reminder',
-          style: body1().copyWith(color: AppColors.description),
+          style: bodyBold().copyWith(color: AppColors.description),
         ),
         const SizedBox(
           height: 4,
         ),
-        Text('$taskNoti Minute before start', style: body2()),
+        Text('$taskNoti Minute before start',
+            style: bodyRegular().copyWith(color: AppColors.white)),
       ],
     );
   }
@@ -158,15 +162,30 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // MainButton(
-          //   buttonText: 'Edit',
-          //   onTap: () {},
-          // ),
-          // const SizedBox(height: 16),
+          MainButton(
+            buttonText: 'Edit',
+            onTap: () async {
+              bool? isRefreash = await context.pushNamed(
+                Routes.taskCreatepage,
+                extra: TaskCreatePageData(
+                  mode: TASKFORMMODE.edit,
+                  taskId: widget.taskId,
+                ),
+              );
+              if (isRefreash!) {
+                _taskDetailBloc
+                    .add(TaskDetailEvent.started(taskId: widget.taskId!));
+              }
+            },
+          ),
+          const SizedBox(height: 16),
           MainButton(
             buttonText: 'Delete',
-            buttonColor: AppColors.white,
-            textColor: AppColors.red,
+            buttonColor: [
+              AppColors.secondary,
+              AppColors.secondary,
+            ],
+            isHaveBoxShadow: true,
             onTap: () {
               _taskDetailBloc
                   .add(TaskDetailEvent.onTappedDelete(taskId: taskId));

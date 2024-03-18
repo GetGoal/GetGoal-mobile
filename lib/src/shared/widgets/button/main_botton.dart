@@ -8,7 +8,7 @@ class MainButton extends StatelessWidget {
     super.key,
     this.onTap,
     this.buttonText,
-    this.buttonColor,
+    this.buttonColor = const <Color>[],
     this.isHaveStrock = false,
     this.textColor,
     this.icon,
@@ -18,7 +18,7 @@ class MainButton extends StatelessWidget {
 
   final GestureTapCallback? onTap;
   final String? buttonText;
-  final Color? buttonColor;
+  final List<Color>? buttonColor;
   final bool? isHaveStrock;
   final Color? textColor;
   final Widget? icon;
@@ -39,10 +39,12 @@ class MainButton extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
-            colors: [
-              AppColors.primary,
-              AppColors.primary2,
-            ],
+            colors: buttonColor!.isEmpty
+                ? [
+                    AppColors.primary,
+                    AppColors.primary2,
+                  ]
+                : buttonColor!,
           ),
           borderRadius: BorderRadius.circular(36),
           border: isHaveStrock! ? Border.all(color: AppColors.primary2) : null,

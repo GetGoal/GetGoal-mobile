@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../../config/route_config.dart';
 import '../../../../../shared/icon.dart';
+import '../../../../../shared/themes/color.dart';
+import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../program/presentation/screens/program/program_page.dart';
 import '../../../../task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../../../../task/presentation/screens/home/screens/home_page.dart';
+import '../../../../user/presentation/screens/bloc/user_profile/user_profile_bloc.dart';
 import '../../../../user/presentation/screens/user_profile_page.dart';
 import '../../bloc/main_page/main_page_bloc.dart';
 import 'widgets/bottom_nav_widget.dart';
@@ -23,6 +24,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   MainPageBloc get _mainPageBloc => context.read<MainPageBloc>();
   TodoBloc get _todoBloc => context.read<TodoBloc>();
+  UserProfileBloc get _userProfileBloc => context.read<UserProfileBloc>();
 
   List<Widget> pages = [
     const HomePage(),
@@ -35,6 +37,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     _mainPageBloc.add(const MainPageEvent.started());
+    _userProfileBloc.add(const UserProfileEvent.started());
     super.initState();
   }
 
@@ -44,17 +47,53 @@ class _MainPageState extends State<MainPage> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: state.bottomNavSelected == 0 ? 72 : null,
             title: Padding(
               padding: EdgeInsets.only(
                 top: AppSpacing.appMargin,
               ),
-              child: Text(state.appbarTitle),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  state.bottomNavSelected == 0
+                      ? BlocConsumer<UserProfileBloc, UserProfileState>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            switch (state) {
+                              case UserProfileStateInitial():
+                                return const SizedBox();
+                              case UserProfileStateLoading():
+                                return const SizedBox();
+                              case UserProfileStateLoadedSuccess(:final user):
+                                return Text(
+                                  'Welcome back, ${user.firstName}',
+                                  style: bodyRegular()
+                                      .copyWith(color: AppColors.white),
+                                );
+                              case UserProfileStateError():
+                                return Text('Error', style: title1());
+                              default:
+                                return const SizedBox();
+                            }
+                          },
+                        )
+                      : const SizedBox(),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        state.appbarTitle,
+                        style: title1Bold().copyWith(color: AppColors.white),
+                      ),
+                      const Spacer(),
+                      state.bottomNavSelected == 0
+                          ? _buildNotificationIconAction()
+                          : const SizedBox(),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            actions: [
-              state.bottomNavSelected == 0
-                  ? _settingIconAction()
-                  : const SizedBox(),
-            ],
           ),
           body: pages[state.bottomNavSelected],
           bottomNavigationBar: BottomNavigation(
@@ -67,22 +106,14 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Widget _settingIconAction() {
-    return Container(
-      margin: EdgeInsets.only(
-        top: AppSpacing.appMargin,
-        right: AppSpacing.appMargin,
-      ),
-      child: GestureDetector(
-        onTap: () {
-          context.push(Routes.settingPage);
-        },
-        child: SizedBox(
-          child: SvgPicture.asset(
-            AppIcon.setting_icon,
-            width: 32,
-            fit: BoxFit.scaleDown,
-          ),
+  Widget _buildNotificationIconAction() {
+    return GestureDetector(
+      onTap: () {},
+      child: SizedBox(
+        child: SvgPicture.asset(
+          AppIcon.notification_icon,
+          width: 36,
+          fit: BoxFit.scaleDown,
         ),
       ),
     );

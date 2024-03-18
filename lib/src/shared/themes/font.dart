@@ -63,6 +63,26 @@ TextStyle subHeadlineBold() {
   );
 }
 
+TextStyle caption1Regular() {
+  return const TextStyle(
+    fontSize: 12,
+    color: Colors.black,
+    fontWeight: FontWeight.normal,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
+TextStyle caption1Bold() {
+  return const TextStyle(
+    fontSize: 12,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
 TextStyle heading1() {
   return const TextStyle(
     fontSize: 36,

@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
         height: 36,
       ),
       buttonText: 'Continue with Google',
-      buttonColor: AppColors.white,
+      buttonColor: [AppColors.secondary, AppColors.secondary],
       isHaveBoxShadow: true,
       onTap: () {},
     );

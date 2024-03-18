@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import '../../../../../../../shared/icon.dart';
 import '../../../../../../../shared/themes/color.dart';
 import '../../../../../../../shared/themes/font.dart';
+import '../../../../../../../shared/widgets/icon/custom_icon.dart';
+import '../../../../../../../shared/widgets/text/get_goal_gradient_text.dart';
 
 enum TASKSTATUS {
   todo,
@@ -18,6 +20,7 @@ class TodoTask extends StatelessWidget {
     this.taskDescription,
     this.startTime,
     this.endTime,
+    this.category,
     this.taskStatus,
     this.ontap,
     this.onEdit,
@@ -29,6 +32,7 @@ class TodoTask extends StatelessWidget {
   final String? taskDescription;
   final String? startTime;
   final String? endTime;
+  final String? category;
   final TASKSTATUS? taskStatus;
   final GestureTapCallback? ontap;
   final GestureTapCallback? onEdit;
@@ -40,36 +44,41 @@ class TodoTask extends StatelessWidget {
     return GestureDetector(
       onTap: ontap,
       child: Container(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
         width: double.infinity,
-        decoration: BoxDecoration(
-          boxShadow: AppShadow.shadow,
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(12),
+        decoration: const BoxDecoration(
+          color: Colors.transparent,
         ),
         child: IntrinsicHeight(
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _taskCircle(taskStatus!),
-              const SizedBox(width: 12),
+              SizedBox(
+                width: 48,
+                child: GetGoalGradientText(
+                  DateFormat.jm().format(DateTime.parse(startTime!)),
+                  textAlign: TextAlign.center,
+                  style: bodyBold(),
+                  gradient: taskStatus == TASKSTATUS.todo
+                      ? null
+                      : [AppColors.description, AppColors.description],
+                ),
+              ),
               Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _taskName(),
+                    const SizedBox(height: 4),
                     _taskDescription(),
                     const SizedBox(height: 4),
-                    _taskDuration(taskStatus!),
-                    const SizedBox(
-                      width: double.infinity,
-                    ),
+                    _taskCategory(),
                   ],
                 ),
               ),
-              Container(
-                alignment: Alignment.topRight,
-                child: _taskEditButton(),
-              ),
+              const Spacer(),
+              _taskCircle(taskStatus!),
             ],
           ),
         ),
@@ -87,7 +96,7 @@ class TodoTask extends StatelessWidget {
             height: 62,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.primary),
+              border: Border.all(color: AppColors.primary2),
             ),
           ),
         );
@@ -95,16 +104,17 @@ class TodoTask extends StatelessWidget {
         return GestureDetector(
           onTap: onUnDoneTapped,
           child: Container(
-            width: 36,
-            height: 36,
+            width: 24,
+            height: 62,
             decoration: BoxDecoration(
-              color: AppColors.secondary,
               shape: BoxShape.circle,
+              color: AppColors.primary2,
+              boxShadow: AppShadow.shadow,
             ),
-            child: SvgPicture.asset(
-              AppIcon.check_icon,
-              fit: BoxFit.scaleDown,
-              height: 24,
+            child: CustomIcon(
+              icon: AppIcon.check_icon,
+              iconColor: AppColors.white,
+              size: 16,
             ),
           ),
         );
@@ -116,14 +126,31 @@ class TodoTask extends StatelessWidget {
   Widget _taskName() {
     return Text(
       taskName ?? '',
-      style: body1(),
+      style: bodyBold().copyWith(
+        color: taskStatus == TASKSTATUS.todo
+            ? AppColors.white
+            : AppColors.description,
+      ),
     );
   }
 
   Widget _taskDescription() {
     return Text(
       taskDescription ?? '-',
-      style: description().copyWith(color: AppColors.description),
+      style: caption1Regular().copyWith(
+        color: taskStatus == TASKSTATUS.todo
+            ? AppColors.white
+            : AppColors.description,
+      ),
+    );
+  }
+
+  Widget _taskCategory() {
+    return Text(
+      category ?? '-',
+      style: caption1Regular().copyWith(
+        color: AppColors.description,
+      ),
     );
   }
 
