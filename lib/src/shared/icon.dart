@@ -33,4 +33,5 @@ class AppIcon {
   static const String google_icon = 'assets/icons/google_icon.svg';
   static const String menu_icon = 'assets/icons/menu_icon.svg';
   static const String trash_icon = 'assets/icons/trash_icon.svg';
+  static const String notification_icon = 'assets/icons/notification_icon.svg';
 }
