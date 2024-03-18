@@ -42,7 +42,7 @@ class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
       appbarTitle: Translations.of(context).create_program.create_task_list,
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(16),
           child: Column(
             children: [
               _buildProgramTaskSection(),
@@ -100,7 +100,6 @@ class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
       onTap: () async {
         bool? isRefresh = await context.pushNamed(
           Routes.taskCreatepage,
-          // extra: TASKFORMMODE.program,
           extra: TaskCreatePageData(
             mode: TASKFORMMODE.program,
           ),
@@ -116,7 +115,7 @@ class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
         radius: const Radius.circular(16),
         padding: const EdgeInsets.all(24),
         borderType: BorderType.RRect,
-        color: AppColors.description,
+        color: AppColors.primary2,
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
