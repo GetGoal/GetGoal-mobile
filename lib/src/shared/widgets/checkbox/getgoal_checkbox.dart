@@ -26,7 +26,7 @@ class GetGoalCheckbox extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4.0),
           border: Border.all(
-            color: value ? AppColors.primary : AppColors.strock,
+            color: value ? AppColors.primary : AppColors.stroke,
           ),
         ),
         child: value

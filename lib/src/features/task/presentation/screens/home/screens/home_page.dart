@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
           margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
           child: ListView.separated(
             separatorBuilder: (context, index) => Divider(
-              color: AppColors.strock,
+              color: AppColors.stroke,
             ),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
