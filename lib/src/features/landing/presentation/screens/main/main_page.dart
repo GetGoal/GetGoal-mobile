@@ -9,6 +9,7 @@ import '../../../../../shared/themes/spacing.dart';
 import '../../../../program/presentation/screens/program/program_page.dart';
 import '../../../../task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../../../../task/presentation/screens/home/screens/home_page.dart';
+import '../../../../user/presentation/screens/bloc/user_profile/user_profile_bloc.dart';
 import '../../../../user/presentation/screens/user_profile_page.dart';
 import '../../bloc/main_page/main_page_bloc.dart';
 import 'widgets/bottom_nav_widget.dart';
@@ -23,6 +24,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   MainPageBloc get _mainPageBloc => context.read<MainPageBloc>();
   TodoBloc get _todoBloc => context.read<TodoBloc>();
+  UserProfileBloc get _userProfileBloc => context.read<UserProfileBloc>();
 
   List<Widget> pages = [
     const HomePage(),
@@ -35,6 +37,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     _mainPageBloc.add(const MainPageEvent.started());
+    _userProfileBloc.add(const UserProfileEvent.started());
     super.initState();
   }
 
@@ -53,9 +56,26 @@ class _MainPageState extends State<MainPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   state.bottomNavSelected == 0
-                      ? Text(
-                          'Welcome back, Richard',
-                          style: bodyRegular().copyWith(color: AppColors.white),
+                      ? BlocConsumer<UserProfileBloc, UserProfileState>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            switch (state) {
+                              case UserProfileStateInitial():
+                                return const SizedBox();
+                              case UserProfileStateLoading():
+                                return const SizedBox();
+                              case UserProfileStateLoadedSuccess(:final user):
+                                return Text(
+                                  'Welcome back, ${user.firstName} ${user.lastName}',
+                                  style: bodyRegular()
+                                      .copyWith(color: AppColors.white),
+                                );
+                              case UserProfileStateError():
+                                return Text('Error', style: title1());
+                              default:
+                                return const SizedBox();
+                            }
+                          },
                         )
                       : const SizedBox(),
                   Row(
