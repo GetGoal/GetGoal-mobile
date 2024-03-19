@@ -13,6 +13,7 @@
         "empty_task_done": "ไม่มีรายการที่ทำเสร็จ"
     },
     "user_profile": {
+        "page_title": "โปรไฟล์ของฉัน",
         "display_your_program": "โปรแกรมของฉัน",
         "display_save_program": "บันทึก",
         "display_applied_program": "รับสมัคร",
