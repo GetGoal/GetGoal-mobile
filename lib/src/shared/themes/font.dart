@@ -6,7 +6,7 @@ const List<String> fontFamilyFallback = ['IBMPlexSansThai'];
 TextStyle title1Bold() {
   return const TextStyle(
     fontSize: 34,
-    color: Colors.black,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,
     fontFamilyFallback: fontFamilyFallback,
@@ -16,7 +16,7 @@ TextStyle title1Bold() {
 TextStyle title2Bold() {
   return const TextStyle(
     fontSize: 22,
-    color: Colors.black,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,
     fontFamilyFallback: fontFamilyFallback,
@@ -26,7 +26,7 @@ TextStyle title2Bold() {
 TextStyle bodyRegular() {
   return const TextStyle(
     fontSize: 17,
-    color: Colors.black,
+    color: Colors.white,
     fontWeight: FontWeight.normal,
     fontFamily: fontFamily,
     fontFamilyFallback: fontFamilyFallback,
@@ -36,7 +36,7 @@ TextStyle bodyRegular() {
 TextStyle bodyBold() {
   return const TextStyle(
     fontSize: 17,
-    color: Colors.black,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,
     fontFamilyFallback: fontFamilyFallback,
@@ -46,7 +46,7 @@ TextStyle bodyBold() {
 TextStyle subHeadlineRegular() {
   return const TextStyle(
     fontSize: 15,
-    color: Colors.black,
+    color: Colors.white,
     fontWeight: FontWeight.normal,
     fontFamily: fontFamily,
     fontFamilyFallback: fontFamilyFallback,
@@ -56,8 +56,18 @@ TextStyle subHeadlineRegular() {
 TextStyle subHeadlineBold() {
   return const TextStyle(
     fontSize: 15,
-    color: Colors.black,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
+TextStyle footnoteRegular() {
+  return const TextStyle(
+    fontSize: 13,
+    color: Colors.white,
+    fontWeight: FontWeight.normal,
     fontFamily: fontFamily,
     fontFamilyFallback: fontFamilyFallback,
   );
@@ -66,7 +76,7 @@ TextStyle subHeadlineBold() {
 TextStyle caption1Regular() {
   return const TextStyle(
     fontSize: 12,
-    color: Colors.black,
+    color: Colors.white,
     fontWeight: FontWeight.normal,
     fontFamily: fontFamily,
     fontFamilyFallback: fontFamilyFallback,
@@ -76,7 +86,27 @@ TextStyle caption1Regular() {
 TextStyle caption1Bold() {
   return const TextStyle(
     fontSize: 12,
-    color: Colors.black,
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
+TextStyle caption2Regular() {
+  return const TextStyle(
+    fontSize: 11,
+    color: Colors.white,
+    fontWeight: FontWeight.normal,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+  );
+}
+
+TextStyle caption2Bold() {
+  return const TextStyle(
+    fontSize: 11,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,
     fontFamilyFallback: fontFamilyFallback,

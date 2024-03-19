@@ -82,7 +82,9 @@ class NormalTextInputField extends StatelessWidget {
               isDense: true,
               hintText: hintText,
 
-              hintStyle: subHeadlineRegular().copyWith(color: AppColors.white),
+              hintStyle: subHeadlineRegular().copyWith(
+                color: AppColors.description,
+              ),
               errorStyle: subHeadlineRegular().copyWith(color: AppColors.red),
 
               // Background color

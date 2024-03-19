@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
@@ -47,7 +48,10 @@ class _MainPageState extends State<MainPage> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            toolbarHeight: state.bottomNavSelected == 0 ? 72 : null,
+            toolbarHeight:
+                state.bottomNavSelected == 0 || state.bottomNavSelected == 1
+                    ? 96
+                    : null,
             title: Padding(
               padding: EdgeInsets.only(
                 top: AppSpacing.appMargin,
@@ -91,6 +95,15 @@ class _MainPageState extends State<MainPage> {
                           : const SizedBox(),
                     ],
                   ),
+                  state.bottomNavSelected == 1
+                      ? Text(
+                          Translations.of(context).program.page_description,
+                          style: caption2Regular().copyWith(
+                            color: AppColors.description,
+                          ),
+                          maxLines: 2,
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),

@@ -19,10 +19,10 @@ class CustomIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       icon,
-      fit: BoxFit.scaleDown,
       width: size,
+      fit: BoxFit.scaleDown,
       colorFilter: ColorFilter.mode(
-        iconColor ?? AppColors.black,
+        iconColor ?? AppColors.white,
         BlendMode.srcIn,
       ),
     );

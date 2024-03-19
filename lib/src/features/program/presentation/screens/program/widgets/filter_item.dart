@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../../shared/themes/color.dart';
+import '../../../../../../shared/themes/font.dart';
 
 class FilterItem extends StatelessWidget {
   const FilterItem({
@@ -21,11 +22,21 @@ class FilterItem extends StatelessWidget {
       onTap: onTapped,
       child: Container(
         decoration: BoxDecoration(
-          color: selected == currentIndex ? AppColors.primary : Colors.white,
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomRight,
+            colors: selected == currentIndex
+                ? [
+                    AppColors.primary,
+                    AppColors.primary2,
+                  ]
+                : [
+                    AppColors.secondary,
+                    AppColors.secondary,
+                  ],
+          ),
           borderRadius: BorderRadius.circular(24),
-          border: selected == currentIndex
-              ? Border.all(color: AppColors.primary, width: 1)
-              : Border.all(color: Colors.black12, width: 1),
+          boxShadow: AppShadow.shadow,
         ),
         height: 32,
         child: Center(
@@ -33,7 +44,7 @@ class FilterItem extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               title,
-              style: const TextStyle(fontSize: 12),
+              style: caption1Regular().copyWith(color: AppColors.white),
             ),
           ),
         ),
