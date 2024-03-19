@@ -38,7 +38,7 @@ class GetGoalScaffold extends StatelessWidget {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: isGredientBackground!
-                  ? [AppColors.background2, AppColors.background3]
+                  ? [AppColors.lightOrange, AppColors.lightDarkBlue]
                   : [AppColors.background, AppColors.background],
             ),
           ),

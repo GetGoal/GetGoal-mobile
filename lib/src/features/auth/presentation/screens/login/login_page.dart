@@ -8,6 +8,7 @@ import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
+import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
@@ -39,7 +40,7 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
         alignment: Alignment.center,
         child: Form(
           key: _formKey,
@@ -114,6 +115,7 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
         ),
         const SizedBox(height: 8),
         GestureDetector(
+          onTap: () => context.pushNamed(Routes.forgetPasswordPage),
           child: Text(
             'Forgot password?',
             style: body2().copyWith(color: AppColors.primary),

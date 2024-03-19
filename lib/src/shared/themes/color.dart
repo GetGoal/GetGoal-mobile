@@ -10,6 +10,8 @@ class AppColors {
   static Color description = HexColor.fromHex('8C8C8C');
   static Color red = HexColor.fromHex('AD1F1F');
   static Color background = HexColor.fromHex('0A0A10');
+  static Color lightOrange = HexColor.fromHex('493B2B');
+  static Color lightDarkBlue = HexColor.fromHex('1E2234');
 
   static MaterialColor primaryWhite = const MaterialColor(
     _whilteMaterialColor,

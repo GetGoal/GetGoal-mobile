@@ -8,6 +8,7 @@ import '../features/auth/domain/usecase/auth/create_account_usecase.dart';
 import '../features/auth/domain/usecase/auth/login_usecase.dart';
 import '../features/auth/domain/usecase/auth/logout_usecase.dart';
 import '../features/auth/domain/usecase/auth/verify_account_usecase.dart';
+import '../features/auth/presentation/screens/forget_password/bloc/forget_password/forget_password_bloc.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
@@ -254,6 +255,9 @@ Future<void> _initBlocs() async {
   );
   getIt.registerFactory<LogoutBloc>(
     () => LogoutBloc(getIt()),
+  );
+  getIt.registerFactory<ForgetPasswordBloc>(
+    () => ForgetPasswordBloc(),
   );
 
   // Initialize Bloc for user feature

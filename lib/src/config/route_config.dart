@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/di.dart';
+import '../features/auth/presentation/screens/forget_password/bloc/forget_password/forget_password_bloc.dart';
+import '../features/auth/presentation/screens/forget_password/forget_password_page.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/login/login_page.dart';
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
@@ -56,6 +58,7 @@ class RouteConfig {
       _taskDetailPage(),
       _programCreatePage(),
       _programTaskCreate(),
+      _forgetPasswordPage(),
     ],
   );
 
@@ -279,6 +282,21 @@ class RouteConfig {
       ),
     );
   }
+
+  static GoRoute _forgetPasswordPage() {
+    return GoRoute(
+      path: Routes.forgetPasswordPage,
+      name: Routes.forgetPasswordPage,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<ForgetPasswordBloc>(),
+          ),
+        ],
+        child: const ForgetPasswordPage(),
+      ),
+    );
+  }
 }
 
 class Routes {
@@ -297,4 +315,5 @@ class Routes {
   static const String taskDetailPage = '/task/detail';
   static const String settingPage = '/setting';
   static const String userProfilePage = '/user/profile';
+  static const String forgetPasswordPage = '/forget_password';
 }
