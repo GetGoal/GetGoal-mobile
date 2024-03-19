@@ -31,6 +31,19 @@ class BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final day = DateFormat.d(LocaleSettings.currentLocale.languageCode)
+        .format(DateTime.now());
+    final month = DateFormat.MMMM(LocaleSettings.currentLocale.languageCode)
+        .format(DateTime.now());
+    final year = LocaleSettings.currentLocale.languageCode == 'en'
+        ? DateFormat.y(LocaleSettings.currentLocale.languageCode)
+            .format(DateTime.now())
+        : int.parse(
+              DateFormat.y(LocaleSettings.currentLocale.languageCode)
+                  .format(DateTime.now()),
+            ) +
+            543;
+
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -59,8 +72,7 @@ class BottomNavigation extends StatelessWidget {
               ontap: () => mainPageBloc!.add(
                 MainPageEvent.bottomNavTapped(
                   bottomNavSelected: 0,
-                  appbarTitle:
-                      DateFormat('MMMM, dd yyyy').format(DateTime.now()),
+                  appbarTitle: '$month, $day $year',
                 ),
               ),
             ),
@@ -105,9 +117,10 @@ class BottomNavigation extends StatelessWidget {
               currentIndex: bottomNavSelected,
               ontap: () {
                 mainPageBloc!.add(
-                  const MainPageEvent.bottomNavTapped(
+                  MainPageEvent.bottomNavTapped(
                     bottomNavSelected: 4,
-                    appbarTitle: '',
+                    appbarTitle:
+                        Translations.of(context).user_profile.page_title,
                   ),
                 );
               },

@@ -64,12 +64,25 @@ class _HomePageState extends State<HomePage> {
       initialDate: DateTime.now().subtract(const Duration(days: 3650)),
       currentDate: DateTime.now(),
       ontap: (date) {
+        final day = DateFormat.d(LocaleSettings.currentLocale.languageCode)
+            .format(date);
+        final month = DateFormat.MMMM(LocaleSettings.currentLocale.languageCode)
+            .format(date);
+        final year = LocaleSettings.currentLocale.languageCode == 'en'
+            ? DateFormat.y(LocaleSettings.currentLocale.languageCode)
+                .format(date)
+            : int.parse(
+                  DateFormat.y(LocaleSettings.currentLocale.languageCode)
+                      .format(date),
+                ) +
+                543;
+
         _dateTimelineBloc.add(DateTimelineEvent.tapped(selectedTime: date));
         _todoBloc.add(TodoEvent.dateSelectorTapped(date: date));
         _mainPageBloc.add(
           MainPageEvent.bottomNavTapped(
             bottomNavSelected: 0,
-            appbarTitle: DateFormat('MMMM, dd yyyy').format(date),
+            appbarTitle: '$month, $day $year',
           ),
         );
       },

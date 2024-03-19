@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../config/i18n/strings.g.dart';
+import '../../../../../config/route_config.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
+import '../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../program/presentation/screens/program/program_page.dart';
 import '../../../../task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../../../../task/presentation/screens/home/screens/home_page.dart';
@@ -93,6 +96,9 @@ class _MainPageState extends State<MainPage> {
                       state.bottomNavSelected == 0
                           ? _buildNotificationIconAction()
                           : const SizedBox(),
+                      state.bottomNavSelected == 4
+                          ? _buildSettingIconAction()
+                          : const SizedBox(),
                     ],
                   ),
                   state.bottomNavSelected == 1
@@ -127,6 +133,29 @@ class _MainPageState extends State<MainPage> {
           AppIcon.notification_icon,
           width: 36,
           fit: BoxFit.scaleDown,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSettingIconAction() {
+    return GestureDetector(
+      onTap: () async {
+        bool? isRefreash = await context.pushNamed(Routes.settingPage);
+        if (isRefreash!) {
+          if (context.mounted) {
+            _mainPageBloc.add(
+              MainPageEvent.bottomNavTapped(
+                bottomNavSelected: 4,
+                appbarTitle: context.t.user_profile.page_title,
+              ),
+            );
+          }
+        }
+      },
+      child: const SizedBox(
+        child: CustomIcon(
+          icon: AppIcon.setting_icon,
         ),
       ),
     );
