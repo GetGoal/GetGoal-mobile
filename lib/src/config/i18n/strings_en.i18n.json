@@ -79,5 +79,8 @@
         "languages": "languages",
         "english": "English",
         "thai": "Thai"
+    },
+    "forget_password": {
+        "page_title": "Forget password"
     }
 }
