@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 120 (60 per locale)
+/// Strings: 122 (61 per locale)
 ///
-/// Built on 2024-03-18 at 17:05 UTC
+/// Built on 2024-03-19 at 11:04 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -194,6 +194,7 @@ class _StringsUserProfileEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get page_title => 'My profile';
 	String get display_your_program => 'Your program';
 	String get display_save_program => 'Save';
 	String get display_applied_program => 'Applied';
@@ -380,6 +381,7 @@ class _StringsUserProfileTh implements _StringsUserProfileEn {
 	@override final _StringsTh _root; // ignore: unused_field
 
 	// Translations
+	@override String get page_title => 'โปรไฟล์ของฉัน';
 	@override String get display_your_program => 'โปรแกรมของฉัน';
 	@override String get display_save_program => 'บันทึก';
 	@override String get display_applied_program => 'รับสมัคร';
@@ -511,6 +513,7 @@ extension on Translations {
 			case 'task.empty_task': return 'No tasks';
 			case 'task.empty_task_todo': return 'Wow! There aren\'t any tasks left to do.\nGreat job! <3';
 			case 'task.empty_task_done': return 'Nothing done';
+			case 'user_profile.page_title': return 'My profile';
 			case 'user_profile.display_your_program': return 'Your program';
 			case 'user_profile.display_save_program': return 'Save';
 			case 'user_profile.display_applied_program': return 'Applied';
@@ -579,6 +582,7 @@ extension on _StringsTh {
 			case 'task.empty_task': return 'ไม่มีรายการที่ต้องทำ';
 			case 'task.empty_task_todo': return 'สุดยอด! ไม่มีรายการที่ต้องทำแล้ว.\nเก่งมาก! <3';
 			case 'task.empty_task_done': return 'ไม่มีรายการที่ทำเสร็จ';
+			case 'user_profile.page_title': return 'โปรไฟล์ของฉัน';
 			case 'user_profile.display_your_program': return 'โปรแกรมของฉัน';
 			case 'user_profile.display_save_program': return 'บันทึก';
 			case 'user_profile.display_applied_program': return 'รับสมัคร';
