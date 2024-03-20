@@ -31,7 +31,8 @@ class _NewPasswordPageState extends State<NewPasswordPage>
   @override
   Widget build(BuildContext context) {
     return GetGoalScaffold(
-      appbarTitle: context.t.forget_password.page_title,
+      appbarTitle: context.t.new_password.page_title,
+      pageDescription: 'Please fill your new password below',
       isGredientBackground: true,
       body: Form(
         key: _formKey,
