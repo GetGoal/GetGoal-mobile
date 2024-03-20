@@ -7,6 +7,8 @@ import '../features/auth/presentation/screens/forget_password/bloc/forget_passwo
 import '../features/auth/presentation/screens/forget_password/forget_password_page.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/login/login_page.dart';
+import '../features/auth/presentation/screens/new_password/bloc/new_password/new_password_bloc.dart';
+import '../features/auth/presentation/screens/new_password/new_password_page.dart';
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
 import '../features/auth/presentation/screens/sign_up/sign_up_page.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
@@ -59,6 +61,7 @@ class RouteConfig {
       _programCreatePage(),
       _programTaskCreate(),
       _forgetPasswordPage(),
+      _newPasswordPage(),
     ],
   );
 
@@ -297,6 +300,21 @@ class RouteConfig {
       ),
     );
   }
+
+  static GoRoute _newPasswordPage() {
+    return GoRoute(
+      path: Routes.newPasswordPage,
+      name: Routes.newPasswordPage,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<NewPasswordBloc>(),
+          ),
+        ],
+        child: const NewPasswordPage(),
+      ),
+    );
+  }
 }
 
 class Routes {
@@ -316,4 +334,5 @@ class Routes {
   static const String settingPage = '/setting';
   static const String userProfilePage = '/user/profile';
   static const String forgetPasswordPage = '/forget_password';
+  static const String newPasswordPage = '/new_password';
 }
