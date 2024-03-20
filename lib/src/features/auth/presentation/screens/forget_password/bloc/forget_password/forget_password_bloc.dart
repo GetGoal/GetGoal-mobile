@@ -10,7 +10,14 @@ part 'forget_password_bloc.freezed.dart';
 class ForgetPasswordBloc
     extends Bloc<ForgetPasswordEvent, ForgetPasswordState> {
   ForgetPasswordBloc() : super(const ForgetPasswordState.initial()) {
+    on<ForgetPasswordEventStarted>(_onStarted);
     on<ForgetPasswordEventOnSubmited>(_onSubmited);
+  }
+  FutureOr<void> _onStarted(
+    ForgetPasswordEventStarted event,
+    Emitter<ForgetPasswordState> emit,
+  ) {
+    emit(const ForgetPasswordState.initial());
   }
 
   FutureOr<void> _onSubmited(

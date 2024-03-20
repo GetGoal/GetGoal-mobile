@@ -63,10 +63,13 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage>
 
   Widget _buildSubmitButton() {
     return BlocConsumer<ForgetPasswordBloc, ForgetPasswordState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         switch (state) {
           case ForgetPasswordStateSuccess():
-            context.pushNamed(Routes.newPasswordPage);
+            bool? isRefresh = await context.pushNamed(Routes.newPasswordPage);
+            if (isRefresh!) {
+              _forgetPasswordBloc.add(const ForgetPasswordEvent.started());
+            }
           case ForgetPasswordStateFailure():
           default:
         }
