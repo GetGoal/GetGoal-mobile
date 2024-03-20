@@ -82,5 +82,8 @@
     },
     "forget_password": {
         "page_title": "Forget password"
+    },
+    "new_password": {
+        "page_title": "New password"
     }
 }
