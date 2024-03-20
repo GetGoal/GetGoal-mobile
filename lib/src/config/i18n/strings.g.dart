@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 126 (63 per locale)
 ///
-/// Built on 2024-03-20 at 04:11 UTC
+/// Built on 2024-03-20 at 08:42 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -320,7 +320,7 @@ class _StringsForgetPasswordEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get page_title => 'Forget password';
+	String get page_title => 'Reset password';
 }
 
 // Path: new_password
@@ -330,7 +330,7 @@ class _StringsNewPasswordEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get page_title => 'New password';
+	String get page_title => 'Set new password';
 }
 
 // Path: <root>
@@ -609,8 +609,8 @@ extension on Translations {
 			case 'setting.languages': return 'languages';
 			case 'setting.english': return 'English';
 			case 'setting.thai': return 'Thai';
-			case 'forget_password.page_title': return 'Forget password';
-			case 'new_password.page_title': return 'New password';
+			case 'forget_password.page_title': return 'Reset password';
+			case 'new_password.page_title': return 'Set new password';
 			default: return null;
 		}
 	}

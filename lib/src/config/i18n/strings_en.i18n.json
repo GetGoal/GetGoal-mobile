@@ -81,9 +81,9 @@
         "thai": "Thai"
     },
     "forget_password": {
-        "page_title": "Forget password"
+        "page_title": "Reset password"
     },
     "new_password": {
-        "page_title": "New password"
+        "page_title": "Set new password"
     }
 }
