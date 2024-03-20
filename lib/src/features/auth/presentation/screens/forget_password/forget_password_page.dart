@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../config/i18n/strings.g.dart';
+import '../../../../../config/route_config.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
@@ -64,6 +66,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage>
       listener: (context, state) {
         switch (state) {
           case ForgetPasswordStateSuccess():
+            context.pushNamed(Routes.newPasswordPage);
           case ForgetPasswordStateFailure():
           default:
         }
