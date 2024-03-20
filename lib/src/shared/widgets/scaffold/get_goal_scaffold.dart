@@ -83,12 +83,15 @@ class GetGoalScaffold extends StatelessWidget {
                   )
                 : const SizedBox(),
             SizedBox(width: isShowBackButton! ? 16 : 0),
-            Text(
-              appbarTitle ?? '',
-              style: title1Bold().copyWith(color: AppColors.white),
+            Flexible(
+              child: Text(
+                appbarTitle ?? '',
+                style: title1Bold().copyWith(color: AppColors.white),
+              ),
             ),
           ],
         ),
+        const SizedBox(height: 4),
         pageDescription != null
             ? Text(
                 pageDescription!,
