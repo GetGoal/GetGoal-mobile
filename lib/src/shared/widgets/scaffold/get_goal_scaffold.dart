@@ -16,6 +16,7 @@ class GetGoalScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.isShowBackButton = true,
     this.isGredientBackground = false,
+    this.isShowAppbar = true,
     this.onGoBack,
   });
 
@@ -25,6 +26,7 @@ class GetGoalScaffold extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final bool? isShowBackButton;
   final bool? isGredientBackground;
+  final bool? isShowAppbar;
   final Function()? onGoBack;
 
   @override
@@ -51,7 +53,7 @@ class GetGoalScaffold extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _buildAppbar(context),
+                isShowAppbar! ? _buildAppbar(context) : const SizedBox(),
                 const SizedBox(height: 24),
                 SingleChildScrollView(
                   child: body,
