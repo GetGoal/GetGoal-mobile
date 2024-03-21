@@ -79,5 +79,11 @@
         "languages": "ภาษา",
         "english": "อังกฤษ",
         "thai": "ไทย"
+    },
+    "forget_password": {
+        "page_title": "ลืมรหัสผ่าน"
+    },
+    "new_password": {
+        "page_title": "ตั้งรหัสผ่านใหม่"
     }
 }

@@ -79,5 +79,11 @@
         "languages": "languages",
         "english": "English",
         "thai": "Thai"
+    },
+    "forget_password": {
+        "page_title": "Reset password"
+    },
+    "new_password": {
+        "page_title": "Set new password"
     }
 }
