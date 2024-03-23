@@ -5,10 +5,12 @@ import '../features/auth/data/repositories/auth_repository_impl.dart';
 import '../features/auth/data/sources/api/auth_api_service.dart';
 import '../features/auth/domain/repositories/auth_repository.dart';
 import '../features/auth/domain/usecase/auth/create_account_usecase.dart';
+import '../features/auth/domain/usecase/auth/google_sign_in_usecase.dart';
 import '../features/auth/domain/usecase/auth/login_usecase.dart';
 import '../features/auth/domain/usecase/auth/logout_usecase.dart';
 import '../features/auth/domain/usecase/auth/verify_account_usecase.dart';
 import '../features/auth/presentation/screens/forget_password/bloc/forget_password/forget_password_bloc.dart';
+import '../features/auth/presentation/screens/login/bloc/google_login/google_sign_in_bloc.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/new_password/bloc/new_password/new_password_bloc.dart';
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
@@ -192,6 +194,9 @@ Future<void> _initUsecases() async {
   getIt.registerLazySingleton(
     () => LogoutUsecase(getIt()),
   );
+  getIt.registerLazySingleton(
+    () => GoogleSignInUsecase(getIt()),
+  );
 
   // Initialize usecase for user feature
   getIt.registerLazySingleton(
@@ -262,6 +267,9 @@ Future<void> _initBlocs() async {
   );
   getIt.registerFactory<NewPasswordBloc>(
     () => NewPasswordBloc(),
+  );
+  getIt.registerFactory<GoogleSignInBloc>(
+    () => GoogleSignInBloc(getIt()),
   );
 
   // Initialize Bloc for user feature
