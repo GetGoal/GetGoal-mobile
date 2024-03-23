@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../core/bases/base_data_response.dart';
 import '../../../../shared/app_cache.dart';
@@ -8,6 +9,7 @@ import '../../domain/entity/create_user.dart';
 import '../../domain/entity/login_entity.dart';
 import '../../domain/entity/token_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
+import '../models/request/google_sign_in_request.dart';
 import '../models/request/login_request.dart';
 import '../models/request/register_request.dart';
 import '../models/request/verify_request.dart';
@@ -139,6 +141,49 @@ class AuthRepositoryImpl implements AuthRepository {
         message: data['message'],
         count: data['count'],
         data: null,
+        error: data['error'],
+      );
+    }
+  }
+
+  @override
+  Future<BaseDataResponse<TokenEntity>> googleSignIn(
+    String? provider,
+    GoogleSignInAccount? account,
+  ) async {
+    try {
+      final req = GoogleSingInRequest(
+        provider: provider,
+        google: GoogleSignInModel(
+            displayName: account!.displayName,
+            email: account.email,
+            id: account.id,
+            photoUrl: account.photoUrl,
+            serverAuthCode: account.serverAuthCode),
+      );
+
+      final res = await _authApiService.googleSignIn(req);
+
+      final token = TokenEntity(
+        accessToken: res.data.data!.accessToken,
+        refreshToken: res.data.data!.refreshToken,
+      );
+
+      return BaseDataResponse(
+        code: res.data.code,
+        count: res.data.count,
+        message: res.data.message,
+        data: token,
+        error: res.data.error,
+      );
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: data['data'],
         error: data['error'],
       );
     }
