@@ -16,6 +16,8 @@ import '../features/auth/presentation/screens/verification/bloc/verify_account/v
 import '../features/auth/presentation/screens/verification/verification_page.dart';
 import '../features/landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../features/landing/presentation/screens/main/main_page.dart';
+import '../features/notification/presentation/bloc/notification/notification_bloc.dart';
+import '../features/notification/presentation/screens/notification_page.dart';
 import '../features/program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 import '../features/program/presentation/bloc/program/program_bloc.dart';
@@ -63,6 +65,7 @@ class RouteConfig {
       _programTaskCreate(),
       _forgetPasswordPage(),
       _newPasswordPage(),
+      _notificationPage(),
     ],
   );
 
@@ -319,6 +322,21 @@ class RouteConfig {
       ),
     );
   }
+
+  static GoRoute _notificationPage() {
+    return GoRoute(
+      path: Routes.notificationPage,
+      name: Routes.notificationPage,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<NotificationBloc>(),
+          ),
+        ],
+        child: const NotificationPage(),
+      ),
+    );
+  }
 }
 
 class Routes {
@@ -339,4 +357,5 @@ class Routes {
   static const String userProfilePage = '/user/profile';
   static const String forgetPasswordPage = '/forget_password';
   static const String newPasswordPage = '/new_password';
+  static const String notificationPage = '/notification';
 }

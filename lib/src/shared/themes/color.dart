@@ -13,6 +13,16 @@ class AppColors {
   static Color lightOrange = HexColor.fromHex('493B2B');
   static Color lightDarkBlue = HexColor.fromHex('1E2234');
 
+  // Gradient color
+  static LinearGradient primaryGradient = LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomRight,
+    colors: [
+      AppColors.primary,
+      AppColors.primary2,
+    ],
+  );
+
   static MaterialColor primaryWhite = const MaterialColor(
     _whilteMaterialColor,
     <int, Color>{

@@ -127,7 +127,9 @@ class _MainPageState extends State<MainPage> {
 
   Widget _buildNotificationIconAction() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.pushNamed(Routes.notificationPage);
+      },
       child: SizedBox(
         child: SvgPicture.asset(
           AppIcon.notification_icon,
