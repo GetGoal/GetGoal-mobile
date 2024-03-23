@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 
-class ProgramLebel extends StatelessWidget {
-  const ProgramLebel({super.key, required this.title});
+class ProgramLabel extends StatelessWidget {
+  const ProgramLabel({super.key, required this.title});
 
   final String title;
 

@@ -92,7 +92,7 @@ class ProgramCard extends StatelessWidget {
   Widget _programMetaData() {
     return Row(
       children: [
-        ProgramLebel(
+        ProgramLabel(
           title: label?.labelName ?? '',
         ),
         const SizedBox(width: 8),

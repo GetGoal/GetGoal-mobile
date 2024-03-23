@@ -85,5 +85,8 @@
     },
     "new_password": {
         "page_title": "Set new password"
+    },
+    "notification": {
+        "page_title": "Notification"
     }
 }

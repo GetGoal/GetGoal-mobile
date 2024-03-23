@@ -168,7 +168,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
           children: [
             Row(
               children: [
-                ProgramLebel(title: label?.labelName ?? ''),
+                ProgramLabel(title: label?.labelName ?? ''),
                 const SizedBox(width: 8),
                 Text(
                   DateFormat('yMMMd').format(DateTime.now()),
