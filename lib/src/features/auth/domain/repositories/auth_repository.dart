@@ -1,3 +1,5 @@
+import 'package:google_sign_in/google_sign_in.dart';
+
 import '../../../../core/bases/base_data_response.dart';
 import '../entity/create_user.dart';
 import '../entity/login_entity.dart';
@@ -15,4 +17,10 @@ abstract class AuthRepository {
 
   // Logout
   Future<BaseDataResponse> logout();
+
+  // Google Sign In
+  Future<BaseDataResponse<TokenEntity>> googleSignIn(
+    String? provider,
+    GoogleSignInAccount? account,
+  );
 }

@@ -3,6 +3,7 @@ import 'package:retrofit/dio.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../../../core/bases/base_data_response.dart';
+import '../../models/request/google_sign_in_request.dart';
 import '../../models/request/login_request.dart';
 import '../../models/request/register_request.dart';
 import '../../models/request/verify_request.dart';
@@ -31,4 +32,9 @@ abstract class AuthApiService {
 
   @POST('/v1/auth/sign-out')
   Future<HttpResponse<BaseDataResponse>> logout();
+
+  @POST('/v1/auth/external-sign-in')
+  Future<HttpResponse<BaseDataResponse<LoginSuccessResponse>>> googleSignIn(
+    @Body() GoogleSingInRequest requestBody,
+  );
 }
