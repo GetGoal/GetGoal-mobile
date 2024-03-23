@@ -13,12 +13,14 @@
         "empty_task_done": "Nothing done"
     },
     "user_profile": {
+        "page_title": "My profile",
         "display_your_program": "Your program",
         "display_save_program": "Save",
         "display_applied_program": "Applied",
         "logout": "Log out"
     },
     "program": {
+        "page_description": "Find a training program that's all about what you love and where you want to go!",
         "search": "Search",
         "task_overview": "Tasks Overview",
         "start_program": "Start this program",
@@ -77,5 +79,11 @@
         "languages": "languages",
         "english": "English",
         "thai": "Thai"
+    },
+    "forget_password": {
+        "page_title": "Reset password"
+    },
+    "new_password": {
+        "page_title": "Set new password"
     }
 }

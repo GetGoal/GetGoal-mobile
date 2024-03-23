@@ -6,7 +6,6 @@ class TodoState with _$TodoState {
   const factory TodoState.loading() = TodoStateLoading;
   const factory TodoState.loadedSuccess({
     required List<Task> todoList,
-    required List<Task> doneList,
   }) = TodoStateLoadedSuccess;
   const factory TodoState.empty() = TodoStateLoadedEmpty;
   const factory TodoState.error() = TodoStateError;

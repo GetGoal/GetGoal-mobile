@@ -12,7 +12,7 @@ part of 'task_create_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TaskCreateEvent {
@@ -127,7 +127,7 @@ class _$TaskCreateEventStartedImpl implements TaskCreateEventStarted {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskCreateEventStartedImpl &&
@@ -280,7 +280,7 @@ class _$TaskCreateEventOnCreateImpl implements TaskCreateEventOnCreate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskCreateEventOnCreateImpl &&
@@ -439,7 +439,7 @@ class _$TaskCreateEventOnEditImpl implements TaskCreateEventOnEdit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskCreateEventOnEditImpl &&
@@ -677,7 +677,7 @@ class _$TaskCreateStateInitialImpl implements TaskCreateStateInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskCreateStateInitialImpl &&
@@ -814,7 +814,7 @@ class _$TaskCreateStateLoadingImpl implements TaskCreateStateLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskCreateStateLoadingImpl);
@@ -971,7 +971,7 @@ class _$TaskCreateStateLoadedSuccessImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskCreateStateLoadedSuccessImpl &&
@@ -1126,7 +1126,7 @@ class _$TaskCreateStateErrorImpl implements TaskCreateStateError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskCreateStateErrorImpl &&
@@ -1264,7 +1264,7 @@ class _$TaskCreateStateCreatedImpl implements TaskCreateStateCreated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskCreateStateCreatedImpl);

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 118 (59 per locale)
+/// Strings: 126 (63 per locale)
 ///
-/// Built on 2024-02-20 at 09:21 UTC
+/// Built on 2024-03-20 at 08:42 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -158,6 +158,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsCreateProgramEn create_program = _StringsCreateProgramEn._(_root);
 	late final _StringsEditProgramEn edit_program = _StringsEditProgramEn._(_root);
 	late final _StringsSettingEn setting = _StringsSettingEn._(_root);
+	late final _StringsForgetPasswordEn forget_password = _StringsForgetPasswordEn._(_root);
+	late final _StringsNewPasswordEn new_password = _StringsNewPasswordEn._(_root);
 }
 
 // Path: navbar
@@ -194,6 +196,7 @@ class _StringsUserProfileEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get page_title => 'My profile';
 	String get display_your_program => 'Your program';
 	String get display_save_program => 'Save';
 	String get display_applied_program => 'Applied';
@@ -207,6 +210,7 @@ class _StringsProgramEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get page_description => 'Find a training program that\'s all about what you love and where you want to go!';
 	String get search => 'Search';
 	String get task_overview => 'Tasks Overview';
 	String get start_program => 'Start this program';
@@ -309,6 +313,26 @@ class _StringsSettingEn {
 	String get thai => 'Thai';
 }
 
+// Path: forget_password
+class _StringsForgetPasswordEn {
+	_StringsForgetPasswordEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get page_title => 'Reset password';
+}
+
+// Path: new_password
+class _StringsNewPasswordEn {
+	_StringsNewPasswordEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get page_title => 'Set new password';
+}
+
 // Path: <root>
 class _StringsTh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
@@ -343,6 +367,8 @@ class _StringsTh implements Translations {
 	@override late final _StringsCreateProgramTh create_program = _StringsCreateProgramTh._(_root);
 	@override late final _StringsEditProgramTh edit_program = _StringsEditProgramTh._(_root);
 	@override late final _StringsSettingTh setting = _StringsSettingTh._(_root);
+	@override late final _StringsForgetPasswordTh forget_password = _StringsForgetPasswordTh._(_root);
+	@override late final _StringsNewPasswordTh new_password = _StringsNewPasswordTh._(_root);
 }
 
 // Path: navbar
@@ -379,6 +405,7 @@ class _StringsUserProfileTh implements _StringsUserProfileEn {
 	@override final _StringsTh _root; // ignore: unused_field
 
 	// Translations
+	@override String get page_title => 'โปรไฟล์ของฉัน';
 	@override String get display_your_program => 'โปรแกรมของฉัน';
 	@override String get display_save_program => 'บันทึก';
 	@override String get display_applied_program => 'รับสมัคร';
@@ -392,6 +419,7 @@ class _StringsProgramTh implements _StringsProgramEn {
 	@override final _StringsTh _root; // ignore: unused_field
 
 	// Translations
+	@override String get page_description => 'ค้นหาโปรแกรมที่คุณต้องพร้อมกับทำสิ่งที่คุณรัก!';
 	@override String get search => 'ค้นหา';
 	@override String get task_overview => 'ภาครวม';
 	@override String get start_program => 'เริ่มโปรแกรมนี้';
@@ -494,6 +522,26 @@ class _StringsSettingTh implements _StringsSettingEn {
 	@override String get thai => 'ไทย';
 }
 
+// Path: forget_password
+class _StringsForgetPasswordTh implements _StringsForgetPasswordEn {
+	_StringsForgetPasswordTh._(this._root);
+
+	@override final _StringsTh _root; // ignore: unused_field
+
+	// Translations
+	@override String get page_title => 'ลืมรหัสผ่าน';
+}
+
+// Path: new_password
+class _StringsNewPasswordTh implements _StringsNewPasswordEn {
+	_StringsNewPasswordTh._(this._root);
+
+	@override final _StringsTh _root; // ignore: unused_field
+
+	// Translations
+	@override String get page_title => 'ตั้งรหัสผ่านใหม่';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -509,10 +557,12 @@ extension on Translations {
 			case 'task.empty_task': return 'No tasks';
 			case 'task.empty_task_todo': return 'Wow! There aren\'t any tasks left to do.\nGreat job! <3';
 			case 'task.empty_task_done': return 'Nothing done';
+			case 'user_profile.page_title': return 'My profile';
 			case 'user_profile.display_your_program': return 'Your program';
 			case 'user_profile.display_save_program': return 'Save';
 			case 'user_profile.display_applied_program': return 'Applied';
 			case 'user_profile.logout': return 'Log out';
+			case 'program.page_description': return 'Find a training program that\'s all about what you love and where you want to go!';
 			case 'program.search': return 'Search';
 			case 'program.task_overview': return 'Tasks Overview';
 			case 'program.start_program': return 'Start this program';
@@ -559,6 +609,8 @@ extension on Translations {
 			case 'setting.languages': return 'languages';
 			case 'setting.english': return 'English';
 			case 'setting.thai': return 'Thai';
+			case 'forget_password.page_title': return 'Reset password';
+			case 'new_password.page_title': return 'Set new password';
 			default: return null;
 		}
 	}
@@ -576,10 +628,12 @@ extension on _StringsTh {
 			case 'task.empty_task': return 'ไม่มีรายการที่ต้องทำ';
 			case 'task.empty_task_todo': return 'สุดยอด! ไม่มีรายการที่ต้องทำแล้ว.\nเก่งมาก! <3';
 			case 'task.empty_task_done': return 'ไม่มีรายการที่ทำเสร็จ';
+			case 'user_profile.page_title': return 'โปรไฟล์ของฉัน';
 			case 'user_profile.display_your_program': return 'โปรแกรมของฉัน';
 			case 'user_profile.display_save_program': return 'บันทึก';
 			case 'user_profile.display_applied_program': return 'รับสมัคร';
 			case 'user_profile.logout': return 'ออกจากระบบ';
+			case 'program.page_description': return 'ค้นหาโปรแกรมที่คุณต้องพร้อมกับทำสิ่งที่คุณรัก!';
 			case 'program.search': return 'ค้นหา';
 			case 'program.task_overview': return 'ภาครวม';
 			case 'program.start_program': return 'เริ่มโปรแกรมนี้';
@@ -626,6 +680,8 @@ extension on _StringsTh {
 			case 'setting.languages': return 'ภาษา';
 			case 'setting.english': return 'อังกฤษ';
 			case 'setting.thai': return 'ไทย';
+			case 'forget_password.page_title': return 'ลืมรหัสผ่าน';
+			case 'new_password.page_title': return 'ตั้งรหัสผ่านใหม่';
 			default: return null;
 		}
 	}

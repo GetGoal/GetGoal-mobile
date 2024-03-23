@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../../../../main_qa.dart';
 import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../config/route_config.dart';
-import '../../../../../../core/secure_store.dart';
 import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
@@ -33,24 +31,37 @@ class BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final day = DateFormat.d(LocaleSettings.currentLocale.languageCode)
+        .format(DateTime.now());
+    final month = DateFormat.MMMM(LocaleSettings.currentLocale.languageCode)
+        .format(DateTime.now());
+    final year = LocaleSettings.currentLocale.languageCode == 'en'
+        ? DateFormat.y(LocaleSettings.currentLocale.languageCode)
+            .format(DateTime.now())
+        : int.parse(
+              DateFormat.y(LocaleSettings.currentLocale.languageCode)
+                  .format(DateTime.now()),
+            ) +
+            543;
+
     return Container(
-      alignment: Alignment.center,
-      height: Platform.isIOS ? 96 : 72,
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: AppColors.stock,
+            color: AppColors.stroke,
             width: 0.5,
           ),
         ),
-        color: AppColors.white,
-        boxShadow: AppShadow.shadow,
+        color: Colors.transparent,
       ),
-      child: SizedBox(
-        height: 48,
+      child: Container(
+        height: Platform.isIOS ? 96 : 72,
+        alignment: Alignment.center,
+        padding:
+            const EdgeInsets.only(left: 24, top: 16, right: 24, bottom: 24),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BottomNavItem(
               icon: AppIcon.bottom_nav_home,
@@ -61,8 +72,7 @@ class BottomNavigation extends StatelessWidget {
               ontap: () => mainPageBloc!.add(
                 MainPageEvent.bottomNavTapped(
                   bottomNavSelected: 0,
-                  appbarTitle:
-                      DateFormat('MMMM, dd yyyy').format(DateTime.now()),
+                  appbarTitle: '$month, $day $year',
                 ),
               ),
             ),
@@ -81,63 +91,14 @@ class BottomNavigation extends StatelessWidget {
             ),
             BottomNavItem(
               icon: AppIcon.bottom_nav_add,
-              onSelectedIcon: AppIcon.bottom_nav_calendar_selected,
+              onSelectedIcon: AppIcon.bottom_nav_add,
               title: 'Add',
               position: 2,
-              size: 48,
-              color: AppColors.primary,
+              size: 56,
+              isDisableColor: true,
               currentIndex: bottomNavSelected,
               ontap: () => _displayCreateBottomSheet(context),
             ),
-            // Theme(
-            //   data: Theme.of(context).copyWith(
-            //     splashFactory: NoSplash.splashFactory,
-            //   ),
-            //   child: PopupMenuButton(
-            //     elevation: 1,
-            //     shadowColor: Colors.black38,
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(16),
-            //     ),
-            //     offset: Offset(kToolbarHeight, Platform.isIOS ? -96 : -72),
-            //     padding: const EdgeInsets.all(0),
-            //     icon: SvgPicture.asset(
-            //       AppIcon.bottom_nav_add,
-            //       fit: BoxFit.scaleDown,
-            //     ),
-            //     iconSize: 48,
-            //     itemBuilder: (context) => [
-            //       PopupMenuItem(
-            //         onTap: () => context.pushNamed('/program/create'),
-            //         child: Row(
-            //           children: [
-            //             CustomIcon(
-            //               icon: AppIcon.bottom_nav_add,
-            //               iconColor: AppColors.description,
-            //               size: 16,
-            //             ),
-            //             const SizedBox(width: 8),
-            //             const Text('Create program'),
-            //           ],
-            //         ),
-            //       ),
-            //       PopupMenuItem(
-            //         onTap: () => context.pushNamed('/task/create'),
-            //         child: Row(
-            //           children: [
-            //             CustomIcon(
-            //               icon: AppIcon.bottom_nav_add,
-            //               iconColor: AppColors.description,
-            //               size: 16,
-            //             ),
-            //             const SizedBox(width: 8),
-            //             const Text('Create task'),
-            //           ],
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             BottomNavItem(
               icon: AppIcon.bottom_nav_calendar,
               onSelectedIcon: AppIcon.bottom_nav_calendar_selected,
@@ -156,9 +117,10 @@ class BottomNavigation extends StatelessWidget {
               currentIndex: bottomNavSelected,
               ontap: () {
                 mainPageBloc!.add(
-                  const MainPageEvent.bottomNavTapped(
+                  MainPageEvent.bottomNavTapped(
                     bottomNavSelected: 4,
-                    appbarTitle: '',
+                    appbarTitle:
+                        Translations.of(context).user_profile.page_title,
                   ),
                 );
               },
@@ -182,6 +144,11 @@ class BottomNavigation extends StatelessWidget {
     return Container(
       height: 250,
       padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0),
+        color: AppColors.secondary,
+        boxShadow: AppShadow.shadow,
+      ),
       child: Column(
         children: [
           Container(
@@ -189,7 +156,7 @@ class BottomNavigation extends StatelessWidget {
               borderRadius: BorderRadius.circular(
                 100,
               ),
-              color: Colors.black26,
+              color: Colors.white30,
             ),
             height: 4,
             width: 36,
@@ -199,7 +166,7 @@ class BottomNavigation extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               Translations.of(context).create_button.create_new,
-              style: heading3(),
+              style: title2Bold().copyWith(color: AppColors.white),
             ),
           ),
 
@@ -221,7 +188,7 @@ class BottomNavigation extends StatelessWidget {
                     width: 24,
                     child: CustomIcon(
                       icon: AppIcon.bottom_nav_programs,
-                      iconColor: AppColors.description,
+                      iconColor: AppColors.white,
                       size: 48,
                     ),
                   ),
@@ -231,7 +198,7 @@ class BottomNavigation extends StatelessWidget {
                     children: [
                       Text(
                         Translations.of(context).create_button.create_program,
-                        style: title1(),
+                        style: bodyBold().copyWith(color: AppColors.white),
                       ),
                       Text(
                         Translations.of(context)
@@ -277,7 +244,7 @@ class BottomNavigation extends StatelessWidget {
                     width: 24,
                     child: CustomIcon(
                       icon: AppIcon.bottom_nav_add,
-                      iconColor: AppColors.description,
+                      iconColor: AppColors.white,
                       size: 24,
                     ),
                   ),
@@ -287,7 +254,7 @@ class BottomNavigation extends StatelessWidget {
                     children: [
                       Text(
                         Translations.of(context).create_button.crete_task,
-                        style: title1(),
+                        style: bodyBold().copyWith(color: AppColors.white),
                       ),
                       Text(
                         Translations.of(context).create_button.crete_task_des,

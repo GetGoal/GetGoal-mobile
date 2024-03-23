@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../../../../shared/utils/date_format.dart';
-import '../../../../../domain/models/task.dart';
+import '../../../../../domain/entities/task.dart';
 import '../../../../../domain/usecases/task/change_task_status_to_done_usecase.dart';
 import '../../../../../domain/usecases/task/change_task_status_to_not_done_usecase.dart';
 import '../../../../../domain/usecases/task/get_task_by_user_usecase.dart';
@@ -59,7 +58,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           )
           .toList();
 
-      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
+      emit(TodoState.loadedSuccess(todoList: [...todoList, ...doneList]));
     } catch (e) {
       emit(const TodoState.error());
     }
@@ -91,9 +90,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           )
           .toList();
 
-      print(taskList.data);
-
-      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
+      emit(TodoState.loadedSuccess(todoList: [...todoList, ...doneList]));
     } catch (e) {
       _logger.e('ProgramStateError:', error: e);
       emit(const TodoState.error());
@@ -105,7 +102,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     Emitter<TodoState> emit,
   ) async {
     try {
-      // emit(const TodoState.loading());
       await _changeTaskStatusToDoneUsecase.call(params: event.taskId);
 
       final taskList = await _getTaskByUserUsecase.call(
@@ -127,7 +123,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           )
           .toList();
 
-      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
+      emit(TodoState.loadedSuccess(todoList: [...todoList, ...doneList]));
     } catch (e) {
       emit(const TodoState.error());
     }
@@ -138,7 +134,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     Emitter<TodoState> emit,
   ) async {
     try {
-      // emit(const TodoState.loading());
       await _changeTaskStatusToNotDoneUsecase.call(params: event.taskId);
 
       final taskList = await _getTaskByUserUsecase.call(
@@ -160,7 +155,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           )
           .toList();
 
-      emit(TodoState.loadedSuccess(todoList: todoList, doneList: doneList));
+      emit(TodoState.loadedSuccess(todoList: [...todoList, ...doneList]));
     } catch (e) {
       emit(const TodoState.error());
     }

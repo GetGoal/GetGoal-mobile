@@ -20,7 +20,7 @@ class ErrorDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Something want wrong', style: heading3()),
+            Text('Something went wrong', style: heading3()),
             const SizedBox(height: 16),
             Text(errorMessage ?? '', style: body1()),
             const SizedBox(height: 40),
@@ -30,7 +30,7 @@ class ErrorDialog extends StatelessWidget {
                 'Close',
                 style: body1().copyWith(color: AppColors.primary),
               ),
-            )
+            ),
           ],
         ),
       ),

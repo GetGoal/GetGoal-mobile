@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../icon.dart';
@@ -30,17 +29,18 @@ class GetGoalSubScaffold extends StatelessWidget {
         title: Row(
           children: [
             CircleButton(
-              onTap: onGoBack ?? () => context.pop(),
-              icon: const CustomIcon(
+              onTap: onGoBack ?? () => context.pop(true),
+              icon: CustomIcon(
                 icon: AppIcon.back_icon,
                 size: 24,
+                iconColor: AppColors.white,
               ),
-              border: Border.all(color: AppColors.stock),
+              color: AppColors.secondary,
             ),
             const SizedBox(width: 16),
             Text(
               appbarTitle ?? '',
-              style: heading2(),
+              style: title1Bold().copyWith(color: AppColors.white),
             ),
           ],
         ),

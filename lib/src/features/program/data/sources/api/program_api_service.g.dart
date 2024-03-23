@@ -21,10 +21,10 @@ class _ProgramApiService implements ProgramApiService {
   @override
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
       getPrograms() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<List<ProgramModel>>>>(
             Options(
@@ -59,7 +59,7 @@ class _ProgramApiService implements ProgramApiService {
   @override
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
       getProgramByLabelName(FilterProgramRequest requestBody) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -98,10 +98,10 @@ class _ProgramApiService implements ProgramApiService {
   @override
   Future<HttpResponse<BaseDataResponse<ProgramModel>>> getProgramById(
       String programId) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<ProgramModel>>>(Options(
       method: 'GET',
@@ -130,7 +130,7 @@ class _ProgramApiService implements ProgramApiService {
   @override
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getProgramBySearch(
       SearchProgramRequest requestBody) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -169,7 +169,7 @@ class _ProgramApiService implements ProgramApiService {
   @override
   Future<HttpResponse<BaseDataResponse<ProgramModel>>> createProgram(
       CreateProgramRequest requestBody) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -202,10 +202,10 @@ class _ProgramApiService implements ProgramApiService {
   @override
   Future<HttpResponse<BaseDataResponse<dynamic>>> deleteProgram(
       String programId) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<dynamic>>>(Options(
       method: 'DELETE',

@@ -36,7 +36,7 @@ class OtpSlotTextField extends StatelessWidget {
               ),
             ),
             borderSide: BorderSide(
-              color: AppColors.stock,
+              color: AppColors.stroke,
               width: 1,
             ),
           ),

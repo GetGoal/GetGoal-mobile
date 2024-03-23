@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../../domain/models/program_create.dart';
+import '../../../../../domain/entities/program_create.dart';
 import '../../../../../domain/usecases/program/create_program_usecase.dart';
 
 part 'program_create_event.dart';

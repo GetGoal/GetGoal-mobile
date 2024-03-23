@@ -1,7 +1,6 @@
 import '../../../../core/bases/base_data_response.dart';
 import '../../../../core/bases/base_usecase.dart';
-import '../../../program/domain/models/program.dart';
-
+import '../../../program/domain/entities/program.dart';
 import '../repositories/user_repository.dart';
 
 class GetUserProgramUsecase

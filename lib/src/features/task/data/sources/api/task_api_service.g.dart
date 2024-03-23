@@ -21,7 +21,7 @@ class _TaskApiService implements TaskApiService {
   @override
   Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> getTaskByUser(
       TaskUserRequestParameters requestBody) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -59,10 +59,10 @@ class _TaskApiService implements TaskApiService {
   @override
   Future<HttpResponse<BaseDataResponse<List<TaskModel>>>> getTaskByProgramId(
       String programId) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<List<TaskModel>>>>(Options(
       method: 'GET',
@@ -96,10 +96,10 @@ class _TaskApiService implements TaskApiService {
   @override
   Future<HttpResponse<BaseDataResponse<TaskModel>>> getTaskById(
       String taskId) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<TaskModel>>>(Options(
       method: 'GET',
@@ -128,7 +128,7 @@ class _TaskApiService implements TaskApiService {
   @override
   Future<HttpResponse<BaseDataResponse<TaskModel>>> createTask(
       TaskRequest task) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -163,7 +163,7 @@ class _TaskApiService implements TaskApiService {
     String programId,
     JoinProgramRequest requestBody,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -201,10 +201,10 @@ class _TaskApiService implements TaskApiService {
   @override
   Future<HttpResponse<BaseDataResponse<TaskModel>>> changeTaskStatusToDone(
       String taskId) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<TaskModel>>>(Options(
       method: 'PUT',
@@ -235,7 +235,7 @@ class _TaskApiService implements TaskApiService {
     String taskId,
     TaskRequest requestBody,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -268,10 +268,10 @@ class _TaskApiService implements TaskApiService {
   @override
   Future<HttpResponse<BaseDataResponse<TaskModel>>> changeTaskStatusToNotDone(
       String taskId) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<TaskModel>>>(Options(
       method: 'PUT',
@@ -300,10 +300,10 @@ class _TaskApiService implements TaskApiService {
   @override
   Future<HttpResponse<BaseDataResponse<TaskModel>>> deleteTask(
       String taskId) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<BaseDataResponse<TaskModel>>>(Options(
       method: 'DELETE',

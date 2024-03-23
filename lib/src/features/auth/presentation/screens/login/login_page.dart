@@ -4,15 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../config/route_config.dart';
-import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
+import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
-import 'bloc/google_login/google_sign_in_bloc.dart';
 import 'bloc/login/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -24,7 +23,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
   LoginBloc get _loginBloc => context.read<LoginBloc>();
-  GoogleSignInBloc get _googleSignInBloc => context.read<GoogleSignInBloc>();
 
   final _formKey = GlobalKey<FormState>();
   final _emailInputController = TextEditingController();
@@ -42,7 +40,7 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
         alignment: Alignment.center,
         child: Form(
           key: _formKey,
@@ -84,75 +82,17 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
   }
 
   Widget _buildGoogleLoginButton() {
-    return BlocConsumer<GoogleSignInBloc, GoogleSignInState>(
-      listener: (context, state) {
-        switch (state) {
-          case GoogleSignInSuccess():
-            context.go(Routes.mainPage);
-            break;
-          case GoogleSignInFailure():
-            showDialog(
-              context: context,
-              builder: (context) => const ErrorDialog(
-                errorMessage: 'Failed to login with google',
-              ),
-            );
-            break;
-          default:
-        }
-      },
-      builder: (context, state) {
-        switch (state) {
-          case GoogleSignInInitial():
-            return MainButton(
-              icon: SvgPicture.asset(
-                AppIcon.google_icon,
-                fit: BoxFit.scaleDown,
-                height: 36,
-              ),
-              buttonText: 'Continue with Google',
-              buttonColor: AppColors.white,
-              isHaveBoxShadow: true,
-              onTap: googleLogin,
-            );
-          case GoogleSignInLoading():
-            return MainButton(
-              icon: SvgPicture.asset(
-                AppIcon.google_icon,
-                fit: BoxFit.scaleDown,
-                height: 36,
-              ),
-              buttonText: 'Continue with Google',
-              buttonColor: AppColors.white,
-              isHaveBoxShadow: true,
-              onTap: () {},
-            );
-          default:
-            return MainButton(
-              icon: SvgPicture.asset(
-                AppIcon.google_icon,
-                fit: BoxFit.scaleDown,
-                height: 36,
-              ),
-              buttonText: 'Continue with Google',
-              buttonColor: AppColors.white,
-              isHaveBoxShadow: true,
-              onTap: googleLogin,
-            );
-        }
-      },
+    return MainButton(
+      icon: SvgPicture.asset(
+        AppIcon.google_icon,
+        fit: BoxFit.scaleDown,
+        height: 36,
+      ),
+      buttonText: 'Continue with Google',
+      buttonColor: [AppColors.secondary, AppColors.secondary],
+      isHaveBoxShadow: true,
+      onTap: () {},
     );
-    // return MainButton(
-    //   icon: SvgPicture.asset(
-    //     AppIcon.google_icon,
-    //     fit: BoxFit.scaleDown,
-    //     height: 36,
-    //   ),
-    //   buttonText: 'Continue with Google',
-    //   buttonColor: AppColors.white,
-    //   isHaveBoxShadow: true,
-    //   onTap: () {},
-    // );
   }
 
   Widget _buildEmailTextFieldInput() {
@@ -175,6 +115,7 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
         ),
         const SizedBox(height: 8),
         GestureDetector(
+          onTap: () => context.pushNamed(Routes.forgetPasswordPage),
           child: Text(
             'Forgot password?',
             style: body2().copyWith(color: AppColors.primary),
@@ -264,9 +205,5 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
         ),
       );
     }
-  }
-
-  void googleLogin() {
-    _googleSignInBloc.add(const GoogleSignInEvent.onGoogleLogin());
   }
 }

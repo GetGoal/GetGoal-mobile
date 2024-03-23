@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static Color primary = HexColor.fromHex('FFD08A');
-  static Color secondary = HexColor.fromHex('56945C');
+  static Color primary = HexColor.fromHex('FFB167');
+  static Color primary2 = HexColor.fromHex('FF8919');
+  static Color secondary = HexColor.fromHex('222227');
   static Color white = HexColor.fromHex('FFFFFF');
   static Color black = HexColor.fromHex('000000');
-  static Color stock = HexColor.fromHex('EAEBEC');
+  static Color stroke = HexColor.fromHex('292929');
   static Color description = HexColor.fromHex('8C8C8C');
-  static Color red = HexColor.fromHex('F04438');
+  static Color red = HexColor.fromHex('AD1F1F');
+  static Color background = HexColor.fromHex('0A0A10');
+  static Color lightOrange = HexColor.fromHex('493B2B');
+  static Color lightDarkBlue = HexColor.fromHex('1E2234');
 
   static MaterialColor primaryWhite = const MaterialColor(
     _whilteMaterialColor,
@@ -38,11 +42,20 @@ extension HexColor on Color {
 
 class AppShadow {
   static List<BoxShadow> shadow = [
-    BoxShadow(
-      color: AppColors.black.withOpacity(0.1),
-      spreadRadius: 0,
-      blurRadius: 48,
-      offset: const Offset(0, 2),
+    const BoxShadow(
+      color: Color.fromRGBO(0, 0, 0, 0.05),
+      offset: Offset(0.0, -2.0),
+      blurRadius: 6.0,
+    ),
+    const BoxShadow(
+      color: Color.fromRGBO(0, 0, 0, 0.10),
+      offset: Offset(0.0, 2.0),
+      blurRadius: 8.0,
+    ),
+    const BoxShadow(
+      color: Color.fromRGBO(255, 255, 255, 0.20),
+      offset: Offset(0.0, -1.0),
+      blurRadius: 0.0,
     ),
   ];
 }

@@ -8,18 +8,18 @@ class MainButton extends StatelessWidget {
     super.key,
     this.onTap,
     this.buttonText,
-    this.buttonColor,
-    this.bottonStock,
+    this.buttonColor = const <Color>[],
+    this.isHaveStroke = false,
     this.textColor,
     this.icon,
-    this.isHaveBoxShadow = false,
+    this.isHaveBoxShadow = true,
     this.isLoading = false,
   });
 
   final GestureTapCallback? onTap;
   final String? buttonText;
-  final Color? buttonColor;
-  final Color? bottonStock;
+  final List<Color>? buttonColor;
+  final bool? isHaveStroke;
   final Color? textColor;
   final Widget? icon;
   final bool? isHaveBoxShadow;
@@ -36,10 +36,18 @@ class MainButton extends StatelessWidget {
         height: 56,
         decoration: BoxDecoration(
           boxShadow: isHaveBoxShadow! ? AppShadow.shadow : null,
-          color: buttonColor ?? AppColors.primary,
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomRight,
+            colors: buttonColor!.isEmpty
+                ? [
+                    AppColors.primary,
+                    AppColors.primary2,
+                  ]
+                : buttonColor!,
+          ),
           borderRadius: BorderRadius.circular(36),
-          border:
-              bottonStock != null ? Border.all(color: AppColors.stock) : null,
+          border: isHaveStroke! ? Border.all(color: AppColors.primary2) : null,
         ),
         child: Center(
           child: Row(
@@ -58,7 +66,7 @@ class MainButton extends StatelessWidget {
                   : Text(
                       buttonText ?? '',
                       style:
-                          body1().copyWith(color: textColor ?? AppColors.black),
+                          body1().copyWith(color: textColor ?? AppColors.white),
                     ),
             ],
           ),

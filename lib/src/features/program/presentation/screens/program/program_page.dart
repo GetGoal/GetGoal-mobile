@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
+import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/circle_button.dart';
 import '../../../../../shared/widgets/icon/custom_icon.dart';
-import '../../../domain/models/program.dart';
-import '../../../domain/models/program_filter.dart';
+import '../../../domain/entities/program.dart';
+import '../../../domain/entities/program_filter.dart';
 import '../../bloc/filter_program/filter_program_bloc.dart';
 import '../../bloc/program/program_bloc.dart';
 import 'widgets/filter_item.dart';
@@ -50,8 +50,11 @@ class _ProgramPageState extends State<ProgramPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 12),
+        const SizedBox(height: 24),
+        _searchBar(),
+        const SizedBox(height: 16),
         _filterBar(),
+        const SizedBox(height: 16),
         _programSection(),
       ],
     );
@@ -142,7 +145,6 @@ class _ProgramPageState extends State<ProgramPage> {
     return Container(
       margin: EdgeInsets.only(
         left: AppSpacing.appMargin,
-        bottom: AppSpacing.appMargin,
       ),
       height: 32,
       child: ListView.builder(
@@ -191,7 +193,7 @@ class _ProgramPageState extends State<ProgramPage> {
     return Expanded(
       child: Center(
         child: CircularProgressIndicator(
-          color: AppColors.primary,
+          color: AppColors.primary2,
         ),
       ),
     );
@@ -200,13 +202,16 @@ class _ProgramPageState extends State<ProgramPage> {
   Widget _programLoadedSuccess(List<Program> programList) {
     return Expanded(
       child: RefreshIndicator(
-        color: AppColors.primary,
+        color: AppColors.primary2,
+        backgroundColor: AppColors.secondary,
         onRefresh: () async => _programBloc.add(const ProgramEvent.started()),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _searchBar(),
-              ListView.builder(
+              ListView.separated(
+                separatorBuilder: (context, index) => Divider(
+                  color: AppColors.stroke,
+                ),
                 physics: const NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
                 shrinkWrap: true,
@@ -247,11 +252,12 @@ class _ProgramPageState extends State<ProgramPage> {
   }
 
   Widget _programEmpty() {
-    return const Expanded(
+    return Expanded(
       child: Center(
         child: Text(
           "Sorry, we don't have any program on this category\nright now",
           textAlign: TextAlign.center,
+          style: subHeadlineRegular().copyWith(color: AppColors.description),
         ),
       ),
     );
@@ -283,10 +289,10 @@ class _ProgramPageState extends State<ProgramPage> {
   Widget _programSearchEmpty() {
     return Column(
       children: [
-        _searchBar(),
-        const Text(
+        Text(
           "Sorry, we couldn't find anything that includes \nall the words you searched for.",
           textAlign: TextAlign.center,
+          style: footnoteRegular().copyWith(color: AppColors.description),
         ),
       ],
     );
@@ -296,10 +302,11 @@ class _ProgramPageState extends State<ProgramPage> {
     bool isSearchTextEmpty = _searchController.text.isEmpty;
 
     return Container(
-      margin: const EdgeInsets.all(20),
-      height: 56,
-      decoration: BoxDecoration(boxShadow: AppShadow.shadow),
+      height: 40,
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
       child: TextField(
+        style: subHeadlineRegular().copyWith(color: AppColors.white),
         onTap: () {
           _programBloc.add(const ProgramEvent.searching());
           _filterProgramBloc.add(const FilterProgramEvent.hided());
@@ -314,18 +321,22 @@ class _ProgramPageState extends State<ProgramPage> {
         },
         controller: _searchController,
         textInputAction: TextInputAction.search,
+        maxLines: 1,
+        textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
-          isDense: true,
+          contentPadding: EdgeInsets.zero,
           hintText: Translations.of(context).program.search,
-          fillColor: AppColors.white,
+          hintStyle: subHeadlineRegular().copyWith(
+            color: AppColors.description,
+          ),
+          fillColor: AppColors.background,
           filled: true,
-          prefixIconColor: AppColors.description,
           prefixIcon: Container(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: SvgPicture.asset(
-              AppIcon.search_icon,
-              fit: BoxFit.scaleDown,
-              width: 24,
+            padding: const EdgeInsets.all(8),
+            child: CustomIcon(
+              icon: AppIcon.search_icon,
+              size: 16,
+              iconColor: AppColors.description,
             ),
           ),
           suffixIcon: isSearchTextEmpty
@@ -336,17 +347,23 @@ class _ProgramPageState extends State<ProgramPage> {
                     _filterProgramBloc.add(const FilterProgramEvent.started());
                     _searchController.clear();
                   },
-                  icon: const Icon(Icons.cancel),
+                  icon: Icon(
+                    Icons.cancel,
+                    color: AppColors.white,
+                  ),
                 ),
           enabledBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(36)),
-            borderSide: BorderSide(color: AppColors.stock, width: 1),
+            borderSide: BorderSide(color: AppColors.stroke, width: 1),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(36)),
-            borderSide: BorderSide(color: AppColors.primary, width: 1),
+            borderSide: BorderSide(color: AppColors.primary2, width: 1),
           ),
         ),
+        onTapOutside: (value) {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
       ),
     );
   }

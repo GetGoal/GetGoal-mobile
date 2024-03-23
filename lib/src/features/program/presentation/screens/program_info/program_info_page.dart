@@ -10,11 +10,12 @@ import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
+import '../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../shared/widgets/image/cache_image.dart';
 import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
-import '../../../../task/domain/models/task.dart';
-import '../../../domain/models/program.dart';
+import '../../../../task/domain/entities/task.dart';
+import '../../../domain/entities/program.dart';
 import '../../bloc/program_info/program_info_bloc.dart';
 import '../program/widgets/program_label.dart';
 import 'widgets/task_card_widget.dart';
@@ -40,7 +41,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
       (state) {
         if (state is ProgramInfoStateLoadedSuccess) {
           setState(() {
-            tasks = state.program!.tasks!;
+            tasks = state.program.tasks!;
           });
         }
       },
@@ -63,7 +64,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
           case ProgramInfoStateLoading():
             return const LoadingScreen();
           case ProgramInfoStateLoadedSuccess(:final program):
-            return _programInfoLoadedSuccess(program!);
+            return _programInfoLoadedSuccess(program);
           case ProgramInfoStateError():
             return _programInfoError();
           default:
@@ -89,23 +90,24 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
     return GetGoalSubScaffold(
       body: RefreshIndicator(
         color: AppColors.primary,
-        onRefresh: () async => _programInfoBloc
-            .add(ProgramInfoEvent.started(programId: widget.programId)),
+        onRefresh: () async => _programInfoBloc.add(
+          ProgramInfoEvent.started(programId: widget.programId),
+        ),
         child: SingleChildScrollView(
           child: Container(
-            margin: const EdgeInsets.all(20),
+            margin: EdgeInsets.all(AppSpacing.appMargin),
             child: Column(
               children: [
                 _programImage(program.programImage!),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 _programHeader(
                   label: program.labels![0],
                   programName: program.programName,
                   duration: program.expectedTime,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 _programDescription(program.programDesc),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 _taskOverview(program.tasks),
               ],
             ),
@@ -166,22 +168,27 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
           children: [
             Row(
               children: [
-                ProgramLebel(title: label!.labelName ?? ''),
+                ProgramLebel(title: label?.labelName ?? ''),
                 const SizedBox(width: 8),
-                Text(DateFormat('yMMMd').format(DateTime.now())),
+                Text(
+                  DateFormat('yMMMd').format(DateTime.now()),
+                  style: caption2Regular().copyWith(
+                    color: AppColors.description,
+                  ),
+                ),
               ],
             ),
             const Spacer(),
             Row(
               children: [
-                SvgPicture.asset(
-                  AppIcon.program_duration_icon,
-                  height: 16,
+                const CustomIcon(
+                  icon: AppIcon.program_duration_icon,
+                  size: 16,
                 ),
                 const SizedBox(
                   width: 4,
                 ),
-                Text('${duration ?? 0}', style: description()),
+                Text('${duration ?? 0}', style: caption2Regular()),
               ],
             ),
           ],
@@ -189,7 +196,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
         const SizedBox(height: 4),
         Text(
           programName ?? '',
-          style: heading3(),
+          style: title2Bold(),
         ),
         const SizedBox(height: 4),
         Row(
@@ -199,9 +206,9 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
                 Container(
                   width: 24,
                   height: 24,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.black,
+                    color: AppColors.primary2,
                   ),
                 ),
                 const SizedBox(
@@ -209,16 +216,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
                 ),
                 Text(
                   'Thana Sriwichai',
-                  style: description(),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                GestureDetector(
-                  child: Text(
-                    'Follow',
-                    style: description().copyWith(color: AppColors.primary),
-                  ),
+                  style: caption1Regular(),
                 ),
               ],
             ),
@@ -234,12 +232,17 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
   }
 
   Widget _programDescription(String? programDesc) {
-    return SizedBox(
+    return Container(
+      padding: const EdgeInsets.only(left: 16),
+      decoration: BoxDecoration(
+        border: Border(left: BorderSide(color: AppColors.primary2)),
+      ),
       width: double.infinity,
       child: Text(
         programDesc ?? '',
         maxLines: 6,
         overflow: TextOverflow.ellipsis,
+        style: subHeadlineRegular(),
       ),
     );
   }
@@ -248,29 +251,16 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 36),
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-            color: AppColors.primary,
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
-          ),
-          width: double.infinity,
-          height: 60,
-          child: Text(
-            Translations.of(context).program.task_overview,
-            style: title1(),
-          ),
-        ),
+        Text('Tasks Overview', style: bodyBold()),
         const SizedBox(height: 16),
         Column(
-          children: List<TaskCard>.generate(
-            tasks!.length,
-            (index) => TaskCard(
+          children: List<TaskCard>.generate(tasks!.length, (index) {
+            return TaskCard(
               number: index + 1,
               taskName: tasks[index].taskName,
-            ),
-          ),
+              taskDesc: tasks[index].taskDescription,
+            );
+          }),
         ),
       ],
     );
@@ -280,7 +270,7 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
     bool isTasksEmpty = tasks.isEmpty;
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24),
+      padding: const EdgeInsets.only(bottom: 24, top: 16),
       margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
       child: MainButton(
         buttonText: isTasksEmpty

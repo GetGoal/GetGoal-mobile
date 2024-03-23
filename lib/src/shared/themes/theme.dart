@@ -7,16 +7,16 @@ import 'spacing.dart';
 ThemeData appTheme(BuildContext context) {
   return ThemeData(
     useMaterial3: true,
-    primaryColor: AppColors.primary,
+    primaryColor: AppColors.primary2,
     colorScheme:
         ColorScheme.fromSwatch(primarySwatch: AppColors.primaryWhite).copyWith(
       primary: AppColors.primary,
     ),
-    scaffoldBackgroundColor: AppColors.white,
+    scaffoldBackgroundColor: AppColors.background,
     appBarTheme: AppBarTheme(
-      color: AppColors.white,
+      color: Colors.transparent,
       elevation: 0,
-      titleTextStyle: heading2(),
+      titleTextStyle: title1Bold(),
       centerTitle: false,
       titleSpacing: AppSpacing.appMargin,
       scrolledUnderElevation: 0,
@@ -25,7 +25,7 @@ ThemeData appTheme(BuildContext context) {
     fontFamilyFallback: const ['Kanit'],
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary,
+        backgroundColor: AppColors.primary2,
         elevation: 0,
         textStyle: TextStyle(
           color: AppColors.black,
@@ -37,9 +37,9 @@ ThemeData appTheme(BuildContext context) {
       ),
     ),
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: AppColors.primary,
-      selectionColor: AppColors.primary,
-      selectionHandleColor: AppColors.primary,
+      cursorColor: AppColors.primary2,
+      selectionColor: AppColors.primary2,
+      selectionHandleColor: AppColors.primary2,
     ),
     popupMenuTheme: const PopupMenuThemeData(
       enableFeedback: false,

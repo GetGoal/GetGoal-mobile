@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
+import '../../../../../../shared/widgets/text/get_goal_gradient_text.dart';
 
 class TaskPlanningCard extends StatelessWidget {
   const TaskPlanningCard({
@@ -25,7 +26,7 @@ class TaskPlanningCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.secondary,
         boxShadow: AppShadow.shadow,
         borderRadius: BorderRadius.circular(16),
       ),
@@ -51,10 +52,17 @@ class TaskPlanningCard extends StatelessWidget {
       height: 40,
       width: 40,
       decoration: BoxDecoration(
-        color: AppColors.primary,
         shape: BoxShape.circle,
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors.primary,
+            AppColors.primary2,
+          ],
+        ),
       ),
-      child: Center(child: Text('$taskNumber')),
+      child: Center(child: Text('$taskNumber', style: bodyBold())),
     );
   }
 
@@ -67,7 +75,7 @@ class TaskPlanningCard extends StatelessWidget {
         children: [
           Text(
             taskName,
-            style: body2(),
+            style: bodyBold(),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
           ),
@@ -130,10 +138,7 @@ class TaskPlanningCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            AppIcon.edit_task_icon,
-            height: 16,
-          ),
+          GetGoalGradientText('Edit', style: subHeadlineRegular()),
         ],
       ),
     );

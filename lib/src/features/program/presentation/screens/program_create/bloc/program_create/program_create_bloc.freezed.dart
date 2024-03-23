@@ -12,7 +12,7 @@ part of 'program_create_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreateProgramEvent {
@@ -104,7 +104,7 @@ class _$CreateProgramEventStartedImpl implements CreateProgramEventStarted {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateProgramEventStartedImpl);
@@ -238,7 +238,7 @@ class _$CreateProgramEventOnCreatedImpl implements CreateProgramEventOnCreated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateProgramEventOnCreatedImpl &&
@@ -433,7 +433,7 @@ class _$CreateProgramStateInitialImpl implements CreateProgramStateInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateProgramStateInitialImpl);
@@ -552,7 +552,7 @@ class _$CreateProgramStateLoadingImpl implements CreateProgramStateLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateProgramStateLoadingImpl);
@@ -671,7 +671,7 @@ class _$CreateProgramStateCreatedImpl implements CreateProgramStateCreated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateProgramStateCreatedImpl);
@@ -809,7 +809,7 @@ class _$CreateProgramStateCreatedErrorImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateProgramStateCreatedErrorImpl &&

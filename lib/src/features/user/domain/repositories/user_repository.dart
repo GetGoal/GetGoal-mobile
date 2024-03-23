@@ -1,5 +1,5 @@
 import '../../../../core/bases/base_data_response.dart';
-import '../../../program/domain/models/program.dart';
+import '../../../program/domain/entities/program.dart';
 import '../entities/user_profile_entity.dart';
 
 abstract class UserRepository {

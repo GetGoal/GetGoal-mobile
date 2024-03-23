@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../task/domain/models/task.dart';
+import '../../../task/domain/entities/task.dart';
 import 'program.dart';
 
 part 'program_create.freezed.dart';

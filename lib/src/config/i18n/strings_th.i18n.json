@@ -13,12 +13,14 @@
         "empty_task_done": "ไม่มีรายการที่ทำเสร็จ"
     },
     "user_profile": {
+        "page_title": "โปรไฟล์ของฉัน",
         "display_your_program": "โปรแกรมของฉัน",
         "display_save_program": "บันทึก",
         "display_applied_program": "รับสมัคร",
         "logout": "ออกจากระบบ"
     },
     "program": {
+        "page_description": "ค้นหาโปรแกรมที่คุณต้องพร้อมกับทำสิ่งที่คุณรัก!",
         "search": "ค้นหา",
         "task_overview": "ภาครวม",
         "start_program": "เริ่มโปรแกรมนี้",
@@ -77,5 +79,11 @@
         "languages": "ภาษา",
         "english": "อังกฤษ",
         "thai": "ไทย"
+    },
+    "forget_password": {
+        "page_title": "ลืมรหัสผ่าน"
+    },
+    "new_password": {
+        "page_title": "ตั้งรหัสผ่านใหม่"
     }
 }

@@ -12,7 +12,7 @@ part of 'task_planning_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TaskPlanningEvent {
@@ -141,7 +141,7 @@ class _$StartedEventImpl implements StartedEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StartedEventImpl &&
@@ -295,7 +295,7 @@ class _$CreatedEventImpl implements CreatedEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreatedEventImpl &&
@@ -516,7 +516,7 @@ class _$TaskPlanningStateInitialImpl implements TaskPlanningStateInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskPlanningStateInitialImpl);
@@ -657,7 +657,7 @@ class _$TaskPlanningStateLoadingImpl implements TaskPlanningStateLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskPlanningStateLoadingImpl);
@@ -823,7 +823,7 @@ class _$TaskPlanningStateLoadedSuccessImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskPlanningStateLoadedSuccessImpl &&
@@ -980,7 +980,7 @@ class _$TaskPlanningStateEmptyImpl implements TaskPlanningStateEmpty {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskPlanningStateEmptyImpl);
@@ -1120,7 +1120,7 @@ class _$TaskPlanningStateErrorImpl implements TaskPlanningStateError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskPlanningStateErrorImpl);
@@ -1262,7 +1262,7 @@ class _$TaskPlanningStateJoinedProgramImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskPlanningStateJoinedProgramImpl);
@@ -1405,7 +1405,7 @@ class _$TaskPlanningStateJoinedProgramErrorImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskPlanningStateJoinedProgramErrorImpl);

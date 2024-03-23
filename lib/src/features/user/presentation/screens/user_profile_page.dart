@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/i18n/strings.g.dart';
@@ -13,8 +12,8 @@ import '../../../../shared/widgets/button/circle_button.dart';
 import '../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../shared/widgets/image/cache_image.dart';
-import '../../../../shared/widgets/loading_screen_widget.dart';
-import '../../../program/domain/models/program.dart';
+import '../../../../shared/widgets/text/get_goal_gradient_text.dart';
+import '../../../program/domain/entities/program.dart';
 import '../../../program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../../../program/presentation/enum/program_form_mode.enum.dart';
 import '../../../program/presentation/screens/program/widgets/program_card.dart';
@@ -61,8 +60,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 _buildUserProfileInfo(),
                 const SizedBox(height: 8),
                 _buildLogoutButton(),
-                const SizedBox(height: 40),
+                const SizedBox(height: 24),
                 _buildMenuSelector(),
+                const SizedBox(height: 16),
                 _buildFeedSection(),
               ],
             ),
@@ -96,7 +96,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               case UserProfileStateLoadedSuccess(:final user):
                 return Text(
                   '${user.firstName} ${user.lastName}',
-                  style: title1(),
+                  style: title2Bold(),
                 );
               case UserProfileStateError():
                 return Text('Error', style: title1());
@@ -139,13 +139,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  color: AppColors.red,
+                  color: AppColors.secondary,
+                  border: Border.all(
+                    color: AppColors.red,
+                  ),
                 ),
                 child: Text(
                   Translations.of(context).user_profile.logout,
-                  style: description().copyWith(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                  ),
+                  style: caption1Regular(),
                 ),
               ),
             );
@@ -168,7 +169,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         boxShadow: AppShadow.shadow,
-        color: AppColors.white,
+        color: AppColors.secondary,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
@@ -180,17 +181,16 @@ class _UserProfilePageState extends State<UserProfilePage> {
               decoration: BoxDecoration(
                 border: selected == 0
                     ? BorderDirectional(
-                        bottom: BorderSide(color: AppColors.primary),
+                        bottom: BorderSide(color: AppColors.primary2),
                       )
                     : null,
               ),
               alignment: Alignment.center,
               width: 96,
-              child: Text(
+              child: GetGoalGradientText(
                 Translations.of(context).user_profile.display_your_program,
-                style: description().copyWith(
-                  color:
-                      selected == 0 ? AppColors.primary : AppColors.description,
+                style: caption1Regular().copyWith(
+                  color: selected == 0 ? null : AppColors.description,
                 ),
               ),
             ),
@@ -202,7 +202,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               decoration: BoxDecoration(
                 border: selected == 1
                     ? BorderDirectional(
-                        bottom: BorderSide(color: AppColors.primary),
+                        bottom: BorderSide(color: AppColors.primary2),
                       )
                     : null,
               ),
