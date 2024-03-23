@@ -289,7 +289,7 @@ mixin _$GoogleSignInState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GoogleSignInAccount account) success,
+    required TResult Function() success,
     required TResult Function(String error) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -297,7 +297,7 @@ mixin _$GoogleSignInState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GoogleSignInAccount account)? success,
+    TResult? Function()? success,
     TResult? Function(String error)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -305,7 +305,7 @@ mixin _$GoogleSignInState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GoogleSignInAccount account)? success,
+    TResult Function()? success,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) =>
@@ -396,7 +396,7 @@ class _$GoogleSignInInitialImpl implements GoogleSignInInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GoogleSignInAccount account) success,
+    required TResult Function() success,
     required TResult Function(String error) failure,
   }) {
     return initial();
@@ -407,7 +407,7 @@ class _$GoogleSignInInitialImpl implements GoogleSignInInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GoogleSignInAccount account)? success,
+    TResult? Function()? success,
     TResult? Function(String error)? failure,
   }) {
     return initial?.call();
@@ -418,7 +418,7 @@ class _$GoogleSignInInitialImpl implements GoogleSignInInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GoogleSignInAccount account)? success,
+    TResult Function()? success,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -511,7 +511,7 @@ class _$GoogleSignInLoadingImpl implements GoogleSignInLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GoogleSignInAccount account) success,
+    required TResult Function() success,
     required TResult Function(String error) failure,
   }) {
     return loading();
@@ -522,7 +522,7 @@ class _$GoogleSignInLoadingImpl implements GoogleSignInLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GoogleSignInAccount account)? success,
+    TResult? Function()? success,
     TResult? Function(String error)? failure,
   }) {
     return loading?.call();
@@ -533,7 +533,7 @@ class _$GoogleSignInLoadingImpl implements GoogleSignInLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GoogleSignInAccount account)? success,
+    TResult Function()? success,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -590,8 +590,6 @@ abstract class _$$GoogleSignInSuccessImplCopyWith<$Res> {
   factory _$$GoogleSignInSuccessImplCopyWith(_$GoogleSignInSuccessImpl value,
           $Res Function(_$GoogleSignInSuccessImpl) then) =
       __$$GoogleSignInSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({GoogleSignInAccount account});
 }
 
 /// @nodoc
@@ -601,61 +599,37 @@ class __$$GoogleSignInSuccessImplCopyWithImpl<$Res>
   __$$GoogleSignInSuccessImplCopyWithImpl(_$GoogleSignInSuccessImpl _value,
       $Res Function(_$GoogleSignInSuccessImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? account = null,
-  }) {
-    return _then(_$GoogleSignInSuccessImpl(
-      null == account
-          ? _value.account
-          : account // ignore: cast_nullable_to_non_nullable
-              as GoogleSignInAccount,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
-  const _$GoogleSignInSuccessImpl(this.account);
-
-  @override
-  final GoogleSignInAccount account;
+  const _$GoogleSignInSuccessImpl();
 
   @override
   String toString() {
-    return 'GoogleSignInState.success(account: $account)';
+    return 'GoogleSignInState.success()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GoogleSignInSuccessImpl &&
-            (identical(other.account, account) || other.account == account));
+            other is _$GoogleSignInSuccessImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, account);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GoogleSignInSuccessImplCopyWith<_$GoogleSignInSuccessImpl> get copyWith =>
-      __$$GoogleSignInSuccessImplCopyWithImpl<_$GoogleSignInSuccessImpl>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GoogleSignInAccount account) success,
+    required TResult Function() success,
     required TResult Function(String error) failure,
   }) {
-    return success(account);
+    return success();
   }
 
   @override
@@ -663,10 +637,10 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GoogleSignInAccount account)? success,
+    TResult? Function()? success,
     TResult? Function(String error)? failure,
   }) {
-    return success?.call(account);
+    return success?.call();
   }
 
   @override
@@ -674,12 +648,12 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GoogleSignInAccount account)? success,
+    TResult Function()? success,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(account);
+      return success();
     }
     return orElse();
   }
@@ -723,13 +697,7 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
 }
 
 abstract class GoogleSignInSuccess implements GoogleSignInState {
-  const factory GoogleSignInSuccess(final GoogleSignInAccount account) =
-      _$GoogleSignInSuccessImpl;
-
-  GoogleSignInAccount get account;
-  @JsonKey(ignore: true)
-  _$$GoogleSignInSuccessImplCopyWith<_$GoogleSignInSuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory GoogleSignInSuccess() = _$GoogleSignInSuccessImpl;
 }
 
 /// @nodoc
@@ -799,7 +767,7 @@ class _$GoogleSignInFailureImpl implements GoogleSignInFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(GoogleSignInAccount account) success,
+    required TResult Function() success,
     required TResult Function(String error) failure,
   }) {
     return failure(error);
@@ -810,7 +778,7 @@ class _$GoogleSignInFailureImpl implements GoogleSignInFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(GoogleSignInAccount account)? success,
+    TResult? Function()? success,
     TResult? Function(String error)? failure,
   }) {
     return failure?.call(error);
@@ -821,7 +789,7 @@ class _$GoogleSignInFailureImpl implements GoogleSignInFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(GoogleSignInAccount account)? success,
+    TResult Function()? success,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
