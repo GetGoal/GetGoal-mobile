@@ -264,7 +264,7 @@ Future<void> _initBlocs() async {
     () => LoginBloc(getIt()),
   );
   getIt.registerFactory<LogoutBloc>(
-    () => LogoutBloc(getIt()),
+    () => LogoutBloc(getIt(), getIt()),
   );
   getIt.registerFactory<ForgetPasswordBloc>(
     () => ForgetPasswordBloc(),
