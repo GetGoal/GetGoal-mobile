@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../core/bases/base_data.dart';
 
@@ -156,5 +157,12 @@ class AuthRepositoryImpl implements AuthRepository {
         error: data['error'],
       );
     }
+  }
+
+  @override
+  Future<BaseDataResponse<TokenEntity>> googleSignIn(
+      GoogleSignInAccount googleData) {
+    // TODO: implement googleSignIn
+    throw UnimplementedError();
   }
 }
