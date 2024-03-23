@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../features/auth/data/repositories/auth_repository_impl.dart';
 import '../features/auth/data/sources/api/auth_api_service.dart';
@@ -250,6 +251,9 @@ Future<void> _initBlocs() async {
   );
 
   // Initialize Bloc for authentication feature
+  getIt.registerLazySingleton<GoogleSignIn>(
+    () => GoogleSignIn(),
+  );
   getIt.registerFactory<CreateAccountBloc>(
     () => CreateAccountBloc(getIt()),
   );
@@ -269,7 +273,7 @@ Future<void> _initBlocs() async {
     () => NewPasswordBloc(),
   );
   getIt.registerFactory<GoogleSignInBloc>(
-    () => GoogleSignInBloc(getIt()),
+    () => GoogleSignInBloc(getIt(), getIt()),
   );
 
   // Initialize Bloc for user feature

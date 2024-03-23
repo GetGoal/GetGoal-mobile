@@ -7,26 +7,16 @@ import '../../entity/token_entity.dart';
 import '../../repositories/auth_repository.dart';
 
 class GoogleSignInUsecase
-    implements BaseUseCase<BaseDataResponse<TokenEntity>, void> {
+    implements BaseUseCase<BaseDataResponse<TokenEntity>, GoogleSignInAccount> {
   GoogleSignInUsecase(this._authRepository);
 
   final AuthRepository _authRepository;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
   @override
-  Future<BaseDataResponse<TokenEntity>> call({required void params}) async {
-    final GoogleSignInAccount? gUser = await _googleSignIn.signIn();
-
-    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
-
-    final credentials = GoogleAuthProvider.credential(
-      accessToken: gAuth.accessToken,
-      idToken: gAuth.idToken,
-    );
-    await FirebaseAuth.instance.signInWithCredential(credentials);
-
+  Future<BaseDataResponse<TokenEntity>> call(
+      {required GoogleSignInAccount params}) async {
     return _authRepository.googleSignIn(
       'google',
-      gUser,
+      params,
     );
   }
 }
