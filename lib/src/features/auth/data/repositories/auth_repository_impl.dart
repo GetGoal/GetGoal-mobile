@@ -154,7 +154,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final req = GoogleSingInRequest(
         provider: provider,
-        google: GoogleEntity(
+        google: GoogleSignInModel(
             displayName: account!.displayName,
             email: account.email,
             id: account.id,

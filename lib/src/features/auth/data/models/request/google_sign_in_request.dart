@@ -20,12 +20,12 @@ class GoogleSingInRequest {
   final String? provider;
 
   @JsonKey(name: 'google')
-  final GoogleEntity? google;
+  final GoogleSignInModel? google;
 }
 
 @JsonSerializable()
-class GoogleEntity {
-  GoogleEntity({
+class GoogleSignInModel {
+  GoogleSignInModel({
     required this.displayName,
     required this.email,
     required this.id,
@@ -33,12 +33,12 @@ class GoogleEntity {
     required this.serverAuthCode,
   });
 
-  factory GoogleEntity.fromJson(
+  factory GoogleSignInModel.fromJson(
     Map<String, dynamic> json,
   ) =>
-      _$GoogleEntityFromJson(json);
+      _$GoogleSignInModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$GoogleEntityToJson(this);
+  Map<String, dynamic> toJson() => _$GoogleSignInModelToJson(this);
 
   @JsonKey(name: 'display_name')
   final String? displayName;

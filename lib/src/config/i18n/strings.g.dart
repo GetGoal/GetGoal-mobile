@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 126 (63 per locale)
+/// Strings: 128 (64 per locale)
 ///
-/// Built on 2024-03-23 at 19:05 UTC
+/// Built on 2024-03-23 at 23:52 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -160,6 +160,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsSettingEn setting = _StringsSettingEn._(_root);
 	late final _StringsForgetPasswordEn forget_password = _StringsForgetPasswordEn._(_root);
 	late final _StringsNewPasswordEn new_password = _StringsNewPasswordEn._(_root);
+	late final _StringsNotificationEn notification = _StringsNotificationEn._(_root);
 }
 
 // Path: navbar
@@ -333,6 +334,16 @@ class _StringsNewPasswordEn {
 	String get page_title => 'Set new password';
 }
 
+// Path: notification
+class _StringsNotificationEn {
+	_StringsNotificationEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get page_title => 'Notification';
+}
+
 // Path: <root>
 class _StringsTh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
@@ -369,6 +380,7 @@ class _StringsTh implements Translations {
 	@override late final _StringsSettingTh setting = _StringsSettingTh._(_root);
 	@override late final _StringsForgetPasswordTh forget_password = _StringsForgetPasswordTh._(_root);
 	@override late final _StringsNewPasswordTh new_password = _StringsNewPasswordTh._(_root);
+	@override late final _StringsNotificationTh notification = _StringsNotificationTh._(_root);
 }
 
 // Path: navbar
@@ -542,6 +554,16 @@ class _StringsNewPasswordTh implements _StringsNewPasswordEn {
 	@override String get page_title => 'ตั้งรหัสผ่านใหม่';
 }
 
+// Path: notification
+class _StringsNotificationTh implements _StringsNotificationEn {
+	_StringsNotificationTh._(this._root);
+
+	@override final _StringsTh _root; // ignore: unused_field
+
+	// Translations
+	@override String get page_title => 'การแจ้งเตือน';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -611,6 +633,7 @@ extension on Translations {
 			case 'setting.thai': return 'Thai';
 			case 'forget_password.page_title': return 'Reset password';
 			case 'new_password.page_title': return 'Set new password';
+			case 'notification.page_title': return 'Notification';
 			default: return null;
 		}
 	}
@@ -682,6 +705,7 @@ extension on _StringsTh {
 			case 'setting.thai': return 'ไทย';
 			case 'forget_password.page_title': return 'ลืมรหัสผ่าน';
 			case 'new_password.page_title': return 'ตั้งรหัสผ่านใหม่';
+			case 'notification.page_title': return 'การแจ้งเตือน';
 			default: return null;
 		}
 	}

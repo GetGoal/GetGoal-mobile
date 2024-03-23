@@ -11,7 +11,7 @@ GoogleSingInRequest _$GoogleSingInRequestFromJson(Map<String, dynamic> json) =>
       provider: json['provider'] as String?,
       google: json['google'] == null
           ? null
-          : GoogleEntity.fromJson(json['google'] as Map<String, dynamic>),
+          : GoogleSignInModel.fromJson(json['google'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GoogleSingInRequestToJson(
@@ -21,7 +21,8 @@ Map<String, dynamic> _$GoogleSingInRequestToJson(
       'google': instance.google,
     };
 
-GoogleEntity _$GoogleEntityFromJson(Map<String, dynamic> json) => GoogleEntity(
+GoogleSignInModel _$GoogleSignInModelFromJson(Map<String, dynamic> json) =>
+    GoogleSignInModel(
       displayName: json['display_name'] as String?,
       email: json['email'] as String?,
       id: json['id'] as String?,
@@ -29,7 +30,7 @@ GoogleEntity _$GoogleEntityFromJson(Map<String, dynamic> json) => GoogleEntity(
       serverAuthCode: json['server_auth_code'] as String?,
     );
 
-Map<String, dynamic> _$GoogleEntityToJson(GoogleEntity instance) =>
+Map<String, dynamic> _$GoogleSignInModelToJson(GoogleSignInModel instance) =>
     <String, dynamic>{
       'display_name': instance.displayName,
       'email': instance.email,

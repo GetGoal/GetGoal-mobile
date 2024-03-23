@@ -101,26 +101,9 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
       },
       builder: (context, state) {
         switch (state) {
-          case GoogleSignInInitial():
-            return MainButton(
-              icon: SvgPicture.asset(
-                AppIcon.google_icon,
-                fit: BoxFit.scaleDown,
-                height: 36,
-              ),
-              buttonText: 'Continue with Google',
-              buttonColor: [AppColors.secondary, AppColors.secondary],
-              isHaveBoxShadow: true,
-              onTap: googleSignIn,
-            );
-
           case GoogleSignInLoading():
             return const MainButton(isLoading: true);
-
-          case GoogleSignInSuccess():
-            return const MainButton(isLoading: true);
-
-          case GoogleSignInFailure():
+          default:
             return MainButton(
               icon: SvgPicture.asset(
                 AppIcon.google_icon,
@@ -132,25 +115,10 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
               isHaveBoxShadow: true,
               onTap: googleSignIn,
             );
-          default:
-            return const MainButton(buttonText: 'fsf');
         }
       },
     );
   }
-  // Widget _buildGoogleLoginButton() {
-  //   return MainButton(
-  //     icon: SvgPicture.asset(
-  //       AppIcon.google_icon,
-  //       fit: BoxFit.scaleDown,
-  //       height: 36,
-  //     ),
-  //     buttonText: 'Continue with Google',
-  //     buttonColor: [AppColors.secondary, AppColors.secondary],
-  //     isHaveBoxShadow: true,
-  //     onTap: () {},
-  //   );
-  // }
 
   Widget _buildEmailTextFieldInput() {
     return NormalTextInputField(
