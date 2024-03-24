@@ -39,7 +39,8 @@ class _NewPasswordPageState extends State<NewPasswordPage>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _buildNewPasswordInputField(),
+            const SizedBox(height: 24),
+            Expanded(child: _buildNewPasswordInputField()),
             _buildSubmitButton(),
           ],
         ),
