@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
 import '../../themes/color.dart';
 import '../../themes/font.dart';
@@ -109,54 +110,41 @@ class NormalTextInputField extends StatelessWidget {
                   : null,
 
               // Text input field border
-              enabledBorder: OutlineInputBorder(
+              enabledBorder: GradientOutlineInputBorder(
+                gradient: AppColors.silverGradient,
                 // Radius
                 borderRadius: const BorderRadius.all(
                   Radius.circular(
-                    12.0,
+                    16.0,
                   ),
-                ),
-                // Style
-                borderSide: BorderSide(
-                  color: AppColors.description,
-                  width: 1,
                 ),
               ),
 
               // When text input field in focus
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: GradientOutlineInputBorder(
+                gradient: AppColors.primaryGradient,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(
-                    12.0,
+                    16.0,
                   ),
-                ),
-                borderSide: BorderSide(
-                  color: AppColors.primary2,
-                  width: 1,
                 ),
               ),
 
               // Text input field error style
-              errorBorder: OutlineInputBorder(
+              errorBorder: GradientOutlineInputBorder(
+                gradient: AppColors.redGradient,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(
-                    12.0,
+                    16.0,
                   ),
-                ),
-                borderSide: BorderSide(
-                  color: AppColors.red,
-                  width: 1,
                 ),
               ),
-              focusedErrorBorder: OutlineInputBorder(
+              focusedErrorBorder: GradientOutlineInputBorder(
+                gradient: AppColors.redGradient,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(
-                    12.0,
+                    16.0,
                   ),
-                ),
-                borderSide: BorderSide(
-                  color: AppColors.red,
-                  width: 1,
                 ),
               ),
             ),
