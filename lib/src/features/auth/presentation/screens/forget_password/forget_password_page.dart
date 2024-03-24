@@ -42,7 +42,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _buildEmailInputField(),
+            const SizedBox(height: 24),
+            Expanded(child: _buildEmailInputField()),
             _buildSubmitButton(),
           ],
         ),
