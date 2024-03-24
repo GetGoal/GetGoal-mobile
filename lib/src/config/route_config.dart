@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../core/di.dart';
 import '../features/auth/presentation/screens/forget_password/bloc/forget_password/forget_password_bloc.dart';
 import '../features/auth/presentation/screens/forget_password/forget_password_page.dart';
-import '../features/auth/presentation/screens/landing/landign_page.dart';
+import '../features/auth/presentation/screens/landing/landing_page.dart';
 import '../features/auth/presentation/screens/login/bloc/google_login/google_sign_in_bloc.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/login/login_page.dart';
