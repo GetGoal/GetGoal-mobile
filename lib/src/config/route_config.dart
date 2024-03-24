@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../core/di.dart';
 import '../features/auth/presentation/screens/forget_password/bloc/forget_password/forget_password_bloc.dart';
 import '../features/auth/presentation/screens/forget_password/forget_password_page.dart';
+import '../features/auth/presentation/screens/landing/landign_page.dart';
 import '../features/auth/presentation/screens/login/bloc/google_login/google_sign_in_bloc.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/login/login_page.dart';
@@ -47,10 +48,11 @@ class RouteConfig {
   // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter _goRouter = GoRouter(
-    initialLocation: Routes.loginPage,
+    initialLocation: Routes.landingPage,
     debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
     routes: [
+      _landingPage(),
       _loginPage(),
       _signUpPage(),
       _verificationPage(),
@@ -71,6 +73,21 @@ class RouteConfig {
 
   static GoRouter get goRouter => _goRouter;
 
+  static GoRoute _landingPage() {
+    return GoRoute(
+      path: Routes.landingPage,
+      name: Routes.landingPage,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<GoogleSignInBloc>(),
+          ),
+        ],
+        child: const LandingPage(),
+      ),
+    );
+  }
+
   static GoRoute _loginPage() {
     return GoRoute(
       path: Routes.loginPage,
@@ -79,9 +96,6 @@ class RouteConfig {
         providers: [
           BlocProvider(
             create: (context) => getIt<LoginBloc>(),
-          ),
-          BlocProvider(
-            create: (context) => getIt<GoogleSignInBloc>(),
           ),
         ],
         child: const LoginPage(),
@@ -342,6 +356,7 @@ class RouteConfig {
 class Routes {
   const Routes._();
 
+  static const String landingPage = '/landing';
   static const String loginPage = '/login';
   static const String signUpPage = '/sign_up';
   static const String verificationPage = '/verification';
