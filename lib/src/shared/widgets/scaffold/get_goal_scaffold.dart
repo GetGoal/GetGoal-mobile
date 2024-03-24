@@ -33,74 +33,65 @@ class GetGoalScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Center(
+      extendBodyBehindAppBar: true,
+      appBar: isShowAppbar!
+          ? _buildAppbar(context)
+          : const PreferredSize(
+              preferredSize: Size.zero,
+              child: SizedBox(),
+            ),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: isGredientBackground!
+                ? [AppColors.lightOrange, AppColors.lightDarkBlue]
+                : [AppColors.background, AppColors.background],
+          ),
+        ),
         child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: isGredientBackground!
-                  ? [AppColors.lightOrange, AppColors.lightDarkBlue]
-                  : [AppColors.background, AppColors.background],
-            ),
+          margin: const EdgeInsets.only(
+            top: 112,
+            right: 16,
+            bottom: 48,
+            left: 16,
           ),
-          child: Container(
-            margin: const EdgeInsets.only(
-              top: 72,
-              right: 16,
-              bottom: 48,
-              left: 16,
-            ),
-            child: Column(
-              children: [
-                isShowAppbar! ? _buildAppbar(context) : const SizedBox(),
-                const SizedBox(height: 24),
-                SingleChildScrollView(
-                  child: body,
-                ),
-              ],
-            ),
-          ),
+          child: body,
         ),
       ),
       bottomNavigationBar: bottomNavigationBar,
     );
   }
 
-  Widget _buildAppbar(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            isShowBackButton!
-                ? CircleButton(
-                    onTap: onGoBack ?? () => context.pop(true),
-                    icon: CustomIcon(
-                      icon: AppIcon.back_icon,
-                      size: 24,
-                      iconColor: AppColors.white,
-                    ),
-                    color: AppColors.secondary,
-                  )
-                : const SizedBox(),
-            SizedBox(width: isShowBackButton! ? 16 : 0),
-            Flexible(
-              child: Text(
+  AppBar _buildAppbar(BuildContext context) {
+    return AppBar(
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              CircleButton(
+                onTap: onGoBack ?? () => context.pop(true),
+                icon: CustomIcon(
+                  icon: AppIcon.back_icon,
+                  size: 24,
+                  iconColor: AppColors.white,
+                ),
+                color: AppColors.secondary,
+              ),
+              const SizedBox(width: 16),
+              Text(
                 appbarTitle ?? '',
                 style: title1Bold().copyWith(color: AppColors.white),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 4),
-        pageDescription != null
-            ? Text(
-                pageDescription!,
-                style: footnoteRegular().copyWith(color: AppColors.description),
-              )
-            : const SizedBox(),
-      ],
+            ],
+          ),
+        ],
+      ),
+      automaticallyImplyLeading: false,
     );
   }
 }
