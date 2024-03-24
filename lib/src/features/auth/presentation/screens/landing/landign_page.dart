@@ -88,7 +88,11 @@ class _LandingPageState extends State<LandingPage> {
       builder: (context, state) {
         switch (state) {
           case GoogleSignInLoading():
-            return const MainButton(isLoading: true);
+            return MainButton(
+              isLoading: true,
+              buttonColor: [AppColors.secondary, AppColors.secondary],
+              isHaveStroke: true,
+            );
           default:
             return MainButton(
               icon: SvgPicture.asset(
