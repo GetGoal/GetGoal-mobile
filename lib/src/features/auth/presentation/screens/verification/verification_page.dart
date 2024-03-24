@@ -221,13 +221,13 @@ class _VerificationPageState extends State<VerificationPage> {
   Widget _verificationButton() {
     return Column(
       children: [
-        // MainButton(
-        //   buttonText: 'Resend (60s)',
-        //   buttonColor: AppColors.white,
-        //   bottonStock: AppColors.stock,
-        //   onTap: () {},
-        // ),
-        // const SizedBox(height: 16),
+        MainButton(
+          buttonText: 'Resend',
+          buttonColor: [AppColors.secondary, AppColors.secondary],
+          isHaveBoxShadow: true,
+          onTap: () {},
+        ),
+        const SizedBox(height: 16),
         MainButton(
           buttonText: 'Continue',
           onTap: () {
