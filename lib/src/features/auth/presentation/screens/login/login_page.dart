@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../config/route_config.dart';
-import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
-import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/dialog/error_dialog.dart';
+import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
-import 'bloc/google_login/google_sign_in_bloc.dart';
 import 'bloc/login/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -24,7 +21,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
   LoginBloc get _loginBloc => context.read<LoginBloc>();
-  GoogleSignInBloc get _googleBloc => context.read<GoogleSignInBloc>();
 
   final _formKey = GlobalKey<FormState>();
   final _emailInputController = TextEditingController();
@@ -39,84 +35,31 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
-        alignment: Alignment.center,
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildTextHeader(),
-              const SizedBox(height: 40),
-              _buildGoogleLoginButton(),
-              const SizedBox(height: 20),
-              Text('Or', style: description()),
-              const SizedBox(height: 20),
-              _buildEmailTextFieldInput(),
-              const SizedBox(height: 20),
-              _buildPasswordTextFieldInput(),
-              const SizedBox(height: 32),
-              _buildSubmitButton(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTextHeader() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Welcome to', style: heading1()),
-        Row(
+    return GetGoalScaffold(
+      isShowAppbar: true,
+      appbarTitle: 'Login',
+      isShowBackButton: true,
+      isGredientBackground: true,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Get', style: heading1()),
-            Text('Goal!', style: heading1().copyWith(color: AppColors.primary)),
+            const SizedBox(height: 24),
+            Expanded(
+              child: Column(
+                children: [
+                  _buildEmailTextFieldInput(),
+                  const SizedBox(height: 20),
+                  _buildPasswordTextFieldInput(),
+                  const SizedBox(height: 32),
+                ],
+              ),
+            ),
+            _buildSubmitButton(),
           ],
         ),
-        const Text('"Dream, Plan, Achieve with GetGoal!"'),
-      ],
-    );
-  }
-
-  Widget _buildGoogleLoginButton() {
-    return BlocConsumer<GoogleSignInBloc, GoogleSignInState>(
-      listener: (context, state) {
-        switch (state) {
-          case GoogleSignInSuccess():
-            context.go(Routes.mainPage);
-            break;
-          case GoogleSignInFailure(:final error):
-            showDialog(
-              context: context,
-              builder: (context) => ErrorDialog(errorMessage: error),
-            );
-            break;
-          default:
-        }
-      },
-      builder: (context, state) {
-        switch (state) {
-          case GoogleSignInLoading():
-            return const MainButton(isLoading: true);
-          default:
-            return MainButton(
-              icon: SvgPicture.asset(
-                AppIcon.google_icon,
-                fit: BoxFit.scaleDown,
-                height: 36,
-              ),
-              buttonText: 'Continue with Google',
-              buttonColor: [AppColors.secondary, AppColors.secondary],
-              isHaveBoxShadow: true,
-              onTap: googleSignIn,
-            );
-        }
-      },
+      ),
     );
   }
 
@@ -194,29 +137,6 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
             }
           },
         ),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Don't have an account?",
-              style: body1(),
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            GestureDetector(
-              onTap: () => context.pushNamed('/sign_up'),
-              child: Text(
-                'Create an account',
-                style: body1().copyWith(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
       ],
     );
   }
@@ -230,9 +150,5 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
         ),
       );
     }
-  }
-
-  void googleSignIn() {
-    _googleBloc.add(const GoogleSignInEvent.onGoogleLogin());
   }
 }
