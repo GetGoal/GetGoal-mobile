@@ -22,6 +22,22 @@ class AppColors {
       AppColors.primary2,
     ],
   );
+  static LinearGradient silverGradient = LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomRight,
+    colors: [
+      HexColor.fromHex('7A7A7A'),
+      HexColor.fromHex('353535'),
+    ],
+  );
+  static LinearGradient redGradient = LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomRight,
+    colors: [
+      HexColor.fromHex('FF6060'),
+      HexColor.fromHex('850000'),
+    ],
+  );
 
   static MaterialColor primaryWhite = const MaterialColor(
     _whilteMaterialColor,
