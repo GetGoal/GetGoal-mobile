@@ -6,7 +6,7 @@ import '../../../../../config/route_config.dart';
 import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
-import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
+import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import '../../../domain/entity/create_user.dart';
 import 'bloc/create_account/create_account_bloc.dart';
@@ -29,29 +29,31 @@ class _SignUpPageState extends State<SignUpPage> with AuthValidationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return GetGoalSubScaffold(
-      appbarTitle: 'Sign up',
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(20),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                _buildFirstNameTextFieldInput(),
-                const SizedBox(height: 20),
-                _buildLastNameTextFieldInput(),
-                const SizedBox(height: 20),
-                _buildEmailTextFieldInput(),
-                const SizedBox(height: 20),
-                _buildPasswordTextFieldInput(),
-                const SizedBox(height: 20),
-              ],
+    return GetGoalScaffold(
+      isGredientBackground: true,
+      appbarTitle: 'Create an account',
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            const SizedBox(height: 24),
+            Expanded(
+              child: Column(
+                children: [
+                  _buildFirstNameTextFieldInput(),
+                  const SizedBox(height: 20),
+                  _buildLastNameTextFieldInput(),
+                  const SizedBox(height: 20),
+                  _buildEmailTextFieldInput(),
+                  const SizedBox(height: 20),
+                  _buildPasswordTextFieldInput(),
+                ],
+              ),
             ),
-          ),
+            _buildSubmitButton(),
+          ],
         ),
       ),
-      bottomNavigationBar: _buildSubmitButton(),
     );
   }
 
@@ -92,32 +94,29 @@ class _SignUpPageState extends State<SignUpPage> with AuthValidationMixin {
   }
 
   Widget _buildSubmitButton() {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 40, right: 20, left: 20),
-      child: BlocConsumer<CreateAccountBloc, CreateAccountState>(
-        listener: (context, state) {
-          switch (state) {
-            case CreateAccountStateCreated():
-              context.pushNamed(Routes.verificationPage);
-              break;
-            default:
-          }
-        },
-        builder: (context, state) {
-          switch (state) {
-            case CreateAccountStateInitial():
-              return MainButton(buttonText: 'Continue', onTap: registerAccount);
-            case CreateAccountStateLoading():
-              return const MainButton(isLoading: true);
-            case CreateAccountStateCreated():
-              return const MainButton(isLoading: true);
-            case CreateAccountStateError():
-              return MainButton(buttonText: 'Continue', onTap: registerAccount);
-            default:
-              return const MainButton(buttonText: 'Continue');
-          }
-        },
-      ),
+    return BlocConsumer<CreateAccountBloc, CreateAccountState>(
+      listener: (context, state) {
+        switch (state) {
+          case CreateAccountStateCreated():
+            context.pushNamed(Routes.verificationPage);
+            break;
+          default:
+        }
+      },
+      builder: (context, state) {
+        switch (state) {
+          case CreateAccountStateInitial():
+            return MainButton(buttonText: 'Continue', onTap: registerAccount);
+          case CreateAccountStateLoading():
+            return const MainButton(isLoading: true);
+          case CreateAccountStateCreated():
+            return const MainButton(isLoading: true);
+          case CreateAccountStateError():
+            return MainButton(buttonText: 'Continue', onTap: registerAccount);
+          default:
+            return const MainButton(buttonText: 'Continue');
+        }
+      },
     );
   }
 
