@@ -79,7 +79,10 @@ class _LandingPageState extends State<LandingPage> {
           case GoogleSignInFailure(:final error):
             showDialog(
               context: context,
-              builder: (context) => ErrorDialog(errorMessage: error),
+              builder: (context) => ErrorDialog(
+                title: 'Unable to login',
+                errorMessage: error,
+              ),
             );
             break;
           default:
