@@ -8,7 +8,7 @@ import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/dialog/error_dialog.dart';
-import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
+import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
 import 'bloc/verify_account/verify_account_bloc.dart';
 import 'widgets/otp_slot_text_field.dart';
 
@@ -62,38 +62,34 @@ class _VerificationPageState extends State<VerificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GetGoalSubScaffold(
+    return GetGoalScaffold(
+      isGredientBackground: true,
       appbarTitle: 'Verification Code',
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildDescriptionInfo(),
-            Container(
-              padding: const EdgeInsets.only(bottom: 80),
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildOtpFirstSlot(),
-                  const SizedBox(width: 16),
-                  _buildOtpSecondSlot(),
-                  const SizedBox(width: 16),
-                  _buildOtpThirtSlot(),
-                  const SizedBox(width: 16),
-                  _buildOtpForthSlot(),
-                  const SizedBox(width: 16),
-                  _buildOtpFifthSlot(),
-                  const SizedBox(width: 16),
-                  _buildOtpSixthSlot(),
-                ],
-              ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _buildDescriptionInfo(),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildOtpFirstSlot(),
+                const SizedBox(width: 16),
+                _buildOtpSecondSlot(),
+                const SizedBox(width: 16),
+                _buildOtpThirtSlot(),
+                const SizedBox(width: 16),
+                _buildOtpForthSlot(),
+                const SizedBox(width: 16),
+                _buildOtpFifthSlot(),
+                const SizedBox(width: 16),
+                _buildOtpSixthSlot(),
+              ],
             ),
-            _buildButtonSection(),
-          ],
-        ),
+          ),
+          _buildButtonSection(),
+        ],
       ),
     );
   }
@@ -105,9 +101,9 @@ class _VerificationPageState extends State<VerificationPage> {
       children: [
         Text(
           'We sent the code to your Email',
-          style: body2().copyWith(color: AppColors.description),
+          style: footnoteRegular().copyWith(color: AppColors.description),
         ),
-        Text(AppCache.userEmail, style: body2()),
+        Text(AppCache.userEmail, style: footnoteRegular()),
       ],
     );
   }
@@ -212,29 +208,9 @@ class _VerificationPageState extends State<VerificationPage> {
       },
       builder: (context, state) {
         switch (state) {
-          case VerifyAccountStateInitial():
-            return _verificationButton();
-
           case VerifyAccountStateLoading():
-            return Container(
-              padding: const EdgeInsets.only(bottom: 40),
-              child: const MainButton(
-                buttonText: 'Loading',
-                isLoading: true,
-              ),
-            );
+            return const MainButton(isLoading: true);
 
-          case VerifyAccountStateVerified():
-            return Container(
-              padding: const EdgeInsets.only(bottom: 40),
-              child: const MainButton(
-                buttonText: 'Loading',
-                isLoading: true,
-              ),
-            );
-
-          case VerifyAccountStateVirifiedError():
-            return _verificationButton();
           default:
             return _verificationButton();
         }
@@ -243,36 +219,32 @@ class _VerificationPageState extends State<VerificationPage> {
   }
 
   Widget _verificationButton() {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: Column(
-        children: [
-          // MainButton(
-          //   buttonText: 'Resend (60s)',
-          //   buttonColor: AppColors.white,
-          //   bottonStock: AppColors.stock,
-          //   onTap: () {},
-          // ),
-          // const SizedBox(height: 16),
-          MainButton(
-            buttonText: 'Continue',
-            onTap: () {
-              String code1 = _firstBoxInput.text;
-              String code2 = _secondBoxInput.text;
-              String code3 = _thirtBoxInput.text;
-              String code4 = _forthBoxInput.text;
-              String code5 = _fifthBoxInput.text;
-              String code6 = _sixthBoxInput.text;
+    return Column(
+      children: [
+        MainButton(
+          buttonText: 'Resend',
+          buttonColor: [AppColors.secondary, AppColors.secondary],
+          isHaveBoxShadow: true,
+          onTap: () {},
+        ),
+        const SizedBox(height: 16),
+        MainButton(
+          buttonText: 'Continue',
+          onTap: () {
+            String code1 = _firstBoxInput.text;
+            String code2 = _secondBoxInput.text;
+            String code3 = _thirtBoxInput.text;
+            String code4 = _forthBoxInput.text;
+            String code5 = _fifthBoxInput.text;
+            String code6 = _sixthBoxInput.text;
 
-              String verifyCode = '$code1$code2$code3$code4$code5$code6';
-              _verifyAccountBloc.add(
-                VerifyAccountEvent.verified(code: verifyCode),
-              );
-              // context.go('/main');
-            },
-          ),
-        ],
-      ),
+            String verifyCode = '$code1$code2$code3$code4$code5$code6';
+            _verifyAccountBloc.add(
+              VerifyAccountEvent.verified(code: verifyCode),
+            );
+          },
+        ),
+      ],
     );
   }
 }

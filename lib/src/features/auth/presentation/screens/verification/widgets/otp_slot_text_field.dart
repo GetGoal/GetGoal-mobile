@@ -21,12 +21,12 @@ class OtpSlotTextField extends StatelessWidget {
     return Expanded(
       child: TextField(
         controller: controller,
-        style: heading1(),
+        style: title1Bold(),
         textAlign: TextAlign.center,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 24),
           isDense: true,
-          fillColor: AppColors.white,
+          fillColor: AppColors.secondary,
           filled: true,
           prefixIconColor: AppColors.description,
           enabledBorder: OutlineInputBorder(
@@ -47,7 +47,7 @@ class OtpSlotTextField extends StatelessWidget {
               ),
             ),
             borderSide: BorderSide(
-              color: AppColors.primary,
+              color: AppColors.primary2,
               width: 1,
             ),
           ),

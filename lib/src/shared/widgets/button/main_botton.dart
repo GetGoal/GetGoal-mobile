@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 import '../../themes/color.dart';
 import '../../themes/font.dart';
@@ -47,7 +48,9 @@ class MainButton extends StatelessWidget {
                 : buttonColor!,
           ),
           borderRadius: BorderRadius.circular(36),
-          border: isHaveStroke! ? Border.all(color: AppColors.primary2) : null,
+          border: isHaveStroke!
+              ? GradientBoxBorder(gradient: AppColors.primaryGradient)
+              : null,
         ),
         child: Center(
           child: Row(
