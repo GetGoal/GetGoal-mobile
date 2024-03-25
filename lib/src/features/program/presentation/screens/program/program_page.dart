@@ -8,7 +8,6 @@ import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
-import '../../../../../shared/widgets/button/circle_button.dart';
 import '../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../domain/entities/program.dart';
 import '../../../domain/entities/program_filter.dart';
@@ -228,13 +227,10 @@ class _ProgramPageState extends State<ProgramPage> {
                         ? const Label(labelName: 'Unknow')
                         : programList[index].labels![0],
                     createdAt: programList[index].updatedAt,
-                    actionButton: CircleButton(
-                      size: 36,
-                      icon: CustomIcon(
-                        icon: AppIcon.bookmark_icon,
-                        size: 24,
-                        iconColor: AppColors.description,
-                      ),
+                    actionButton: CustomIcon(
+                      icon: AppIcon.bookmark_icon,
+                      size: 24,
+                      iconColor: AppColors.description,
                     ),
                     onTab: () {
                       context.push(

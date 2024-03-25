@@ -8,7 +8,6 @@ import '../../../../shared/icon.dart';
 import '../../../../shared/themes/color.dart';
 import '../../../../shared/themes/font.dart';
 import '../../../../shared/themes/spacing.dart';
-import '../../../../shared/widgets/button/circle_button.dart';
 import '../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../shared/widgets/image/cache_image.dart';
@@ -254,13 +253,18 @@ class _UserProfilePageState extends State<UserProfilePage> {
             return const SizedBox();
 
           case UserProgramStateLoadedSuccess(:final programList):
-            return ListView.builder(
+            return ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: programList.length,
+              separatorBuilder: (context, index) => Divider(
+                color: AppColors.stroke,
+              ),
               itemBuilder: (context, index) {
                 return ProgramCard(
-                  onTab: () {},
+                  onTab: () => context.push(
+                    '/program_info/${programList[index].programId}',
+                  ),
                   programImage: programList[index].programImage,
                   programName: programList[index].programName,
                   programDesc: programList[index].programDesc,
@@ -274,17 +278,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       splashFactory: NoSplash.splashFactory,
                     ),
                     child: PopupMenuButton(
-                      elevation: 1,
-                      shadowColor: Colors.black38,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                       padding: const EdgeInsets.all(0),
-                      icon: CircleButton(
-                        icon: CustomIcon(
-                          icon: AppIcon.menu_icon,
-                          iconColor: AppColors.description,
-                        ),
+                      icon: CustomIcon(
+                        size: 24,
+                        icon: AppIcon.menu_icon,
+                        iconColor: AppColors.description,
                       ),
                       itemBuilder: (context) => [
                         // Edit program
