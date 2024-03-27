@@ -32,6 +32,7 @@ import '../features/program/domain/usecases/program/get_program_by_search_usecas
 import '../features/program/domain/usecases/program/get_program_usecase.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 import '../features/program/presentation/bloc/program/program_bloc.dart';
+import '../features/program/presentation/bloc/program_edit/program_edit_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
 import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
@@ -227,6 +228,9 @@ Future<void> _initBlocs() async {
   );
   getIt.registerFactory<CreateProgramBloc>(
     () => CreateProgramBloc(getIt()),
+  );
+  getIt.registerFactory<ProgramEditBloc>(
+    () => ProgramEditBloc(getIt()),
   );
 
   // Initialize Bloc for task feature
