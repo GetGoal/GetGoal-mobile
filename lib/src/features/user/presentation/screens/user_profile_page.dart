@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/i18n/strings.g.dart';
 import '../../../../config/route_config.dart';
+import '../../../../shared/app_cache.dart';
 import '../../../../shared/icon.dart';
 import '../../../../shared/themes/color.dart';
 import '../../../../shared/themes/font.dart';
@@ -16,6 +17,7 @@ import '../../../program/domain/entities/program.dart';
 import '../../../program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../../../program/presentation/enum/program_form_mode.enum.dart';
 import '../../../program/presentation/screens/program/widgets/program_card.dart';
+import '../../../program/presentation/screens/program_create/program_create_page.dart';
 import 'bloc/logout/logout_bloc.dart';
 import 'bloc/user_profile/user_profile_bloc.dart';
 import 'bloc/user_program/user_program_bloc.dart';
@@ -113,7 +115,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
       listener: (context, state) {
         switch (state) {
           case LogoutStateloaggedOut():
-            context.go(Routes.loginPage);
+            context.go(Routes.landingPage);
             break;
           case LogoutStateLoggedOutError(:final message):
             showDialog(
@@ -290,10 +292,19 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       itemBuilder: (context) => [
                         // Edit program
                         PopupMenuItem(
-                          onTap: () => context.pushNamed(
-                            Routes.programCreatePage,
-                            extra: PROGRAMFORMMODE.edit,
-                          ),
+                          onTap: () async {
+                            bool? isRefresh = await context.pushNamed(
+                              Routes.programCreatePage,
+                              extra: ProgramCreatePageData(
+                                mode: PROGRAMFORMMODE.edit,
+                                programId:
+                                    programList[index].programId.toString(),
+                              ),
+                            );
+                            if (isRefresh!) {
+                              AppCache.programTaskCreateList = [];
+                            }
+                          },
                           child: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8),
                             child: Row(
