@@ -11,6 +11,7 @@ import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../program/presentation/enum/program_form_mode.enum.dart';
+import '../../../../../program/presentation/screens/program_create/program_create_page.dart';
 import '../../../../../task/presentation/enum/task_form_mode_enum.dart';
 import '../../../../../task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../../../../../task/presentation/screens/task_create/task_create_page.dart';
@@ -176,7 +177,9 @@ class BottomNavigation extends StatelessWidget {
               context.pop();
               context.pushNamed(
                 Routes.programCreatePage,
-                extra: PROGRAMFORMMODE.create,
+                extra: ProgramCreatePageData(
+                  mode: PROGRAMFORMMODE.create,
+                ),
               );
             },
             behavior: HitTestBehavior.translucent,
