@@ -72,7 +72,7 @@ class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
           child: TaskPlanningCard(
             taskNumber: index + 1,
             taskName: AppCache.programTaskCreateList[index].taskName!,
-            startTime: DateTime.now().toString(),
+            startTime: AppCache.programTaskCreateList[index].startTime,
             onEdit: () async {
               bool? isRefresh = await context.pushNamed(
                 Routes.taskCreatepage,
