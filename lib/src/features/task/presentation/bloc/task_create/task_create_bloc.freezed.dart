@@ -21,6 +21,7 @@ mixin _$TaskCreateEvent {
     required TResult Function(String? taskId) started,
     required TResult Function(Task task) onCreate,
     required TResult Function(Task task, String taskId) onEdit,
+    required TResult Function(Task task) onLoadEditData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$TaskCreateEvent {
     TResult? Function(String? taskId)? started,
     TResult? Function(Task task)? onCreate,
     TResult? Function(Task task, String taskId)? onEdit,
+    TResult? Function(Task task)? onLoadEditData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$TaskCreateEvent {
     TResult Function(String? taskId)? started,
     TResult Function(Task task)? onCreate,
     TResult Function(Task task, String taskId)? onEdit,
+    TResult Function(Task task)? onLoadEditData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,8 @@ mixin _$TaskCreateEvent {
     required TResult Function(TaskCreateEventStarted value) started,
     required TResult Function(TaskCreateEventOnCreate value) onCreate,
     required TResult Function(TaskCreateEventOnEdit value) onEdit,
+    required TResult Function(TaskCreateEventOnLoadEditData value)
+        onLoadEditData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +55,7 @@ mixin _$TaskCreateEvent {
     TResult? Function(TaskCreateEventStarted value)? started,
     TResult? Function(TaskCreateEventOnCreate value)? onCreate,
     TResult? Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult? Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +63,7 @@ mixin _$TaskCreateEvent {
     TResult Function(TaskCreateEventStarted value)? started,
     TResult Function(TaskCreateEventOnCreate value)? onCreate,
     TResult Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -150,6 +157,7 @@ class _$TaskCreateEventStartedImpl implements TaskCreateEventStarted {
     required TResult Function(String? taskId) started,
     required TResult Function(Task task) onCreate,
     required TResult Function(Task task, String taskId) onEdit,
+    required TResult Function(Task task) onLoadEditData,
   }) {
     return started(taskId);
   }
@@ -160,6 +168,7 @@ class _$TaskCreateEventStartedImpl implements TaskCreateEventStarted {
     TResult? Function(String? taskId)? started,
     TResult? Function(Task task)? onCreate,
     TResult? Function(Task task, String taskId)? onEdit,
+    TResult? Function(Task task)? onLoadEditData,
   }) {
     return started?.call(taskId);
   }
@@ -170,6 +179,7 @@ class _$TaskCreateEventStartedImpl implements TaskCreateEventStarted {
     TResult Function(String? taskId)? started,
     TResult Function(Task task)? onCreate,
     TResult Function(Task task, String taskId)? onEdit,
+    TResult Function(Task task)? onLoadEditData,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -184,6 +194,8 @@ class _$TaskCreateEventStartedImpl implements TaskCreateEventStarted {
     required TResult Function(TaskCreateEventStarted value) started,
     required TResult Function(TaskCreateEventOnCreate value) onCreate,
     required TResult Function(TaskCreateEventOnEdit value) onEdit,
+    required TResult Function(TaskCreateEventOnLoadEditData value)
+        onLoadEditData,
   }) {
     return started(this);
   }
@@ -194,6 +206,7 @@ class _$TaskCreateEventStartedImpl implements TaskCreateEventStarted {
     TResult? Function(TaskCreateEventStarted value)? started,
     TResult? Function(TaskCreateEventOnCreate value)? onCreate,
     TResult? Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult? Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
   }) {
     return started?.call(this);
   }
@@ -204,6 +217,7 @@ class _$TaskCreateEventStartedImpl implements TaskCreateEventStarted {
     TResult Function(TaskCreateEventStarted value)? started,
     TResult Function(TaskCreateEventOnCreate value)? onCreate,
     TResult Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -303,6 +317,7 @@ class _$TaskCreateEventOnCreateImpl implements TaskCreateEventOnCreate {
     required TResult Function(String? taskId) started,
     required TResult Function(Task task) onCreate,
     required TResult Function(Task task, String taskId) onEdit,
+    required TResult Function(Task task) onLoadEditData,
   }) {
     return onCreate(task);
   }
@@ -313,6 +328,7 @@ class _$TaskCreateEventOnCreateImpl implements TaskCreateEventOnCreate {
     TResult? Function(String? taskId)? started,
     TResult? Function(Task task)? onCreate,
     TResult? Function(Task task, String taskId)? onEdit,
+    TResult? Function(Task task)? onLoadEditData,
   }) {
     return onCreate?.call(task);
   }
@@ -323,6 +339,7 @@ class _$TaskCreateEventOnCreateImpl implements TaskCreateEventOnCreate {
     TResult Function(String? taskId)? started,
     TResult Function(Task task)? onCreate,
     TResult Function(Task task, String taskId)? onEdit,
+    TResult Function(Task task)? onLoadEditData,
     required TResult orElse(),
   }) {
     if (onCreate != null) {
@@ -337,6 +354,8 @@ class _$TaskCreateEventOnCreateImpl implements TaskCreateEventOnCreate {
     required TResult Function(TaskCreateEventStarted value) started,
     required TResult Function(TaskCreateEventOnCreate value) onCreate,
     required TResult Function(TaskCreateEventOnEdit value) onEdit,
+    required TResult Function(TaskCreateEventOnLoadEditData value)
+        onLoadEditData,
   }) {
     return onCreate(this);
   }
@@ -347,6 +366,7 @@ class _$TaskCreateEventOnCreateImpl implements TaskCreateEventOnCreate {
     TResult? Function(TaskCreateEventStarted value)? started,
     TResult? Function(TaskCreateEventOnCreate value)? onCreate,
     TResult? Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult? Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
   }) {
     return onCreate?.call(this);
   }
@@ -357,6 +377,7 @@ class _$TaskCreateEventOnCreateImpl implements TaskCreateEventOnCreate {
     TResult Function(TaskCreateEventStarted value)? started,
     TResult Function(TaskCreateEventOnCreate value)? onCreate,
     TResult Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
     required TResult orElse(),
   }) {
     if (onCreate != null) {
@@ -463,6 +484,7 @@ class _$TaskCreateEventOnEditImpl implements TaskCreateEventOnEdit {
     required TResult Function(String? taskId) started,
     required TResult Function(Task task) onCreate,
     required TResult Function(Task task, String taskId) onEdit,
+    required TResult Function(Task task) onLoadEditData,
   }) {
     return onEdit(task, taskId);
   }
@@ -473,6 +495,7 @@ class _$TaskCreateEventOnEditImpl implements TaskCreateEventOnEdit {
     TResult? Function(String? taskId)? started,
     TResult? Function(Task task)? onCreate,
     TResult? Function(Task task, String taskId)? onEdit,
+    TResult? Function(Task task)? onLoadEditData,
   }) {
     return onEdit?.call(task, taskId);
   }
@@ -483,6 +506,7 @@ class _$TaskCreateEventOnEditImpl implements TaskCreateEventOnEdit {
     TResult Function(String? taskId)? started,
     TResult Function(Task task)? onCreate,
     TResult Function(Task task, String taskId)? onEdit,
+    TResult Function(Task task)? onLoadEditData,
     required TResult orElse(),
   }) {
     if (onEdit != null) {
@@ -497,6 +521,8 @@ class _$TaskCreateEventOnEditImpl implements TaskCreateEventOnEdit {
     required TResult Function(TaskCreateEventStarted value) started,
     required TResult Function(TaskCreateEventOnCreate value) onCreate,
     required TResult Function(TaskCreateEventOnEdit value) onEdit,
+    required TResult Function(TaskCreateEventOnLoadEditData value)
+        onLoadEditData,
   }) {
     return onEdit(this);
   }
@@ -507,6 +533,7 @@ class _$TaskCreateEventOnEditImpl implements TaskCreateEventOnEdit {
     TResult? Function(TaskCreateEventStarted value)? started,
     TResult? Function(TaskCreateEventOnCreate value)? onCreate,
     TResult? Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult? Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
   }) {
     return onEdit?.call(this);
   }
@@ -517,6 +544,7 @@ class _$TaskCreateEventOnEditImpl implements TaskCreateEventOnEdit {
     TResult Function(TaskCreateEventStarted value)? started,
     TResult Function(TaskCreateEventOnCreate value)? onCreate,
     TResult Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
     required TResult orElse(),
   }) {
     if (onEdit != null) {
@@ -535,6 +563,170 @@ abstract class TaskCreateEventOnEdit implements TaskCreateEvent {
   String get taskId;
   @JsonKey(ignore: true)
   _$$TaskCreateEventOnEditImplCopyWith<_$TaskCreateEventOnEditImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TaskCreateEventOnLoadEditDataImplCopyWith<$Res> {
+  factory _$$TaskCreateEventOnLoadEditDataImplCopyWith(
+          _$TaskCreateEventOnLoadEditDataImpl value,
+          $Res Function(_$TaskCreateEventOnLoadEditDataImpl) then) =
+      __$$TaskCreateEventOnLoadEditDataImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Task task});
+
+  $TaskCopyWith<$Res> get task;
+}
+
+/// @nodoc
+class __$$TaskCreateEventOnLoadEditDataImplCopyWithImpl<$Res>
+    extends _$TaskCreateEventCopyWithImpl<$Res,
+        _$TaskCreateEventOnLoadEditDataImpl>
+    implements _$$TaskCreateEventOnLoadEditDataImplCopyWith<$Res> {
+  __$$TaskCreateEventOnLoadEditDataImplCopyWithImpl(
+      _$TaskCreateEventOnLoadEditDataImpl _value,
+      $Res Function(_$TaskCreateEventOnLoadEditDataImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? task = null,
+  }) {
+    return _then(_$TaskCreateEventOnLoadEditDataImpl(
+      task: null == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as Task,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskCopyWith<$Res> get task {
+    return $TaskCopyWith<$Res>(_value.task, (value) {
+      return _then(_value.copyWith(task: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$TaskCreateEventOnLoadEditDataImpl
+    implements TaskCreateEventOnLoadEditData {
+  const _$TaskCreateEventOnLoadEditDataImpl({required this.task});
+
+  @override
+  final Task task;
+
+  @override
+  String toString() {
+    return 'TaskCreateEvent.onLoadEditData(task: $task)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TaskCreateEventOnLoadEditDataImpl &&
+            (identical(other.task, task) || other.task == task));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, task);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TaskCreateEventOnLoadEditDataImplCopyWith<
+          _$TaskCreateEventOnLoadEditDataImpl>
+      get copyWith => __$$TaskCreateEventOnLoadEditDataImplCopyWithImpl<
+          _$TaskCreateEventOnLoadEditDataImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? taskId) started,
+    required TResult Function(Task task) onCreate,
+    required TResult Function(Task task, String taskId) onEdit,
+    required TResult Function(Task task) onLoadEditData,
+  }) {
+    return onLoadEditData(task);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? taskId)? started,
+    TResult? Function(Task task)? onCreate,
+    TResult? Function(Task task, String taskId)? onEdit,
+    TResult? Function(Task task)? onLoadEditData,
+  }) {
+    return onLoadEditData?.call(task);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? taskId)? started,
+    TResult Function(Task task)? onCreate,
+    TResult Function(Task task, String taskId)? onEdit,
+    TResult Function(Task task)? onLoadEditData,
+    required TResult orElse(),
+  }) {
+    if (onLoadEditData != null) {
+      return onLoadEditData(task);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TaskCreateEventStarted value) started,
+    required TResult Function(TaskCreateEventOnCreate value) onCreate,
+    required TResult Function(TaskCreateEventOnEdit value) onEdit,
+    required TResult Function(TaskCreateEventOnLoadEditData value)
+        onLoadEditData,
+  }) {
+    return onLoadEditData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TaskCreateEventStarted value)? started,
+    TResult? Function(TaskCreateEventOnCreate value)? onCreate,
+    TResult? Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult? Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
+  }) {
+    return onLoadEditData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TaskCreateEventStarted value)? started,
+    TResult Function(TaskCreateEventOnCreate value)? onCreate,
+    TResult Function(TaskCreateEventOnEdit value)? onEdit,
+    TResult Function(TaskCreateEventOnLoadEditData value)? onLoadEditData,
+    required TResult orElse(),
+  }) {
+    if (onLoadEditData != null) {
+      return onLoadEditData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TaskCreateEventOnLoadEditData implements TaskCreateEvent {
+  const factory TaskCreateEventOnLoadEditData({required final Task task}) =
+      _$TaskCreateEventOnLoadEditDataImpl;
+
+  Task get task;
+  @JsonKey(ignore: true)
+  _$$TaskCreateEventOnLoadEditDataImplCopyWith<
+          _$TaskCreateEventOnLoadEditDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
