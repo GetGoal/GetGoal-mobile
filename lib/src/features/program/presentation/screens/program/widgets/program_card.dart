@@ -88,7 +88,7 @@ class ProgramCard extends StatelessWidget {
 
   Widget _programDescription() {
     return Text(
-      programDesc ?? '',
+      programDesc ?? 'No descripition',
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
       style: footnoteRegular().copyWith(color: AppColors.description),
@@ -127,12 +127,6 @@ class ProgramCard extends StatelessWidget {
             radius: 16,
           ),
         ),
-        // Container(
-        //   margin: const EdgeInsets.only(top: 4, right: 4),
-        //   child: Align(
-        //     child: actionButton ?? const SizedBox(),
-        //   ),
-        // ),
       ],
     );
   }
