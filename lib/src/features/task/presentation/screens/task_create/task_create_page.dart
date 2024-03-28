@@ -321,11 +321,15 @@ class _TaskCreatePageState extends State<TaskCreatePage>
             );
           }
           if (widget.pageData!.mode == TASKFORMMODE.program) {
-            AppCache.programTaskCreateList.add(task);
+            final taskList = AppCache.programTaskCreateList.toList();
+            taskList.add(task);
+            AppCache.programTaskCreateList = taskList;
             context.pop(true);
           }
           if (widget.pageData!.mode == TASKFORMMODE.programCreate) {
-            AppCache.programTaskCreateList[widget.pageData!.taskIndex!] = task;
+            final taskList = AppCache.programTaskCreateList.toList();
+            taskList[widget.pageData!.taskIndex!] = task;
+            AppCache.programTaskCreateList = taskList;
             context.pop(true);
           }
         }
