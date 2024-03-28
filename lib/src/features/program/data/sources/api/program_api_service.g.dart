@@ -128,6 +128,41 @@ class _ProgramApiService implements ProgramApiService {
   }
 
   @override
+  Future<HttpResponse<BaseDataResponse<ProgramModel>>> editProgramById(
+    String programId,
+    CreateProgramRequest requestBody,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(requestBody.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<BaseDataResponse<ProgramModel>>>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/v1/programs/${programId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseDataResponse<ProgramModel>.fromJson(
+      _result.data!,
+      (json) => ProgramModel.fromJson(json as Map<String, dynamic>),
+    );
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getProgramBySearch(
       SearchProgramRequest requestBody) async {
     final _extra = <String, dynamic>{};
