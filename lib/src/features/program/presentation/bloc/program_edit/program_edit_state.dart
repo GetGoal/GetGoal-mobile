@@ -8,7 +8,7 @@ class ProgramEditState with _$ProgramEditState {
   const factory ProgramEditState.loading() = ProgramEditStateLoading;
   const factory ProgramEditState.success({
     Program? program,
-  }) = ProgramEditStateSuccess;
+  }) = ProgramEditStateEditedSuccess;
   const factory ProgramEditState.failure({
     String? message,
   }) = ProgramEditStateFailure;

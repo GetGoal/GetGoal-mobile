@@ -5,5 +5,8 @@ class ProgramEditEvent with _$ProgramEditEvent {
   const factory ProgramEditEvent.started({
     String? programId,
   }) = ProgramEditEventStarted;
-  const factory ProgramEditEvent.onEdit() = ProgramEditEventOnEdit;
+  const factory ProgramEditEvent.onEdit({
+    required ProgramCreate programData,
+    required String programId,
+  }) = ProgramEditEventOnEdit;
 }

@@ -16,22 +16,24 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProgramEditEvent {
+  String? get programId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? programId) started,
-    required TResult Function() onEdit,
+    required TResult Function(ProgramCreate programData, String programId)
+        onEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? programId)? started,
-    TResult? Function()? onEdit,
+    TResult? Function(ProgramCreate programData, String programId)? onEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? programId)? started,
-    TResult Function()? onEdit,
+    TResult Function(ProgramCreate programData, String programId)? onEdit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +56,10 @@ mixin _$ProgramEditEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ProgramEditEventCopyWith<ProgramEditEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -61,6 +67,8 @@ abstract class $ProgramEditEventCopyWith<$Res> {
   factory $ProgramEditEventCopyWith(
           ProgramEditEvent value, $Res Function(ProgramEditEvent) then) =
       _$ProgramEditEventCopyWithImpl<$Res, ProgramEditEvent>;
+  @useResult
+  $Res call({String programId});
 }
 
 /// @nodoc
@@ -72,14 +80,29 @@ class _$ProgramEditEventCopyWithImpl<$Res, $Val extends ProgramEditEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? programId = null,
+  }) {
+    return _then(_value.copyWith(
+      programId: null == programId
+          ? _value.programId!
+          : programId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$ProgramEditEventStartedImplCopyWith<$Res> {
+abstract class _$$ProgramEditEventStartedImplCopyWith<$Res>
+    implements $ProgramEditEventCopyWith<$Res> {
   factory _$$ProgramEditEventStartedImplCopyWith(
           _$ProgramEditEventStartedImpl value,
           $Res Function(_$ProgramEditEventStartedImpl) then) =
       __$$ProgramEditEventStartedImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({String? programId});
 }
@@ -143,7 +166,8 @@ class _$ProgramEditEventStartedImpl implements ProgramEditEventStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? programId) started,
-    required TResult Function() onEdit,
+    required TResult Function(ProgramCreate programData, String programId)
+        onEdit,
   }) {
     return started(programId);
   }
@@ -152,7 +176,7 @@ class _$ProgramEditEventStartedImpl implements ProgramEditEventStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? programId)? started,
-    TResult? Function()? onEdit,
+    TResult? Function(ProgramCreate programData, String programId)? onEdit,
   }) {
     return started?.call(programId);
   }
@@ -161,7 +185,7 @@ class _$ProgramEditEventStartedImpl implements ProgramEditEventStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? programId)? started,
-    TResult Function()? onEdit,
+    TResult Function(ProgramCreate programData, String programId)? onEdit,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -206,18 +230,26 @@ abstract class ProgramEditEventStarted implements ProgramEditEvent {
   const factory ProgramEditEventStarted({final String? programId}) =
       _$ProgramEditEventStartedImpl;
 
+  @override
   String? get programId;
+  @override
   @JsonKey(ignore: true)
   _$$ProgramEditEventStartedImplCopyWith<_$ProgramEditEventStartedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ProgramEditEventOnEditImplCopyWith<$Res> {
+abstract class _$$ProgramEditEventOnEditImplCopyWith<$Res>
+    implements $ProgramEditEventCopyWith<$Res> {
   factory _$$ProgramEditEventOnEditImplCopyWith(
           _$ProgramEditEventOnEditImpl value,
           $Res Function(_$ProgramEditEventOnEditImpl) then) =
       __$$ProgramEditEventOnEditImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProgramCreate programData, String programId});
+
+  $ProgramCreateCopyWith<$Res> get programData;
 }
 
 /// @nodoc
@@ -228,55 +260,99 @@ class __$$ProgramEditEventOnEditImplCopyWithImpl<$Res>
       _$ProgramEditEventOnEditImpl _value,
       $Res Function(_$ProgramEditEventOnEditImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? programData = null,
+    Object? programId = null,
+  }) {
+    return _then(_$ProgramEditEventOnEditImpl(
+      programData: null == programData
+          ? _value.programData
+          : programData // ignore: cast_nullable_to_non_nullable
+              as ProgramCreate,
+      programId: null == programId
+          ? _value.programId
+          : programId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProgramCreateCopyWith<$Res> get programData {
+    return $ProgramCreateCopyWith<$Res>(_value.programData, (value) {
+      return _then(_value.copyWith(programData: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$ProgramEditEventOnEditImpl implements ProgramEditEventOnEdit {
-  const _$ProgramEditEventOnEditImpl();
+  const _$ProgramEditEventOnEditImpl(
+      {required this.programData, required this.programId});
+
+  @override
+  final ProgramCreate programData;
+  @override
+  final String programId;
 
   @override
   String toString() {
-    return 'ProgramEditEvent.onEdit()';
+    return 'ProgramEditEvent.onEdit(programData: $programData, programId: $programId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProgramEditEventOnEditImpl);
+            other is _$ProgramEditEventOnEditImpl &&
+            (identical(other.programData, programData) ||
+                other.programData == programData) &&
+            (identical(other.programId, programId) ||
+                other.programId == programId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, programData, programId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProgramEditEventOnEditImplCopyWith<_$ProgramEditEventOnEditImpl>
+      get copyWith => __$$ProgramEditEventOnEditImplCopyWithImpl<
+          _$ProgramEditEventOnEditImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? programId) started,
-    required TResult Function() onEdit,
+    required TResult Function(ProgramCreate programData, String programId)
+        onEdit,
   }) {
-    return onEdit();
+    return onEdit(programData, programId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? programId)? started,
-    TResult? Function()? onEdit,
+    TResult? Function(ProgramCreate programData, String programId)? onEdit,
   }) {
-    return onEdit?.call();
+    return onEdit?.call(programData, programId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? programId)? started,
-    TResult Function()? onEdit,
+    TResult Function(ProgramCreate programData, String programId)? onEdit,
     required TResult orElse(),
   }) {
     if (onEdit != null) {
-      return onEdit();
+      return onEdit(programData, programId);
     }
     return orElse();
   }
@@ -314,7 +390,17 @@ class _$ProgramEditEventOnEditImpl implements ProgramEditEventOnEdit {
 }
 
 abstract class ProgramEditEventOnEdit implements ProgramEditEvent {
-  const factory ProgramEditEventOnEdit() = _$ProgramEditEventOnEditImpl;
+  const factory ProgramEditEventOnEdit(
+      {required final ProgramCreate programData,
+      required final String programId}) = _$ProgramEditEventOnEditImpl;
+
+  ProgramCreate get programData;
+  @override
+  String get programId;
+  @override
+  @JsonKey(ignore: true)
+  _$$ProgramEditEventOnEditImplCopyWith<_$ProgramEditEventOnEditImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -348,7 +434,7 @@ mixin _$ProgramEditState {
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEditStateInitial value) initial,
     required TResult Function(ProgramEditStateLoading value) loading,
-    required TResult Function(ProgramEditStateSuccess value) success,
+    required TResult Function(ProgramEditStateEditedSuccess value) success,
     required TResult Function(ProgramEditStateFailure value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -356,7 +442,7 @@ mixin _$ProgramEditState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEditStateInitial value)? initial,
     TResult? Function(ProgramEditStateLoading value)? loading,
-    TResult? Function(ProgramEditStateSuccess value)? success,
+    TResult? Function(ProgramEditStateEditedSuccess value)? success,
     TResult? Function(ProgramEditStateFailure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -364,7 +450,7 @@ mixin _$ProgramEditState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEditStateInitial value)? initial,
     TResult Function(ProgramEditStateLoading value)? loading,
-    TResult Function(ProgramEditStateSuccess value)? success,
+    TResult Function(ProgramEditStateEditedSuccess value)? success,
     TResult Function(ProgramEditStateFailure value)? failure,
     required TResult orElse(),
   }) =>
@@ -509,7 +595,7 @@ class _$ProgramEditStateInitialImpl implements ProgramEditStateInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEditStateInitial value) initial,
     required TResult Function(ProgramEditStateLoading value) loading,
-    required TResult Function(ProgramEditStateSuccess value) success,
+    required TResult Function(ProgramEditStateEditedSuccess value) success,
     required TResult Function(ProgramEditStateFailure value) failure,
   }) {
     return initial(this);
@@ -520,7 +606,7 @@ class _$ProgramEditStateInitialImpl implements ProgramEditStateInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEditStateInitial value)? initial,
     TResult? Function(ProgramEditStateLoading value)? loading,
-    TResult? Function(ProgramEditStateSuccess value)? success,
+    TResult? Function(ProgramEditStateEditedSuccess value)? success,
     TResult? Function(ProgramEditStateFailure value)? failure,
   }) {
     return initial?.call(this);
@@ -531,7 +617,7 @@ class _$ProgramEditStateInitialImpl implements ProgramEditStateInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEditStateInitial value)? initial,
     TResult Function(ProgramEditStateLoading value)? loading,
-    TResult Function(ProgramEditStateSuccess value)? success,
+    TResult Function(ProgramEditStateEditedSuccess value)? success,
     TResult Function(ProgramEditStateFailure value)? failure,
     required TResult orElse(),
   }) {
@@ -632,7 +718,7 @@ class _$ProgramEditStateLoadingImpl implements ProgramEditStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEditStateInitial value) initial,
     required TResult Function(ProgramEditStateLoading value) loading,
-    required TResult Function(ProgramEditStateSuccess value) success,
+    required TResult Function(ProgramEditStateEditedSuccess value) success,
     required TResult Function(ProgramEditStateFailure value) failure,
   }) {
     return loading(this);
@@ -643,7 +729,7 @@ class _$ProgramEditStateLoadingImpl implements ProgramEditStateLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEditStateInitial value)? initial,
     TResult? Function(ProgramEditStateLoading value)? loading,
-    TResult? Function(ProgramEditStateSuccess value)? success,
+    TResult? Function(ProgramEditStateEditedSuccess value)? success,
     TResult? Function(ProgramEditStateFailure value)? failure,
   }) {
     return loading?.call(this);
@@ -654,7 +740,7 @@ class _$ProgramEditStateLoadingImpl implements ProgramEditStateLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEditStateInitial value)? initial,
     TResult Function(ProgramEditStateLoading value)? loading,
-    TResult Function(ProgramEditStateSuccess value)? success,
+    TResult Function(ProgramEditStateEditedSuccess value)? success,
     TResult Function(ProgramEditStateFailure value)? failure,
     required TResult orElse(),
   }) {
@@ -670,11 +756,11 @@ abstract class ProgramEditStateLoading implements ProgramEditState {
 }
 
 /// @nodoc
-abstract class _$$ProgramEditStateSuccessImplCopyWith<$Res> {
-  factory _$$ProgramEditStateSuccessImplCopyWith(
-          _$ProgramEditStateSuccessImpl value,
-          $Res Function(_$ProgramEditStateSuccessImpl) then) =
-      __$$ProgramEditStateSuccessImplCopyWithImpl<$Res>;
+abstract class _$$ProgramEditStateEditedSuccessImplCopyWith<$Res> {
+  factory _$$ProgramEditStateEditedSuccessImplCopyWith(
+          _$ProgramEditStateEditedSuccessImpl value,
+          $Res Function(_$ProgramEditStateEditedSuccessImpl) then) =
+      __$$ProgramEditStateEditedSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Program? program});
 
@@ -682,12 +768,13 @@ abstract class _$$ProgramEditStateSuccessImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ProgramEditStateSuccessImplCopyWithImpl<$Res>
-    extends _$ProgramEditStateCopyWithImpl<$Res, _$ProgramEditStateSuccessImpl>
-    implements _$$ProgramEditStateSuccessImplCopyWith<$Res> {
-  __$$ProgramEditStateSuccessImplCopyWithImpl(
-      _$ProgramEditStateSuccessImpl _value,
-      $Res Function(_$ProgramEditStateSuccessImpl) _then)
+class __$$ProgramEditStateEditedSuccessImplCopyWithImpl<$Res>
+    extends _$ProgramEditStateCopyWithImpl<$Res,
+        _$ProgramEditStateEditedSuccessImpl>
+    implements _$$ProgramEditStateEditedSuccessImplCopyWith<$Res> {
+  __$$ProgramEditStateEditedSuccessImplCopyWithImpl(
+      _$ProgramEditStateEditedSuccessImpl _value,
+      $Res Function(_$ProgramEditStateEditedSuccessImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -695,7 +782,7 @@ class __$$ProgramEditStateSuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? program = freezed,
   }) {
-    return _then(_$ProgramEditStateSuccessImpl(
+    return _then(_$ProgramEditStateEditedSuccessImpl(
       program: freezed == program
           ? _value.program
           : program // ignore: cast_nullable_to_non_nullable
@@ -718,8 +805,9 @@ class __$$ProgramEditStateSuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProgramEditStateSuccessImpl implements ProgramEditStateSuccess {
-  const _$ProgramEditStateSuccessImpl({this.program});
+class _$ProgramEditStateEditedSuccessImpl
+    implements ProgramEditStateEditedSuccess {
+  const _$ProgramEditStateEditedSuccessImpl({this.program});
 
   @override
   final Program? program;
@@ -733,7 +821,7 @@ class _$ProgramEditStateSuccessImpl implements ProgramEditStateSuccess {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProgramEditStateSuccessImpl &&
+            other is _$ProgramEditStateEditedSuccessImpl &&
             (identical(other.program, program) || other.program == program));
   }
 
@@ -743,9 +831,10 @@ class _$ProgramEditStateSuccessImpl implements ProgramEditStateSuccess {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProgramEditStateSuccessImplCopyWith<_$ProgramEditStateSuccessImpl>
-      get copyWith => __$$ProgramEditStateSuccessImplCopyWithImpl<
-          _$ProgramEditStateSuccessImpl>(this, _$identity);
+  _$$ProgramEditStateEditedSuccessImplCopyWith<
+          _$ProgramEditStateEditedSuccessImpl>
+      get copyWith => __$$ProgramEditStateEditedSuccessImplCopyWithImpl<
+          _$ProgramEditStateEditedSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -789,7 +878,7 @@ class _$ProgramEditStateSuccessImpl implements ProgramEditStateSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEditStateInitial value) initial,
     required TResult Function(ProgramEditStateLoading value) loading,
-    required TResult Function(ProgramEditStateSuccess value) success,
+    required TResult Function(ProgramEditStateEditedSuccess value) success,
     required TResult Function(ProgramEditStateFailure value) failure,
   }) {
     return success(this);
@@ -800,7 +889,7 @@ class _$ProgramEditStateSuccessImpl implements ProgramEditStateSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEditStateInitial value)? initial,
     TResult? Function(ProgramEditStateLoading value)? loading,
-    TResult? Function(ProgramEditStateSuccess value)? success,
+    TResult? Function(ProgramEditStateEditedSuccess value)? success,
     TResult? Function(ProgramEditStateFailure value)? failure,
   }) {
     return success?.call(this);
@@ -811,7 +900,7 @@ class _$ProgramEditStateSuccessImpl implements ProgramEditStateSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEditStateInitial value)? initial,
     TResult Function(ProgramEditStateLoading value)? loading,
-    TResult Function(ProgramEditStateSuccess value)? success,
+    TResult Function(ProgramEditStateEditedSuccess value)? success,
     TResult Function(ProgramEditStateFailure value)? failure,
     required TResult orElse(),
   }) {
@@ -822,13 +911,14 @@ class _$ProgramEditStateSuccessImpl implements ProgramEditStateSuccess {
   }
 }
 
-abstract class ProgramEditStateSuccess implements ProgramEditState {
-  const factory ProgramEditStateSuccess({final Program? program}) =
-      _$ProgramEditStateSuccessImpl;
+abstract class ProgramEditStateEditedSuccess implements ProgramEditState {
+  const factory ProgramEditStateEditedSuccess({final Program? program}) =
+      _$ProgramEditStateEditedSuccessImpl;
 
   Program? get program;
   @JsonKey(ignore: true)
-  _$$ProgramEditStateSuccessImplCopyWith<_$ProgramEditStateSuccessImpl>
+  _$$ProgramEditStateEditedSuccessImplCopyWith<
+          _$ProgramEditStateEditedSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -938,7 +1028,7 @@ class _$ProgramEditStateFailureImpl implements ProgramEditStateFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEditStateInitial value) initial,
     required TResult Function(ProgramEditStateLoading value) loading,
-    required TResult Function(ProgramEditStateSuccess value) success,
+    required TResult Function(ProgramEditStateEditedSuccess value) success,
     required TResult Function(ProgramEditStateFailure value) failure,
   }) {
     return failure(this);
@@ -949,7 +1039,7 @@ class _$ProgramEditStateFailureImpl implements ProgramEditStateFailure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEditStateInitial value)? initial,
     TResult? Function(ProgramEditStateLoading value)? loading,
-    TResult? Function(ProgramEditStateSuccess value)? success,
+    TResult? Function(ProgramEditStateEditedSuccess value)? success,
     TResult? Function(ProgramEditStateFailure value)? failure,
   }) {
     return failure?.call(this);
@@ -960,7 +1050,7 @@ class _$ProgramEditStateFailureImpl implements ProgramEditStateFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEditStateInitial value)? initial,
     TResult Function(ProgramEditStateLoading value)? loading,
-    TResult Function(ProgramEditStateSuccess value)? success,
+    TResult Function(ProgramEditStateEditedSuccess value)? success,
     TResult Function(ProgramEditStateFailure value)? failure,
     required TResult orElse(),
   }) {

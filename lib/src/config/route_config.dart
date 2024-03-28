@@ -308,8 +308,13 @@ class RouteConfig {
           BlocProvider(
             create: (context) => getIt<CreateProgramBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<ProgramEditBloc>(),
+          ),
         ],
-        child: const ProgramTaskCreate(),
+        child: ProgramTaskCreate(
+          pageData: state.extra as ProgramTaskCreatePageData,
+        ),
       ),
     );
   }
