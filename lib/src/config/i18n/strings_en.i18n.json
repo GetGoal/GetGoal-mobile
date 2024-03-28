@@ -56,6 +56,7 @@
     },
     "create_program": {
         "create_program": "Create Program",
+        "save_program": "Save program",
         "upload_your_image": "Upload your image",
         "tap_to_upload": "Tap to upload",
         "file_support": "File support .JPEG .PNG",

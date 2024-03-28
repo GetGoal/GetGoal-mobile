@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 128 (64 per locale)
+/// Strings: 130 (65 per locale)
 ///
-/// Built on 2024-03-23 at 23:52 UTC
+/// Built on 2024-03-28 at 16:28 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -275,6 +275,7 @@ class _StringsCreateProgramEn {
 
 	// Translations
 	String get create_program => 'Create Program';
+	String get save_program => 'Save program';
 	String get upload_your_image => 'Upload your image';
 	String get tap_to_upload => 'Tap to upload';
 	String get file_support => 'File support .JPEG .PNG';
@@ -495,11 +496,12 @@ class _StringsCreateProgramTh implements _StringsCreateProgramEn {
 
 	// Translations
 	@override String get create_program => 'สร้างโปรแกรม';
+	@override String get save_program => 'บันทึกโปรแกรม';
 	@override String get upload_your_image => 'อัปโหลดภาพของคุณ';
 	@override String get tap_to_upload => 'แตะเพื่ออัปโหลด';
 	@override String get file_support => 'รองรับไฟล์ .JPEG .PNG';
 	@override String get program_name => 'ชื่อโปรแกรม';
-	@override String get ex_program_name => 'ตัวอย่าง สร้างเพลงด้วยตัวคุณเองใน 3 วัน';
+	@override String get ex_program_name => 'ตัวอย่าง สร้างเพลง_ด้วยตัวคุณเองใน 3 วัน';
 	@override String get description => 'คำอธิบาย';
 	@override String get ex_description => 'คำอธิบายโปรแกรม';
 	@override String get category => 'หมวดหมู่';
@@ -612,6 +614,7 @@ extension on Translations {
 			case 'create_task.save_button': return 'Save';
 			case 'edit_task.task_setting': return 'Task Settings';
 			case 'create_program.create_program': return 'Create Program';
+			case 'create_program.save_program': return 'Save program';
 			case 'create_program.upload_your_image': return 'Upload your image';
 			case 'create_program.tap_to_upload': return 'Tap to upload';
 			case 'create_program.file_support': return 'File support .JPEG .PNG';
@@ -684,11 +687,12 @@ extension on _StringsTh {
 			case 'create_task.save_button': return 'บันทึก';
 			case 'edit_task.task_setting': return 'แก้ไขรายการ';
 			case 'create_program.create_program': return 'สร้างโปรแกรม';
+			case 'create_program.save_program': return 'บันทึกโปรแกรม';
 			case 'create_program.upload_your_image': return 'อัปโหลดภาพของคุณ';
 			case 'create_program.tap_to_upload': return 'แตะเพื่ออัปโหลด';
 			case 'create_program.file_support': return 'รองรับไฟล์ .JPEG .PNG';
 			case 'create_program.program_name': return 'ชื่อโปรแกรม';
-			case 'create_program.ex_program_name': return 'ตัวอย่าง สร้างเพลงด้วยตัวคุณเองใน 3 วัน';
+			case 'create_program.ex_program_name': return 'ตัวอย่าง สร้างเพลง_ด้วยตัวคุณเองใน 3 วัน';
 			case 'create_program.description': return 'คำอธิบาย';
 			case 'create_program.ex_description': return 'คำอธิบายโปรแกรม';
 			case 'create_program.category': return 'หมวดหมู่';
