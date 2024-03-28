@@ -196,4 +196,74 @@ class ProgramRepositoryImpl implements ProgramRepository {
       );
     }
   }
+
+  @override
+  Future<BaseDataResponse<Program>> editProgram(
+    ProgramCreate program,
+    String programId,
+  ) async {
+    try {
+      final firebaseStorage = FirebaseStorage.instance;
+
+      String downloadUrl = '';
+
+      bool isUrlValid = Uri.parse(program.imagePath!).isAbsolute;
+      if (!isUrlValid) {
+        final path =
+            p.basename(program.imagePath!).replaceFirst('image_picker_', '');
+
+        final file = await File(program.imagePath!).create();
+        final snapshot = await firebaseStorage
+            .ref()
+            .child('media/program/$path')
+            .putFile(file);
+
+        downloadUrl = await snapshot.ref.getDownloadURL();
+      }
+
+      print(AppCache.programTaskCreateList);
+
+      final requestBody = CreateProgramRequest(
+        programName: program.programName,
+        programDesc: program.programDescription,
+        mediaUrl: !isUrlValid ? downloadUrl : program.imagePath,
+        expectedTime: program.expectedTime,
+        tasks: AppCache.programTaskCreateList
+            .map((e) => e.taskToTaskRequest())
+            .toList(),
+        labels: program.category!
+            .map((e) => LabelRequest(labelName: e.labelName))
+            .toList(),
+      );
+
+      final res = await _programApiService.editProgramById(
+        programId,
+        requestBody,
+      );
+
+      final programRes = res.data.data!.programToEntity();
+
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: programRes,
+        error: res.data.error,
+      );
+
+      AppCache.programCreate = const ProgramCreate();
+      AppCache.programTaskCreateList = [];
+
+      return data;
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
 }
