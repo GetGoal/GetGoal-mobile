@@ -33,6 +33,7 @@ extension TaskToJoinProgramTaskRequest on Task {
 
 extension TaskToTaskRequest on Task {
   TaskRequest taskToTaskRequest() => TaskRequest(
+        taskId: taskId ?? 0,
         taskName: taskName ?? '',
         taskDesc: taskDescription ?? '',
         category: category ?? '',
