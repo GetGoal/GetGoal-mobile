@@ -5,6 +5,7 @@ part 'task_request.g.dart';
 @JsonSerializable()
 class TaskRequest {
   TaskRequest({
+    required this.taskId,
     required this.taskName,
     required this.taskDesc,
     required this.isSetNoti,
@@ -19,6 +20,9 @@ class TaskRequest {
       _$TaskRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$TaskRequestToJson(this);
+
+  @JsonKey(name: 'task_id')
+  final int? taskId;
 
   @JsonKey(name: 'task_name')
   final String? taskName;

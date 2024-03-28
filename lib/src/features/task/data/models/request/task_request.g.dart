@@ -7,6 +7,7 @@ part of 'task_request.dart';
 // **************************************************************************
 
 TaskRequest _$TaskRequestFromJson(Map<String, dynamic> json) => TaskRequest(
+      taskId: json['task_id'] as int?,
       taskName: json['task_name'] as String?,
       taskDesc: json['task_description'] as String?,
       isSetNoti: json['is_set_noti'] as int?,
@@ -17,6 +18,7 @@ TaskRequest _$TaskRequestFromJson(Map<String, dynamic> json) => TaskRequest(
 
 Map<String, dynamic> _$TaskRequestToJson(TaskRequest instance) =>
     <String, dynamic>{
+      'task_id': instance.taskId,
       'task_name': instance.taskName,
       'task_description': instance.taskDesc,
       'is_set_noti': instance.isSetNoti,
