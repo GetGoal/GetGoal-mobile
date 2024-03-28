@@ -22,6 +22,7 @@ import '../../../domain/entities/program.dart';
 import '../../../domain/entities/program_create.dart';
 import '../../bloc/program_edit/program_edit_bloc.dart';
 import '../../enum/program_form_mode.enum.dart';
+import 'program_task_create.dart';
 
 class ProgramCreatePageData {
   ProgramCreatePageData({
@@ -125,7 +126,7 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
           case ProgramEditStateLoading():
             return _buildProgramCreateLoading();
 
-          case ProgramEditStateSuccess():
+          case ProgramEditStateEditedSuccess():
             return Form(
               key: _formKey,
               child: Column(
@@ -191,7 +192,7 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
     }
 
     // Display image from file that choose from user device
-    if (_imageFile != File('')) {
+    if (_imageFile.path.isNotEmpty) {
       return Stack(
         children: [
           Container(
@@ -306,7 +307,13 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
 
           AppCache.programCreate = program;
 
-          context.pushNamed(Routes.programTaskCreatePage);
+          context.pushNamed(
+            Routes.programTaskCreatePage,
+            extra: ProgramTaskCreatePageData(
+              mode: widget.pageData!.mode,
+              programId: widget.pageData!.programId,
+            ),
+          );
         }
       },
     );

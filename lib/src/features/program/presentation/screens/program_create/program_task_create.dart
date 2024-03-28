@@ -15,12 +15,27 @@ import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../task/presentation/enum/task_form_mode_enum.dart';
 import '../../../../task/presentation/screens/task_create/task_create_page.dart';
 import '../../../../task/presentation/screens/task_planning/widgets/task_planning_card_widget.dart';
+import '../../bloc/program_edit/program_edit_bloc.dart';
+import '../../enum/program_form_mode.enum.dart';
 import 'bloc/program_create/program_create_bloc.dart';
+
+class ProgramTaskCreatePageData {
+  ProgramTaskCreatePageData({
+    this.mode,
+    this.programId,
+  });
+
+  final PROGRAMFORMMODE? mode;
+  final String? programId;
+}
 
 class ProgramTaskCreate extends StatefulWidget {
   const ProgramTaskCreate({
     super.key,
+    this.pageData,
   });
+
+  final ProgramTaskCreatePageData? pageData;
 
   @override
   State<ProgramTaskCreate> createState() => _ProgramTaskCreateState();
@@ -28,6 +43,7 @@ class ProgramTaskCreate extends StatefulWidget {
 
 class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
   CreateProgramBloc get _createProgramBloc => context.read<CreateProgramBloc>();
+  ProgramEditBloc get _programEditBloc => context.read<ProgramEditBloc>();
 
   List tasksList = [];
 
@@ -50,7 +66,7 @@ class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
                   ? _buildCreateTaskButton()
                   : const SizedBox(),
               const SizedBox(height: 40),
-              _buildSubmitButton(),
+              _buildSubmitButton(widget.pageData!.mode!),
             ],
           ),
         ),
@@ -133,58 +149,97 @@ class _ProgramTaskCreateState extends State<ProgramTaskCreate> {
     );
   }
 
-  Widget _buildSubmitButton() {
-    return BlocConsumer<CreateProgramBloc, CreateProgramState>(
-      buildWhen: (previous, current) =>
-          current is! CreateProgramStateCreatedError,
-      listener: (context, state) async {
-        switch (state) {
-          case CreateProgramStateCreated():
-            context.go(Routes.mainPage);
-            break;
-          case CreateProgramStateCreatedError(:final message):
-            await showDialog(
-              context: context,
-              builder: (context) => ErrorDialog(errorMessage: message),
-            );
-            _createProgramBloc.add(const CreateProgramEvent.started());
-            break;
-          default:
-        }
-      },
-      builder: (context, state) {
-        switch (state) {
-          case CreateProgramStateInitial():
-            return MainButton(
-              onTap: () {
-                _createProgramBloc.add(
-                  CreateProgramEvent.onCreate(
-                    programData: AppCache.programCreate,
-                  ),
+  Widget _buildSubmitButton(PROGRAMFORMMODE mode) {
+    switch (mode) {
+      case PROGRAMFORMMODE.edit:
+        return BlocConsumer<ProgramEditBloc, ProgramEditState>(
+          listener: (context, state) async {
+            switch (state) {
+              case ProgramEditStateEditedSuccess():
+                context.go(Routes.mainPage);
+                break;
+              case ProgramEditStateFailure(:final message):
+                await showDialog(
+                  context: context,
+                  builder: (context) => ErrorDialog(errorMessage: message),
                 );
-              },
-              buttonText:
-                  Translations.of(context).create_program.create_program,
-            );
-          case CreateProgramStateLoading():
-            return const MainButton(isLoading: true);
-          case CreateProgramStateCreated():
-            return const MainButton(isLoading: true);
-          case CreateProgramStateCreatedError():
-          default:
-            return MainButton(
-              onTap: () {
-                _createProgramBloc.add(
-                  CreateProgramEvent.onCreate(
-                    programData: AppCache.programCreate,
-                  ),
+                break;
+              default:
+            }
+          },
+          builder: (context, state) {
+            switch (state) {
+              case ProgramEditStateLoading():
+                return const MainButton(isLoading: true);
+              default:
+                return MainButton(
+                  onTap: () {
+                    _programEditBloc.add(
+                      ProgramEditEvent.onEdit(
+                        programData: AppCache.programCreate,
+                        programId: widget.pageData!.programId!,
+                      ),
+                    );
+                  },
+                  buttonText:
+                      Translations.of(context).create_program.save_program,
                 );
-              },
-              buttonText:
-                  Translations.of(context).create_program.create_program,
-            );
-        }
-      },
-    );
+            }
+          },
+        );
+      default:
+        return BlocConsumer<CreateProgramBloc, CreateProgramState>(
+          buildWhen: (previous, current) =>
+              current is! CreateProgramStateCreatedError,
+          listener: (context, state) async {
+            switch (state) {
+              case CreateProgramStateCreated():
+                context.go(Routes.mainPage);
+                break;
+              case CreateProgramStateCreatedError(:final message):
+                await showDialog(
+                  context: context,
+                  builder: (context) => ErrorDialog(errorMessage: message),
+                );
+                _createProgramBloc.add(const CreateProgramEvent.started());
+                break;
+              default:
+            }
+          },
+          builder: (context, state) {
+            switch (state) {
+              case CreateProgramStateInitial():
+                return MainButton(
+                  onTap: () {
+                    _createProgramBloc.add(
+                      CreateProgramEvent.onCreate(
+                        programData: AppCache.programCreate,
+                      ),
+                    );
+                  },
+                  buttonText:
+                      Translations.of(context).create_program.create_program,
+                );
+              case CreateProgramStateLoading():
+                return const MainButton(isLoading: true);
+              case CreateProgramStateCreated():
+                return const MainButton(isLoading: true);
+              case CreateProgramStateCreatedError():
+              default:
+                return MainButton(
+                  onTap: () {
+                    _createProgramBloc.add(
+                      CreateProgramEvent.onCreate(
+                        programData: AppCache.programCreate,
+                      ),
+                    );
+                  },
+                  buttonText:
+                      Translations.of(context).create_program.create_program,
+                );
+            }
+          },
+        );
+    }
   }
 }
