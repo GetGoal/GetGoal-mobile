@@ -5,5 +5,7 @@ class NewPasswordState with _$NewPasswordState {
   const factory NewPasswordState.initial() = NewPasswordStateInitial;
   const factory NewPasswordState.loading() = NewPasswordStateLoading;
   const factory NewPasswordState.success() = NewPasswordStateSuccess;
-  const factory NewPasswordState.failure() = NewPasswordStateFailure;
+  const factory NewPasswordState.failure({
+    String? message,
+  }) = NewPasswordStateFailure;
 }

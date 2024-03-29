@@ -12,6 +12,9 @@ abstract class AuthRepository {
   // Verify account
   Future<BaseDataResponse> verifyAccount(String code);
 
+  // Verify password reset
+  Future<BaseDataResponse> verifyPasswordReset(String code);
+
   // Login
   Future<BaseDataResponse<TokenEntity>> login(LoginEntity loginData);
 
@@ -23,4 +26,6 @@ abstract class AuthRepository {
     String? provider,
     GoogleSignInAccount? account,
   );
+
+  Future<BaseDataResponse> resetPassword(String email);
 }

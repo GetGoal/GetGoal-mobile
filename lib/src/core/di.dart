@@ -9,13 +9,16 @@ import '../features/auth/domain/usecase/auth/create_account_usecase.dart';
 import '../features/auth/domain/usecase/auth/google_sign_in_usecase.dart';
 import '../features/auth/domain/usecase/auth/login_usecase.dart';
 import '../features/auth/domain/usecase/auth/logout_usecase.dart';
+import '../features/auth/domain/usecase/auth/reset_password_usecase.dart';
 import '../features/auth/domain/usecase/auth/verify_account_usecase.dart';
+import '../features/auth/domain/usecase/auth/verify_password_reset_usecase.dart';
 import '../features/auth/presentation/screens/forget_password/bloc/forget_password/forget_password_bloc.dart';
 import '../features/auth/presentation/screens/login/bloc/google_login/google_sign_in_bloc.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/new_password/bloc/new_password/new_password_bloc.dart';
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
+import '../features/auth/presentation/screens/verification/bloc/verify_password_reset/verify_password_reset_bloc.dart';
 import '../features/landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../features/notification/presentation/bloc/notification/notification_bloc.dart';
 import '../features/program/data/repositories/program_filter_repository_impl.dart';
@@ -62,6 +65,7 @@ import '../features/user/data/sources/api/user_api_service.dart';
 import '../features/user/domain/repositories/user_repository.dart';
 import '../features/user/domain/usecases/get_user_profile_usecase.dart';
 import '../features/user/domain/usecases/get_user_program_usecase.dart';
+import '../features/user/domain/usecases/reset_user_password_usecase.dart';
 import '../features/user/presentation/screens/bloc/logout/logout_bloc.dart';
 import '../features/user/presentation/screens/bloc/user_profile/user_profile_bloc.dart';
 import '../features/user/presentation/screens/bloc/user_program/user_program_bloc.dart';
@@ -213,6 +217,12 @@ Future<void> _initUsecases() async {
   getIt.registerLazySingleton(
     () => GoogleSignInUsecase(getIt()),
   );
+  getIt.registerLazySingleton(
+    () => ResetPasswordUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => VerfifyPasswordResetUsecase(getIt()),
+  );
 
   // Initialize usecase for user feature
   getIt.registerLazySingleton(
@@ -220,6 +230,9 @@ Future<void> _initUsecases() async {
   );
   getIt.registerLazySingleton(
     () => GetUserProfileUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => ResetUserPasswordUsecase(getIt()),
   );
 }
 
@@ -281,6 +294,9 @@ Future<void> _initBlocs() async {
   getIt.registerFactory<VerifyAccountBloc>(
     () => VerifyAccountBloc(getIt()),
   );
+  getIt.registerFactory<VerifyPasswordResetBloc>(
+    () => VerifyPasswordResetBloc(getIt()),
+  );
   getIt.registerFactory<LoginBloc>(
     () => LoginBloc(getIt()),
   );
@@ -288,10 +304,10 @@ Future<void> _initBlocs() async {
     () => LogoutBloc(getIt(), getIt()),
   );
   getIt.registerFactory<ForgetPasswordBloc>(
-    () => ForgetPasswordBloc(),
+    () => ForgetPasswordBloc(getIt()),
   );
   getIt.registerFactory<NewPasswordBloc>(
-    () => NewPasswordBloc(),
+    () => NewPasswordBloc(getIt()),
   );
   getIt.registerFactory<GoogleSignInBloc>(
     () => GoogleSignInBloc(getIt(), getIt()),

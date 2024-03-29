@@ -8,4 +8,7 @@ abstract class UserRepository {
 
   // Get user program
   Future<BaseDataResponse<UserProfileEntity>> getUserProfile();
+
+  // Reset user password
+  Future<BaseDataResponse> resetUserPassword(String email, String password);
 }

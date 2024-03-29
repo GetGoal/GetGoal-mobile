@@ -19,19 +19,19 @@ mixin _$NewPasswordEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() onSubmited,
+    required TResult Function(String email, String password) onSubmited,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? onSubmited,
+    TResult? Function(String email, String password)? onSubmited,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? onSubmited,
+    TResult Function(String email, String password)? onSubmited,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,7 +116,7 @@ class _$NewPasswordEventStartedImpl implements NewPasswordEventStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() onSubmited,
+    required TResult Function(String email, String password) onSubmited,
   }) {
     return started();
   }
@@ -125,7 +125,7 @@ class _$NewPasswordEventStartedImpl implements NewPasswordEventStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? onSubmited,
+    TResult? Function(String email, String password)? onSubmited,
   }) {
     return started?.call();
   }
@@ -134,7 +134,7 @@ class _$NewPasswordEventStartedImpl implements NewPasswordEventStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? onSubmited,
+    TResult Function(String email, String password)? onSubmited,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -185,6 +185,8 @@ abstract class _$$NewPasswordEventOnSubmitedImplCopyWith<$Res> {
           _$NewPasswordEventOnSubmitedImpl value,
           $Res Function(_$NewPasswordEventOnSubmitedImpl) then) =
       __$$NewPasswordEventOnSubmitedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -196,55 +198,89 @@ class __$$NewPasswordEventOnSubmitedImplCopyWithImpl<$Res>
       _$NewPasswordEventOnSubmitedImpl _value,
       $Res Function(_$NewPasswordEventOnSubmitedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? password = null,
+  }) {
+    return _then(_$NewPasswordEventOnSubmitedImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$NewPasswordEventOnSubmitedImpl implements NewPasswordEventOnSubmited {
-  const _$NewPasswordEventOnSubmitedImpl();
+  const _$NewPasswordEventOnSubmitedImpl(
+      {required this.email, required this.password});
+
+  @override
+  final String email;
+  @override
+  final String password;
 
   @override
   String toString() {
-    return 'NewPasswordEvent.onSubmited()';
+    return 'NewPasswordEvent.onSubmited(email: $email, password: $password)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NewPasswordEventOnSubmitedImpl);
+            other is _$NewPasswordEventOnSubmitedImpl &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, email, password);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NewPasswordEventOnSubmitedImplCopyWith<_$NewPasswordEventOnSubmitedImpl>
+      get copyWith => __$$NewPasswordEventOnSubmitedImplCopyWithImpl<
+          _$NewPasswordEventOnSubmitedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() onSubmited,
+    required TResult Function(String email, String password) onSubmited,
   }) {
-    return onSubmited();
+    return onSubmited(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? onSubmited,
+    TResult? Function(String email, String password)? onSubmited,
   }) {
-    return onSubmited?.call();
+    return onSubmited?.call(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? onSubmited,
+    TResult Function(String email, String password)? onSubmited,
     required TResult orElse(),
   }) {
     if (onSubmited != null) {
-      return onSubmited();
+      return onSubmited(email, password);
     }
     return orElse();
   }
@@ -282,7 +318,15 @@ class _$NewPasswordEventOnSubmitedImpl implements NewPasswordEventOnSubmited {
 }
 
 abstract class NewPasswordEventOnSubmited implements NewPasswordEvent {
-  const factory NewPasswordEventOnSubmited() = _$NewPasswordEventOnSubmitedImpl;
+  const factory NewPasswordEventOnSubmited(
+      {required final String email,
+      required final String password}) = _$NewPasswordEventOnSubmitedImpl;
+
+  String get email;
+  String get password;
+  @JsonKey(ignore: true)
+  _$$NewPasswordEventOnSubmitedImplCopyWith<_$NewPasswordEventOnSubmitedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -292,7 +336,7 @@ mixin _$NewPasswordState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() failure,
+    required TResult Function(String? message) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -300,7 +344,7 @@ mixin _$NewPasswordState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? failure,
+    TResult? Function(String? message)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -308,7 +352,7 @@ mixin _$NewPasswordState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failure,
+    TResult Function(String? message)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -401,7 +445,7 @@ class _$NewPasswordStateInitialImpl implements NewPasswordStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() failure,
+    required TResult Function(String? message) failure,
   }) {
     return initial();
   }
@@ -412,7 +456,7 @@ class _$NewPasswordStateInitialImpl implements NewPasswordStateInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? failure,
+    TResult? Function(String? message)? failure,
   }) {
     return initial?.call();
   }
@@ -423,7 +467,7 @@ class _$NewPasswordStateInitialImpl implements NewPasswordStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failure,
+    TResult Function(String? message)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -518,7 +562,7 @@ class _$NewPasswordStateLoadingImpl implements NewPasswordStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() failure,
+    required TResult Function(String? message) failure,
   }) {
     return loading();
   }
@@ -529,7 +573,7 @@ class _$NewPasswordStateLoadingImpl implements NewPasswordStateLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? failure,
+    TResult? Function(String? message)? failure,
   }) {
     return loading?.call();
   }
@@ -540,7 +584,7 @@ class _$NewPasswordStateLoadingImpl implements NewPasswordStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failure,
+    TResult Function(String? message)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -635,7 +679,7 @@ class _$NewPasswordStateSuccessImpl implements NewPasswordStateSuccess {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() failure,
+    required TResult Function(String? message) failure,
   }) {
     return success();
   }
@@ -646,7 +690,7 @@ class _$NewPasswordStateSuccessImpl implements NewPasswordStateSuccess {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? failure,
+    TResult? Function(String? message)? failure,
   }) {
     return success?.call();
   }
@@ -657,7 +701,7 @@ class _$NewPasswordStateSuccessImpl implements NewPasswordStateSuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failure,
+    TResult Function(String? message)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -714,6 +758,8 @@ abstract class _$$NewPasswordStateFailureImplCopyWith<$Res> {
           _$NewPasswordStateFailureImpl value,
           $Res Function(_$NewPasswordStateFailureImpl) then) =
       __$$NewPasswordStateFailureImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -724,27 +770,51 @@ class __$$NewPasswordStateFailureImplCopyWithImpl<$Res>
       _$NewPasswordStateFailureImpl _value,
       $Res Function(_$NewPasswordStateFailureImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$NewPasswordStateFailureImpl(
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$NewPasswordStateFailureImpl implements NewPasswordStateFailure {
-  const _$NewPasswordStateFailureImpl();
+  const _$NewPasswordStateFailureImpl({this.message});
+
+  @override
+  final String? message;
 
   @override
   String toString() {
-    return 'NewPasswordState.failure()';
+    return 'NewPasswordState.failure(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NewPasswordStateFailureImpl);
+            other is _$NewPasswordStateFailureImpl &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NewPasswordStateFailureImplCopyWith<_$NewPasswordStateFailureImpl>
+      get copyWith => __$$NewPasswordStateFailureImplCopyWithImpl<
+          _$NewPasswordStateFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -752,9 +822,9 @@ class _$NewPasswordStateFailureImpl implements NewPasswordStateFailure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() failure,
+    required TResult Function(String? message) failure,
   }) {
-    return failure();
+    return failure(message);
   }
 
   @override
@@ -763,9 +833,9 @@ class _$NewPasswordStateFailureImpl implements NewPasswordStateFailure {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? failure,
+    TResult? Function(String? message)? failure,
   }) {
-    return failure?.call();
+    return failure?.call(message);
   }
 
   @override
@@ -774,11 +844,11 @@ class _$NewPasswordStateFailureImpl implements NewPasswordStateFailure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failure,
+    TResult Function(String? message)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure();
+      return failure(message);
     }
     return orElse();
   }
@@ -822,5 +892,11 @@ class _$NewPasswordStateFailureImpl implements NewPasswordStateFailure {
 }
 
 abstract class NewPasswordStateFailure implements NewPasswordState {
-  const factory NewPasswordStateFailure() = _$NewPasswordStateFailureImpl;
+  const factory NewPasswordStateFailure({final String? message}) =
+      _$NewPasswordStateFailureImpl;
+
+  String? get message;
+  @JsonKey(ignore: true)
+  _$$NewPasswordStateFailureImplCopyWith<_$NewPasswordStateFailureImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

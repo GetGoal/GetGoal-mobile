@@ -335,7 +335,7 @@ mixin _$CreateAccountState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() created,
-    required TResult Function() createError,
+    required TResult Function(String? error) createError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -343,7 +343,7 @@ mixin _$CreateAccountState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? created,
-    TResult? Function()? createError,
+    TResult? Function(String? error)? createError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -351,7 +351,7 @@ mixin _$CreateAccountState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? created,
-    TResult Function()? createError,
+    TResult Function(String? error)? createError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -445,7 +445,7 @@ class _$CreateAccountStateInitialImpl implements CreateAccountStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() created,
-    required TResult Function() createError,
+    required TResult Function(String? error) createError,
   }) {
     return initial();
   }
@@ -456,7 +456,7 @@ class _$CreateAccountStateInitialImpl implements CreateAccountStateInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? created,
-    TResult? Function()? createError,
+    TResult? Function(String? error)? createError,
   }) {
     return initial?.call();
   }
@@ -467,7 +467,7 @@ class _$CreateAccountStateInitialImpl implements CreateAccountStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? created,
-    TResult Function()? createError,
+    TResult Function(String? error)? createError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -563,7 +563,7 @@ class _$CreateAccountStateLoadingImpl implements CreateAccountStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() created,
-    required TResult Function() createError,
+    required TResult Function(String? error) createError,
   }) {
     return loading();
   }
@@ -574,7 +574,7 @@ class _$CreateAccountStateLoadingImpl implements CreateAccountStateLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? created,
-    TResult? Function()? createError,
+    TResult? Function(String? error)? createError,
   }) {
     return loading?.call();
   }
@@ -585,7 +585,7 @@ class _$CreateAccountStateLoadingImpl implements CreateAccountStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? created,
-    TResult Function()? createError,
+    TResult Function(String? error)? createError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -681,7 +681,7 @@ class _$CreateAccountStateCreatedImpl implements CreateAccountStateCreated {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() created,
-    required TResult Function() createError,
+    required TResult Function(String? error) createError,
   }) {
     return created();
   }
@@ -692,7 +692,7 @@ class _$CreateAccountStateCreatedImpl implements CreateAccountStateCreated {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? created,
-    TResult? Function()? createError,
+    TResult? Function(String? error)? createError,
   }) {
     return created?.call();
   }
@@ -703,7 +703,7 @@ class _$CreateAccountStateCreatedImpl implements CreateAccountStateCreated {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? created,
-    TResult Function()? createError,
+    TResult Function(String? error)? createError,
     required TResult orElse(),
   }) {
     if (created != null) {
@@ -760,6 +760,8 @@ abstract class _$$CreateAccountStateErrorImplCopyWith<$Res> {
           _$CreateAccountStateErrorImpl value,
           $Res Function(_$CreateAccountStateErrorImpl) then) =
       __$$CreateAccountStateErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? error});
 }
 
 /// @nodoc
@@ -771,27 +773,51 @@ class __$$CreateAccountStateErrorImplCopyWithImpl<$Res>
       _$CreateAccountStateErrorImpl _value,
       $Res Function(_$CreateAccountStateErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = freezed,
+  }) {
+    return _then(_$CreateAccountStateErrorImpl(
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$CreateAccountStateErrorImpl implements CreateAccountStateError {
-  const _$CreateAccountStateErrorImpl();
+  const _$CreateAccountStateErrorImpl({this.error});
+
+  @override
+  final String? error;
 
   @override
   String toString() {
-    return 'CreateAccountState.createError()';
+    return 'CreateAccountState.createError(error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CreateAccountStateErrorImpl);
+            other is _$CreateAccountStateErrorImpl &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateAccountStateErrorImplCopyWith<_$CreateAccountStateErrorImpl>
+      get copyWith => __$$CreateAccountStateErrorImplCopyWithImpl<
+          _$CreateAccountStateErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -799,9 +825,9 @@ class _$CreateAccountStateErrorImpl implements CreateAccountStateError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() created,
-    required TResult Function() createError,
+    required TResult Function(String? error) createError,
   }) {
-    return createError();
+    return createError(error);
   }
 
   @override
@@ -810,9 +836,9 @@ class _$CreateAccountStateErrorImpl implements CreateAccountStateError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? created,
-    TResult? Function()? createError,
+    TResult? Function(String? error)? createError,
   }) {
-    return createError?.call();
+    return createError?.call(error);
   }
 
   @override
@@ -821,11 +847,11 @@ class _$CreateAccountStateErrorImpl implements CreateAccountStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? created,
-    TResult Function()? createError,
+    TResult Function(String? error)? createError,
     required TResult orElse(),
   }) {
     if (createError != null) {
-      return createError();
+      return createError(error);
     }
     return orElse();
   }
@@ -869,5 +895,11 @@ class _$CreateAccountStateErrorImpl implements CreateAccountStateError {
 }
 
 abstract class CreateAccountStateError implements CreateAccountState {
-  const factory CreateAccountStateError() = _$CreateAccountStateErrorImpl;
+  const factory CreateAccountStateError({final String? error}) =
+      _$CreateAccountStateErrorImpl;
+
+  String? get error;
+  @JsonKey(ignore: true)
+  _$$CreateAccountStateErrorImplCopyWith<_$CreateAccountStateErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

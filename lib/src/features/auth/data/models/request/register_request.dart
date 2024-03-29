@@ -9,6 +9,7 @@ class RegisterRequest {
     required this.lastName,
     required this.email,
     required this.password,
+    required this.labels,
   });
 
   factory RegisterRequest.fromJson(
@@ -29,4 +30,7 @@ class RegisterRequest {
 
   @JsonKey(name: 'password')
   final String? password;
+
+  @JsonKey(name: 'labels')
+  final List<String>? labels;
 }

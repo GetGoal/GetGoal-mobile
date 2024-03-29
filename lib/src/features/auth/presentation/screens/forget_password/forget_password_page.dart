@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../config/route_config.dart';
+import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
+import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
+import '../verification/enum/verification_mode_enum.dart';
+import '../verification/verification_page.dart';
 import 'bloc/forget_password/forget_password_bloc.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
@@ -66,12 +69,30 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage>
     return BlocConsumer<ForgetPasswordBloc, ForgetPasswordState>(
       listener: (context, state) async {
         switch (state) {
-          case ForgetPasswordStateSuccess():
-            bool? isRefresh = await context.pushNamed(Routes.newPasswordPage);
-            if (isRefresh!) {
-              _forgetPasswordBloc.add(const ForgetPasswordEvent.started());
-            }
-          case ForgetPasswordStateFailure():
+          case ForgetPasswordStateSuccess(:final message):
+            await showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(
+                errorMessage: message,
+                title: 'Complete!',
+              ),
+            );
+            if (!mounted) return;
+            context.pushNamed(
+              Routes.verificationPage,
+              extra: VerificationPageData(
+                mode: VERIFICATIONMODE.verifyPasswordReset,
+              ),
+            );
+            break;
+          case ForgetPasswordStateFailure(:final message):
+            await showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(
+                errorMessage: message,
+              ),
+            );
+            break;
           default:
         }
       },
@@ -86,8 +107,11 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage>
               onTap: () {
                 if (_formKey.currentState!.validate()) {
                   _forgetPasswordBloc.add(
-                    const ForgetPasswordEvent.onSubmited(),
+                    ForgetPasswordEvent.onSubmited(
+                      email: _emailInputController.text,
+                    ),
                   );
+                  AppCache.userEmail = _emailInputController.text;
                 }
               },
               buttonText: 'Continue',

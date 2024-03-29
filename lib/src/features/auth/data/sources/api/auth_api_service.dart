@@ -3,6 +3,7 @@ import 'package:retrofit/dio.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../../../core/bases/base_data_response.dart';
+import '../../models/request/email_request.dart';
 import '../../models/request/google_sign_in_request.dart';
 import '../../models/request/login_request.dart';
 import '../../models/request/register_request.dart';
@@ -25,6 +26,11 @@ abstract class AuthApiService {
     @Body() VerifyRequest requestBody,
   );
 
+  @POST('/v1/auth/verify-password-reset')
+  Future<HttpResponse<BaseDataResponse>> verifyPasswordReset(
+    @Body() VerifyRequest requestBody,
+  );
+
   @POST('/v1/auth/sign-in')
   Future<HttpResponse<BaseDataResponse<LoginSuccessResponse>>> login(
     @Body() LoginRequest requestBody,
@@ -36,5 +42,10 @@ abstract class AuthApiService {
   @POST('/v1/auth/external-sign-in')
   Future<HttpResponse<BaseDataResponse<LoginSuccessResponse>>> googleSignIn(
     @Body() GoogleSingInRequest requestBody,
+  );
+
+  @POST('/v1/auth/reset-password')
+  Future<HttpResponse<BaseDataResponse>> resetPassword(
+    @Body() EmailRequest requestBody,
   );
 }

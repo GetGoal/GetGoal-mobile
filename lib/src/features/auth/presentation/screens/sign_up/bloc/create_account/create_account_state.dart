@@ -5,5 +5,7 @@ class CreateAccountState with _$CreateAccountState {
   const factory CreateAccountState.initial() = CreateAccountStateInitial;
   const factory CreateAccountState.loading() = CreateAccountStateLoading;
   const factory CreateAccountState.created() = CreateAccountStateCreated;
-  const factory CreateAccountState.createError() = CreateAccountStateError;
+  const factory CreateAccountState.createError({
+    String? error,
+  }) = CreateAccountStateError;
 }

@@ -1,0 +1,4 @@
+enum VERIFICATIONMODE {
+  verifyAccount,
+  verifyPasswordReset,
+}

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../../../../core/bases/base_data.dart';
 import '../../../../../domain/usecase/auth/verify_account_usecase.dart';
 
 part 'verify_account_event.dart';
@@ -31,8 +32,8 @@ class VerifyAccountBloc extends Bloc<VerifyAccountEvent, VerifyAccountState> {
       }
 
       emit(const VerifyAccountState.verified());
-    } catch (e) {
-      emit(const VerifyAccountState.verifiedError());
+    } on DataFailed catch (e) {
+      emit(VerifyAccountState.verifiedError(message: e.error.toString()));
     }
   }
 }
