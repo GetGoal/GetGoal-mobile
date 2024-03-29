@@ -233,8 +233,6 @@ class ProgramRepositoryImpl implements ProgramRepository {
         downloadUrl = await snapshot.ref.getDownloadURL();
       }
 
-      print(AppCache.programTaskCreateList);
-
       final requestBody = CreateProgramRequest(
         programName: program.programName,
         programDesc: program.programDescription,
@@ -265,6 +263,32 @@ class ProgramRepositoryImpl implements ProgramRepository {
 
       AppCache.programCreate = const ProgramCreate();
       AppCache.programTaskCreateList = [];
+
+      return data;
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
+
+  @override
+  Future<BaseDataResponse> saveProgram(String programId) async {
+    try {
+      final res = await _programApiService.saveProgram(programId);
+
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: null,
+        error: res.data.error,
+      );
 
       return data;
     } on DioException catch (e) {
