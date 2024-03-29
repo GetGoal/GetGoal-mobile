@@ -8,6 +8,7 @@ import '../../../domain/entities/program.dart';
 import '../../../domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../../../domain/usecases/program/get_program_by_search_usecase.dart';
 import '../../../domain/usecases/program/get_program_usecase.dart';
+import '../../../domain/usecases/program/get_recommend_program_usecase.dart';
 import '../../../domain/usecases/program/save_program_usecase.dart';
 
 part 'program_event.dart';
@@ -20,9 +21,11 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
     this._getProgramByLabelName,
     this._getProgramBySearchUsecase,
     this._saveProgramUsecase,
+    this._getRecommendProgramUsecase,
   ) : super(const ProgramState.initial()) {
     on<ProgramEventStart>(_onProgramStart);
     on<ProgramEventGetAllProgram>(_onProgramGetAllProgram);
+    on<ProgramEventGetRecommendProgram>(_onProgramRecommendProgram);
     on<ProgramEventClicked>(_onProgramClicked);
     on<ProgramEventFilterClicked>(_onProgramFilterClicked);
     on<ProgramEventSearchProgram>(_onProgramSearch);
@@ -31,6 +34,7 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
   }
 
   final GetProgramUsecase _getProgramUsecase;
+  final GetRecommendProgramUsecase _getRecommendProgramUsecase;
   final GetProgramByLabelNameUsecase _getProgramByLabelName;
   final GetProgramBySearchUsecase _getProgramBySearchUsecase;
   final SaveProgramUsecase _saveProgramUsecase;
@@ -135,6 +139,27 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
       emit(const ProgramState.loadedSuccess(programs: []));
 
       final programList = await _getProgramUsecase.call();
+
+      if (programList.data!.isEmpty) {
+        emit(const ProgramState.programEmpty());
+        return;
+      }
+
+      emit(ProgramState.loadedSuccess(programs: programList.data!));
+    } catch (e) {
+      _logger.e('ProgramStateError:', error: e);
+      emit(const ProgramState.error());
+    }
+  }
+
+  FutureOr<void> _onProgramRecommendProgram(
+    ProgramEventGetRecommendProgram event,
+    Emitter<ProgramState> emit,
+  ) async {
+    try {
+      emit(const ProgramState.loadedSuccess(programs: []));
+
+      final programList = await _getRecommendProgramUsecase.call();
 
       if (programList.data!.isEmpty) {
         emit(const ProgramState.programEmpty());
