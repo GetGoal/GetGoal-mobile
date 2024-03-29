@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../shared/icon.dart';
@@ -9,7 +10,7 @@ import '../../../../../../shared/widgets/image/cache_image.dart';
 import '../../../../domain/entities/program.dart';
 import 'program_label.dart';
 
-class ProgramCard extends StatelessWidget {
+class ProgramCard extends StatefulWidget {
   const ProgramCard({
     super.key,
     this.programImage,
@@ -21,7 +22,10 @@ class ProgramCard extends StatelessWidget {
     this.rating,
     this.createdAt,
     this.onTab,
-    this.actionButton,
+    this.onSave,
+    this.onEdit,
+    this.onDelete,
+    this.isShowMenu = false,
   });
 
   final String? programImage;
@@ -33,15 +37,25 @@ class ProgramCard extends StatelessWidget {
   final double? rating;
   final String? createdAt;
   final Function? onTab;
-  final Widget? actionButton;
+  final Function? onSave;
+  final Function? onEdit;
+  final Function? onDelete;
+  final bool isShowMenu;
+
+  @override
+  State<ProgramCard> createState() => _ProgramCardState();
+}
+
+class _ProgramCardState extends State<ProgramCard> {
+  bool isSaved = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
-        if (onTab == null) return;
-        onTab!();
+        if (widget.onTab == null) return;
+        widget.onTab!();
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8),
@@ -49,7 +63,16 @@ class ProgramCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _programName(),
+                widget.isShowMenu ? _programMenu() : const SizedBox(),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
                   width: 265,
@@ -57,17 +80,12 @@ class ProgramCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // _programCreatedby(),
-                      // const SizedBox(height: 4),
-                      _programName(),
-                      const SizedBox(height: 8),
                       _programExpectedTime(),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 4),
                       _programDescription(),
                     ],
                   ),
                 ),
-                const Spacer(),
                 _programImage(),
               ],
             ),
@@ -80,17 +98,20 @@ class ProgramCard extends StatelessWidget {
   }
 
   Widget _programName() {
-    return Text(
-      programName ?? '',
-      style: subHeadlineBold(),
+    return Flexible(
+      child: Text(
+        widget.programName ?? '',
+        maxLines: 2,
+        style: subHeadlineBold(),
+      ),
     );
   }
 
   Widget _programDescription() {
     return Text(
-      programDesc ?? 'No descripition',
+      widget.programDesc ?? 'No descripition',
       overflow: TextOverflow.ellipsis,
-      maxLines: 2,
+      maxLines: 4,
       style: footnoteRegular().copyWith(color: AppColors.description),
     );
   }
@@ -99,15 +120,32 @@ class ProgramCard extends StatelessWidget {
     return Row(
       children: [
         ProgramLabel(
-          title: label?.labelName ?? '',
+          title: widget.label?.labelName ?? '',
         ),
         const SizedBox(width: 8),
         Text(
-          DateFormat('yMMMd').format(DateTime.parse(createdAt!)),
+          DateFormat('yMMMd').format(DateTime.parse(widget.createdAt!)),
           style: caption2Regular().copyWith(color: AppColors.description),
         ),
         const Spacer(),
-        actionButton ?? const SizedBox(),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isSaved = !isSaved;
+            });
+            if (widget.onSave!() == null) return;
+            widget.onSave!();
+          },
+          child: isSaved
+              ? SvgPicture.asset(
+                  AppIcon.bookmark_saved_icon,
+                )
+              : CustomIcon(
+                  icon: AppIcon.bookmark_icon,
+                  size: 24,
+                  iconColor: AppColors.description,
+                ),
+        ),
       ],
     );
   }
@@ -123,7 +161,7 @@ class ProgramCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           child: CacheImage(
-            programImage: programImage!,
+            programImage: widget.programImage!,
             radius: 16,
           ),
         ),
@@ -139,12 +177,61 @@ class ProgramCard extends StatelessWidget {
           width: 4,
         ),
         Text(
-          duration ?? '',
+          widget.duration ?? '',
           style: caption1Regular().copyWith(
             color: AppColors.white,
           ),
         ),
       ],
+    );
+  }
+
+  Widget _programMenu() {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        splashFactory: NoSplash.splashFactory,
+      ),
+      child: PopupMenuButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        padding: const EdgeInsets.all(0),
+        icon: CustomIcon(
+          size: 24,
+          icon: AppIcon.menu_icon,
+          iconColor: AppColors.description,
+        ),
+        itemBuilder: (context) => [
+          // Edit program
+          PopupMenuItem(
+            onTap: () async {},
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  Text('Edit'),
+                ],
+              ),
+            ),
+          ),
+
+          // Delete program
+          PopupMenuItem(
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  Text(
+                    'Delete',
+                    style: TextStyle(color: AppColors.red),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

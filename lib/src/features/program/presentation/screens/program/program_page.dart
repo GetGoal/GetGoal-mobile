@@ -227,11 +227,6 @@ class _ProgramPageState extends State<ProgramPage> {
                         ? const Label(labelName: 'Unknow')
                         : programList[index].labels![0],
                     createdAt: programList[index].updatedAt,
-                    actionButton: CustomIcon(
-                      icon: AppIcon.bookmark_icon,
-                      size: 24,
-                      iconColor: AppColors.description,
-                    ),
                     onTab: () {
                       context.push(
                         '/program_info/${programList[index].programId}',
