@@ -51,20 +51,18 @@ class TodoTask extends StatelessWidget {
         ),
         child: IntrinsicHeight(
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: 48,
+                width: 72,
                 child: GetGoalGradientText(
                   DateFormat.jm().format(DateTime.parse(startTime!)),
-                  textAlign: TextAlign.center,
                   style: bodyBold(),
                   gradient: taskStatus == TASKSTATUS.todo
                       ? null
                       : [AppColors.description, AppColors.description],
                 ),
               ),
+              const SizedBox(width: 16),
               Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
