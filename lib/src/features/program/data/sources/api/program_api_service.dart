@@ -43,6 +43,11 @@ abstract class ProgramApiService {
     @Body() CreateProgramRequest requestBody,
   );
 
+  @POST('/v1/programs/save-program/{id}')
+  Future<HttpResponse<BaseDataResponse<ProgramModel>>> saveProgram(
+    @Path('id') String programId,
+  );
+
   @DELETE('/v1/programs/{id}')
   Future<HttpResponse<BaseDataResponse>> deleteProgram(
     @Path('id') String programId,
