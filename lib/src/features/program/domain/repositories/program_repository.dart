@@ -19,4 +19,7 @@ abstract class ProgramRepository {
 
   // Delete Program
   Future<BaseDataResponse> deleteProgram(String programId, String? imageUrl);
+
+  // Save program
+  Future<BaseDataResponse> saveProgram(String programId);
 }

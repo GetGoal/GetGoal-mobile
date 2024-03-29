@@ -25,6 +25,7 @@ mixin _$Program {
   String? get updatedAt => throw _privateConstructorUsedError;
   List<Label>? get labels => throw _privateConstructorUsedError;
   List<Task>? get tasks => throw _privateConstructorUsedError;
+  bool? get isSaved => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProgramCopyWith<Program> get copyWith => throw _privateConstructorUsedError;
@@ -44,7 +45,8 @@ abstract class $ProgramCopyWith<$Res> {
       String? expectedTime,
       String? updatedAt,
       List<Label>? labels,
-      List<Task>? tasks});
+      List<Task>? tasks,
+      bool? isSaved});
 }
 
 /// @nodoc
@@ -69,6 +71,7 @@ class _$ProgramCopyWithImpl<$Res, $Val extends Program>
     Object? updatedAt = freezed,
     Object? labels = freezed,
     Object? tasks = freezed,
+    Object? isSaved = freezed,
   }) {
     return _then(_value.copyWith(
       programId: freezed == programId
@@ -107,6 +110,10 @@ class _$ProgramCopyWithImpl<$Res, $Val extends Program>
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>?,
+      isSaved: freezed == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -127,7 +134,8 @@ abstract class _$$ProgramImplCopyWith<$Res> implements $ProgramCopyWith<$Res> {
       String? expectedTime,
       String? updatedAt,
       List<Label>? labels,
-      List<Task>? tasks});
+      List<Task>? tasks,
+      bool? isSaved});
 }
 
 /// @nodoc
@@ -150,6 +158,7 @@ class __$$ProgramImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? labels = freezed,
     Object? tasks = freezed,
+    Object? isSaved = freezed,
   }) {
     return _then(_$ProgramImpl(
       programId: freezed == programId
@@ -188,6 +197,10 @@ class __$$ProgramImplCopyWithImpl<$Res>
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>?,
+      isSaved: freezed == isSaved
+          ? _value.isSaved
+          : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -204,7 +217,8 @@ class _$ProgramImpl implements _Program {
       this.expectedTime,
       this.updatedAt,
       final List<Label>? labels,
-      final List<Task>? tasks})
+      final List<Task>? tasks,
+      this.isSaved})
       : _labels = labels,
         _tasks = tasks;
 
@@ -243,8 +257,11 @@ class _$ProgramImpl implements _Program {
   }
 
   @override
+  final bool? isSaved;
+
+  @override
   String toString() {
-    return 'Program(programId: $programId, programName: $programName, rating: $rating, programImage: $programImage, programDesc: $programDesc, expectedTime: $expectedTime, updatedAt: $updatedAt, labels: $labels, tasks: $tasks)';
+    return 'Program(programId: $programId, programName: $programName, rating: $rating, programImage: $programImage, programDesc: $programDesc, expectedTime: $expectedTime, updatedAt: $updatedAt, labels: $labels, tasks: $tasks, isSaved: $isSaved)';
   }
 
   @override
@@ -266,7 +283,8 @@ class _$ProgramImpl implements _Program {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             const DeepCollectionEquality().equals(other._labels, _labels) &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            (identical(other.isSaved, isSaved) || other.isSaved == isSaved));
   }
 
   @override
@@ -280,7 +298,8 @@ class _$ProgramImpl implements _Program {
       expectedTime,
       updatedAt,
       const DeepCollectionEquality().hash(_labels),
-      const DeepCollectionEquality().hash(_tasks));
+      const DeepCollectionEquality().hash(_tasks),
+      isSaved);
 
   @JsonKey(ignore: true)
   @override
@@ -299,7 +318,8 @@ abstract class _Program implements Program {
       final String? expectedTime,
       final String? updatedAt,
       final List<Label>? labels,
-      final List<Task>? tasks}) = _$ProgramImpl;
+      final List<Task>? tasks,
+      final bool? isSaved}) = _$ProgramImpl;
 
   @override
   int? get programId;
@@ -319,6 +339,8 @@ abstract class _Program implements Program {
   List<Label>? get labels;
   @override
   List<Task>? get tasks;
+  @override
+  bool? get isSaved;
   @override
   @JsonKey(ignore: true)
   _$$ProgramImplCopyWith<_$ProgramImpl> get copyWith =>

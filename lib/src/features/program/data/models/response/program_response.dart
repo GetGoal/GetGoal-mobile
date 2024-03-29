@@ -59,6 +59,7 @@ class ProgramModel {
     required this.updatedAt,
     required this.labels,
     required this.tasks,
+    required this.isSaved,
   });
 
   factory ProgramModel.fromJson(Map<String, dynamic> json) =>
@@ -92,4 +93,7 @@ class ProgramModel {
 
   @JsonKey(name: 'tasks')
   final List<TaskModel>? tasks;
+
+  @JsonKey(name: 'is_saved')
+  final bool? isSaved;
 }

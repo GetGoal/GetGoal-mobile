@@ -8,6 +8,7 @@ import '../../../domain/entities/program.dart';
 import '../../../domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../../../domain/usecases/program/get_program_by_search_usecase.dart';
 import '../../../domain/usecases/program/get_program_usecase.dart';
+import '../../../domain/usecases/program/save_program_usecase.dart';
 
 part 'program_event.dart';
 part 'program_state.dart';
@@ -18,17 +19,21 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
     this._getProgramUsecase,
     this._getProgramByLabelName,
     this._getProgramBySearchUsecase,
+    this._saveProgramUsecase,
   ) : super(const ProgramState.initial()) {
     on<ProgramEventStart>(_onProgramStart);
+    on<ProgramEventGetAllProgram>(_onProgramGetAllProgram);
     on<ProgramEventClicked>(_onProgramClicked);
     on<ProgramEventFilterClicked>(_onProgramFilterClicked);
     on<ProgramEventSearchProgram>(_onProgramSearch);
     on<ProgramEventSearching>(_onProgramSearching);
+    on<ProgramEventSaveProgram>(_onSaveProgram);
   }
 
   final GetProgramUsecase _getProgramUsecase;
   final GetProgramByLabelNameUsecase _getProgramByLabelName;
   final GetProgramBySearchUsecase _getProgramBySearchUsecase;
+  final SaveProgramUsecase _saveProgramUsecase;
 
   final _logger = Logger(
     printer: PrettyPrinter(),
@@ -109,5 +114,37 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
     Emitter<ProgramState> emit,
   ) {
     emit(const ProgramState.loadedSuccess(programs: []));
+  }
+
+  FutureOr<void> _onSaveProgram(
+    ProgramEventSaveProgram event,
+    Emitter<ProgramState> emit,
+  ) async {
+    try {
+      await _saveProgramUsecase.call(params: event.programId);
+    } catch (e) {
+      _logger.e(e);
+    }
+  }
+
+  FutureOr<void> _onProgramGetAllProgram(
+    ProgramEventGetAllProgram event,
+    Emitter<ProgramState> emit,
+  ) async {
+    try {
+      emit(const ProgramState.loadedSuccess(programs: []));
+
+      final programList = await _getProgramUsecase.call();
+
+      if (programList.data!.isEmpty) {
+        emit(const ProgramState.programEmpty());
+        return;
+      }
+
+      emit(ProgramState.loadedSuccess(programs: programList.data!));
+    } catch (e) {
+      _logger.e('ProgramStateError:', error: e);
+      emit(const ProgramState.error());
+    }
   }
 }

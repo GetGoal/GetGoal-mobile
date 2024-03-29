@@ -11,10 +11,12 @@ ThemeData appTheme(BuildContext context) {
     primaryColor: AppColors.primary2,
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: AppColors.primarySecondary,
+      accentColor: AppColors.primary2,
       brightness: Brightness.dark,
       cardColor: AppColors.secondary,
     ).copyWith(
       brightness: Brightness.dark,
+      primary: AppColors.primary2,
     ),
     scaffoldBackgroundColor: AppColors.background,
     appBarTheme: AppBarTheme(
@@ -29,7 +31,7 @@ ThemeData appTheme(BuildContext context) {
     fontFamilyFallback: const ['Kanit'],
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary2,
+        backgroundColor: AppColors.secondary,
         elevation: 0,
         textStyle: subHeadlineRegular(),
         splashFactory: NoSplash.splashFactory,

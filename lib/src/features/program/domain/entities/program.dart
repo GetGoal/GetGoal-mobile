@@ -16,6 +16,7 @@ sealed class Program with _$Program {
     final String? updatedAt,
     final List<Label>? labels,
     final List<Task>? tasks,
+    final bool? isSaved,
   }) = _Program;
 }
 

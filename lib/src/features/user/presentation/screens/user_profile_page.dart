@@ -5,12 +5,10 @@ import 'package:go_router/go_router.dart';
 import '../../../../config/i18n/strings.g.dart';
 import '../../../../config/route_config.dart';
 import '../../../../shared/app_cache.dart';
-import '../../../../shared/icon.dart';
 import '../../../../shared/themes/color.dart';
 import '../../../../shared/themes/font.dart';
 import '../../../../shared/themes/spacing.dart';
 import '../../../../shared/widgets/dialog/error_dialog.dart';
-import '../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../shared/widgets/image/cache_image.dart';
 import '../../../../shared/widgets/text/get_goal_gradient_text.dart';
 import '../../../program/domain/entities/program.dart';
@@ -264,6 +262,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ),
               itemBuilder: (context, index) {
                 return ProgramCard(
+                  isShowMenu: true,
+                  isShowSaveButton: false,
                   onTab: () => context.push(
                     '/program_info/${programList[index].programId}',
                   ),
@@ -275,75 +275,27 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   label:
                       Label(labelName: programList[index].labels![0].labelName),
                   createdAt: DateTime.now().toString(),
-                  actionButton: Theme(
-                    data: Theme.of(context).copyWith(
-                      splashFactory: NoSplash.splashFactory,
-                    ),
-                    child: PopupMenuButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+                  onEdit: () async {
+                    bool? isRefresh = await context.pushNamed(
+                      Routes.programCreatePage,
+                      extra: ProgramCreatePageData(
+                        mode: PROGRAMFORMMODE.edit,
+                        programId: programList[index].programId.toString(),
                       ),
-                      padding: const EdgeInsets.all(0),
-                      icon: CustomIcon(
-                        size: 24,
-                        icon: AppIcon.menu_icon,
-                        iconColor: AppColors.description,
+                    );
+                    if (isRefresh!) {
+                      AppCache.programTaskCreateList = [];
+                    }
+                  },
+                  onDelete: () {
+                    _deleteProgramBloc.add(
+                      DeleteProgramEvent.onDelete(
+                        programId: programList[index].programId.toString(),
+                        imageUrl: programList[index].programImage,
                       ),
-                      itemBuilder: (context) => [
-                        // Edit program
-                        PopupMenuItem(
-                          onTap: () async {
-                            bool? isRefresh = await context.pushNamed(
-                              Routes.programCreatePage,
-                              extra: ProgramCreatePageData(
-                                mode: PROGRAMFORMMODE.edit,
-                                programId:
-                                    programList[index].programId.toString(),
-                              ),
-                            );
-                            if (isRefresh!) {
-                              AppCache.programTaskCreateList = [];
-                            }
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8),
-                            child: Row(
-                              children: [
-                                Text('Edit'),
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        // Delete program
-                        PopupMenuItem(
-                          onTap: () {
-                            _deleteProgramBloc.add(
-                              DeleteProgramEvent.onDelete(
-                                programId:
-                                    programList[index].programId.toString(),
-                                imageUrl: programList[index].programImage,
-                              ),
-                            );
-
-                            _userProgramBloc
-                                .add(const UserProgramEvent.started());
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Delete',
-                                  style: TextStyle(color: AppColors.red),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                    );
+                    _userProgramBloc.add(const UserProgramEvent.started());
+                  },
                 );
               },
             );
