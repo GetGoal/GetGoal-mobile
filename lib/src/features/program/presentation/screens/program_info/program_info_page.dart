@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
@@ -219,11 +218,6 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
                   style: caption1Regular(),
                 ),
               ],
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () => {},
-              child: SvgPicture.asset(AppIcon.bookmark_icon),
             ),
           ],
         ),

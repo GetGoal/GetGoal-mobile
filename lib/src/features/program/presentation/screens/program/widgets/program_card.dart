@@ -26,6 +26,8 @@ class ProgramCard extends StatefulWidget {
     this.onEdit,
     this.onDelete,
     this.isShowMenu = false,
+    this.isShowSaveButton = true,
+    this.isSaved = false,
   });
 
   final String? programImage;
@@ -41,13 +43,23 @@ class ProgramCard extends StatefulWidget {
   final Function? onEdit;
   final Function? onDelete;
   final bool isShowMenu;
+  final bool isShowSaveButton;
+  final bool? isSaved;
 
   @override
   State<ProgramCard> createState() => _ProgramCardState();
 }
 
 class _ProgramCardState extends State<ProgramCard> {
-  bool isSaved = false;
+  bool isTappedSave = false;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      isTappedSave = widget.isSaved!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,24 +140,36 @@ class _ProgramCardState extends State<ProgramCard> {
           style: caption2Regular().copyWith(color: AppColors.description),
         ),
         const Spacer(),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              isSaved = !isSaved;
-            });
-            if (widget.onSave!() == null) return;
-            widget.onSave!();
-          },
-          child: isSaved
-              ? SvgPicture.asset(
-                  AppIcon.bookmark_saved_icon,
-                )
-              : CustomIcon(
-                  icon: AppIcon.bookmark_icon,
-                  size: 24,
-                  iconColor: AppColors.description,
-                ),
-        ),
+        widget.isShowSaveButton
+            ? isTappedSave
+                ? GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isTappedSave = !isTappedSave;
+                      });
+                      if (widget.onSave!() == null) return;
+
+                      if (!widget.isSaved!) {
+                        widget.onSave!();
+                      } else {}
+                    },
+                    child: SvgPicture.asset(
+                      AppIcon.bookmark_saved_icon,
+                    ),
+                  )
+                : GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isTappedSave = !isTappedSave;
+                      });
+                    },
+                    child: CustomIcon(
+                      icon: AppIcon.bookmark_icon,
+                      size: 24,
+                      iconColor: AppColors.description,
+                    ),
+                  )
+            : const SizedBox(),
       ],
     );
   }

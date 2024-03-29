@@ -263,6 +263,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               itemBuilder: (context, index) {
                 return ProgramCard(
                   isShowMenu: true,
+                  isShowSaveButton: false,
                   onTab: () => context.push(
                     '/program_info/${programList[index].programId}',
                   ),
