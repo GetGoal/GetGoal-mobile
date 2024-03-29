@@ -9,4 +9,7 @@ class TaskPlanningEvent with _$TaskPlanningEvent {
     required List<Task> tasks,
     required String programId,
   }) = CreatedEvent;
+  const factory TaskPlanningEvent.loadEditedTask({
+    required List<Task> tasks,
+  }) = TaskPlanningEventLoadEditedTask;
 }
