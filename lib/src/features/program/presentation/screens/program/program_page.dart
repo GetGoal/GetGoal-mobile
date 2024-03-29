@@ -260,8 +260,7 @@ class _ProgramPageState extends State<ProgramPage> {
   }
 
   Widget _programError() {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.5,
+    return Expanded(
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
