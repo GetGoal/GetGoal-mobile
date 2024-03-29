@@ -159,7 +159,7 @@ class _ProgramCardState extends State<ProgramCard> {
                       });
                       if (widget.onSave!() == null) return;
 
-                      if (!widget.isSaved!) {
+                      if (widget.isSaved!) {
                         widget.onSave!();
                       } else {}
                     },
