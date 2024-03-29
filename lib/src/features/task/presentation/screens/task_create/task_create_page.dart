@@ -205,31 +205,65 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   }
 
   Widget _buildTaskNameInputField() {
-    return NormalTextInputField(
-      controller: _taskNameInputController,
-      label: Translations.of(context).create_task.task_name,
-      hintText: Translations.of(context).create_task.ex_task_name,
-      validator: taskNameValidator,
-    );
+    switch (widget.pageData!.mode) {
+      case TASKFORMMODE.taskPlanning:
+        return NormalTextInputField(
+          controller: _taskNameInputController,
+          label: Translations.of(context).create_task.task_name,
+          hintText: Translations.of(context).create_task.ex_task_name,
+          validator: taskNameValidator,
+          isDisable: true,
+        );
+      default:
+        return NormalTextInputField(
+          controller: _taskNameInputController,
+          label: Translations.of(context).create_task.task_name,
+          hintText: Translations.of(context).create_task.ex_task_name,
+          validator: taskNameValidator,
+        );
+    }
   }
 
   Widget _buildDecriptionInputField() {
-    return NormalTextInputField(
-      controller: _taskDescriptionInputController,
-      label: Translations.of(context).create_task.description,
-      hintText: Translations.of(context).create_task.ex_description,
-      maxLines: null,
-      validator: taskDescriptionValidator,
-    );
+    switch (widget.pageData!.mode) {
+      case TASKFORMMODE.taskPlanning:
+        return NormalTextInputField(
+          controller: _taskDescriptionInputController,
+          label: Translations.of(context).create_task.description,
+          hintText: Translations.of(context).create_task.ex_description,
+          maxLines: null,
+          validator: taskDescriptionValidator,
+          isDisable: true,
+        );
+      default:
+        return NormalTextInputField(
+          controller: _taskDescriptionInputController,
+          label: Translations.of(context).create_task.description,
+          hintText: Translations.of(context).create_task.ex_description,
+          maxLines: null,
+          validator: taskDescriptionValidator,
+        );
+    }
   }
 
   Widget _buildCategoryInputField() {
-    return NormalTextInputField(
-      controller: _taskCategoryInputController,
-      label: Translations.of(context).create_task.category,
-      hintText: Translations.of(context).create_task.ex_category,
-      validator: taskCategoryValidator,
-    );
+    switch (widget.pageData!.mode) {
+      case TASKFORMMODE.taskPlanning:
+        return NormalTextInputField(
+          controller: _taskCategoryInputController,
+          label: Translations.of(context).create_task.category,
+          hintText: Translations.of(context).create_task.ex_category,
+          validator: taskCategoryValidator,
+          isDisable: true,
+        );
+      default:
+        return NormalTextInputField(
+          controller: _taskCategoryInputController,
+          label: Translations.of(context).create_task.category,
+          hintText: Translations.of(context).create_task.ex_category,
+          validator: taskCategoryValidator,
+        );
+    }
   }
 
   Widget _buildStartDateInputField() {
@@ -332,6 +366,12 @@ class _TaskCreatePageState extends State<TaskCreatePage>
             AppCache.programTaskCreateList = taskList;
             context.pop(true);
           }
+          if (widget.pageData!.mode == TASKFORMMODE.taskPlanning) {
+            final taskList = AppCache.taskPlanningList.toList();
+            taskList[widget.pageData!.taskIndex!] = task;
+            AppCache.taskPlanningList = taskList;
+            context.pop(true);
+          }
         }
       },
     );
@@ -356,6 +396,8 @@ class _TaskCreatePageState extends State<TaskCreatePage>
         return Translations.of(context).create_task.save_button;
       case TASKFORMMODE.programCreate:
         return Translations.of(context).create_task.save_button;
+      case TASKFORMMODE.taskPlanning:
+        return 'Edit task';
       default:
         return Translations.of(context).create_task.create_button;
     }

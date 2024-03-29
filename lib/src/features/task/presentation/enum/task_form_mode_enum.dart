@@ -3,5 +3,6 @@ enum TASKFORMMODE {
   edit,
   program,
   programCreate,
+  taskPlanning,
   unknown,
 }

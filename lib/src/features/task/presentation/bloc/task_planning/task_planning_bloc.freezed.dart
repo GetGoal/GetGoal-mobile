@@ -16,23 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TaskPlanningEvent {
-  String get programId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String programId) started,
     required TResult Function(List<Task> tasks, String programId) created,
+    required TResult Function(List<Task> tasks) loadEditedTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String programId)? started,
     TResult? Function(List<Task> tasks, String programId)? created,
+    TResult? Function(List<Task> tasks)? loadEditedTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String programId)? started,
     TResult Function(List<Task> tasks, String programId)? created,
+    TResult Function(List<Task> tasks)? loadEditedTask,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,24 +42,24 @@ mixin _$TaskPlanningEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(StartedEvent value) started,
     required TResult Function(CreatedEvent value) created,
+    required TResult Function(TaskPlanningEventLoadEditedTask value)
+        loadEditedTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartedEvent value)? started,
     TResult? Function(CreatedEvent value)? created,
+    TResult? Function(TaskPlanningEventLoadEditedTask value)? loadEditedTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartedEvent value)? started,
     TResult Function(CreatedEvent value)? created,
+    TResult Function(TaskPlanningEventLoadEditedTask value)? loadEditedTask,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $TaskPlanningEventCopyWith<TaskPlanningEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -66,8 +68,6 @@ abstract class $TaskPlanningEventCopyWith<$Res> {
   factory $TaskPlanningEventCopyWith(
           TaskPlanningEvent value, $Res Function(TaskPlanningEvent) then) =
       _$TaskPlanningEventCopyWithImpl<$Res, TaskPlanningEvent>;
-  @useResult
-  $Res call({String programId});
 }
 
 /// @nodoc
@@ -79,28 +79,13 @@ class _$TaskPlanningEventCopyWithImpl<$Res, $Val extends TaskPlanningEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? programId = null,
-  }) {
-    return _then(_value.copyWith(
-      programId: null == programId
-          ? _value.programId
-          : programId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$StartedEventImplCopyWith<$Res>
-    implements $TaskPlanningEventCopyWith<$Res> {
+abstract class _$$StartedEventImplCopyWith<$Res> {
   factory _$$StartedEventImplCopyWith(
           _$StartedEventImpl value, $Res Function(_$StartedEventImpl) then) =
       __$$StartedEventImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String programId});
 }
@@ -163,6 +148,7 @@ class _$StartedEventImpl implements StartedEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String programId) started,
     required TResult Function(List<Task> tasks, String programId) created,
+    required TResult Function(List<Task> tasks) loadEditedTask,
   }) {
     return started(programId);
   }
@@ -172,6 +158,7 @@ class _$StartedEventImpl implements StartedEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String programId)? started,
     TResult? Function(List<Task> tasks, String programId)? created,
+    TResult? Function(List<Task> tasks)? loadEditedTask,
   }) {
     return started?.call(programId);
   }
@@ -181,6 +168,7 @@ class _$StartedEventImpl implements StartedEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String programId)? started,
     TResult Function(List<Task> tasks, String programId)? created,
+    TResult Function(List<Task> tasks)? loadEditedTask,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -194,6 +182,8 @@ class _$StartedEventImpl implements StartedEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(StartedEvent value) started,
     required TResult Function(CreatedEvent value) created,
+    required TResult Function(TaskPlanningEventLoadEditedTask value)
+        loadEditedTask,
   }) {
     return started(this);
   }
@@ -203,6 +193,7 @@ class _$StartedEventImpl implements StartedEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartedEvent value)? started,
     TResult? Function(CreatedEvent value)? created,
+    TResult? Function(TaskPlanningEventLoadEditedTask value)? loadEditedTask,
   }) {
     return started?.call(this);
   }
@@ -212,6 +203,7 @@ class _$StartedEventImpl implements StartedEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartedEvent value)? started,
     TResult Function(CreatedEvent value)? created,
+    TResult Function(TaskPlanningEventLoadEditedTask value)? loadEditedTask,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -225,21 +217,17 @@ abstract class StartedEvent implements TaskPlanningEvent {
   const factory StartedEvent({required final String programId}) =
       _$StartedEventImpl;
 
-  @override
   String get programId;
-  @override
   @JsonKey(ignore: true)
   _$$StartedEventImplCopyWith<_$StartedEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CreatedEventImplCopyWith<$Res>
-    implements $TaskPlanningEventCopyWith<$Res> {
+abstract class _$$CreatedEventImplCopyWith<$Res> {
   factory _$$CreatedEventImplCopyWith(
           _$CreatedEventImpl value, $Res Function(_$CreatedEventImpl) then) =
       __$$CreatedEventImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({List<Task> tasks, String programId});
 }
@@ -319,6 +307,7 @@ class _$CreatedEventImpl implements CreatedEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String programId) started,
     required TResult Function(List<Task> tasks, String programId) created,
+    required TResult Function(List<Task> tasks) loadEditedTask,
   }) {
     return created(tasks, programId);
   }
@@ -328,6 +317,7 @@ class _$CreatedEventImpl implements CreatedEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String programId)? started,
     TResult? Function(List<Task> tasks, String programId)? created,
+    TResult? Function(List<Task> tasks)? loadEditedTask,
   }) {
     return created?.call(tasks, programId);
   }
@@ -337,6 +327,7 @@ class _$CreatedEventImpl implements CreatedEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String programId)? started,
     TResult Function(List<Task> tasks, String programId)? created,
+    TResult Function(List<Task> tasks)? loadEditedTask,
     required TResult orElse(),
   }) {
     if (created != null) {
@@ -350,6 +341,8 @@ class _$CreatedEventImpl implements CreatedEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(StartedEvent value) started,
     required TResult Function(CreatedEvent value) created,
+    required TResult Function(TaskPlanningEventLoadEditedTask value)
+        loadEditedTask,
   }) {
     return created(this);
   }
@@ -359,6 +352,7 @@ class _$CreatedEventImpl implements CreatedEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartedEvent value)? started,
     TResult? Function(CreatedEvent value)? created,
+    TResult? Function(TaskPlanningEventLoadEditedTask value)? loadEditedTask,
   }) {
     return created?.call(this);
   }
@@ -368,6 +362,7 @@ class _$CreatedEventImpl implements CreatedEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartedEvent value)? started,
     TResult Function(CreatedEvent value)? created,
+    TResult Function(TaskPlanningEventLoadEditedTask value)? loadEditedTask,
     required TResult orElse(),
   }) {
     if (created != null) {
@@ -383,12 +378,166 @@ abstract class CreatedEvent implements TaskPlanningEvent {
       required final String programId}) = _$CreatedEventImpl;
 
   List<Task> get tasks;
-  @override
   String get programId;
-  @override
   @JsonKey(ignore: true)
   _$$CreatedEventImplCopyWith<_$CreatedEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TaskPlanningEventLoadEditedTaskImplCopyWith<$Res> {
+  factory _$$TaskPlanningEventLoadEditedTaskImplCopyWith(
+          _$TaskPlanningEventLoadEditedTaskImpl value,
+          $Res Function(_$TaskPlanningEventLoadEditedTaskImpl) then) =
+      __$$TaskPlanningEventLoadEditedTaskImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Task> tasks});
+}
+
+/// @nodoc
+class __$$TaskPlanningEventLoadEditedTaskImplCopyWithImpl<$Res>
+    extends _$TaskPlanningEventCopyWithImpl<$Res,
+        _$TaskPlanningEventLoadEditedTaskImpl>
+    implements _$$TaskPlanningEventLoadEditedTaskImplCopyWith<$Res> {
+  __$$TaskPlanningEventLoadEditedTaskImplCopyWithImpl(
+      _$TaskPlanningEventLoadEditedTaskImpl _value,
+      $Res Function(_$TaskPlanningEventLoadEditedTaskImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tasks = null,
+  }) {
+    return _then(_$TaskPlanningEventLoadEditedTaskImpl(
+      tasks: null == tasks
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TaskPlanningEventLoadEditedTaskImpl
+    implements TaskPlanningEventLoadEditedTask {
+  const _$TaskPlanningEventLoadEditedTaskImpl({required final List<Task> tasks})
+      : _tasks = tasks;
+
+  final List<Task> _tasks;
+  @override
+  List<Task> get tasks {
+    if (_tasks is EqualUnmodifiableListView) return _tasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasks);
+  }
+
+  @override
+  String toString() {
+    return 'TaskPlanningEvent.loadEditedTask(tasks: $tasks)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TaskPlanningEventLoadEditedTaskImpl &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TaskPlanningEventLoadEditedTaskImplCopyWith<
+          _$TaskPlanningEventLoadEditedTaskImpl>
+      get copyWith => __$$TaskPlanningEventLoadEditedTaskImplCopyWithImpl<
+          _$TaskPlanningEventLoadEditedTaskImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String programId) started,
+    required TResult Function(List<Task> tasks, String programId) created,
+    required TResult Function(List<Task> tasks) loadEditedTask,
+  }) {
+    return loadEditedTask(tasks);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String programId)? started,
+    TResult? Function(List<Task> tasks, String programId)? created,
+    TResult? Function(List<Task> tasks)? loadEditedTask,
+  }) {
+    return loadEditedTask?.call(tasks);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String programId)? started,
+    TResult Function(List<Task> tasks, String programId)? created,
+    TResult Function(List<Task> tasks)? loadEditedTask,
+    required TResult orElse(),
+  }) {
+    if (loadEditedTask != null) {
+      return loadEditedTask(tasks);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartedEvent value) started,
+    required TResult Function(CreatedEvent value) created,
+    required TResult Function(TaskPlanningEventLoadEditedTask value)
+        loadEditedTask,
+  }) {
+    return loadEditedTask(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartedEvent value)? started,
+    TResult? Function(CreatedEvent value)? created,
+    TResult? Function(TaskPlanningEventLoadEditedTask value)? loadEditedTask,
+  }) {
+    return loadEditedTask?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartedEvent value)? started,
+    TResult Function(CreatedEvent value)? created,
+    TResult Function(TaskPlanningEventLoadEditedTask value)? loadEditedTask,
+    required TResult orElse(),
+  }) {
+    if (loadEditedTask != null) {
+      return loadEditedTask(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TaskPlanningEventLoadEditedTask implements TaskPlanningEvent {
+  const factory TaskPlanningEventLoadEditedTask(
+          {required final List<Task> tasks}) =
+      _$TaskPlanningEventLoadEditedTaskImpl;
+
+  List<Task> get tasks;
+  @JsonKey(ignore: true)
+  _$$TaskPlanningEventLoadEditedTaskImplCopyWith<
+          _$TaskPlanningEventLoadEditedTaskImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

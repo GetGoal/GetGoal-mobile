@@ -19,6 +19,7 @@ class TaskPlanningBloc extends Bloc<TaskPlanningEvent, TaskPlanningState> {
   ) : super(const TaskPlanningStateInitial()) {
     on<StartedEvent>(_onTaskPlanningStart);
     on<CreatedEvent>(_onDoneButtonTapped);
+    on<TaskPlanningEventLoadEditedTask>(_onLoadEditedTask);
   }
 
   final GetTaskByProgramIdUsecase _getTaskByProgramIdUsecase;
@@ -69,5 +70,12 @@ class TaskPlanningBloc extends Bloc<TaskPlanningEvent, TaskPlanningState> {
     } catch (e) {
       emit(const TaskPlanningState.joinedProgramError());
     }
+  }
+
+  FutureOr<void> _onLoadEditedTask(
+    TaskPlanningEventLoadEditedTask event,
+    Emitter<TaskPlanningState> emit,
+  ) {
+    emit(TaskPlanningState.loadedSuccess(tasks: event.tasks));
   }
 }
