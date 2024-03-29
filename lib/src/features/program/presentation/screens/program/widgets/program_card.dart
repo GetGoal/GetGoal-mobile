@@ -147,11 +147,6 @@ class _ProgramCardState extends State<ProgramCard> {
                       setState(() {
                         isTappedSave = !isTappedSave;
                       });
-                      if (widget.onSave!() == null) return;
-
-                      if (!widget.isSaved!) {
-                        widget.onSave!();
-                      } else {}
                     },
                     child: SvgPicture.asset(
                       AppIcon.bookmark_saved_icon,
@@ -162,6 +157,11 @@ class _ProgramCardState extends State<ProgramCard> {
                       setState(() {
                         isTappedSave = !isTappedSave;
                       });
+                      if (widget.onSave!() == null) return;
+
+                      if (!widget.isSaved!) {
+                        widget.onSave!();
+                      } else {}
                     },
                     child: CustomIcon(
                       icon: AppIcon.bookmark_icon,
