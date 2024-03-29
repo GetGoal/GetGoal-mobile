@@ -11,12 +11,10 @@ ThemeData appTheme(BuildContext context) {
     primaryColor: AppColors.primary2,
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: AppColors.primarySecondary,
-      accentColor: AppColors.primary2,
       brightness: Brightness.dark,
       cardColor: AppColors.secondary,
     ).copyWith(
       brightness: Brightness.dark,
-      primary: AppColors.primary2,
     ),
     scaffoldBackgroundColor: AppColors.background,
     appBarTheme: AppBarTheme(
@@ -33,11 +31,7 @@ ThemeData appTheme(BuildContext context) {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary2,
         elevation: 0,
-        textStyle: TextStyle(
-          color: AppColors.black,
-          fontSize: 12,
-          fontFamily: 'Nunito',
-        ),
+        textStyle: subHeadlineRegular(),
         splashFactory: NoSplash.splashFactory,
         shadowColor: Colors.transparent,
       ),
