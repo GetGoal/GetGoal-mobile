@@ -16,6 +16,10 @@ abstract class ProgramApiService {
   @GET('/v1/programs')
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getPrograms();
 
+  @GET('/v1/programs/for-you')
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
+      getRecommendPrograms();
+
   @POST('/v1/programs/filter')
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
       getProgramByLabelName(

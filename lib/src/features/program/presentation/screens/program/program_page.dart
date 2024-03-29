@@ -380,11 +380,9 @@ class _ProgramPageState extends State<ProgramPage> {
       );
       switch (index) {
         case 0:
-          break;
+          _programBloc.add(const ProgramEvent.getRecommendProgram());
         case 1:
           _programBloc.add(const ProgramEvent.getAllProgram());
-          break;
-        case 2:
           break;
         default:
           _programBloc.add(
