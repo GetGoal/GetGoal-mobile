@@ -35,6 +35,7 @@ import '../features/program/domain/usecases/program/get_program_by_id_usecase.da
 import '../features/program/domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_search_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_usecase.dart';
+import '../features/program/domain/usecases/program/get_recommend_program_usecase.dart';
 import '../features/program/domain/usecases/program/save_program_usecase.dart';
 import '../features/program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
@@ -171,6 +172,9 @@ Future<void> _initUsecases() async {
   getIt.registerLazySingleton(
     () => SaveProgramUsecase(getIt()),
   );
+  getIt.registerLazySingleton(
+    () => GetRecommendProgramUsecase(getIt()),
+  );
 
 // Initialize for task feature
   getIt.registerLazySingleton(
@@ -247,7 +251,7 @@ Future<void> _initBlocs() async {
     () => FilterProgramBloc(getIt()),
   );
   getIt.registerFactory<ProgramBloc>(
-    () => ProgramBloc(getIt(), getIt(), getIt(), getIt()),
+    () => ProgramBloc(getIt(), getIt(), getIt(), getIt(), getIt()),
   );
   getIt.registerFactory<ProgramInfoBloc>(
     () => ProgramInfoBloc(getIt()),

@@ -302,4 +302,33 @@ class ProgramRepositoryImpl implements ProgramRepository {
       );
     }
   }
+
+  @override
+  Future<BaseDataResponse<List<Program>>> getRecommendPrograms() async {
+    try {
+      final res = await _programApiService.getRecommendPrograms();
+
+      final program = res.data.data!.map((e) => e.programToEntity()).toList();
+
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: program,
+        error: res.data.error,
+      );
+
+      return data;
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
 }
