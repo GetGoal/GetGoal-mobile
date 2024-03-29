@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 130 (65 per locale)
 ///
-/// Built on 2024-03-28 at 16:28 UTC
+/// Built on 2024-03-29 at 10:01 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -501,7 +501,7 @@ class _StringsCreateProgramTh implements _StringsCreateProgramEn {
 	@override String get tap_to_upload => 'แตะเพื่ออัปโหลด';
 	@override String get file_support => 'รองรับไฟล์ .JPEG .PNG';
 	@override String get program_name => 'ชื่อโปรแกรม';
-	@override String get ex_program_name => 'ตัวอย่าง สร้างเพลง_ด้วยตัวคุณเองใน 3 วัน';
+	@override String get ex_program_name => 'ตัวอย่าง สร้างเพลงด้วยตัวคุณเองใน 3 วัน';
 	@override String get description => 'คำอธิบาย';
 	@override String get ex_description => 'คำอธิบายโปรแกรม';
 	@override String get category => 'หมวดหมู่';
@@ -692,7 +692,7 @@ extension on _StringsTh {
 			case 'create_program.tap_to_upload': return 'แตะเพื่ออัปโหลด';
 			case 'create_program.file_support': return 'รองรับไฟล์ .JPEG .PNG';
 			case 'create_program.program_name': return 'ชื่อโปรแกรม';
-			case 'create_program.ex_program_name': return 'ตัวอย่าง สร้างเพลง_ด้วยตัวคุณเองใน 3 วัน';
+			case 'create_program.ex_program_name': return 'ตัวอย่าง สร้างเพลงด้วยตัวคุณเองใน 3 วัน';
 			case 'create_program.description': return 'คำอธิบาย';
 			case 'create_program.ex_description': return 'คำอธิบายโปรแกรม';
 			case 'create_program.category': return 'หมวดหมู่';
