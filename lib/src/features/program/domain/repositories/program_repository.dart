@@ -5,6 +5,7 @@ import '../entities/program_create.dart';
 
 abstract class ProgramRepository {
   Future<DataState<List<Program>>> getPrograms();
+  Future<BaseDataResponse<List<Program>>> getRecommendPrograms();
   Future<DataState<List<Program>>> getProgramByLabelName(
     List<String> listOfLabelName,
   );
