@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../config/route_config.dart';
+import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
@@ -9,6 +11,8 @@ import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../domain/entities/task.dart';
 import '../../bloc/task_planning/task_planning_bloc.dart';
+import '../../enum/task_form_mode_enum.dart';
+import '../task_create/task_create_page.dart';
 import 'widgets/task_planning_card_widget.dart';
 
 class TaskPlanningPage extends StatefulWidget {
@@ -142,6 +146,26 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
               taskNumber: index + 1,
               taskName: tasks[index].taskName!,
               startTime: tasks[index].startTime,
+              onEdit: () async {
+                AppCache.taskPlanningList = tasks;
+
+                bool? isRefresh = await context.pushNamed(
+                  Routes.taskCreatepage,
+                  extra: TaskCreatePageData(
+                    mode: TASKFORMMODE.taskPlanning,
+                    task: AppCache.taskPlanningList[index],
+                    taskIndex: index,
+                  ),
+                );
+
+                if (isRefresh!) {
+                  _taskPlanningBloc.add(
+                    TaskPlanningEvent.loadEditedTask(
+                      tasks: AppCache.taskPlanningList,
+                    ),
+                  );
+                }
+              },
             ),
           );
         },
@@ -168,6 +192,8 @@ class _TaskPlanningPageState extends State<TaskPlanningPage> {
               programId: widget.programId!,
             ),
           );
+
+          AppCache.taskPlanningList = [];
         },
       ),
     );
