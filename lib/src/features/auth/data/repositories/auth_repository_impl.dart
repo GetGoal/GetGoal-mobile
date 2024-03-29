@@ -9,6 +9,7 @@ import '../../domain/entity/create_user.dart';
 import '../../domain/entity/login_entity.dart';
 import '../../domain/entity/token_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
+import '../models/request/email_request.dart';
 import '../models/request/google_sign_in_request.dart';
 import '../models/request/login_request.dart';
 import '../models/request/register_request.dart';
@@ -30,6 +31,7 @@ class AuthRepositoryImpl implements AuthRepository {
         lastName: userData.lastName,
         email: userData.email,
         password: userData.password,
+        labels: [],
       );
       final res = await _authApiService.register(user);
 
@@ -155,11 +157,12 @@ class AuthRepositoryImpl implements AuthRepository {
       final req = GoogleSingInRequest(
         provider: provider,
         google: GoogleSignInModel(
-            displayName: account!.displayName,
-            email: account.email,
-            id: account.id,
-            photoUrl: account.photoUrl,
-            serverAuthCode: account.serverAuthCode),
+          displayName: account!.displayName,
+          email: account.email,
+          id: account.id,
+          photoUrl: account.photoUrl,
+          serverAuthCode: account.serverAuthCode,
+        ),
       );
 
       final res = await _authApiService.googleSignIn(req);
@@ -176,6 +179,63 @@ class AuthRepositoryImpl implements AuthRepository {
         data: token,
         error: res.data.error,
       );
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: data['data'],
+        error: data['error'],
+      );
+    }
+  }
+
+  @override
+  Future<BaseDataResponse> resetPassword(String email) async {
+    try {
+      final userEmail = EmailRequest(email: email);
+      final res = await _authApiService.resetPassword(userEmail);
+
+      return BaseDataResponse(
+        code: res.data.code,
+        count: res.data.count,
+        message: res.data.message,
+        data: null,
+        error: res.data.error,
+      );
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
+
+  @override
+  Future<BaseDataResponse> verifyPasswordReset(String code) async {
+    try {
+      final requestBody = VerifyRequest(
+        code: code,
+        email: AppCache.userEmail,
+      );
+
+      final res = await _authApiService.verifyPasswordReset(requestBody);
+
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: res.data.data,
+        error: res.data.error,
+      );
+      return data;
     } on DioException catch (e) {
       final data = jsonDecode(e.response.toString());
 

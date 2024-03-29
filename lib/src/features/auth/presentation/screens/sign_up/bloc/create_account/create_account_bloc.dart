@@ -29,14 +29,14 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
       final res = await _createAccountUsecase.call(params: event.user);
 
       if (res.code != 201) {
-        emit(const CreateAccountState.createError());
+        emit(CreateAccountState.createError(error: res.error));
         return;
       }
 
       return emit(const CreateAccountState.created());
     } on DataFailed catch (e) {
       log(e.error.toString());
-      emit(const CreateAccountState.createError());
+      emit(CreateAccountState.createError(error: e.error.toString()));
     }
   }
 }

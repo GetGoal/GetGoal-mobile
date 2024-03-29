@@ -19,19 +19,19 @@ mixin _$ForgetPasswordEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() onSubmited,
+    required TResult Function(String email) onSubmited,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? onSubmited,
+    TResult? Function(String email)? onSubmited,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? onSubmited,
+    TResult Function(String email)? onSubmited,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,7 +117,7 @@ class _$ForgetPasswordEventStartedImpl implements ForgetPasswordEventStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() onSubmited,
+    required TResult Function(String email) onSubmited,
   }) {
     return started();
   }
@@ -126,7 +126,7 @@ class _$ForgetPasswordEventStartedImpl implements ForgetPasswordEventStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? onSubmited,
+    TResult? Function(String email)? onSubmited,
   }) {
     return started?.call();
   }
@@ -135,7 +135,7 @@ class _$ForgetPasswordEventStartedImpl implements ForgetPasswordEventStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? onSubmited,
+    TResult Function(String email)? onSubmited,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -186,6 +186,8 @@ abstract class _$$ForgetPasswordEventOnSubmitedImplCopyWith<$Res> {
           _$ForgetPasswordEventOnSubmitedImpl value,
           $Res Function(_$ForgetPasswordEventOnSubmitedImpl) then) =
       __$$ForgetPasswordEventOnSubmitedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email});
 }
 
 /// @nodoc
@@ -197,56 +199,81 @@ class __$$ForgetPasswordEventOnSubmitedImplCopyWithImpl<$Res>
       _$ForgetPasswordEventOnSubmitedImpl _value,
       $Res Function(_$ForgetPasswordEventOnSubmitedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_$ForgetPasswordEventOnSubmitedImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ForgetPasswordEventOnSubmitedImpl
     implements ForgetPasswordEventOnSubmited {
-  const _$ForgetPasswordEventOnSubmitedImpl();
+  const _$ForgetPasswordEventOnSubmitedImpl({required this.email});
+
+  @override
+  final String email;
 
   @override
   String toString() {
-    return 'ForgetPasswordEvent.onSubmited()';
+    return 'ForgetPasswordEvent.onSubmited(email: $email)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ForgetPasswordEventOnSubmitedImpl);
+            other is _$ForgetPasswordEventOnSubmitedImpl &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ForgetPasswordEventOnSubmitedImplCopyWith<
+          _$ForgetPasswordEventOnSubmitedImpl>
+      get copyWith => __$$ForgetPasswordEventOnSubmitedImplCopyWithImpl<
+          _$ForgetPasswordEventOnSubmitedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() onSubmited,
+    required TResult Function(String email) onSubmited,
   }) {
-    return onSubmited();
+    return onSubmited(email);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? onSubmited,
+    TResult? Function(String email)? onSubmited,
   }) {
-    return onSubmited?.call();
+    return onSubmited?.call(email);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? onSubmited,
+    TResult Function(String email)? onSubmited,
     required TResult orElse(),
   }) {
     if (onSubmited != null) {
-      return onSubmited();
+      return onSubmited(email);
     }
     return orElse();
   }
@@ -284,8 +311,14 @@ class _$ForgetPasswordEventOnSubmitedImpl
 }
 
 abstract class ForgetPasswordEventOnSubmited implements ForgetPasswordEvent {
-  const factory ForgetPasswordEventOnSubmited() =
+  const factory ForgetPasswordEventOnSubmited({required final String email}) =
       _$ForgetPasswordEventOnSubmitedImpl;
+
+  String get email;
+  @JsonKey(ignore: true)
+  _$$ForgetPasswordEventOnSubmitedImplCopyWith<
+          _$ForgetPasswordEventOnSubmitedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -294,7 +327,7 @@ mixin _$ForgetPasswordState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String? message) success,
     required TResult Function(String? message) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -302,7 +335,7 @@ mixin _$ForgetPasswordState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String? message)? success,
     TResult? Function(String? message)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -310,7 +343,7 @@ mixin _$ForgetPasswordState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String? message)? success,
     TResult Function(String? message)? failure,
     required TResult orElse(),
   }) =>
@@ -404,7 +437,7 @@ class _$ForgetPasswordStateInitialImpl implements ForgetPasswordStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String? message) success,
     required TResult Function(String? message) failure,
   }) {
     return initial();
@@ -415,7 +448,7 @@ class _$ForgetPasswordStateInitialImpl implements ForgetPasswordStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String? message)? success,
     TResult? Function(String? message)? failure,
   }) {
     return initial?.call();
@@ -426,7 +459,7 @@ class _$ForgetPasswordStateInitialImpl implements ForgetPasswordStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String? message)? success,
     TResult Function(String? message)? failure,
     required TResult orElse(),
   }) {
@@ -522,7 +555,7 @@ class _$ForgetPasswordStateLoadingImpl implements ForgetPasswordStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String? message) success,
     required TResult Function(String? message) failure,
   }) {
     return loading();
@@ -533,7 +566,7 @@ class _$ForgetPasswordStateLoadingImpl implements ForgetPasswordStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String? message)? success,
     TResult? Function(String? message)? failure,
   }) {
     return loading?.call();
@@ -544,7 +577,7 @@ class _$ForgetPasswordStateLoadingImpl implements ForgetPasswordStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String? message)? success,
     TResult Function(String? message)? failure,
     required TResult orElse(),
   }) {
@@ -602,6 +635,8 @@ abstract class _$$ForgetPasswordStateSuccessImplCopyWith<$Res> {
           _$ForgetPasswordStateSuccessImpl value,
           $Res Function(_$ForgetPasswordStateSuccessImpl) then) =
       __$$ForgetPasswordStateSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -613,37 +648,61 @@ class __$$ForgetPasswordStateSuccessImplCopyWithImpl<$Res>
       _$ForgetPasswordStateSuccessImpl _value,
       $Res Function(_$ForgetPasswordStateSuccessImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$ForgetPasswordStateSuccessImpl(
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ForgetPasswordStateSuccessImpl implements ForgetPasswordStateSuccess {
-  const _$ForgetPasswordStateSuccessImpl();
+  const _$ForgetPasswordStateSuccessImpl({this.message});
+
+  @override
+  final String? message;
 
   @override
   String toString() {
-    return 'ForgetPasswordState.success()';
+    return 'ForgetPasswordState.success(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ForgetPasswordStateSuccessImpl);
+            other is _$ForgetPasswordStateSuccessImpl &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ForgetPasswordStateSuccessImplCopyWith<_$ForgetPasswordStateSuccessImpl>
+      get copyWith => __$$ForgetPasswordStateSuccessImplCopyWithImpl<
+          _$ForgetPasswordStateSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String? message) success,
     required TResult Function(String? message) failure,
   }) {
-    return success();
+    return success(message);
   }
 
   @override
@@ -651,10 +710,10 @@ class _$ForgetPasswordStateSuccessImpl implements ForgetPasswordStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String? message)? success,
     TResult? Function(String? message)? failure,
   }) {
-    return success?.call();
+    return success?.call(message);
   }
 
   @override
@@ -662,12 +721,12 @@ class _$ForgetPasswordStateSuccessImpl implements ForgetPasswordStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String? message)? success,
     TResult Function(String? message)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(message);
     }
     return orElse();
   }
@@ -711,7 +770,13 @@ class _$ForgetPasswordStateSuccessImpl implements ForgetPasswordStateSuccess {
 }
 
 abstract class ForgetPasswordStateSuccess implements ForgetPasswordState {
-  const factory ForgetPasswordStateSuccess() = _$ForgetPasswordStateSuccessImpl;
+  const factory ForgetPasswordStateSuccess({final String? message}) =
+      _$ForgetPasswordStateSuccessImpl;
+
+  String? get message;
+  @JsonKey(ignore: true)
+  _$$ForgetPasswordStateSuccessImplCopyWith<_$ForgetPasswordStateSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -784,7 +849,7 @@ class _$ForgetPasswordStateFailureImpl implements ForgetPasswordStateFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String? message) success,
     required TResult Function(String? message) failure,
   }) {
     return failure(message);
@@ -795,7 +860,7 @@ class _$ForgetPasswordStateFailureImpl implements ForgetPasswordStateFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String? message)? success,
     TResult? Function(String? message)? failure,
   }) {
     return failure?.call(message);
@@ -806,7 +871,7 @@ class _$ForgetPasswordStateFailureImpl implements ForgetPasswordStateFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String? message)? success,
     TResult Function(String? message)? failure,
     required TResult orElse(),
   }) {

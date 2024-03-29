@@ -14,6 +14,7 @@ import '../features/auth/presentation/screens/new_password/new_password_page.dar
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
 import '../features/auth/presentation/screens/sign_up/sign_up_page.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
+import '../features/auth/presentation/screens/verification/bloc/verify_password_reset/verify_password_reset_bloc.dart';
 import '../features/auth/presentation/screens/verification/verification_page.dart';
 import '../features/landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../features/landing/presentation/screens/main/main_page.dart';
@@ -127,8 +128,13 @@ class RouteConfig {
           BlocProvider(
             create: (context) => getIt<VerifyAccountBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<VerifyPasswordResetBloc>(),
+          ),
         ],
-        child: const VerificationPage(),
+        child: VerificationPage(
+          pageData: state.extra as VerificationPageData,
+        ),
       ),
     );
   }

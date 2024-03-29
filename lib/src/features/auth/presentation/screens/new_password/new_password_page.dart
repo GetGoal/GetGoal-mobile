@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../config/i18n/strings.g.dart';
+import '../../../../../config/route_config.dart';
+import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
+import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import 'bloc/new_password/new_password_bloc.dart';
@@ -55,31 +59,53 @@ class _NewPasswordPageState extends State<NewPasswordPage>
         controller: _emailInputController,
         label: 'New password',
         validator: passwordValidator,
+        isPassword: true,
       ),
     );
   }
 
   Widget _buildSubmitButton() {
     return BlocConsumer<NewPasswordBloc, NewPasswordState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         switch (state) {
           case NewPasswordStateSuccess():
-          case NewPasswordStateFailure():
+            await showDialog(
+              context: context,
+              builder: (context) => const ErrorDialog(
+                title: 'Complete!',
+                errorMessage: 'Your password has changed',
+              ),
+            );
+            if (!mounted) return;
+
+            AppCache.userEmail = '';
+            context.go(Routes.landingPage);
+            break;
+
+          case NewPasswordStateFailure(:final message):
+            await showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(
+                errorMessage: message,
+              ),
+            );
+            break;
           default:
         }
       },
       builder: (context, state) {
         switch (state) {
           case NewPasswordStateLoading():
-            return const MainButton(
-              isLoading: true,
-            );
+            return const MainButton(isLoading: true);
           default:
             return MainButton(
               onTap: () {
                 if (_formKey.currentState!.validate()) {
                   _newPasswordBloc.add(
-                    const NewPasswordEvent.onSubmited(),
+                    NewPasswordEvent.onSubmited(
+                      email: AppCache.userEmail,
+                      password: _emailInputController.text,
+                    ),
                   );
                 }
               },
