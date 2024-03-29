@@ -12,6 +12,7 @@ class AppColors {
   static Color background = HexColor.fromHex('0A0A10');
   static Color lightOrange = HexColor.fromHex('493B2B');
   static Color lightDarkBlue = HexColor.fromHex('1E2234');
+  static Color disable = HexColor.fromHex('6B6B6B');
 
   // Gradient color
   static LinearGradient primaryGradient = LinearGradient(

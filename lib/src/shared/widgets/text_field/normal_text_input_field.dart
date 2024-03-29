@@ -22,6 +22,7 @@ class NormalTextInputField extends StatelessWidget {
     this.isPassword = false,
     this.onSaved,
     this.onFieldSubmitted,
+    this.isDisable = false,
   });
 
   final String label;
@@ -39,6 +40,7 @@ class NormalTextInputField extends StatelessWidget {
   final bool? isPassword;
   final Function(String?)? onSaved;
   final Function(String)? onFieldSubmitted;
+  final bool? isDisable;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +54,13 @@ class NormalTextInputField extends StatelessWidget {
         const SizedBox(height: 8.0),
         SizedBox(
           child: TextFormField(
+            readOnly: isDisable!,
             onFieldSubmitted: onFieldSubmitted,
             onSaved: onSaved,
             autocorrect: false,
-            style: subHeadlineRegular().copyWith(color: AppColors.white),
+            style: subHeadlineRegular().copyWith(
+              color: isDisable! ? AppColors.description : AppColors.white,
+            ),
 
             obscureText: isPassword!,
 
@@ -89,7 +94,7 @@ class NormalTextInputField extends StatelessWidget {
               errorStyle: subHeadlineRegular().copyWith(color: AppColors.red),
 
               // Background color
-              fillColor: AppColors.secondary,
+              fillColor: isDisable! ? AppColors.disable : AppColors.secondary,
               filled: true,
               contentPadding: const EdgeInsets.all(16),
 
@@ -110,25 +115,43 @@ class NormalTextInputField extends StatelessWidget {
                   : null,
 
               // Text input field border
-              enabledBorder: GradientOutlineInputBorder(
-                gradient: AppColors.silverGradient,
-                // Radius
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(
-                    16.0,
-                  ),
-                ),
-              ),
+              enabledBorder: isDisable!
+                  ? const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          16.0,
+                        ),
+                      ),
+                    )
+                  : GradientOutlineInputBorder(
+                      gradient: AppColors.silverGradient,
+                      // Radius
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(
+                          16.0,
+                        ),
+                      ),
+                    ),
 
               // When text input field in focus
-              focusedBorder: GradientOutlineInputBorder(
-                gradient: AppColors.primaryGradient,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(
-                    16.0,
-                  ),
-                ),
-              ),
+              focusedBorder: isDisable!
+                  ? const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          16.0,
+                        ),
+                      ),
+                    )
+                  : GradientOutlineInputBorder(
+                      gradient: AppColors.primaryGradient,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(
+                          16.0,
+                        ),
+                      ),
+                    ),
 
               // Text input field error style
               errorBorder: GradientOutlineInputBorder(
@@ -139,14 +162,16 @@ class NormalTextInputField extends StatelessWidget {
                   ),
                 ),
               ),
-              focusedErrorBorder: GradientOutlineInputBorder(
-                gradient: AppColors.redGradient,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(
-                    16.0,
-                  ),
-                ),
-              ),
+              focusedErrorBorder: isDisable!
+                  ? null
+                  : GradientOutlineInputBorder(
+                      gradient: AppColors.redGradient,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(
+                          16.0,
+                        ),
+                      ),
+                    ),
             ),
           ),
         ),
