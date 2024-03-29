@@ -88,7 +88,7 @@ class _ProgramPageState extends State<ProgramPage> {
       builder: (context, state) {
         switch (state) {
           case ProgramStateInital():
-            return _programLoading();
+            return const SizedBox();
           case ProgramStateLoading():
             return _programLoading();
           case ProgramStateLoadedSuccess(
@@ -102,7 +102,7 @@ class _ProgramPageState extends State<ProgramPage> {
           case ProgramStateSearchEmpty():
             return _programSearchEmpty();
           default:
-            return Container();
+            return const SizedBox();
         }
       },
     );
@@ -227,9 +227,17 @@ class _ProgramPageState extends State<ProgramPage> {
                         ? const Label(labelName: 'Unknow')
                         : programList[index].labels![0],
                     createdAt: programList[index].updatedAt,
+                    isSaved: programList[index].isSaved,
                     onTab: () {
                       context.push(
                         '/program_info/${programList[index].programId}',
+                      );
+                    },
+                    onSave: () {
+                      _programBloc.add(
+                        ProgramEvent.saveProgram(
+                          programId: programList[index].programId.toString(),
+                        ),
                       );
                     },
                   );
@@ -374,7 +382,7 @@ class _ProgramPageState extends State<ProgramPage> {
         case 0:
           break;
         case 1:
-          _programBloc.add(const ProgramEvent.started());
+          _programBloc.add(const ProgramEvent.getAllProgram());
           break;
         case 2:
           break;

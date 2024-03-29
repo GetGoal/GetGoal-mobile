@@ -19,56 +19,68 @@ mixin _$ProgramEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() getAllProgram,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
     required TResult Function() searching,
     required TResult Function(String text) searchProgram,
+    required TResult Function(String programId) saveProgram,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? getAllProgram,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
     TResult? Function()? searching,
     TResult? Function(String text)? searchProgram,
+    TResult? Function(String programId)? saveProgram,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? getAllProgram,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
     TResult Function()? searching,
     TResult Function(String text)? searchProgram,
+    TResult Function(String programId)? saveProgram,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventGetAllProgram value) getAllProgram,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
     required TResult Function(ProgramEventSearching value) searching,
     required TResult Function(ProgramEventSearchProgram value) searchProgram,
+    required TResult Function(ProgramEventSaveProgram value) saveProgram,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
     TResult? Function(ProgramEventSearching value)? searching,
     TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult? Function(ProgramEventSaveProgram value)? saveProgram,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
     TResult Function(ProgramEventSearching value)? searching,
     TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult Function(ProgramEventSaveProgram value)? saveProgram,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -131,10 +143,12 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() getAllProgram,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
     required TResult Function() searching,
     required TResult Function(String text) searchProgram,
+    required TResult Function(String programId) saveProgram,
   }) {
     return started();
   }
@@ -143,10 +157,12 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? getAllProgram,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
     TResult? Function()? searching,
     TResult? Function(String text)? searchProgram,
+    TResult? Function(String programId)? saveProgram,
   }) {
     return started?.call();
   }
@@ -155,10 +171,12 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? getAllProgram,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
     TResult Function()? searching,
     TResult Function(String text)? searchProgram,
+    TResult Function(String programId)? saveProgram,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -171,10 +189,12 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventGetAllProgram value) getAllProgram,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
     required TResult Function(ProgramEventSearching value) searching,
     required TResult Function(ProgramEventSearchProgram value) searchProgram,
+    required TResult Function(ProgramEventSaveProgram value) saveProgram,
   }) {
     return started(this);
   }
@@ -183,10 +203,12 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
     TResult? Function(ProgramEventSearching value)? searching,
     TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult? Function(ProgramEventSaveProgram value)? saveProgram,
   }) {
     return started?.call(this);
   }
@@ -195,10 +217,12 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
     TResult Function(ProgramEventSearching value)? searching,
     TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult Function(ProgramEventSaveProgram value)? saveProgram,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -210,6 +234,141 @@ class _$ProgramEventStartImpl implements ProgramEventStart {
 
 abstract class ProgramEventStart implements ProgramEvent {
   const factory ProgramEventStart() = _$ProgramEventStartImpl;
+}
+
+/// @nodoc
+abstract class _$$ProgramEventGetAllProgramImplCopyWith<$Res> {
+  factory _$$ProgramEventGetAllProgramImplCopyWith(
+          _$ProgramEventGetAllProgramImpl value,
+          $Res Function(_$ProgramEventGetAllProgramImpl) then) =
+      __$$ProgramEventGetAllProgramImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ProgramEventGetAllProgramImplCopyWithImpl<$Res>
+    extends _$ProgramEventCopyWithImpl<$Res, _$ProgramEventGetAllProgramImpl>
+    implements _$$ProgramEventGetAllProgramImplCopyWith<$Res> {
+  __$$ProgramEventGetAllProgramImplCopyWithImpl(
+      _$ProgramEventGetAllProgramImpl _value,
+      $Res Function(_$ProgramEventGetAllProgramImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ProgramEventGetAllProgramImpl implements ProgramEventGetAllProgram {
+  const _$ProgramEventGetAllProgramImpl();
+
+  @override
+  String toString() {
+    return 'ProgramEvent.getAllProgram()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProgramEventGetAllProgramImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllProgram,
+    required TResult Function() clicked,
+    required TResult Function(String labelName) filterClicked,
+    required TResult Function() searching,
+    required TResult Function(String text) searchProgram,
+    required TResult Function(String programId) saveProgram,
+  }) {
+    return getAllProgram();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllProgram,
+    TResult? Function()? clicked,
+    TResult? Function(String labelName)? filterClicked,
+    TResult? Function()? searching,
+    TResult? Function(String text)? searchProgram,
+    TResult? Function(String programId)? saveProgram,
+  }) {
+    return getAllProgram?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllProgram,
+    TResult Function()? clicked,
+    TResult Function(String labelName)? filterClicked,
+    TResult Function()? searching,
+    TResult Function(String text)? searchProgram,
+    TResult Function(String programId)? saveProgram,
+    required TResult orElse(),
+  }) {
+    if (getAllProgram != null) {
+      return getAllProgram();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventGetAllProgram value) getAllProgram,
+    required TResult Function(ProgramEventClicked value) clicked,
+    required TResult Function(ProgramEventFilterClicked value) filterClicked,
+    required TResult Function(ProgramEventSearching value) searching,
+    required TResult Function(ProgramEventSearchProgram value) searchProgram,
+    required TResult Function(ProgramEventSaveProgram value) saveProgram,
+  }) {
+    return getAllProgram(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventGetAllProgram value)? getAllProgram,
+    TResult? Function(ProgramEventClicked value)? clicked,
+    TResult? Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult? Function(ProgramEventSearching value)? searching,
+    TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult? Function(ProgramEventSaveProgram value)? saveProgram,
+  }) {
+    return getAllProgram?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventGetAllProgram value)? getAllProgram,
+    TResult Function(ProgramEventClicked value)? clicked,
+    TResult Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult Function(ProgramEventSearching value)? searching,
+    TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult Function(ProgramEventSaveProgram value)? saveProgram,
+    required TResult orElse(),
+  }) {
+    if (getAllProgram != null) {
+      return getAllProgram(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProgramEventGetAllProgram implements ProgramEvent {
+  const factory ProgramEventGetAllProgram() = _$ProgramEventGetAllProgramImpl;
 }
 
 /// @nodoc
@@ -252,10 +411,12 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() getAllProgram,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
     required TResult Function() searching,
     required TResult Function(String text) searchProgram,
+    required TResult Function(String programId) saveProgram,
   }) {
     return clicked();
   }
@@ -264,10 +425,12 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? getAllProgram,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
     TResult? Function()? searching,
     TResult? Function(String text)? searchProgram,
+    TResult? Function(String programId)? saveProgram,
   }) {
     return clicked?.call();
   }
@@ -276,10 +439,12 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? getAllProgram,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
     TResult Function()? searching,
     TResult Function(String text)? searchProgram,
+    TResult Function(String programId)? saveProgram,
     required TResult orElse(),
   }) {
     if (clicked != null) {
@@ -292,10 +457,12 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventGetAllProgram value) getAllProgram,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
     required TResult Function(ProgramEventSearching value) searching,
     required TResult Function(ProgramEventSearchProgram value) searchProgram,
+    required TResult Function(ProgramEventSaveProgram value) saveProgram,
   }) {
     return clicked(this);
   }
@@ -304,10 +471,12 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
     TResult? Function(ProgramEventSearching value)? searching,
     TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult? Function(ProgramEventSaveProgram value)? saveProgram,
   }) {
     return clicked?.call(this);
   }
@@ -316,10 +485,12 @@ class _$ProgramEventClickedImpl implements ProgramEventClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
     TResult Function(ProgramEventSearching value)? searching,
     TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult Function(ProgramEventSaveProgram value)? saveProgram,
     required TResult orElse(),
   }) {
     if (clicked != null) {
@@ -402,10 +573,12 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() getAllProgram,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
     required TResult Function() searching,
     required TResult Function(String text) searchProgram,
+    required TResult Function(String programId) saveProgram,
   }) {
     return filterClicked(labelName);
   }
@@ -414,10 +587,12 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? getAllProgram,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
     TResult? Function()? searching,
     TResult? Function(String text)? searchProgram,
+    TResult? Function(String programId)? saveProgram,
   }) {
     return filterClicked?.call(labelName);
   }
@@ -426,10 +601,12 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? getAllProgram,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
     TResult Function()? searching,
     TResult Function(String text)? searchProgram,
+    TResult Function(String programId)? saveProgram,
     required TResult orElse(),
   }) {
     if (filterClicked != null) {
@@ -442,10 +619,12 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventGetAllProgram value) getAllProgram,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
     required TResult Function(ProgramEventSearching value) searching,
     required TResult Function(ProgramEventSearchProgram value) searchProgram,
+    required TResult Function(ProgramEventSaveProgram value) saveProgram,
   }) {
     return filterClicked(this);
   }
@@ -454,10 +633,12 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
     TResult? Function(ProgramEventSearching value)? searching,
     TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult? Function(ProgramEventSaveProgram value)? saveProgram,
   }) {
     return filterClicked?.call(this);
   }
@@ -466,10 +647,12 @@ class _$ProgramEventFilterClickedImpl implements ProgramEventFilterClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
     TResult Function(ProgramEventSearching value)? searching,
     TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult Function(ProgramEventSaveProgram value)? saveProgram,
     required TResult orElse(),
   }) {
     if (filterClicked != null) {
@@ -530,10 +713,12 @@ class _$ProgramEventSearchingImpl implements ProgramEventSearching {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() getAllProgram,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
     required TResult Function() searching,
     required TResult Function(String text) searchProgram,
+    required TResult Function(String programId) saveProgram,
   }) {
     return searching();
   }
@@ -542,10 +727,12 @@ class _$ProgramEventSearchingImpl implements ProgramEventSearching {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? getAllProgram,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
     TResult? Function()? searching,
     TResult? Function(String text)? searchProgram,
+    TResult? Function(String programId)? saveProgram,
   }) {
     return searching?.call();
   }
@@ -554,10 +741,12 @@ class _$ProgramEventSearchingImpl implements ProgramEventSearching {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? getAllProgram,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
     TResult Function()? searching,
     TResult Function(String text)? searchProgram,
+    TResult Function(String programId)? saveProgram,
     required TResult orElse(),
   }) {
     if (searching != null) {
@@ -570,10 +759,12 @@ class _$ProgramEventSearchingImpl implements ProgramEventSearching {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventGetAllProgram value) getAllProgram,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
     required TResult Function(ProgramEventSearching value) searching,
     required TResult Function(ProgramEventSearchProgram value) searchProgram,
+    required TResult Function(ProgramEventSaveProgram value) saveProgram,
   }) {
     return searching(this);
   }
@@ -582,10 +773,12 @@ class _$ProgramEventSearchingImpl implements ProgramEventSearching {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
     TResult? Function(ProgramEventSearching value)? searching,
     TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult? Function(ProgramEventSaveProgram value)? saveProgram,
   }) {
     return searching?.call(this);
   }
@@ -594,10 +787,12 @@ class _$ProgramEventSearchingImpl implements ProgramEventSearching {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
     TResult Function(ProgramEventSearching value)? searching,
     TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult Function(ProgramEventSaveProgram value)? saveProgram,
     required TResult orElse(),
   }) {
     if (searching != null) {
@@ -679,10 +874,12 @@ class _$ProgramEventSearchProgramImpl implements ProgramEventSearchProgram {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() getAllProgram,
     required TResult Function() clicked,
     required TResult Function(String labelName) filterClicked,
     required TResult Function() searching,
     required TResult Function(String text) searchProgram,
+    required TResult Function(String programId) saveProgram,
   }) {
     return searchProgram(text);
   }
@@ -691,10 +888,12 @@ class _$ProgramEventSearchProgramImpl implements ProgramEventSearchProgram {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? getAllProgram,
     TResult? Function()? clicked,
     TResult? Function(String labelName)? filterClicked,
     TResult? Function()? searching,
     TResult? Function(String text)? searchProgram,
+    TResult? Function(String programId)? saveProgram,
   }) {
     return searchProgram?.call(text);
   }
@@ -703,10 +902,12 @@ class _$ProgramEventSearchProgramImpl implements ProgramEventSearchProgram {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? getAllProgram,
     TResult Function()? clicked,
     TResult Function(String labelName)? filterClicked,
     TResult Function()? searching,
     TResult Function(String text)? searchProgram,
+    TResult Function(String programId)? saveProgram,
     required TResult orElse(),
   }) {
     if (searchProgram != null) {
@@ -719,10 +920,12 @@ class _$ProgramEventSearchProgramImpl implements ProgramEventSearchProgram {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventGetAllProgram value) getAllProgram,
     required TResult Function(ProgramEventClicked value) clicked,
     required TResult Function(ProgramEventFilterClicked value) filterClicked,
     required TResult Function(ProgramEventSearching value) searching,
     required TResult Function(ProgramEventSearchProgram value) searchProgram,
+    required TResult Function(ProgramEventSaveProgram value) saveProgram,
   }) {
     return searchProgram(this);
   }
@@ -731,10 +934,12 @@ class _$ProgramEventSearchProgramImpl implements ProgramEventSearchProgram {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult? Function(ProgramEventClicked value)? clicked,
     TResult? Function(ProgramEventFilterClicked value)? filterClicked,
     TResult? Function(ProgramEventSearching value)? searching,
     TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult? Function(ProgramEventSaveProgram value)? saveProgram,
   }) {
     return searchProgram?.call(this);
   }
@@ -743,10 +948,12 @@ class _$ProgramEventSearchProgramImpl implements ProgramEventSearchProgram {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventGetAllProgram value)? getAllProgram,
     TResult Function(ProgramEventClicked value)? clicked,
     TResult Function(ProgramEventFilterClicked value)? filterClicked,
     TResult Function(ProgramEventSearching value)? searching,
     TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult Function(ProgramEventSaveProgram value)? saveProgram,
     required TResult orElse(),
   }) {
     if (searchProgram != null) {
@@ -763,6 +970,174 @@ abstract class ProgramEventSearchProgram implements ProgramEvent {
   String get text;
   @JsonKey(ignore: true)
   _$$ProgramEventSearchProgramImplCopyWith<_$ProgramEventSearchProgramImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ProgramEventSaveProgramImplCopyWith<$Res> {
+  factory _$$ProgramEventSaveProgramImplCopyWith(
+          _$ProgramEventSaveProgramImpl value,
+          $Res Function(_$ProgramEventSaveProgramImpl) then) =
+      __$$ProgramEventSaveProgramImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String programId});
+}
+
+/// @nodoc
+class __$$ProgramEventSaveProgramImplCopyWithImpl<$Res>
+    extends _$ProgramEventCopyWithImpl<$Res, _$ProgramEventSaveProgramImpl>
+    implements _$$ProgramEventSaveProgramImplCopyWith<$Res> {
+  __$$ProgramEventSaveProgramImplCopyWithImpl(
+      _$ProgramEventSaveProgramImpl _value,
+      $Res Function(_$ProgramEventSaveProgramImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? programId = null,
+  }) {
+    return _then(_$ProgramEventSaveProgramImpl(
+      programId: null == programId
+          ? _value.programId
+          : programId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ProgramEventSaveProgramImpl implements ProgramEventSaveProgram {
+  const _$ProgramEventSaveProgramImpl({required this.programId});
+
+  @override
+  final String programId;
+
+  @override
+  String toString() {
+    return 'ProgramEvent.saveProgram(programId: $programId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProgramEventSaveProgramImpl &&
+            (identical(other.programId, programId) ||
+                other.programId == programId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, programId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProgramEventSaveProgramImplCopyWith<_$ProgramEventSaveProgramImpl>
+      get copyWith => __$$ProgramEventSaveProgramImplCopyWithImpl<
+          _$ProgramEventSaveProgramImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllProgram,
+    required TResult Function() clicked,
+    required TResult Function(String labelName) filterClicked,
+    required TResult Function() searching,
+    required TResult Function(String text) searchProgram,
+    required TResult Function(String programId) saveProgram,
+  }) {
+    return saveProgram(programId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllProgram,
+    TResult? Function()? clicked,
+    TResult? Function(String labelName)? filterClicked,
+    TResult? Function()? searching,
+    TResult? Function(String text)? searchProgram,
+    TResult? Function(String programId)? saveProgram,
+  }) {
+    return saveProgram?.call(programId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllProgram,
+    TResult Function()? clicked,
+    TResult Function(String labelName)? filterClicked,
+    TResult Function()? searching,
+    TResult Function(String text)? searchProgram,
+    TResult Function(String programId)? saveProgram,
+    required TResult orElse(),
+  }) {
+    if (saveProgram != null) {
+      return saveProgram(programId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProgramEventStart value) started,
+    required TResult Function(ProgramEventGetAllProgram value) getAllProgram,
+    required TResult Function(ProgramEventClicked value) clicked,
+    required TResult Function(ProgramEventFilterClicked value) filterClicked,
+    required TResult Function(ProgramEventSearching value) searching,
+    required TResult Function(ProgramEventSearchProgram value) searchProgram,
+    required TResult Function(ProgramEventSaveProgram value) saveProgram,
+  }) {
+    return saveProgram(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProgramEventStart value)? started,
+    TResult? Function(ProgramEventGetAllProgram value)? getAllProgram,
+    TResult? Function(ProgramEventClicked value)? clicked,
+    TResult? Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult? Function(ProgramEventSearching value)? searching,
+    TResult? Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult? Function(ProgramEventSaveProgram value)? saveProgram,
+  }) {
+    return saveProgram?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProgramEventStart value)? started,
+    TResult Function(ProgramEventGetAllProgram value)? getAllProgram,
+    TResult Function(ProgramEventClicked value)? clicked,
+    TResult Function(ProgramEventFilterClicked value)? filterClicked,
+    TResult Function(ProgramEventSearching value)? searching,
+    TResult Function(ProgramEventSearchProgram value)? searchProgram,
+    TResult Function(ProgramEventSaveProgram value)? saveProgram,
+    required TResult orElse(),
+  }) {
+    if (saveProgram != null) {
+      return saveProgram(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProgramEventSaveProgram implements ProgramEvent {
+  const factory ProgramEventSaveProgram({required final String programId}) =
+      _$ProgramEventSaveProgramImpl;
+
+  String get programId;
+  @JsonKey(ignore: true)
+  _$$ProgramEventSaveProgramImplCopyWith<_$ProgramEventSaveProgramImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
