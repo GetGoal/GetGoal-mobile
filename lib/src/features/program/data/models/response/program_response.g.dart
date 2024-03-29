@@ -58,6 +58,7 @@ ProgramModel _$ProgramModelFromJson(Map<String, dynamic> json) => ProgramModel(
       tasks: (json['tasks'] as List<dynamic>?)
           ?.map((e) => TaskModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isSaved: json['is_saved'] as bool?,
     );
 
 Map<String, dynamic> _$ProgramModelToJson(ProgramModel instance) =>
@@ -71,4 +72,5 @@ Map<String, dynamic> _$ProgramModelToJson(ProgramModel instance) =>
       'updated_at': instance.updatedAt,
       'labels': instance.labels,
       'tasks': instance.tasks,
+      'is_saved': instance.isSaved,
     };
