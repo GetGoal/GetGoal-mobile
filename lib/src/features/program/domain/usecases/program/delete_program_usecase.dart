@@ -8,7 +8,7 @@ class DeleteProgramUsecase implements BaseUseCase<BaseDataResponse, String> {
   final ProgramRepository _programRepository;
 
   @override
-  Future<BaseDataResponse> call({required String params}) {
-    return _programRepository.deleteProgram(params);
+  Future<BaseDataResponse> call({required String params, String? imageUrl}) {
+    return _programRepository.deleteProgram(params, imageUrl);
   }
 }

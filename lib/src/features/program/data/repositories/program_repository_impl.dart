@@ -172,9 +172,21 @@ class ProgramRepositoryImpl implements ProgramRepository {
 
   // Delete program
   @override
-  Future<BaseDataResponse> deleteProgram(String programId) async {
+  Future<BaseDataResponse> deleteProgram(
+    String programId,
+    String? imageUrl,
+  ) async {
     try {
+      final firebaseStorage = FirebaseStorage.instance;
+
       final res = await _programApiService.deleteProgram(programId);
+      if (imageUrl != null) {
+        bool isUrlValid = Uri.parse(imageUrl).isAbsolute;
+
+        if (isUrlValid) {
+          firebaseStorage.refFromURL(imageUrl).delete();
+        }
+      }
 
       final data = BaseDataResponse(
         code: res.data.code,

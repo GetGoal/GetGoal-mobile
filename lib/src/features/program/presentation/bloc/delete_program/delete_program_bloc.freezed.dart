@@ -19,19 +19,19 @@ mixin _$DeleteProgramEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String programId) onDelete,
+    required TResult Function(String programId, String? imageUrl) onDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String programId)? onDelete,
+    TResult? Function(String programId, String? imageUrl)? onDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String programId)? onDelete,
+    TResult Function(String programId, String? imageUrl)? onDelete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,7 +117,7 @@ class _$DeleteProgramEventStartedImpl implements DeleteProgramEventStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String programId) onDelete,
+    required TResult Function(String programId, String? imageUrl) onDelete,
   }) {
     return started();
   }
@@ -126,7 +126,7 @@ class _$DeleteProgramEventStartedImpl implements DeleteProgramEventStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String programId)? onDelete,
+    TResult? Function(String programId, String? imageUrl)? onDelete,
   }) {
     return started?.call();
   }
@@ -135,7 +135,7 @@ class _$DeleteProgramEventStartedImpl implements DeleteProgramEventStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String programId)? onDelete,
+    TResult Function(String programId, String? imageUrl)? onDelete,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -187,7 +187,7 @@ abstract class _$$DeleteProgramEventOnDeleteImplCopyWith<$Res> {
           $Res Function(_$DeleteProgramEventOnDeleteImpl) then) =
       __$$DeleteProgramEventOnDeleteImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String programId});
+  $Res call({String programId, String? imageUrl});
 }
 
 /// @nodoc
@@ -204,12 +204,17 @@ class __$$DeleteProgramEventOnDeleteImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? programId = null,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$DeleteProgramEventOnDeleteImpl(
       programId: null == programId
           ? _value.programId
           : programId // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -217,14 +222,17 @@ class __$$DeleteProgramEventOnDeleteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteProgramEventOnDeleteImpl implements DeleteProgramEventOnDelete {
-  const _$DeleteProgramEventOnDeleteImpl({required this.programId});
+  const _$DeleteProgramEventOnDeleteImpl(
+      {required this.programId, this.imageUrl});
 
   @override
   final String programId;
+  @override
+  final String? imageUrl;
 
   @override
   String toString() {
-    return 'DeleteProgramEvent.onDelete(programId: $programId)';
+    return 'DeleteProgramEvent.onDelete(programId: $programId, imageUrl: $imageUrl)';
   }
 
   @override
@@ -233,11 +241,13 @@ class _$DeleteProgramEventOnDeleteImpl implements DeleteProgramEventOnDelete {
         (other.runtimeType == runtimeType &&
             other is _$DeleteProgramEventOnDeleteImpl &&
             (identical(other.programId, programId) ||
-                other.programId == programId));
+                other.programId == programId) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, programId);
+  int get hashCode => Object.hash(runtimeType, programId, imageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -250,29 +260,29 @@ class _$DeleteProgramEventOnDeleteImpl implements DeleteProgramEventOnDelete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String programId) onDelete,
+    required TResult Function(String programId, String? imageUrl) onDelete,
   }) {
-    return onDelete(programId);
+    return onDelete(programId, imageUrl);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String programId)? onDelete,
+    TResult? Function(String programId, String? imageUrl)? onDelete,
   }) {
-    return onDelete?.call(programId);
+    return onDelete?.call(programId, imageUrl);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String programId)? onDelete,
+    TResult Function(String programId, String? imageUrl)? onDelete,
     required TResult orElse(),
   }) {
     if (onDelete != null) {
-      return onDelete(programId);
+      return onDelete(programId, imageUrl);
     }
     return orElse();
   }
@@ -310,10 +320,12 @@ class _$DeleteProgramEventOnDeleteImpl implements DeleteProgramEventOnDelete {
 }
 
 abstract class DeleteProgramEventOnDelete implements DeleteProgramEvent {
-  const factory DeleteProgramEventOnDelete({required final String programId}) =
-      _$DeleteProgramEventOnDeleteImpl;
+  const factory DeleteProgramEventOnDelete(
+      {required final String programId,
+      final String? imageUrl}) = _$DeleteProgramEventOnDeleteImpl;
 
   String get programId;
+  String? get imageUrl;
   @JsonKey(ignore: true)
   _$$DeleteProgramEventOnDeleteImplCopyWith<_$DeleteProgramEventOnDeleteImpl>
       get copyWith => throw _privateConstructorUsedError;

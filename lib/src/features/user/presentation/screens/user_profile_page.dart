@@ -322,6 +322,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                               DeleteProgramEvent.onDelete(
                                 programId:
                                     programList[index].programId.toString(),
+                                imageUrl: programList[index].programImage,
                               ),
                             );
 
