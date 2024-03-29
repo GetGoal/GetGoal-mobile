@@ -23,5 +23,6 @@ extension ProgramMapper on ProgramModel {
                 .toList(),
         tasks:
             tasks == null ? [] : tasks!.map((e) => e.taskToEntity()).toList(),
+        isSaved: isSaved ?? false,
       );
 }
