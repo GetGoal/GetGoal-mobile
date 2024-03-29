@@ -54,7 +54,24 @@ class AppColors {
       900: Color(_whilteMaterialColor),
     },
   );
+  static MaterialColor primarySecondary = const MaterialColor(
+    _secondaryMaterialColor,
+    <int, Color>{
+      50: Color(_secondaryMaterialColor),
+      100: Color(_secondaryMaterialColor),
+      200: Color(_secondaryMaterialColor),
+      300: Color(_secondaryMaterialColor),
+      400: Color(_secondaryMaterialColor),
+      500: Color(_secondaryMaterialColor),
+      600: Color(_secondaryMaterialColor),
+      700: Color(_secondaryMaterialColor),
+      800: Color(_secondaryMaterialColor),
+      900: Color(_secondaryMaterialColor),
+    },
+  );
+
   static const int _whilteMaterialColor = 0xFFFFFFFF;
+  static const int _secondaryMaterialColor = 0xFF0A0A10;
 }
 
 extension HexColor on Color {

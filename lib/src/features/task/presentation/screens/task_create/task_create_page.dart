@@ -64,6 +64,11 @@ class _TaskCreatePageState extends State<TaskCreatePage>
 
   @override
   void initState() {
+    if (widget.pageData!.taskId == null && widget.pageData?.task != null) {
+      _taskCreateBloc
+          .add(TaskCreateEvent.onLoadEditData(task: widget.pageData!.task!));
+      return;
+    }
     _taskCreateBloc
         .add(TaskCreateEvent.started(taskId: widget.pageData!.taskId));
     super.initState();
@@ -97,76 +102,35 @@ class _TaskCreatePageState extends State<TaskCreatePage>
               listener: (context, state) {
                 switch (state) {
                   case TaskCreateStateInitial(:final task):
-                    if (task != null) {
-                      _taskNameInputController.text = task.taskName!;
-                      _taskDescriptionInputController.text =
-                          task.taskDescription!;
-                      _taskCategoryInputController.text = task.category!;
-                      _taskStartDateInputController.text =
-                          DateFormat.yMd('th_TH')
-                              .format(DateTime.parse(task.startTime!));
-                      List time = DateFormat.Hm()
-                          .format((DateTime.parse(task.startTime!)))
-                          .split(':');
-                      _selectedDate = formatDate(
-                        DateFormat.yMd('th_TH')
-                            .format(DateTime.parse(task.startTime!)),
-                      );
-                      TimeOfDay formatedTime = TimeOfDay(
-                        hour: int.parse(time[0]),
-                        minute: int.parse(time[1]),
-                      );
+                    if (task == null) return;
 
-                      _selectedTime = formatTime(formatedTime);
+                    // Get data to each input field
+                    _taskNameInputController.text = task.taskName!;
+                    _taskDescriptionInputController.text =
+                        task.taskDescription!;
+                    _taskCategoryInputController.text = task.category!;
+                    _taskStartDateInputController.text = DateFormat.yMd('th_TH')
+                        .format(DateTime.parse(task.startTime!));
+                    List time = DateFormat.Hm()
+                        .format((DateTime.parse(task.startTime!)))
+                        .split(':');
+                    _selectedDate = formatDate(
+                      DateFormat.yMd('th_TH')
+                          .format(DateTime.parse(task.startTime!)),
+                    );
+                    TimeOfDay formatedTime = TimeOfDay(
+                      hour: int.parse(time[0]),
+                      minute: int.parse(time[1]),
+                    );
 
-                      _taskTimeInputController.text =
-                          formatedTime.format(context);
+                    _selectedTime = formatTime(formatedTime);
 
-                      _selectedReminder = task.timeBeforeNotify != 0
-                          ? '${task.timeBeforeNotify} Minute before start'
-                          : 'None';
-                    }
-                    if (widget.pageData!.task != null) {
-                      _taskNameInputController.text =
-                          widget.pageData!.task!.taskName!;
-                      _taskDescriptionInputController.text =
-                          widget.pageData!.task!.taskDescription!;
-                      _taskCategoryInputController.text =
-                          widget.pageData!.task!.category!;
-                      _taskStartDateInputController.text =
-                          DateFormat.yMd('th_TH').format(
-                        DateTime.parse(
-                          widget.pageData!.task!.startTime!,
-                        ),
-                      );
-                      List time = DateFormat.Hm()
-                          .format(
-                            (DateTime.parse(
-                              widget.pageData!.task!.startTime!,
-                            )),
-                          )
-                          .split(':');
-                      _selectedDate = formatDate(
-                        DateFormat.yMd('th_TH').format(
-                          DateTime.parse(widget.pageData!.task!.startTime!),
-                        ),
-                      );
-                      TimeOfDay formatedTime = TimeOfDay(
-                        hour: int.parse(time[0]),
-                        minute: int.parse(time[1]),
-                      );
+                    _taskTimeInputController.text =
+                        formatedTime.format(context);
 
-                      _selectedTime = formatTime(formatedTime);
-
-                      _taskTimeInputController.text =
-                          formatedTime.format(context);
-
-                      _selectedReminder = widget
-                                  .pageData!.task!.timeBeforeNotify !=
-                              0
-                          ? '${widget.pageData!.task!.timeBeforeNotify} Minute before start'
-                          : 'None';
-                    }
+                    _selectedReminder = task.timeBeforeNotify != 0
+                        ? '${task.timeBeforeNotify} Minute before start'
+                        : 'None';
                     break;
 
                   case TaskCreateStateCreated():
@@ -357,11 +321,15 @@ class _TaskCreatePageState extends State<TaskCreatePage>
             );
           }
           if (widget.pageData!.mode == TASKFORMMODE.program) {
-            AppCache.programTaskCreateList.add(task);
+            final taskList = AppCache.programTaskCreateList.toList();
+            taskList.add(task);
+            AppCache.programTaskCreateList = taskList;
             context.pop(true);
           }
           if (widget.pageData!.mode == TASKFORMMODE.programCreate) {
-            AppCache.programTaskCreateList[widget.pageData!.taskIndex!] = task;
+            final taskList = AppCache.programTaskCreateList.toList();
+            taskList[widget.pageData!.taskIndex!] = task;
+            AppCache.programTaskCreateList = taskList;
             context.pop(true);
           }
         }

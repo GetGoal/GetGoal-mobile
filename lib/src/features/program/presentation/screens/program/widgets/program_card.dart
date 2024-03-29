@@ -44,29 +44,35 @@ class ProgramCard extends StatelessWidget {
         onTab!();
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Row(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            SizedBox(
-              width: 265,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // _programCreatedby(),
-                  // const SizedBox(height: 4),
-                  _programName(),
-                  const SizedBox(height: 8),
-                  _programExpectedTime(),
-                  const SizedBox(height: 8),
-                  _programDescription(),
-                  const SizedBox(height: 8),
-                  _programMetaData(),
-                ],
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 265,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // _programCreatedby(),
+                      // const SizedBox(height: 4),
+                      _programName(),
+                      const SizedBox(height: 8),
+                      _programExpectedTime(),
+                      const SizedBox(height: 8),
+                      _programDescription(),
+                    ],
+                  ),
+                ),
+                const Spacer(),
+                _programImage(),
+              ],
             ),
-            const Spacer(),
-            _programImage(),
+            const SizedBox(height: 16),
+            _programMetaData(),
           ],
         ),
       ),
@@ -82,7 +88,7 @@ class ProgramCard extends StatelessWidget {
 
   Widget _programDescription() {
     return Text(
-      programDesc ?? '',
+      programDesc ?? 'No descripition',
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
       style: footnoteRegular().copyWith(color: AppColors.description),
@@ -100,12 +106,15 @@ class ProgramCard extends StatelessWidget {
           DateFormat('yMMMd').format(DateTime.parse(createdAt!)),
           style: caption2Regular().copyWith(color: AppColors.description),
         ),
+        const Spacer(),
+        actionButton ?? const SizedBox(),
       ],
     );
   }
 
   Widget _programImage() {
     return Stack(
+      alignment: Alignment.topRight,
       children: [
         Container(
           height: 96,

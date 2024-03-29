@@ -26,12 +26,16 @@ import '../features/program/domain/repositories/program_filter_repository.dart';
 import '../features/program/domain/repositories/program_repository.dart';
 import '../features/program/domain/usecases/label/get_program_filter_usecase.dart';
 import '../features/program/domain/usecases/program/create_program_usecase.dart';
+import '../features/program/domain/usecases/program/delete_program_usecase.dart';
+import '../features/program/domain/usecases/program/edit_program_by_id_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_id_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_search_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_usecase.dart';
+import '../features/program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 import '../features/program/presentation/bloc/program/program_bloc.dart';
+import '../features/program/presentation/bloc/program_edit/program_edit_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
 import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
@@ -153,6 +157,12 @@ Future<void> _initUsecases() async {
   getIt.registerLazySingleton(
     () => GetProgramByIdUsecase(getIt()),
   );
+  getIt.registerLazySingleton(
+    () => EditProgramByIdUsecase(getIt()),
+  );
+  getIt.registerLazySingleton(
+    () => DeleteProgramUsecase(getIt()),
+  );
 
 // Initialize for task feature
   getIt.registerLazySingleton(
@@ -227,6 +237,12 @@ Future<void> _initBlocs() async {
   );
   getIt.registerFactory<CreateProgramBloc>(
     () => CreateProgramBloc(getIt()),
+  );
+  getIt.registerFactory<ProgramEditBloc>(
+    () => ProgramEditBloc(getIt(), getIt()),
+  );
+  getIt.registerFactory<DeleteProgramBloc>(
+    () => DeleteProgramBloc(getIt()),
   );
 
   // Initialize Bloc for task feature

@@ -4,11 +4,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/i18n/strings.g.dart';
 import '../../../../config/route_config.dart';
+import '../../../../shared/app_cache.dart';
 import '../../../../shared/icon.dart';
 import '../../../../shared/themes/color.dart';
 import '../../../../shared/themes/font.dart';
 import '../../../../shared/themes/spacing.dart';
-import '../../../../shared/widgets/button/circle_button.dart';
 import '../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../shared/widgets/image/cache_image.dart';
@@ -17,6 +17,7 @@ import '../../../program/domain/entities/program.dart';
 import '../../../program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../../../program/presentation/enum/program_form_mode.enum.dart';
 import '../../../program/presentation/screens/program/widgets/program_card.dart';
+import '../../../program/presentation/screens/program_create/program_create_page.dart';
 import 'bloc/logout/logout_bloc.dart';
 import 'bloc/user_profile/user_profile_bloc.dart';
 import 'bloc/user_program/user_program_bloc.dart';
@@ -114,7 +115,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
       listener: (context, state) {
         switch (state) {
           case LogoutStateloaggedOut():
-            context.go(Routes.loginPage);
+            context.go(Routes.landingPage);
             break;
           case LogoutStateLoggedOutError(:final message):
             showDialog(
@@ -254,13 +255,18 @@ class _UserProfilePageState extends State<UserProfilePage> {
             return const SizedBox();
 
           case UserProgramStateLoadedSuccess(:final programList):
-            return ListView.builder(
+            return ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: programList.length,
+              separatorBuilder: (context, index) => Divider(
+                color: AppColors.stroke,
+              ),
               itemBuilder: (context, index) {
                 return ProgramCard(
-                  onTab: () {},
+                  onTab: () => context.push(
+                    '/program_info/${programList[index].programId}',
+                  ),
                   programImage: programList[index].programImage,
                   programName: programList[index].programName,
                   programDesc: programList[index].programDesc,
@@ -274,25 +280,31 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       splashFactory: NoSplash.splashFactory,
                     ),
                     child: PopupMenuButton(
-                      elevation: 1,
-                      shadowColor: Colors.black38,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                       padding: const EdgeInsets.all(0),
-                      icon: CircleButton(
-                        icon: CustomIcon(
-                          icon: AppIcon.menu_icon,
-                          iconColor: AppColors.description,
-                        ),
+                      icon: CustomIcon(
+                        size: 24,
+                        icon: AppIcon.menu_icon,
+                        iconColor: AppColors.description,
                       ),
                       itemBuilder: (context) => [
                         // Edit program
                         PopupMenuItem(
-                          onTap: () => context.pushNamed(
-                            Routes.programCreatePage,
-                            extra: PROGRAMFORMMODE.edit,
-                          ),
+                          onTap: () async {
+                            bool? isRefresh = await context.pushNamed(
+                              Routes.programCreatePage,
+                              extra: ProgramCreatePageData(
+                                mode: PROGRAMFORMMODE.edit,
+                                programId:
+                                    programList[index].programId.toString(),
+                              ),
+                            );
+                            if (isRefresh!) {
+                              AppCache.programTaskCreateList = [];
+                            }
+                          },
                           child: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8),
                             child: Row(
@@ -310,6 +322,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                               DeleteProgramEvent.onDelete(
                                 programId:
                                     programList[index].programId.toString(),
+                                imageUrl: programList[index].programImage,
                               ),
                             );
 

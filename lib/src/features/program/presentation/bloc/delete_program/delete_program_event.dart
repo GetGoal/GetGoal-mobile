@@ -5,5 +5,6 @@ class DeleteProgramEvent with _$DeleteProgramEvent {
   const factory DeleteProgramEvent.started() = DeleteProgramEventStarted;
   const factory DeleteProgramEvent.onDelete({
     required String programId,
+    String? imageUrl,
   }) = DeleteProgramEventOnDelete;
 }

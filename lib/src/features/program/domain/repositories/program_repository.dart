@@ -12,6 +12,11 @@ abstract class ProgramRepository {
   Future<DataState<List<Program>>> getProramBySearch(String text);
   Future<BaseDataResponse<Program>> createProgram(ProgramCreate programId);
 
+  Future<BaseDataResponse<Program>> editProgram(
+    ProgramCreate program,
+    String programId,
+  );
+
   // Delete Program
-  Future<BaseDataResponse> deleteProgram(String programId);
+  Future<BaseDataResponse> deleteProgram(String programId, String? imageUrl);
 }

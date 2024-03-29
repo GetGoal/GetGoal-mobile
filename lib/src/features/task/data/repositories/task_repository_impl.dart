@@ -135,6 +135,7 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<DataState<Task>> createTask(Task task) async {
     try {
       final TaskRequest requestBody = TaskRequest(
+        taskId: 0,
         taskName: task.taskName,
         taskDesc: task.taskDescription,
         isSetNoti: task.isSetNotification,

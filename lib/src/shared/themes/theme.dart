@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import './font.dart';
@@ -8,9 +9,12 @@ ThemeData appTheme(BuildContext context) {
   return ThemeData(
     useMaterial3: true,
     primaryColor: AppColors.primary2,
-    colorScheme:
-        ColorScheme.fromSwatch(primarySwatch: AppColors.primaryWhite).copyWith(
-      primary: AppColors.primary,
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: AppColors.primarySecondary,
+      brightness: Brightness.dark,
+      cardColor: AppColors.secondary,
+    ).copyWith(
+      brightness: Brightness.dark,
     ),
     scaffoldBackgroundColor: AppColors.background,
     appBarTheme: AppBarTheme(
@@ -27,19 +31,26 @@ ThemeData appTheme(BuildContext context) {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary2,
         elevation: 0,
-        textStyle: TextStyle(
-          color: AppColors.black,
-          fontSize: 12,
-          fontFamily: 'Nunito',
-        ),
+        textStyle: subHeadlineRegular(),
         splashFactory: NoSplash.splashFactory,
         shadowColor: Colors.transparent,
       ),
+    ),
+    timePickerTheme: TimePickerThemeData(
+      dayPeriodBorderSide: BorderSide(
+        color: AppColors.white,
+      ),
+      hourMinuteTextColor: AppColors.white,
+      dayPeriodTextColor: AppColors.white,
+      dialTextColor: AppColors.white,
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: AppColors.primary2,
       selectionColor: AppColors.primary2,
       selectionHandleColor: AppColors.primary2,
+    ),
+    cupertinoOverrideTheme: CupertinoThemeData(
+      primaryColor: AppColors.primary2,
     ),
     popupMenuTheme: const PopupMenuThemeData(
       enableFeedback: false,

@@ -27,6 +27,12 @@ abstract class ProgramApiService {
     @Path('id') String programId,
   );
 
+  @PUT('/v1/programs/{id}')
+  Future<HttpResponse<BaseDataResponse<ProgramModel>>> editProgramById(
+    @Path('id') String programId,
+    @Body() CreateProgramRequest requestBody,
+  );
+
   @POST('/v1/programs/search')
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getProgramBySearch(
     @Body() SearchProgramRequest requestBody,

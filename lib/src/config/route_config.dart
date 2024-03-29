@@ -22,8 +22,8 @@ import '../features/notification/presentation/screens/notification_page.dart';
 import '../features/program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 import '../features/program/presentation/bloc/program/program_bloc.dart';
+import '../features/program/presentation/bloc/program_edit/program_edit_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
-import '../features/program/presentation/enum/program_form_mode.enum.dart';
 import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/program/presentation/screens/program_create/program_create_page.dart';
 import '../features/program/presentation/screens/program_create/program_task_create.dart';
@@ -286,8 +286,15 @@ class RouteConfig {
     return GoRoute(
       path: Routes.programCreatePage,
       name: Routes.programCreatePage,
-      builder: (context, state) => ProgramCreatePage(
-        mode: state.extra as PROGRAMFORMMODE,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<ProgramEditBloc>(),
+          ),
+        ],
+        child: ProgramCreatePage(
+          pageData: state.extra as ProgramCreatePageData,
+        ),
       ),
     );
   }
@@ -301,8 +308,13 @@ class RouteConfig {
           BlocProvider(
             create: (context) => getIt<CreateProgramBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<ProgramEditBloc>(),
+          ),
         ],
-        child: const ProgramTaskCreate(),
+        child: ProgramTaskCreate(
+          pageData: state.extra as ProgramTaskCreatePageData,
+        ),
       ),
     );
   }

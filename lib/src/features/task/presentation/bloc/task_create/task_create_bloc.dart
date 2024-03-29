@@ -21,6 +21,7 @@ class TaskCreateBloc extends Bloc<TaskCreateEvent, TaskCreateState> {
     on<TaskCreateEventStarted>(_onTaskCreateStart);
     on<TaskCreateEventOnCreate>(_onTaskCreate);
     on<TaskCreateEventOnEdit>(_onTaskEdit);
+    on<TaskCreateEventOnLoadEditData>(_onTaskLoadEditData);
   }
 
   final CreateTaskUsecase _createTaskUsecase;
@@ -98,6 +99,19 @@ class TaskCreateBloc extends Bloc<TaskCreateEvent, TaskCreateState> {
       );
 
       emit(const TaskCreateState.created());
+    } catch (e) {
+      emit(const TaskCreateState.error(message: 'error'));
+    }
+  }
+
+  FutureOr<void> _onTaskLoadEditData(
+    TaskCreateEventOnLoadEditData event,
+    Emitter<TaskCreateState> emit,
+  ) {
+    try {
+      emit(const TaskCreateState.loading());
+      emit(TaskCreateState.initial(task: event.task));
+      emit(const TaskCreateState.loadedSuccess());
     } catch (e) {
       emit(const TaskCreateState.error(message: 'error'));
     }
