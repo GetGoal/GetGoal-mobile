@@ -205,45 +205,48 @@ class _ProgramPageState extends State<ProgramPage> {
         backgroundColor: AppColors.secondary,
         onRefresh: () async => _programBloc.add(const ProgramEvent.started()),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ListView.separated(
-                separatorBuilder: (context, index) => Divider(
-                  color: AppColors.stroke,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: Column(
+              children: [
+                ListView.separated(
+                  separatorBuilder: (context, index) => Divider(
+                    color: AppColors.stroke,
+                  ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
+                  shrinkWrap: true,
+                  itemCount: programList.length,
+                  itemBuilder: (context, index) {
+                    bool isLabelEmpty = programList[index].labels!.isEmpty;
+                    return ProgramCard(
+                      programImage: programList[index].programImage,
+                      programName: programList[index].programName,
+                      programDesc: programList[index].programDesc,
+                      rating: programList[index].rating,
+                      duration: programList[index].expectedTime,
+                      label: isLabelEmpty
+                          ? const Label(labelName: 'Unknow')
+                          : programList[index].labels![0],
+                      createdAt: programList[index].updatedAt,
+                      isSaved: programList[index].isSaved,
+                      onTab: () {
+                        context.push(
+                          '/program_info/${programList[index].programId}',
+                        );
+                      },
+                      onSave: () {
+                        _programBloc.add(
+                          ProgramEvent.saveProgram(
+                            programId: programList[index].programId.toString(),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
-                shrinkWrap: true,
-                itemCount: programList.length,
-                itemBuilder: (context, index) {
-                  bool isLabelEmpty = programList[index].labels!.isEmpty;
-                  return ProgramCard(
-                    programImage: programList[index].programImage,
-                    programName: programList[index].programName,
-                    programDesc: programList[index].programDesc,
-                    rating: programList[index].rating,
-                    duration: programList[index].expectedTime,
-                    label: isLabelEmpty
-                        ? const Label(labelName: 'Unknow')
-                        : programList[index].labels![0],
-                    createdAt: programList[index].updatedAt,
-                    isSaved: programList[index].isSaved,
-                    onTab: () {
-                      context.push(
-                        '/program_info/${programList[index].programId}',
-                      );
-                    },
-                    onSave: () {
-                      _programBloc.add(
-                        ProgramEvent.saveProgram(
-                          programId: programList[index].programId.toString(),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

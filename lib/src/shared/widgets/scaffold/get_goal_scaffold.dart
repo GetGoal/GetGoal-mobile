@@ -67,6 +67,7 @@ class GetGoalScaffold extends StatelessWidget {
 
   AppBar _buildAppbar(BuildContext context) {
     return AppBar(
+      toolbarHeight: 88,
       title: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,9 +84,13 @@ class GetGoalScaffold extends StatelessWidget {
                 color: AppColors.secondary,
               ),
               const SizedBox(width: 16),
-              Text(
-                appbarTitle ?? '',
-                style: title1Bold().copyWith(color: AppColors.white),
+              Flexible(
+                child: Text(
+                  appbarTitle ?? '',
+                  style: title1Bold().copyWith(color: AppColors.white),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
               ),
             ],
           ),
