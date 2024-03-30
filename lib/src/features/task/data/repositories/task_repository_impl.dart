@@ -2,7 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../config/notification/notification_service.dart';
 import '../../../../core/bases/base_data.dart';
 
 import '../../../../core/bases/base_data_response.dart';
@@ -76,6 +78,27 @@ class TaskRepositoryImpl implements TaskRepository {
       final httpResponse =
           await _taskApiService.joinProgram(programId, requestBody);
 
+      for (var i = 0; i < httpResponse.data.data!.length; i++) {
+        if (httpResponse.data.data![i].isSetNotification != 0) {
+          final originalDateString = httpResponse.data.data![i].startTime!;
+          final formattedDate = DateFormat(
+            'yyyy-MM-dd HH:mm:ss.SSSSSS',
+          ).format(DateTime.parse(originalDateString));
+
+          NotificationService().scheduleNotification(
+            id: httpResponse.data.data![i].taskId,
+            title: httpResponse.data.data![i].taskName,
+            body:
+                'This task will start in ${httpResponse.data.data![i].timeBeforeNotify} minutes.',
+            scheduledTime: DateTime.parse(formattedDate).subtract(
+              Duration(
+                minutes: httpResponse.data.data![i].timeBeforeNotify!,
+              ),
+            ),
+          );
+        }
+      }
+
       if (httpResponse.response.statusCode == HttpStatus.created) {
         if (httpResponse.data.data == null) return const DataSuccess([]);
 
@@ -146,6 +169,21 @@ class TaskRepositoryImpl implements TaskRepository {
 
       final httpResponse = await _taskApiService.createTask(requestBody);
 
+      final originalDateString = task.startTime!;
+      final formattedDate = DateFormat(
+        'yyyy-MM-dd HH:mm:ss.SSSSSS',
+      ).format(DateTime.parse(originalDateString));
+
+      if (task.isSetNotification != 0) {
+        NotificationService().scheduleNotification(
+          id: httpResponse.data.data!.taskId,
+          title: task.taskName,
+          body: 'This task will start in ${task.timeBeforeNotify} minutes.',
+          scheduledTime: DateTime.parse(formattedDate)
+              .subtract(Duration(minutes: task.timeBeforeNotify!)),
+        );
+      }
+
       if (httpResponse.response.statusCode == HttpStatus.created) {
         return const DataSuccess(Task());
       } else {
@@ -202,6 +240,26 @@ class TaskRepositoryImpl implements TaskRepository {
         taskId,
         task.taskToTaskRequest(),
       );
+
+      if (task.isSetNotification != 0) {
+        await NotificationService().cancelScheduleNotification(
+          httpResponse.data.data!.taskId!,
+        );
+
+        final originalDateString = httpResponse.data.data!.startTime!;
+        final formattedDate = DateFormat(
+          'yyyy-MM-dd HH:mm:ss.SSSSSS',
+        ).format(DateTime.parse(originalDateString));
+
+        NotificationService().scheduleNotification(
+          id: httpResponse.data.data!.taskId,
+          title: httpResponse.data.data!.taskName,
+          body: 'This task will start in ${task.timeBeforeNotify} minutes.',
+          scheduledTime: DateTime.parse(formattedDate).subtract(
+            Duration(minutes: httpResponse.data.data!.timeBeforeNotify!),
+          ),
+        );
+      }
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
