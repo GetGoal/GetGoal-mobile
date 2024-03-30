@@ -93,9 +93,9 @@ class _MainPageState extends State<MainPage> {
                         style: title1Bold().copyWith(color: AppColors.white),
                       ),
                       const Spacer(),
-                      state.bottomNavSelected == 0
-                          ? _buildNotificationIconAction()
-                          : const SizedBox(),
+                      // state.bottomNavSelected == 0
+                      //     ? _buildNotificationIconAction()
+                      //     : const SizedBox(),
                       state.bottomNavSelected == 4
                           ? _buildSettingIconAction()
                           : const SizedBox(),
