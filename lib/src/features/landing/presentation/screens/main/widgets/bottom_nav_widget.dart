@@ -56,7 +56,7 @@ class BottomNavigation extends StatelessWidget {
         color: Colors.transparent,
       ),
       child: Container(
-        height: Platform.isIOS ? 96 : 72,
+        height: 96,
         alignment: Alignment.center,
         padding:
             const EdgeInsets.only(left: 24, top: 16, right: 24, bottom: 24),
