@@ -48,4 +48,9 @@ abstract class AuthApiService {
   Future<HttpResponse<BaseDataResponse>> resetPassword(
     @Body() EmailRequest requestBody,
   );
+
+  @GET('/v1/auth/verify-token')
+  Future<HttpResponse<BaseDataResponse>> verifyToken(
+    @Query('token') String token,
+  );
 }

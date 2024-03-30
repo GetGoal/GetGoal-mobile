@@ -28,4 +28,7 @@ abstract class AuthRepository {
   );
 
   Future<BaseDataResponse> resetPassword(String email);
+
+  // Verify token
+  Future<BaseDataResponse> verifyToken(String token);
 }
