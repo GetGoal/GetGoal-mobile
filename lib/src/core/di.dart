@@ -12,6 +12,7 @@ import '../features/auth/domain/usecase/auth/logout_usecase.dart';
 import '../features/auth/domain/usecase/auth/reset_password_usecase.dart';
 import '../features/auth/domain/usecase/auth/verify_account_usecase.dart';
 import '../features/auth/domain/usecase/auth/verify_password_reset_usecase.dart';
+import '../features/auth/domain/usecase/auth/verify_token_usecase.dart';
 import '../features/auth/presentation/screens/forget_password/bloc/forget_password/forget_password_bloc.dart';
 import '../features/auth/presentation/screens/login/bloc/google_login/google_sign_in_bloc.dart';
 import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
@@ -44,6 +45,7 @@ import '../features/program/presentation/bloc/program_edit/program_edit_bloc.dar
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
 import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
+import '../features/splash/presentation/bloc/splash_page_bloc.dart';
 import '../features/task/data/repositories/task_repository_impl.dart';
 import '../features/task/data/sources/api/task_api_service.dart';
 import '../features/task/domain/repositories/task_repository.dart';
@@ -175,6 +177,9 @@ Future<void> _initUsecases() async {
   getIt.registerLazySingleton(
     () => GetRecommendProgramUsecase(getIt()),
   );
+  getIt.registerLazySingleton(
+    () => VerifyTokenUsecase(getIt()),
+  );
 
 // Initialize for task feature
   getIt.registerLazySingleton(
@@ -289,6 +294,9 @@ Future<void> _initBlocs() async {
   );
 
   // Initialize Bloc for authentication feature
+  getIt.registerLazySingleton<SplashPageBloc>(
+    () => SplashPageBloc(getIt()),
+  );
   getIt.registerLazySingleton<GoogleSignIn>(
     () => GoogleSignIn(),
   );

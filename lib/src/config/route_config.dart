@@ -31,6 +31,8 @@ import '../features/program/presentation/screens/program_create/program_task_cre
 import '../features/program/presentation/screens/program_info/program_info_page.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/setting/presentation/screens/setting/setting_page.dart';
+import '../features/splash/presentation/bloc/splash_page_bloc.dart';
+import '../features/splash/presentation/screen/splash_page.dart';
 import '../features/task/presentation/bloc/task_create/task_create_bloc.dart';
 import '../features/task/presentation/bloc/task_detail/task_detail_bloc.dart';
 import '../features/task/presentation/bloc/task_planning/task_planning_bloc.dart';
@@ -49,10 +51,11 @@ class RouteConfig {
   // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter _goRouter = GoRouter(
-    initialLocation: Routes.landingPage,
+    initialLocation: Routes.splashPage,
     debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
     routes: [
+      _splashPage(),
       _landingPage(),
       _loginPage(),
       _signUpPage(),
@@ -73,6 +76,21 @@ class RouteConfig {
   );
 
   static GoRouter get goRouter => _goRouter;
+
+  static GoRoute _splashPage() {
+    return GoRoute(
+      path: Routes.splashPage,
+      name: Routes.splashPage,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<SplashPageBloc>(),
+          ),
+        ],
+        child: const SplashPage(),
+      ),
+    );
+  }
 
   static GoRoute _landingPage() {
     return GoRoute(
@@ -374,6 +392,7 @@ class RouteConfig {
 class Routes {
   const Routes._();
 
+  static const String splashPage = '/';
   static const String landingPage = '/landing';
   static const String loginPage = '/login';
   static const String signUpPage = '/sign_up';
