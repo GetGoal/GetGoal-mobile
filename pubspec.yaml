@@ -75,6 +75,7 @@ dependencies:
   gradient_borders: ^1.0.0
   flutter_local_notifications: ^17.0.0
   flutter_datetime_picker_plus: ^2.1.0
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
