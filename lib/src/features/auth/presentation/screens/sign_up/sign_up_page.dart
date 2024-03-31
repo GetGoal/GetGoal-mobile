@@ -10,6 +10,8 @@ import '../../../../../shared/widgets/dialog/error_dialog.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import '../../../domain/entity/create_user.dart';
+import '../verification/enum/verification_mode_enum.dart';
+import '../verification/verification_page.dart';
 import 'bloc/create_account/create_account_bloc.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -99,7 +101,10 @@ class _SignUpPageState extends State<SignUpPage> with AuthValidationMixin {
       listener: (context, state) {
         switch (state) {
           case CreateAccountStateCreated():
-            context.pushNamed(Routes.verificationPage);
+            context.pushNamed(Routes.verificationPage,
+                extra: VerificationPageData(
+                  mode: VERIFICATIONMODE.verifyAccount,
+                ));
             break;
           case CreateAccountStateError(:final error):
             showDialog(
