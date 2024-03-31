@@ -25,6 +25,28 @@
             ]
         },
         {
+            "name": "GetGoal-mobile-dev-profile",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev"
+            ],
+            "flutterMode": "profile"
+        },
+        {
+            "name": "GetGoal-mobile-dev-release",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev"
+            ],
+            "flutterMode": "release"
+        },
+        {
             "name": "GetGoal-mobile-qa",
             "request": "launch",
             "type": "dart",
@@ -33,6 +55,28 @@
                 "--flavor",
                 "qa"
             ]
+        },
+        {
+            "name": "GetGoal-mobile-qa-profile",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_qa.dart",
+            "args": [
+                "--flavor",
+                "qa"
+            ],
+            "flutterMode": "profile"
+        },
+        {
+            "name": "GetGoal-mobile-qa-release",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_qa.dart",
+            "args": [
+                "--flavor",
+                "qa"
+            ],
+            "flutterMode": "release"
         },
         {
             "name": "GetGoal-mobile-prod",
@@ -45,15 +89,25 @@
             ]
         },
         {
-            "name": "GetGoal-mobile (profile mode)",
+            "name": "GetGoal-mobile-prod-profile",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "prod"
+            ],
             "flutterMode": "profile"
         },
         {
-            "name": "GetGoal-mobile (release mode)",
+            "name": "GetGoal-mobile-prod-release",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "prod"
+            ],
             "flutterMode": "release"
         }
     ]
