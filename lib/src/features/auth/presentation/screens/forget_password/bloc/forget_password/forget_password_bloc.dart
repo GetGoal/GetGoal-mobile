@@ -35,7 +35,7 @@ class ForgetPasswordBloc
     try {
       emit(const ForgetPasswordState.loading());
       final res = await _resetPasswordUsecase(params: event.email);
-      if (res.code == 201) {
+      if (res.code != 200) {
         emit(ForgetPasswordState.failure(message: res.error));
         return;
       }
