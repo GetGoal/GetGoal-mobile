@@ -24,5 +24,10 @@ abstract class UserApiService {
   );
 
   @GET('/v1/users/programs/saved')
-  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getUserSavePrograms();
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
+      getUserSavePrograms();
+
+  @GET('/v1/users/programs/joined')
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
+      getUserJoinPrograms();
 }

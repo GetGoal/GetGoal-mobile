@@ -204,8 +204,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
             onTap: () {
               setState(() {
                 selected = 1;
-                _userProgramBloc.add(const UserProgramEvent.onSaveTapped());
               });
+              _userProgramBloc.add(const UserProgramEvent.onSaveTapped());
             },
             child: Container(
               alignment: Alignment.center,
@@ -231,6 +231,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               setState(() {
                 selected = 2;
               });
+              _userProgramBloc.add(const UserProgramEvent.onJoinTapped());
             },
             child: Container(
               alignment: Alignment.center,

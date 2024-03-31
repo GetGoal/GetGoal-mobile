@@ -66,6 +66,7 @@ import '../features/task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../features/user/data/repositories/user_repository_impl.dart';
 import '../features/user/data/sources/api/user_api_service.dart';
 import '../features/user/domain/repositories/user_repository.dart';
+import '../features/user/domain/usecases/get_user_join_program_usecase.dart';
 import '../features/user/domain/usecases/get_user_profile_usecase.dart';
 import '../features/user/domain/usecases/get_user_program_usecase.dart';
 import '../features/user/domain/usecases/get_user_save_program_usecase.dart';
@@ -247,6 +248,9 @@ Future<void> _initUsecases() async {
   getIt.registerLazySingleton(
     () => GetUserSaveProgramUsecase(getIt()),
   );
+  getIt.registerLazySingleton(
+    () => GetUserJoinProgramUsecase(getIt()),
+  );
 }
 
 Future<void> _initBlocs() async {
@@ -331,7 +335,7 @@ Future<void> _initBlocs() async {
 
   // Initialize Bloc for user feature
   getIt.registerFactory<UserProgramBloc>(
-    () => UserProgramBloc(getIt(), getIt()),
+    () => UserProgramBloc(getIt(), getIt(), getIt()),
   );
   getIt.registerFactory<UserProfileBloc>(
     () => UserProfileBloc(getIt()),

@@ -14,4 +14,7 @@ abstract class UserRepository {
 
   // Get user's program that user save
   Future<BaseDataResponse<List<Program>>> getUserSaveProgram();
+
+  // Get user's program that user save
+  Future<BaseDataResponse<List<Program>>> getUserJoinProgram();
 }
