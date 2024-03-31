@@ -11,4 +11,7 @@ abstract class UserRepository {
 
   // Reset user password
   Future<BaseDataResponse> resetUserPassword(String email, String password);
+
+  // Get user's program that user save
+  Future<BaseDataResponse<List<Program>>> getUserSaveProgram();
 }

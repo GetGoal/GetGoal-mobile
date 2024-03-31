@@ -19,32 +19,38 @@ mixin _$UserProgramEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() onSaveTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? onSaveTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? onSaveTapped,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(UserProgramEventStarted value) started,
+    required TResult Function(UserProgramEventOnSaveTapped value) onSaveTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(UserProgramEventStarted value)? started,
+    TResult? Function(UserProgramEventOnSaveTapped value)? onSaveTapped,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UserProgramEventStarted value)? started,
+    TResult Function(UserProgramEventOnSaveTapped value)? onSaveTapped,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -110,6 +116,7 @@ class _$UserProgramEventStartedImpl implements UserProgramEventStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() onSaveTapped,
   }) {
     return started();
   }
@@ -118,6 +125,7 @@ class _$UserProgramEventStartedImpl implements UserProgramEventStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function()? onSaveTapped,
   }) {
     return started?.call();
   }
@@ -126,6 +134,7 @@ class _$UserProgramEventStartedImpl implements UserProgramEventStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? onSaveTapped,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -138,6 +147,7 @@ class _$UserProgramEventStartedImpl implements UserProgramEventStarted {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(UserProgramEventStarted value) started,
+    required TResult Function(UserProgramEventOnSaveTapped value) onSaveTapped,
   }) {
     return started(this);
   }
@@ -146,6 +156,7 @@ class _$UserProgramEventStartedImpl implements UserProgramEventStarted {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(UserProgramEventStarted value)? started,
+    TResult? Function(UserProgramEventOnSaveTapped value)? onSaveTapped,
   }) {
     return started?.call(this);
   }
@@ -154,6 +165,7 @@ class _$UserProgramEventStartedImpl implements UserProgramEventStarted {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UserProgramEventStarted value)? started,
+    TResult Function(UserProgramEventOnSaveTapped value)? onSaveTapped,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -165,6 +177,114 @@ class _$UserProgramEventStartedImpl implements UserProgramEventStarted {
 
 abstract class UserProgramEventStarted implements UserProgramEvent {
   const factory UserProgramEventStarted() = _$UserProgramEventStartedImpl;
+}
+
+/// @nodoc
+abstract class _$$UserProgramEventOnSaveTappedImplCopyWith<$Res> {
+  factory _$$UserProgramEventOnSaveTappedImplCopyWith(
+          _$UserProgramEventOnSaveTappedImpl value,
+          $Res Function(_$UserProgramEventOnSaveTappedImpl) then) =
+      __$$UserProgramEventOnSaveTappedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UserProgramEventOnSaveTappedImplCopyWithImpl<$Res>
+    extends _$UserProgramEventCopyWithImpl<$Res,
+        _$UserProgramEventOnSaveTappedImpl>
+    implements _$$UserProgramEventOnSaveTappedImplCopyWith<$Res> {
+  __$$UserProgramEventOnSaveTappedImplCopyWithImpl(
+      _$UserProgramEventOnSaveTappedImpl _value,
+      $Res Function(_$UserProgramEventOnSaveTappedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$UserProgramEventOnSaveTappedImpl
+    implements UserProgramEventOnSaveTapped {
+  const _$UserProgramEventOnSaveTappedImpl();
+
+  @override
+  String toString() {
+    return 'UserProgramEvent.onSaveTapped()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserProgramEventOnSaveTappedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() onSaveTapped,
+  }) {
+    return onSaveTapped();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? onSaveTapped,
+  }) {
+    return onSaveTapped?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? onSaveTapped,
+    required TResult orElse(),
+  }) {
+    if (onSaveTapped != null) {
+      return onSaveTapped();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UserProgramEventStarted value) started,
+    required TResult Function(UserProgramEventOnSaveTapped value) onSaveTapped,
+  }) {
+    return onSaveTapped(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UserProgramEventStarted value)? started,
+    TResult? Function(UserProgramEventOnSaveTapped value)? onSaveTapped,
+  }) {
+    return onSaveTapped?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UserProgramEventStarted value)? started,
+    TResult Function(UserProgramEventOnSaveTapped value)? onSaveTapped,
+    required TResult orElse(),
+  }) {
+    if (onSaveTapped != null) {
+      return onSaveTapped(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UserProgramEventOnSaveTapped implements UserProgramEvent {
+  const factory UserProgramEventOnSaveTapped() =
+      _$UserProgramEventOnSaveTappedImpl;
 }
 
 /// @nodoc

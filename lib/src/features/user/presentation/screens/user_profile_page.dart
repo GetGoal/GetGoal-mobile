@@ -33,6 +33,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
   DeleteProgramBloc get _deleteProgramBloc => context.read<DeleteProgramBloc>();
   UserProfileBloc get _userProfileBloc => context.read<UserProfileBloc>();
 
+  int selected = 0;
+
   @override
   void initState() {
     _userProgramBloc.add(const UserProgramEvent.started());
@@ -161,8 +163,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
   }
 
   Widget _buildMenuSelector() {
-    int selected = 0;
-
     return Container(
       height: 36,
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -175,7 +175,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                selected = 0;
+                _userProgramBloc.add(const UserProgramEvent.started());
+              });
+            },
             child: Container(
               decoration: BoxDecoration(
                 border: selected == 0
@@ -188,14 +193,20 @@ class _UserProfilePageState extends State<UserProfilePage> {
               width: 96,
               child: GetGoalGradientText(
                 Translations.of(context).user_profile.display_your_program,
-                style: caption1Regular().copyWith(
-                  color: selected == 0 ? null : AppColors.description,
-                ),
+                gradient: selected == 0
+                    ? [AppColors.primary, AppColors.primary2]
+                    : [AppColors.description, AppColors.description],
+                style: caption1Regular(),
               ),
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                selected = 1;
+                _userProgramBloc.add(const UserProgramEvent.onSaveTapped());
+              });
+            },
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -206,17 +217,21 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     : null,
               ),
               width: 96,
-              child: Text(
+              child: GetGoalGradientText(
                 Translations.of(context).user_profile.display_save_program,
-                style: description().copyWith(
-                  color:
-                      selected == 1 ? AppColors.primary : AppColors.description,
-                ),
+                gradient: selected == 1
+                    ? [AppColors.primary, AppColors.primary2]
+                    : [AppColors.description, AppColors.description],
+                style: caption1Regular(),
               ),
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                selected = 2;
+              });
+            },
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -227,12 +242,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     : null,
               ),
               width: 96,
-              child: Text(
+              child: GetGoalGradientText(
                 Translations.of(context).user_profile.display_applied_program,
-                style: description().copyWith(
-                  color:
-                      selected == 2 ? AppColors.primary : AppColors.description,
-                ),
+                gradient: selected == 2
+                    ? [AppColors.primary, AppColors.primary2]
+                    : [AppColors.description, AppColors.description],
+                style: caption1Regular(),
               ),
             ),
           ),
