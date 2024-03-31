@@ -9,6 +9,7 @@ import '../../../program/domain/entities/program.dart';
 import '../../domain/entities/user_profile_entity.dart';
 import '../../domain/repositories/user_repository.dart';
 
+import '../models/request/user_label_request.dart';
 import '../sources/api/user_api_service.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -139,20 +140,20 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<BaseDataResponse<List<Program>>> getUserJoinProgram() async {
+  Future<BaseDataResponse> updateUserLabel(List<String> labels) async {
     try {
-      final res = await _userApiService.getUserJoinPrograms();
+      final uesrLabel = UserLabelRequest(labels: labels);
 
-      final programList =
-          res.data.data!.map((e) => e.programToEntity()).toList();
+      final res = await _userApiService.updateUserLabel(uesrLabel);
 
       final data = BaseDataResponse(
         code: res.data.code,
         message: res.data.message,
         count: res.data.count,
-        data: programList,
+        data: null,
         error: res.data.error,
       );
+
       return data;
     } on DioException catch (e) {
       final data = jsonDecode(e.response.toString());
