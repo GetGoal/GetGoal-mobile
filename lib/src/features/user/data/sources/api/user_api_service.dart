@@ -22,4 +22,7 @@ abstract class UserApiService {
   Future<HttpResponse<BaseDataResponse<UserProfileResponse>>> resetPassword(
     @Body() ResetPasswordRequest requestBody,
   );
+
+  @GET('/v1/users/programs/saved')
+  Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>> getUserSavePrograms();
 }
