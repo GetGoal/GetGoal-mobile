@@ -85,11 +85,11 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage>
               ),
             );
             break;
-          case ForgetPasswordStateFailure(:final message):
-            await showDialog(
+          case ForgetPasswordStateFailure():
+            showDialog(
               context: context,
-              builder: (context) => ErrorDialog(
-                errorMessage: message,
+              builder: (context) => const ErrorDialog(
+                errorMessage: 'Email invalid',
               ),
             );
             break;
