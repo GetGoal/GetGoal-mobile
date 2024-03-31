@@ -4,6 +4,7 @@ import 'package:retrofit/retrofit.dart';
 import '../../../../../core/bases/base_data_response.dart';
 import '../../../../auth/data/models/request/reset_password_request.dart';
 import '../../../../program/data/models/response/program_response.dart';
+import '../../models/request/user_label_request.dart';
 import '../../models/response/user_profile_response.dart';
 
 part 'user_api_service.g.dart';
@@ -30,4 +31,9 @@ abstract class UserApiService {
   @GET('/v1/users/programs/joined')
   Future<HttpResponse<BaseDataResponse<List<ProgramModel>>>>
       getUserJoinPrograms();
+
+  @PUT('/v1/users/labels')
+  Future<HttpResponse<BaseDataResponse>> updateUserLabel(
+    @Body() UserLabelRequest requestBody,
+  );
 }

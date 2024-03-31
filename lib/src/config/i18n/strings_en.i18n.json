@@ -6,7 +6,7 @@
         "user": "User"
     },
     "task": {
-        "task_status_to_do": "To-do",
+        "task_status_to_do": "Task",
         "task_status_done": "Done",
         "empty_task": "No tasks",
         "empty_task_todo": "Wow! There aren't any tasks left to do.\nGreat job! <3",

@@ -11,6 +11,9 @@ import '../features/auth/presentation/screens/login/bloc/login/login_bloc.dart';
 import '../features/auth/presentation/screens/login/login_page.dart';
 import '../features/auth/presentation/screens/new_password/bloc/new_password/new_password_bloc.dart';
 import '../features/auth/presentation/screens/new_password/new_password_page.dart';
+import '../features/auth/presentation/screens/preference/bloc/preference_list/preference_list_bloc.dart';
+import '../features/auth/presentation/screens/preference/bloc/update_user_label/update_user_label_bloc.dart';
+import '../features/auth/presentation/screens/preference/preference_page.dart';
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
 import '../features/auth/presentation/screens/sign_up/sign_up_page.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
@@ -59,6 +62,7 @@ class RouteConfig {
       _landingPage(),
       _loginPage(),
       _signUpPage(),
+      _preferencePage(),
       _verificationPage(),
       _mainPage(),
       _programInfoPage(),
@@ -133,6 +137,24 @@ class RouteConfig {
           ),
         ],
         child: const SignUpPage(),
+      ),
+    );
+  }
+
+  static GoRoute _preferencePage() {
+    return GoRoute(
+      path: Routes.preferencePage,
+      name: Routes.preferencePage,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<UpdateUserLabelBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<PreferenceListBloc>(),
+          ),
+        ],
+        child: const PreferencePage(),
       ),
     );
   }
@@ -396,6 +418,7 @@ class Routes {
   static const String landingPage = '/landing';
   static const String loginPage = '/login';
   static const String signUpPage = '/sign_up';
+  static const String preferencePage = '/preference';
   static const String verificationPage = '/verification';
   static const String mainPage = '/main';
   static const String programPage = '/program';

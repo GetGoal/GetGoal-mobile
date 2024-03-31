@@ -17,4 +17,7 @@ abstract class UserRepository {
 
   // Get user's program that user save
   Future<BaseDataResponse<List<Program>>> getUserJoinProgram();
+
+  // Update user label
+  Future<BaseDataResponse> updateUserLabel(List<String> labels);
 }

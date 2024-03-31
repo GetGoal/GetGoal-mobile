@@ -8,5 +8,6 @@ sealed class ProgramFilter with _$ProgramFilter {
     int? labelId,
     String? labelName,
     String? updatedAt,
+    bool? isSelected,
   }) = ProgramFilterLabel;
 }

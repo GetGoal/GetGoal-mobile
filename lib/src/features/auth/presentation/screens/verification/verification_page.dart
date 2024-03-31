@@ -90,6 +90,7 @@ class _VerificationPageState extends State<VerificationPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          const SizedBox(height: 24),
           _buildDescriptionInfo(),
           Expanded(
             child: Row(
@@ -272,7 +273,7 @@ class _VerificationPageState extends State<VerificationPage> {
           listener: (context, state) {
             switch (state) {
               case VerifyAccountStateVerified():
-                context.go(Routes.loginPage);
+                context.pushNamed(Routes.preferencePage);
                 break;
               case VerifyAccountStateVirifiedError(:final message):
                 showDialog(

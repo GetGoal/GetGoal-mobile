@@ -47,8 +47,20 @@ class _UserProfilePageState extends State<UserProfilePage> {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
-          _userProgramBloc.add(const UserProgramEvent.started());
           _userProfileBloc.add(const UserProfileEvent.started());
+          switch (selected) {
+            case 0:
+              _userProgramBloc.add(const UserProgramEvent.started());
+              break;
+            case 1:
+              _userProgramBloc.add(const UserProgramEvent.onSaveTapped());
+              break;
+            case 2:
+              _userProgramBloc.add(const UserProgramEvent.onJoinTapped());
+              break;
+
+            default:
+          }
         },
         child: SingleChildScrollView(
           child: Container(

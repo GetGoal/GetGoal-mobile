@@ -65,8 +65,10 @@ class UserProgramBloc extends Bloc<UserProgramEvent, UserProgramState> {
     }
   }
 
-  FutureOr<void> _onJoinTapped(UserProgramEventOnJoinTapped event,
-      Emitter<UserProgramState> emit) async {
+  FutureOr<void> _onJoinTapped(
+    UserProgramEventOnJoinTapped event,
+    Emitter<UserProgramState> emit,
+  ) async {
     try {
       final res = await _getUserJoinProgramUsecase.call();
 
