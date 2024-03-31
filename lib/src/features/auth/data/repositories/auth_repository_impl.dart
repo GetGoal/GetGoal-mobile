@@ -31,7 +31,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = RegisterRequest(
         firstName: userData.firstName,
         lastName: userData.lastName,
-        email: userData.email,
+        email: userData.email?.trim(),
         password: userData.password,
         labels: [],
       );
@@ -100,7 +100,7 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     try {
       final requestBody = LoginRequest(
-        email: loginData.email,
+        email: loginData.email?.trim(),
         password: loginData.password,
       );
 
