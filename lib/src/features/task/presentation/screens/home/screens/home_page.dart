@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         Container(
           padding: EdgeInsets.all(AppSpacing.appMargin),
           child: Text(
-            'Tasks',
+            context.t.task.task_status_to_do,
             style: title2Bold().copyWith(
               color: AppColors.white,
             ),
