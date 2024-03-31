@@ -201,6 +201,8 @@ class TaskRepositoryImpl implements TaskRepository {
     try {
       final httpResponse = await _taskApiService.deleteTask(taskId);
 
+      await NotificationService().cancelScheduleNotification(int.parse(taskId));
+
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           httpResponse.data.data!.taskToEntity(),
