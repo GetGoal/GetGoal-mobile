@@ -3,6 +3,7 @@ import 'package:retrofit/dio.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../../../core/bases/base_data_response.dart';
+import '../../../../program/data/models/response/program_filter_response.dart';
 import '../../models/request/email_request.dart';
 import '../../models/request/google_sign_in_request.dart';
 import '../../models/request/login_request.dart';
@@ -22,7 +23,7 @@ abstract class AuthApiService {
   );
 
   @POST('/v1/auth/verify')
-  Future<HttpResponse<BaseDataResponse>> verify(
+  Future<HttpResponse<BaseDataResponse<LoginSuccessResponse>>> verify(
     @Body() VerifyRequest requestBody,
   );
 
@@ -50,7 +51,10 @@ abstract class AuthApiService {
   );
 
   @GET('/v1/auth/verify-token')
-  Future<HttpResponse<BaseDataResponse>> verifyToken(
+  Future<HttpResponse<BaseDataResponse<LoginSuccessResponse>>> verifyToken(
     @Query('token') String token,
   );
+
+  @GET('/v1/labels/preferences')
+  Future<HttpResponse<BaseDataResponse<List<Label>>>> getCategoryPreferences();
 }
