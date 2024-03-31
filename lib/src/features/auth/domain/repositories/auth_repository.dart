@@ -1,6 +1,7 @@
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../core/bases/base_data_response.dart';
+import '../../../program/domain/entities/program_filter.dart';
 import '../entity/create_user.dart';
 import '../entity/login_entity.dart';
 import '../entity/token_entity.dart';
@@ -10,7 +11,7 @@ abstract class AuthRepository {
   Future<BaseDataResponse> registerAccount(CreateUser userData);
 
   // Verify account
-  Future<BaseDataResponse> verifyAccount(String code);
+  Future<BaseDataResponse<TokenEntity>> verifyAccount(String code);
 
   // Verify password reset
   Future<BaseDataResponse> verifyPasswordReset(String code);
@@ -31,4 +32,6 @@ abstract class AuthRepository {
 
   // Verify token
   Future<BaseDataResponse> verifyToken(String token);
+
+  Future<BaseDataResponse<List<ProgramFilter>>> getCategoryPreferences();
 }

@@ -5,6 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../core/bases/base_data_response.dart';
 import '../../../../shared/app_cache.dart';
+import '../../../program/data/mappers/program_filter_mapper.dart';
+import '../../../program/domain/entities/program_filter.dart';
 import '../../domain/entity/create_user.dart';
 import '../../domain/entity/login_entity.dart';
 import '../../domain/entity/token_entity.dart';
@@ -57,7 +59,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<BaseDataResponse> verifyAccount(String code) async {
+  Future<BaseDataResponse<TokenEntity>> verifyAccount(String code) async {
     try {
       final requestBody = VerifyRequest(
         code: code,
@@ -65,11 +67,17 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       final res = await _authApiService.verify(requestBody);
+
+      final token = TokenEntity(
+        accessToken: res.data.data!.accessToken,
+        refreshToken: res.data.data!.refreshToken,
+      );
+
       final data = BaseDataResponse(
         code: res.data.code,
         message: res.data.message,
         count: res.data.count,
-        data: res.data.data,
+        data: token,
         error: res.data.error,
       );
       return data;
@@ -259,6 +267,37 @@ class AuthRepositoryImpl implements AuthRepository {
         count: res.data.count,
         message: res.data.message,
         data: null,
+        error: res.data.error,
+      );
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
+
+  @override
+  Future<BaseDataResponse<List<ProgramFilter>>> getCategoryPreferences() async {
+    try {
+      final res = await _authApiService.getCategoryPreferences();
+
+      final labelList = res.data.data!
+          .map(
+            (e) => e.toDomain(),
+          )
+          .toList();
+
+      return BaseDataResponse(
+        code: res.data.code,
+        count: res.data.count,
+        message: res.data.message,
+        data: labelList,
         error: res.data.error,
       );
     } on DioException catch (e) {
