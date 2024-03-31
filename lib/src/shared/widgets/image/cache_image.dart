@@ -14,6 +14,10 @@ class CacheImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       key: UniqueKey(),
+      memCacheWidth: 96,
+      memCacheHeight: 96,
+      maxWidthDiskCache: 96,
+      maxHeightDiskCache: 96,
       fadeInDuration: const Duration(milliseconds: 100),
       fadeOutCurve: Curves.fastLinearToSlowEaseIn,
       imageUrl: programImage!,
