@@ -116,7 +116,35 @@ class UserRepositoryImpl implements UserRepository {
       final res = await _userApiService.getUserSavePrograms();
 
       final programList =
-      res.data.data!.map((e) => e.programToEntity()).toList();
+          res.data.data!.map((e) => e.programToEntity()).toList();
+
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: programList,
+        error: res.data.error,
+      );
+      return data;
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
+
+  @override
+  Future<BaseDataResponse<List<Program>>> getUserJoinProgram() async {
+    try {
+      final res = await _userApiService.getUserJoinPrograms();
+
+      final programList =
+          res.data.data!.map((e) => e.programToEntity()).toList();
 
       final data = BaseDataResponse(
         code: res.data.code,

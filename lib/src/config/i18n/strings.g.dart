@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 130 (65 per locale)
 ///
-/// Built on 2024-03-30 at 07:49 UTC
+/// Built on 2024-03-31 at 19:06 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -200,7 +200,7 @@ class _StringsUserProfileEn {
 	String get page_title => 'My profile';
 	String get display_your_program => 'Your program';
 	String get display_save_program => 'Save';
-	String get display_applied_program => 'Applied';
+	String get display_applied_program => 'Join';
 	String get logout => 'Log out';
 }
 
@@ -584,7 +584,7 @@ extension on Translations {
 			case 'user_profile.page_title': return 'My profile';
 			case 'user_profile.display_your_program': return 'Your program';
 			case 'user_profile.display_save_program': return 'Save';
-			case 'user_profile.display_applied_program': return 'Applied';
+			case 'user_profile.display_applied_program': return 'Join';
 			case 'user_profile.logout': return 'Log out';
 			case 'program.page_description': return 'Find a training program that\'s all about what you love and where you want to go!';
 			case 'program.search': return 'Search';
