@@ -39,6 +39,7 @@ class FilterProgramBloc extends Bloc<FilterProgramEvent, FilterProgramState> {
       emit(
         FilterProgramState.loadedSuccess(
           labels: [...fixedItem, ...filterList.data!],
+          selectedFilter: 0,
         ),
       );
     } catch (e) {
