@@ -74,7 +74,7 @@ class _LandingPageState extends State<LandingPage> {
       listener: (context, state) {
         switch (state) {
           case GoogleSignInSuccess():
-            context.go(Routes.preferencePage);
+            context.go(Routes.mainPage);
             break;
           case GoogleSignInFailure(:final error):
             showDialog(
