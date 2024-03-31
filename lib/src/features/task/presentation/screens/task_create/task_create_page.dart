@@ -412,12 +412,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
     );
 
     if (date != null) {
-      List splitDate = DateFormat.yMd('th_TH').format(date).split('/');
-      // setState(() {
-      _taskStartDateInputController.text = DateFormat.yMd('th_TH').format(date);
-      _selectedDate =
-          '${splitDate[2]}-${int.parse(splitDate[1]) < 10 ? '0${splitDate[1]}' : '$splitDate'}-${splitDate[0]}';
-      // });
+      _selectedDate = DateFormat('yyyy-MM-dd').format(date);
     }
   }
 
