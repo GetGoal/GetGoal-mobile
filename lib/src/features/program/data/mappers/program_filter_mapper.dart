@@ -5,5 +5,6 @@ extension ProgramFilterMapper on Label {
   ProgramFilter toDomain() => ProgramFilter.label(
         labelId: labelId ?? 0,
         labelName: labelName ?? '',
+        isSelected: false,
       );
 }

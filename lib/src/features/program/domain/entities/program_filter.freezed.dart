@@ -19,22 +19,26 @@ mixin _$ProgramFilter {
   int? get labelId => throw _privateConstructorUsedError;
   String? get labelName => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
+  bool? get isSelected => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int? labelId, String? labelName, String? updatedAt)
+    required TResult Function(int? labelId, String? labelName,
+            String? updatedAt, bool? isSelected)
         label,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? labelId, String? labelName, String? updatedAt)?
+    TResult? Function(int? labelId, String? labelName, String? updatedAt,
+            bool? isSelected)?
         label,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? labelId, String? labelName, String? updatedAt)? label,
+    TResult Function(int? labelId, String? labelName, String? updatedAt,
+            bool? isSelected)?
+        label,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -66,7 +70,8 @@ abstract class $ProgramFilterCopyWith<$Res> {
           ProgramFilter value, $Res Function(ProgramFilter) then) =
       _$ProgramFilterCopyWithImpl<$Res, ProgramFilter>;
   @useResult
-  $Res call({int? labelId, String? labelName, String? updatedAt});
+  $Res call(
+      {int? labelId, String? labelName, String? updatedAt, bool? isSelected});
 }
 
 /// @nodoc
@@ -85,6 +90,7 @@ class _$ProgramFilterCopyWithImpl<$Res, $Val extends ProgramFilter>
     Object? labelId = freezed,
     Object? labelName = freezed,
     Object? updatedAt = freezed,
+    Object? isSelected = freezed,
   }) {
     return _then(_value.copyWith(
       labelId: freezed == labelId
@@ -99,6 +105,10 @@ class _$ProgramFilterCopyWithImpl<$Res, $Val extends ProgramFilter>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      isSelected: freezed == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -111,7 +121,8 @@ abstract class _$$ProgramFilterLabelImplCopyWith<$Res>
       __$$ProgramFilterLabelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? labelId, String? labelName, String? updatedAt});
+  $Res call(
+      {int? labelId, String? labelName, String? updatedAt, bool? isSelected});
 }
 
 /// @nodoc
@@ -128,6 +139,7 @@ class __$$ProgramFilterLabelImplCopyWithImpl<$Res>
     Object? labelId = freezed,
     Object? labelName = freezed,
     Object? updatedAt = freezed,
+    Object? isSelected = freezed,
   }) {
     return _then(_$ProgramFilterLabelImpl(
       labelId: freezed == labelId
@@ -142,6 +154,10 @@ class __$$ProgramFilterLabelImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      isSelected: freezed == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -150,7 +166,7 @@ class __$$ProgramFilterLabelImplCopyWithImpl<$Res>
 
 class _$ProgramFilterLabelImpl implements ProgramFilterLabel {
   const _$ProgramFilterLabelImpl(
-      {this.labelId, this.labelName, this.updatedAt});
+      {this.labelId, this.labelName, this.updatedAt, this.isSelected});
 
   @override
   final int? labelId;
@@ -158,10 +174,12 @@ class _$ProgramFilterLabelImpl implements ProgramFilterLabel {
   final String? labelName;
   @override
   final String? updatedAt;
+  @override
+  final bool? isSelected;
 
   @override
   String toString() {
-    return 'ProgramFilter.label(labelId: $labelId, labelName: $labelName, updatedAt: $updatedAt)';
+    return 'ProgramFilter.label(labelId: $labelId, labelName: $labelName, updatedAt: $updatedAt, isSelected: $isSelected)';
   }
 
   @override
@@ -173,11 +191,14 @@ class _$ProgramFilterLabelImpl implements ProgramFilterLabel {
             (identical(other.labelName, labelName) ||
                 other.labelName == labelName) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, labelId, labelName, updatedAt);
+  int get hashCode =>
+      Object.hash(runtimeType, labelId, labelName, updatedAt, isSelected);
 
   @JsonKey(ignore: true)
   @override
@@ -189,30 +210,33 @@ class _$ProgramFilterLabelImpl implements ProgramFilterLabel {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int? labelId, String? labelName, String? updatedAt)
+    required TResult Function(int? labelId, String? labelName,
+            String? updatedAt, bool? isSelected)
         label,
   }) {
-    return label(labelId, labelName, updatedAt);
+    return label(labelId, labelName, updatedAt, isSelected);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? labelId, String? labelName, String? updatedAt)?
+    TResult? Function(int? labelId, String? labelName, String? updatedAt,
+            bool? isSelected)?
         label,
   }) {
-    return label?.call(labelId, labelName, updatedAt);
+    return label?.call(labelId, labelName, updatedAt, isSelected);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? labelId, String? labelName, String? updatedAt)? label,
+    TResult Function(int? labelId, String? labelName, String? updatedAt,
+            bool? isSelected)?
+        label,
     required TResult orElse(),
   }) {
     if (label != null) {
-      return label(labelId, labelName, updatedAt);
+      return label(labelId, labelName, updatedAt, isSelected);
     }
     return orElse();
   }
@@ -250,7 +274,8 @@ abstract class ProgramFilterLabel implements ProgramFilter {
   const factory ProgramFilterLabel(
       {final int? labelId,
       final String? labelName,
-      final String? updatedAt}) = _$ProgramFilterLabelImpl;
+      final String? updatedAt,
+      final bool? isSelected}) = _$ProgramFilterLabelImpl;
 
   @override
   int? get labelId;
@@ -258,6 +283,8 @@ abstract class ProgramFilterLabel implements ProgramFilter {
   String? get labelName;
   @override
   String? get updatedAt;
+  @override
+  bool? get isSelected;
   @override
   @JsonKey(ignore: true)
   _$$ProgramFilterLabelImplCopyWith<_$ProgramFilterLabelImpl> get copyWith =>
