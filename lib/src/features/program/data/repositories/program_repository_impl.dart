@@ -4,10 +4,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:intl/intl.dart';
 import 'package:path/path.dart' as p;
 
-import '../../../../config/notification/notification_service.dart';
 import '../../../../core/bases/base_data.dart';
 import '../../../../core/bases/base_data_response.dart';
 import '../../../../shared/app_cache.dart';
@@ -144,28 +142,6 @@ class ProgramRepositoryImpl implements ProgramRepository {
 
       final res = await _programApiService.createProgram(requestBody);
 
-      for (var i = 0; i < AppCache.programTaskCreateList.length; i++) {
-        if (AppCache.programTaskCreateList[i].isSetNotification != 0) {
-          final originalDateString =
-              AppCache.programTaskCreateList[i].startTime!;
-          final formattedDate = DateFormat(
-            'yyyy-MM-dd HH:mm:ss.SSSSSS',
-          ).format(DateTime.parse(originalDateString));
-
-          NotificationService().scheduleNotification(
-            id: res.data.data!.tasks![i].taskId,
-            title: res.data.data!.tasks![i].taskName,
-            body:
-                'This task will start in ${res.data.data!.tasks![i].timeBeforeNotify} minutes.',
-            scheduledTime: DateTime.parse(formattedDate).subtract(
-              Duration(
-                minutes: res.data.data!.tasks![i].timeBeforeNotify!,
-              ),
-            ),
-          );
-        }
-      }
-
       final programRes = res.data.data!.programToEntity();
 
       final data = BaseDataResponse(
@@ -272,28 +248,6 @@ class ProgramRepositoryImpl implements ProgramRepository {
         programId,
         requestBody,
       );
-
-      for (var i = 0; i < AppCache.programTaskCreateList.length; i++) {
-        if (AppCache.programTaskCreateList[i].isSetNotification != 0) {
-          final originalDateString =
-              AppCache.programTaskCreateList[i].startTime!;
-          final formattedDate = DateFormat(
-            'yyyy-MM-dd HH:mm:ss.SSSSSS',
-          ).format(DateTime.parse(originalDateString));
-
-          NotificationService().scheduleNotification(
-            id: res.data.data!.tasks![i].taskId,
-            title: res.data.data!.tasks![i].taskName,
-            body:
-                'This task will start in ${res.data.data!.tasks![i].timeBeforeNotify} minutes.',
-            scheduledTime: DateTime.parse(formattedDate).subtract(
-              Duration(
-                minutes: res.data.data!.tasks![i].timeBeforeNotify!,
-              ),
-            ),
-          );
-        }
-      }
 
       final programRes = res.data.data!.programToEntity();
 
