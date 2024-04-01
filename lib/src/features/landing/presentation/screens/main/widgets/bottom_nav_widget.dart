@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../config/route_config.dart';
+import '../../../../../../shared/app_cache.dart';
 import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
@@ -171,14 +172,17 @@ class BottomNavigation extends StatelessWidget {
 
           // Create program button
           GestureDetector(
-            onTap: () {
+            onTap: () async {
               context.pop();
-              context.pushNamed(
+              bool? isRefresh = await context.pushNamed(
                 Routes.programCreatePage,
                 extra: ProgramCreatePageData(
                   mode: PROGRAMFORMMODE.create,
                 ),
               );
+              if (isRefresh!) {
+                AppCache.programTaskCreateList = [];
+              }
             },
             behavior: HitTestBehavior.translucent,
             child: Container(
