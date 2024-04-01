@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
 import '../../themes/color.dart';
 import '../../themes/font.dart';
@@ -38,26 +39,22 @@ class DropdownInputField extends StatelessWidget {
           filled: true,
           suffixStyle: subHeadlineRegular().copyWith(color: AppColors.white),
           contentPadding: const EdgeInsets.all(16),
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: GradientOutlineInputBorder(
+            gradient: AppColors.silverGradient,
+            // Radius
             borderRadius: const BorderRadius.all(
               Radius.circular(
-                12.0,
+                16.0,
               ),
-            ),
-            borderSide: BorderSide(
-              color: AppColors.description,
-              width: 1,
             ),
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: GradientOutlineInputBorder(
+            gradient: AppColors.primaryGradient,
+            // Radius
             borderRadius: const BorderRadius.all(
               Radius.circular(
-                12.0,
+                16.0,
               ),
-            ),
-            borderSide: BorderSide(
-              color: AppColors.primary2,
-              width: 1,
             ),
           ),
         ),
