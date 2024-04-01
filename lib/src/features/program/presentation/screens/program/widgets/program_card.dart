@@ -228,7 +228,10 @@ class _ProgramCardState extends State<ProgramCard> {
         itemBuilder: (context) => [
           // Edit program
           PopupMenuItem(
-            onTap: () => widget.onEdit,
+            onTap: () {
+              if (widget.onEdit == null) return;
+              widget.onEdit!();
+            },
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: Row(
@@ -241,7 +244,10 @@ class _ProgramCardState extends State<ProgramCard> {
 
           // Delete program
           PopupMenuItem(
-            onTap: () {},
+            onTap: () {
+              if (widget.onDelete == null) return;
+              widget.onDelete!();
+            },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
