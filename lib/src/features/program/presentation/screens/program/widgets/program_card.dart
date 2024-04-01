@@ -228,7 +228,7 @@ class _ProgramCardState extends State<ProgramCard> {
         itemBuilder: (context) => [
           // Edit program
           PopupMenuItem(
-            onTap: () async {},
+            onTap: () => widget.onEdit,
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: Row(
