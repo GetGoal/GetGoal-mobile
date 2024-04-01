@@ -415,7 +415,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
       List splitDate = DateFormat.yMd('th_TH').format(date).split('/');
       _taskStartDateInputController.text = DateFormat.yMd('th_TH').format(date);
       _selectedDate =
-          '${splitDate[2]}-${int.parse(splitDate[1]) < 10 ? '0${splitDate[1]}' : '$splitDate'}-${int.parse(splitDate[0]) < 10 ? '0${splitDate[0]}' : '$splitDate'}';
+          '${splitDate[2]}-${int.parse(splitDate[1]) < 10 ? '0${splitDate[1]}' : '${splitDate[1]}'}-${int.parse(splitDate[0]) < 10 ? '0${splitDate[0]}' : '${splitDate[0]}'}';
     }
   }
 
@@ -436,7 +436,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
   String formatDate(String date) {
     List splitDate = date.split('/');
 
-    return '${splitDate[2]}-${int.parse(splitDate[1]) < 10 ? '0${splitDate[1]}' : '$splitDate'}-${int.parse(splitDate[0]) < 10 ? '0${splitDate[0]}' : '$splitDate'}';
+    return '${splitDate[2]}-${int.parse(splitDate[1]) < 10 ? '0${splitDate[1]}' : '${splitDate[1]}'}-${int.parse(splitDate[0]) < 10 ? '0${splitDate[0]}' : '${splitDate[0]}'}';
   }
 
   String formatTime(TimeOfDay time) {

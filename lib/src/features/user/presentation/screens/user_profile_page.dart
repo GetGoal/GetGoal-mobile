@@ -312,7 +312,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       ),
                     );
                     if (isRefresh!) {
-                      _userProgramBloc.add(const UserProgramEvent.started());
+                      Future.delayed(const Duration(seconds: 1), () {
+                        _userProgramBloc.add(const UserProgramEvent.started());
+                      });
                       AppCache.programTaskCreateList = [];
                     }
                   },
