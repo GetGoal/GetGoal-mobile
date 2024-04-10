@@ -30,7 +30,9 @@ class PreferenceChip extends StatelessWidget {
               ? GradientBoxBorder(
                   gradient: AppColors.primaryGradient,
                 )
-              : null,
+              : GradientBoxBorder(
+                  gradient: AppColors.silverGradient,
+                ),
           borderRadius: BorderRadius.circular(48),
           color: AppColors.secondary,
           boxShadow: AppShadow.shadow,
