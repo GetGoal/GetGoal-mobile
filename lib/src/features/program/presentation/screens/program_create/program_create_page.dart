@@ -11,15 +11,22 @@ import '../../../../../shared/app_cache.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/program_validation_mixin.dart';
 import '../../../../../shared/themes/color.dart';
+import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
+import '../../../../../shared/utils/string_extension.dart';
 import '../../../../../shared/widgets/button/circle_button.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/icon/custom_icon.dart';
+import '../../../../../shared/widgets/input/multi_selector.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
+import '../../../../../shared/widgets/text/get_goal_gradient_text.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import '../../../../../shared/widgets/text_field/upload_file_input.dart';
+import '../../../../auth/presentation/screens/preference/widgets/preference_chip.dart';
 import '../../../domain/entities/program.dart';
 import '../../../domain/entities/program_create.dart';
+import '../../../domain/entities/program_filter.dart';
+import '../../bloc/program_category/program_category_bloc.dart';
 import '../../bloc/program_edit/program_edit_bloc.dart';
 import '../../enum/program_form_mode.enum.dart';
 import 'program_task_create.dart';
@@ -49,6 +56,8 @@ class ProgramCreatePage extends StatefulWidget {
 class _ProgramCreatePageState extends State<ProgramCreatePage>
     with ProgramValidationMixin {
   ProgramEditBloc get _programEditBloc => context.read<ProgramEditBloc>();
+  ProgramCategoryBloc get _programCategoryBloc =>
+      context.read<ProgramCategoryBloc>();
 
   final _formKey = GlobalKey<FormState>();
   final _programNameTextInputController = TextEditingController();
@@ -58,12 +67,14 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
   String _imagePath = '';
   File _imageFile = File('');
   String _firebaseImagePath = '';
+  List<Label> _categorySelected = [];
 
   @override
   void initState() {
     _programEditBloc.add(
       ProgramEditEvent.started(programId: widget.pageData!.programId),
     );
+    _programCategoryBloc.add(const ProgramCategoryEvent.started());
     super.initState();
   }
 
@@ -273,11 +284,22 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
   }
 
   Widget _buildCategoryFieldInput() {
-    return NormalTextInputField(
-      controller: _programCategoryTextInputController,
-      label: Translations.of(context).create_program.category,
-      hintText: Translations.of(context).create_program.ex_category,
-      validator: programCategoryValidator,
+    return BlocConsumer<ProgramCategoryBloc, ProgramCategoryState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        switch (state) {
+          case ProgramCategoryStateSuccess(:final labels):
+            final selectedLabel = labels.where((e) => e.isSelected!).toList();
+
+            return MultiSelector(
+              label: Translations.of(context).create_program.category,
+              categoryList: selectedLabel,
+              bottomSheet: _buildBottomSheet(context),
+            );
+          default:
+            return const SizedBox();
+        }
+      },
     );
   }
 
@@ -299,9 +321,7 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
             imagePath: _imagePath != '' ? _imagePath : _firebaseImagePath,
             programName: _programNameTextInputController.text,
             programDescription: _programDescriptionTextInputController.text,
-            category: [
-              Label(labelName: _programCategoryTextInputController.text),
-            ],
+            category: _categorySelected,
             expectedTime: _programExpectedTimeTextInputController.text,
           );
 
@@ -328,5 +348,226 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
       default:
         return 'Unknown';
     }
+  }
+
+  Widget _buildBottomSheet(
+    BuildContext context,
+  ) {
+    return Container(
+      height: 640,
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0),
+        color: AppColors.secondary,
+        boxShadow: AppShadow.shadow,
+      ),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                100,
+              ),
+              color: Colors.white30,
+            ),
+            width: 36,
+            child: const SizedBox(
+              height: 4,
+              width: 36,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 24),
+            width: MediaQuery.of(context).size.width,
+            child: Text(
+              'Please select your category',
+              style: bodyBold().copyWith(color: AppColors.white),
+            ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Text(
+              'Can select more than one.',
+              style: footnoteRegular().copyWith(color: AppColors.description),
+            ),
+          ),
+          const SizedBox(height: 24),
+          _buildCategoryList(
+            context,
+            _programCategoryBloc,
+          ),
+          const SizedBox(height: 24),
+          MainButton(
+            buttonText: 'Close',
+            onTap: () => context.pop(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryList(
+    BuildContext context,
+    ProgramCategoryBloc bloc,
+  ) {
+    return BlocBuilder<ProgramCategoryBloc, ProgramCategoryState>(
+      bloc: bloc,
+      builder: (context, state) {
+        switch (state) {
+          case ProgramCategoryStateSuccess(:final labels):
+            return BlocListener<ProgramCategoryBloc, ProgramCategoryState>(
+              bloc: bloc,
+              listener: (context, state) {
+                switch (state) {
+                  case ProgramCategoryStateSuccess(:final labels):
+                    final selectedList =
+                        labels.where((e) => e.isSelected!).toList();
+
+                    final labelSelectedList = selectedList
+                        .map((e) => Label(labelName: e.labelName))
+                        .toList();
+
+                    _categorySelected = labelSelectedList;
+                    break;
+                  default:
+                    break;
+                }
+              },
+              child: Expanded(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Wrap(
+                    children: List<Widget>.generate(
+                      labels.length + 1,
+                      (int index) {
+                        if (index == labels.length) {
+                          return GestureDetector(
+                            onTap: () => _showAddCategoryDialog(labels),
+                            child: Container(
+                              width: 36,
+                              height: 36,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(36.0),
+                                gradient: AppColors.primaryGradient,
+                                boxShadow: AppShadow.shadow,
+                              ),
+                              child: Text('+', style: bodyBold()),
+                            ),
+                          );
+                        } else {
+                          return Container(
+                            padding: const EdgeInsets.only(right: 8, bottom: 8),
+                            child: PreferenceChip(
+                              labelName: labels[index].labelName ?? '',
+                              isSelected: labels[index].isSelected!,
+                              onTab: (bool isSelected) {
+                                final labelList = labels.toList();
+                                final label = ProgramFilter.label(
+                                  labelId: labels[index].labelId,
+                                  labelName: labels[index].labelName,
+                                  updatedAt: null,
+                                  isSelected: isSelected,
+                                );
+                                labelList[index] = label;
+
+                                _programCategoryBloc.add(
+                                  ProgramCategoryEvent.onCategoryTapped(
+                                    labels: labelList,
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            );
+          default:
+            return const SizedBox();
+        }
+      },
+    );
+  }
+
+  void _showAddCategoryDialog(List<ProgramFilter> labels) async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: AppColors.secondary,
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Add new category',
+                  style: bodyBold().copyWith(),
+                ),
+                const SizedBox(height: 16),
+                NormalTextInputField(
+                  label: 'Category name',
+                  controller: _programCategoryTextInputController,
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      child: GestureDetector(
+                        onTap: () => context.pop(),
+                        child: GetGoalGradientText(
+                          'Close',
+                          style: bodyRegular(),
+                          textAlign: TextAlign.center,
+                          gradient: [
+                            AppColors.description,
+                            AppColors.description,
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 24),
+                    SizedBox(
+                      child: GestureDetector(
+                        onTap: () {
+                          final labelList = labels.toList();
+                          final label = ProgramFilter.label(
+                            labelName: _programCategoryTextInputController.text
+                                .toCapitalize()
+                                .trim(),
+                            updatedAt: null,
+                            isSelected: true,
+                          );
+                          labelList.add(label);
+                          _programCategoryBloc.add(
+                            ProgramCategoryEvent.onCategoryTapped(
+                              labels: labelList,
+                            ),
+                          );
+                          _programCategoryTextInputController.clear();
+                          context.pop();
+                        },
+                        child: GetGoalGradientText(
+                          'Add',
+                          style: bodyRegular(),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }
