@@ -44,6 +44,7 @@ import '../features/program/domain/usecases/program/save_program_usecase.dart';
 import '../features/program/presentation/bloc/delete_program/delete_program_bloc.dart';
 import '../features/program/presentation/bloc/filter_program/filter_program_bloc.dart';
 import '../features/program/presentation/bloc/program/program_bloc.dart';
+import '../features/program/presentation/bloc/program_category/program_category_bloc.dart';
 import '../features/program/presentation/bloc/program_edit/program_edit_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
 import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
@@ -287,6 +288,9 @@ Future<void> _initBlocs() async {
   );
   getIt.registerFactory<DeleteProgramBloc>(
     () => DeleteProgramBloc(getIt()),
+  );
+  getIt.registerFactory<ProgramCategoryBloc>(
+    () => ProgramCategoryBloc(),
   );
 
   // Initialize Bloc for task feature
