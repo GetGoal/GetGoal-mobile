@@ -7,6 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../../../core/secure_store.dart';
+import '../../../../../../user/domain/usecases/get_user_profile_usecase.dart';
 import '../../../../../domain/usecase/auth/google_sign_in_usecase.dart';
 
 part 'google_sign_in_bloc.freezed.dart';
@@ -14,19 +15,26 @@ part 'google_sign_in_event.dart';
 part 'google_sign_in_state.dart';
 
 class GoogleSignInBloc extends Bloc<GoogleSignInEvent, GoogleSignInState> {
-  GoogleSignInBloc(this._googleSignInUsecase, this._googleSignIn)
-      : super(const GoogleSignInState.initial()) {
+  GoogleSignInBloc(
+    this._googleSignInUsecase,
+    this._googleSignIn,
+    this._getUserProfileUsecase,
+  ) : super(const GoogleSignInState.initial()) {
     on<GoogleSignInEvent>(_onGoogleLogin);
   }
 
   final GoogleSignInUsecase _googleSignInUsecase;
   final GoogleSignIn _googleSignIn;
+  final GetUserProfileUsecase _getUserProfileUsecase;
 
-  Future<FutureOr<void>> _onGoogleLogin(
+  FutureOr<void> _onGoogleLogin(
     GoogleSignInEvent event,
     Emitter<GoogleSignInState> emit,
   ) async {
     try {
+      await SecureStorage().deleteSecureData('access_token');
+      await SecureStorage().deleteSecureData('refresh_token');
+
       emit(const GoogleSignInState.loading());
       final GoogleSignInAccount? gUser = await _googleSignIn.signIn();
 
@@ -45,8 +53,26 @@ class GoogleSignInBloc extends Bloc<GoogleSignInEvent, GoogleSignInState> {
         emit(GoogleSignInState.failure(res.error!));
       }
 
-      SecureStorage().writeSecureData('access_token', res.data!.accessToken!);
-      SecureStorage().writeSecureData('refresh_token', res.data!.refreshToken!);
+      await SecureStorage()
+          .writeSecureData('access_token', res.data!.accessToken!);
+      await SecureStorage()
+          .writeSecureData('refresh_token', res.data!.refreshToken!);
+
+      try {
+        final user = await _getUserProfileUsecase.call();
+
+        if (user.code != 200) {
+          emit(const GoogleSignInState.failure('failed to login with google'));
+          return;
+        }
+
+        if (user.data!.labels!.isEmpty) {
+          emit(const GoogleSignInState.incompletePreference());
+          return;
+        }
+      } catch (e) {
+        emit(const GoogleSignInState.failure('failed to login with google'));
+      }
 
       emit(const GoogleSignInState.success());
     } catch (e) {

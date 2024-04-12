@@ -344,7 +344,7 @@ Future<void> _initBlocs() async {
     () => NewPasswordBloc(getIt()),
   );
   getIt.registerFactory<GoogleSignInBloc>(
-    () => GoogleSignInBloc(getIt(), getIt()),
+    () => GoogleSignInBloc(getIt(), getIt(), getIt()),
   );
   getIt.registerFactory<PreferenceListBloc>(
     () => PreferenceListBloc(getIt()),
