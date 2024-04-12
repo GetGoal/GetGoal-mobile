@@ -26,6 +26,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     try {
+      await SecureStorage().deleteSecureData('access_token');
+      await SecureStorage().deleteSecureData('refresh_token');
+
       emit(const LoginState.loading());
       final loginData = LoginEntity(
         email: event.email.trim(),
