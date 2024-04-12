@@ -20,6 +20,7 @@ mixin _$UserProfileEntity {
   String? get email => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
+  List<String>? get labels => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserProfileEntityCopyWith<UserProfileEntity> get copyWith =>
@@ -32,7 +33,12 @@ abstract class $UserProfileEntityCopyWith<$Res> {
           UserProfileEntity value, $Res Function(UserProfileEntity) then) =
       _$UserProfileEntityCopyWithImpl<$Res, UserProfileEntity>;
   @useResult
-  $Res call({int? userId, String? email, String? firstName, String? lastName});
+  $Res call(
+      {int? userId,
+      String? email,
+      String? firstName,
+      String? lastName,
+      List<String>? labels});
 }
 
 /// @nodoc
@@ -52,6 +58,7 @@ class _$UserProfileEntityCopyWithImpl<$Res, $Val extends UserProfileEntity>
     Object? email = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? labels = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -70,6 +77,10 @@ class _$UserProfileEntityCopyWithImpl<$Res, $Val extends UserProfileEntity>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
+      labels: freezed == labels
+          ? _value.labels
+          : labels // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -82,7 +93,12 @@ abstract class _$$UserProfileEntityImplCopyWith<$Res>
       __$$UserProfileEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? userId, String? email, String? firstName, String? lastName});
+  $Res call(
+      {int? userId,
+      String? email,
+      String? firstName,
+      String? lastName,
+      List<String>? labels});
 }
 
 /// @nodoc
@@ -100,6 +116,7 @@ class __$$UserProfileEntityImplCopyWithImpl<$Res>
     Object? email = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? labels = freezed,
   }) {
     return _then(_$UserProfileEntityImpl(
       userId: freezed == userId
@@ -118,6 +135,10 @@ class __$$UserProfileEntityImplCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
+      labels: freezed == labels
+          ? _value._labels
+          : labels // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -126,7 +147,12 @@ class __$$UserProfileEntityImplCopyWithImpl<$Res>
 
 class _$UserProfileEntityImpl implements _UserProfileEntity {
   const _$UserProfileEntityImpl(
-      {this.userId, this.email, this.firstName, this.lastName});
+      {this.userId,
+      this.email,
+      this.firstName,
+      this.lastName,
+      final List<String>? labels})
+      : _labels = labels;
 
   @override
   final int? userId;
@@ -136,10 +162,19 @@ class _$UserProfileEntityImpl implements _UserProfileEntity {
   final String? firstName;
   @override
   final String? lastName;
+  final List<String>? _labels;
+  @override
+  List<String>? get labels {
+    final value = _labels;
+    if (value == null) return null;
+    if (_labels is EqualUnmodifiableListView) return _labels;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'UserProfileEntity(userId: $userId, email: $email, firstName: $firstName, lastName: $lastName)';
+    return 'UserProfileEntity(userId: $userId, email: $email, firstName: $firstName, lastName: $lastName, labels: $labels)';
   }
 
   @override
@@ -152,12 +187,13 @@ class _$UserProfileEntityImpl implements _UserProfileEntity {
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
-                other.lastName == lastName));
+                other.lastName == lastName) &&
+            const DeepCollectionEquality().equals(other._labels, _labels));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userId, email, firstName, lastName);
+  int get hashCode => Object.hash(runtimeType, userId, email, firstName,
+      lastName, const DeepCollectionEquality().hash(_labels));
 
   @JsonKey(ignore: true)
   @override
@@ -172,7 +208,8 @@ abstract class _UserProfileEntity implements UserProfileEntity {
       {final int? userId,
       final String? email,
       final String? firstName,
-      final String? lastName}) = _$UserProfileEntityImpl;
+      final String? lastName,
+      final List<String>? labels}) = _$UserProfileEntityImpl;
 
   @override
   int? get userId;
@@ -182,6 +219,8 @@ abstract class _UserProfileEntity implements UserProfileEntity {
   String? get firstName;
   @override
   String? get lastName;
+  @override
+  List<String>? get labels;
   @override
   @JsonKey(ignore: true)
   _$$UserProfileEntityImplCopyWith<_$UserProfileEntityImpl> get copyWith =>

@@ -55,6 +55,7 @@ class UserRepositoryImpl implements UserRepository {
         email: res.data.data!.email,
         firstName: res.data.data!.firstName,
         lastName: res.data.data!.lastName,
+        labels: res.data.data!.labels,
       );
 
       final data = BaseDataResponse(
