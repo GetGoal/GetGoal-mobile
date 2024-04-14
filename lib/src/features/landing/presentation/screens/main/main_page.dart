@@ -10,6 +10,7 @@ import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/icon/custom_icon.dart';
+import '../../../../calendar/presentation/screens/calendar/calendar_page.dart';
 import '../../../../program/presentation/screens/program/program_page.dart';
 import '../../../../task/presentation/screens/home/bloc/todo/todo_bloc.dart';
 import '../../../../task/presentation/screens/home/screens/home_page.dart';
@@ -34,7 +35,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const ProgramPage(),
     const SizedBox(),
-    const SizedBox(),
+    const CalendarPage(),
     const UserProfilePage(),
   ];
 

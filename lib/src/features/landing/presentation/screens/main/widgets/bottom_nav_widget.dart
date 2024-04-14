@@ -106,7 +106,12 @@ class BottomNavigation extends StatelessWidget {
               position: 3,
               currentIndex: bottomNavSelected,
               ontap: () {
-                context.pushNamed('test');
+                mainPageBloc!.add(
+                  MainPageEvent.bottomNavTapped(
+                    bottomNavSelected: 3,
+                    appbarTitle: Translations.of(context).navbar.calendar,
+                  ),
+                );
               },
             ),
             BottomNavItem(
