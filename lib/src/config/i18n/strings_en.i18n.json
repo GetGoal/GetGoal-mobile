@@ -89,5 +89,8 @@
     },
     "notification": {
         "page_title": "Notification"
+    },
+    "calendar_page": {
+        "task": "Task"
     }
 }

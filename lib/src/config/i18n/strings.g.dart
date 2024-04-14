@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 130 (65 per locale)
+/// Strings: 132 (66 per locale)
 ///
-/// Built on 2024-04-09 at 13:24 UTC
+/// Built on 2024-04-14 at 16:05 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -161,6 +161,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsForgetPasswordEn forget_password = _StringsForgetPasswordEn._(_root);
 	late final _StringsNewPasswordEn new_password = _StringsNewPasswordEn._(_root);
 	late final _StringsNotificationEn notification = _StringsNotificationEn._(_root);
+	late final _StringsCalendarPageEn calendar_page = _StringsCalendarPageEn._(_root);
 }
 
 // Path: navbar
@@ -345,6 +346,16 @@ class _StringsNotificationEn {
 	String get page_title => 'Notification';
 }
 
+// Path: calendar_page
+class _StringsCalendarPageEn {
+	_StringsCalendarPageEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get task => 'Task';
+}
+
 // Path: <root>
 class _StringsTh implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
@@ -382,6 +393,7 @@ class _StringsTh implements Translations {
 	@override late final _StringsForgetPasswordTh forget_password = _StringsForgetPasswordTh._(_root);
 	@override late final _StringsNewPasswordTh new_password = _StringsNewPasswordTh._(_root);
 	@override late final _StringsNotificationTh notification = _StringsNotificationTh._(_root);
+	@override late final _StringsCalendarPageTh calendar_page = _StringsCalendarPageTh._(_root);
 }
 
 // Path: navbar
@@ -566,6 +578,16 @@ class _StringsNotificationTh implements _StringsNotificationEn {
 	@override String get page_title => 'การแจ้งเตือน';
 }
 
+// Path: calendar_page
+class _StringsCalendarPageTh implements _StringsCalendarPageEn {
+	_StringsCalendarPageTh._(this._root);
+
+	@override final _StringsTh _root; // ignore: unused_field
+
+	// Translations
+	@override String get task => 'รายการที่ต้องทำ';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -637,6 +659,7 @@ extension on Translations {
 			case 'forget_password.page_title': return 'Reset password';
 			case 'new_password.page_title': return 'Set new password';
 			case 'notification.page_title': return 'Notification';
+			case 'calendar_page.task': return 'Task';
 			default: return null;
 		}
 	}
@@ -710,6 +733,7 @@ extension on _StringsTh {
 			case 'forget_password.page_title': return 'ลืมรหัสผ่าน';
 			case 'new_password.page_title': return 'ตั้งรหัสผ่านใหม่';
 			case 'notification.page_title': return 'การแจ้งเตือน';
+			case 'calendar_page.task': return 'รายการที่ต้องทำ';
 			default: return null;
 		}
 	}
