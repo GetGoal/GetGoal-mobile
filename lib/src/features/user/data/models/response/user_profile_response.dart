@@ -9,6 +9,7 @@ class UserProfileResponse {
     required this.email,
     required this.firstName,
     required this.lastName,
+    required this.labels,
   });
 
   factory UserProfileResponse.fromJson(
@@ -29,4 +30,7 @@ class UserProfileResponse {
 
   @JsonKey(name: 'last_name')
   final String? lastName;
+
+  @JsonKey(name: 'labels')
+  final List<String>? labels;
 }

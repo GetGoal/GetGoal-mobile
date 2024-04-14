@@ -290,6 +290,7 @@ mixin _$GoogleSignInState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() incompletePreference,
     required TResult Function(String error) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -298,6 +299,7 @@ mixin _$GoogleSignInState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function()? incompletePreference,
     TResult? Function(String error)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -306,6 +308,7 @@ mixin _$GoogleSignInState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? incompletePreference,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) =>
@@ -315,6 +318,8 @@ mixin _$GoogleSignInState {
     required TResult Function(GoogleSignInInitial value) initial,
     required TResult Function(GoogleSignInLoading value) loading,
     required TResult Function(GoogleSignInSuccess value) success,
+    required TResult Function(GoogleSignInIncompletePreference value)
+        incompletePreference,
     required TResult Function(GoogleSignInFailure value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -323,6 +328,8 @@ mixin _$GoogleSignInState {
     TResult? Function(GoogleSignInInitial value)? initial,
     TResult? Function(GoogleSignInLoading value)? loading,
     TResult? Function(GoogleSignInSuccess value)? success,
+    TResult? Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult? Function(GoogleSignInFailure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -331,6 +338,8 @@ mixin _$GoogleSignInState {
     TResult Function(GoogleSignInInitial value)? initial,
     TResult Function(GoogleSignInLoading value)? loading,
     TResult Function(GoogleSignInSuccess value)? success,
+    TResult Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult Function(GoogleSignInFailure value)? failure,
     required TResult orElse(),
   }) =>
@@ -397,6 +406,7 @@ class _$GoogleSignInInitialImpl implements GoogleSignInInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() incompletePreference,
     required TResult Function(String error) failure,
   }) {
     return initial();
@@ -408,6 +418,7 @@ class _$GoogleSignInInitialImpl implements GoogleSignInInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function()? incompletePreference,
     TResult? Function(String error)? failure,
   }) {
     return initial?.call();
@@ -419,6 +430,7 @@ class _$GoogleSignInInitialImpl implements GoogleSignInInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? incompletePreference,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -434,6 +446,8 @@ class _$GoogleSignInInitialImpl implements GoogleSignInInitial {
     required TResult Function(GoogleSignInInitial value) initial,
     required TResult Function(GoogleSignInLoading value) loading,
     required TResult Function(GoogleSignInSuccess value) success,
+    required TResult Function(GoogleSignInIncompletePreference value)
+        incompletePreference,
     required TResult Function(GoogleSignInFailure value) failure,
   }) {
     return initial(this);
@@ -445,6 +459,8 @@ class _$GoogleSignInInitialImpl implements GoogleSignInInitial {
     TResult? Function(GoogleSignInInitial value)? initial,
     TResult? Function(GoogleSignInLoading value)? loading,
     TResult? Function(GoogleSignInSuccess value)? success,
+    TResult? Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult? Function(GoogleSignInFailure value)? failure,
   }) {
     return initial?.call(this);
@@ -456,6 +472,8 @@ class _$GoogleSignInInitialImpl implements GoogleSignInInitial {
     TResult Function(GoogleSignInInitial value)? initial,
     TResult Function(GoogleSignInLoading value)? loading,
     TResult Function(GoogleSignInSuccess value)? success,
+    TResult Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult Function(GoogleSignInFailure value)? failure,
     required TResult orElse(),
   }) {
@@ -512,6 +530,7 @@ class _$GoogleSignInLoadingImpl implements GoogleSignInLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() incompletePreference,
     required TResult Function(String error) failure,
   }) {
     return loading();
@@ -523,6 +542,7 @@ class _$GoogleSignInLoadingImpl implements GoogleSignInLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function()? incompletePreference,
     TResult? Function(String error)? failure,
   }) {
     return loading?.call();
@@ -534,6 +554,7 @@ class _$GoogleSignInLoadingImpl implements GoogleSignInLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? incompletePreference,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -549,6 +570,8 @@ class _$GoogleSignInLoadingImpl implements GoogleSignInLoading {
     required TResult Function(GoogleSignInInitial value) initial,
     required TResult Function(GoogleSignInLoading value) loading,
     required TResult Function(GoogleSignInSuccess value) success,
+    required TResult Function(GoogleSignInIncompletePreference value)
+        incompletePreference,
     required TResult Function(GoogleSignInFailure value) failure,
   }) {
     return loading(this);
@@ -560,6 +583,8 @@ class _$GoogleSignInLoadingImpl implements GoogleSignInLoading {
     TResult? Function(GoogleSignInInitial value)? initial,
     TResult? Function(GoogleSignInLoading value)? loading,
     TResult? Function(GoogleSignInSuccess value)? success,
+    TResult? Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult? Function(GoogleSignInFailure value)? failure,
   }) {
     return loading?.call(this);
@@ -571,6 +596,8 @@ class _$GoogleSignInLoadingImpl implements GoogleSignInLoading {
     TResult Function(GoogleSignInInitial value)? initial,
     TResult Function(GoogleSignInLoading value)? loading,
     TResult Function(GoogleSignInSuccess value)? success,
+    TResult Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult Function(GoogleSignInFailure value)? failure,
     required TResult orElse(),
   }) {
@@ -627,6 +654,7 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() incompletePreference,
     required TResult Function(String error) failure,
   }) {
     return success();
@@ -638,6 +666,7 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function()? incompletePreference,
     TResult? Function(String error)? failure,
   }) {
     return success?.call();
@@ -649,6 +678,7 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? incompletePreference,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -664,6 +694,8 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
     required TResult Function(GoogleSignInInitial value) initial,
     required TResult Function(GoogleSignInLoading value) loading,
     required TResult Function(GoogleSignInSuccess value) success,
+    required TResult Function(GoogleSignInIncompletePreference value)
+        incompletePreference,
     required TResult Function(GoogleSignInFailure value) failure,
   }) {
     return success(this);
@@ -675,6 +707,8 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
     TResult? Function(GoogleSignInInitial value)? initial,
     TResult? Function(GoogleSignInLoading value)? loading,
     TResult? Function(GoogleSignInSuccess value)? success,
+    TResult? Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult? Function(GoogleSignInFailure value)? failure,
   }) {
     return success?.call(this);
@@ -686,6 +720,8 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
     TResult Function(GoogleSignInInitial value)? initial,
     TResult Function(GoogleSignInLoading value)? loading,
     TResult Function(GoogleSignInSuccess value)? success,
+    TResult Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult Function(GoogleSignInFailure value)? failure,
     required TResult orElse(),
   }) {
@@ -698,6 +734,135 @@ class _$GoogleSignInSuccessImpl implements GoogleSignInSuccess {
 
 abstract class GoogleSignInSuccess implements GoogleSignInState {
   const factory GoogleSignInSuccess() = _$GoogleSignInSuccessImpl;
+}
+
+/// @nodoc
+abstract class _$$GoogleSignInIncompletePreferenceImplCopyWith<$Res> {
+  factory _$$GoogleSignInIncompletePreferenceImplCopyWith(
+          _$GoogleSignInIncompletePreferenceImpl value,
+          $Res Function(_$GoogleSignInIncompletePreferenceImpl) then) =
+      __$$GoogleSignInIncompletePreferenceImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GoogleSignInIncompletePreferenceImplCopyWithImpl<$Res>
+    extends _$GoogleSignInStateCopyWithImpl<$Res,
+        _$GoogleSignInIncompletePreferenceImpl>
+    implements _$$GoogleSignInIncompletePreferenceImplCopyWith<$Res> {
+  __$$GoogleSignInIncompletePreferenceImplCopyWithImpl(
+      _$GoogleSignInIncompletePreferenceImpl _value,
+      $Res Function(_$GoogleSignInIncompletePreferenceImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GoogleSignInIncompletePreferenceImpl
+    implements GoogleSignInIncompletePreference {
+  const _$GoogleSignInIncompletePreferenceImpl();
+
+  @override
+  String toString() {
+    return 'GoogleSignInState.incompletePreference()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GoogleSignInIncompletePreferenceImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() incompletePreference,
+    required TResult Function(String error) failure,
+  }) {
+    return incompletePreference();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? incompletePreference,
+    TResult? Function(String error)? failure,
+  }) {
+    return incompletePreference?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? incompletePreference,
+    TResult Function(String error)? failure,
+    required TResult orElse(),
+  }) {
+    if (incompletePreference != null) {
+      return incompletePreference();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GoogleSignInInitial value) initial,
+    required TResult Function(GoogleSignInLoading value) loading,
+    required TResult Function(GoogleSignInSuccess value) success,
+    required TResult Function(GoogleSignInIncompletePreference value)
+        incompletePreference,
+    required TResult Function(GoogleSignInFailure value) failure,
+  }) {
+    return incompletePreference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GoogleSignInInitial value)? initial,
+    TResult? Function(GoogleSignInLoading value)? loading,
+    TResult? Function(GoogleSignInSuccess value)? success,
+    TResult? Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
+    TResult? Function(GoogleSignInFailure value)? failure,
+  }) {
+    return incompletePreference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GoogleSignInInitial value)? initial,
+    TResult Function(GoogleSignInLoading value)? loading,
+    TResult Function(GoogleSignInSuccess value)? success,
+    TResult Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
+    TResult Function(GoogleSignInFailure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (incompletePreference != null) {
+      return incompletePreference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GoogleSignInIncompletePreference implements GoogleSignInState {
+  const factory GoogleSignInIncompletePreference() =
+      _$GoogleSignInIncompletePreferenceImpl;
 }
 
 /// @nodoc
@@ -768,6 +933,7 @@ class _$GoogleSignInFailureImpl implements GoogleSignInFailure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() incompletePreference,
     required TResult Function(String error) failure,
   }) {
     return failure(error);
@@ -779,6 +945,7 @@ class _$GoogleSignInFailureImpl implements GoogleSignInFailure {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
+    TResult? Function()? incompletePreference,
     TResult? Function(String error)? failure,
   }) {
     return failure?.call(error);
@@ -790,6 +957,7 @@ class _$GoogleSignInFailureImpl implements GoogleSignInFailure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? incompletePreference,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -805,6 +973,8 @@ class _$GoogleSignInFailureImpl implements GoogleSignInFailure {
     required TResult Function(GoogleSignInInitial value) initial,
     required TResult Function(GoogleSignInLoading value) loading,
     required TResult Function(GoogleSignInSuccess value) success,
+    required TResult Function(GoogleSignInIncompletePreference value)
+        incompletePreference,
     required TResult Function(GoogleSignInFailure value) failure,
   }) {
     return failure(this);
@@ -816,6 +986,8 @@ class _$GoogleSignInFailureImpl implements GoogleSignInFailure {
     TResult? Function(GoogleSignInInitial value)? initial,
     TResult? Function(GoogleSignInLoading value)? loading,
     TResult? Function(GoogleSignInSuccess value)? success,
+    TResult? Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult? Function(GoogleSignInFailure value)? failure,
   }) {
     return failure?.call(this);
@@ -827,6 +999,8 @@ class _$GoogleSignInFailureImpl implements GoogleSignInFailure {
     TResult Function(GoogleSignInInitial value)? initial,
     TResult Function(GoogleSignInLoading value)? loading,
     TResult Function(GoogleSignInSuccess value)? success,
+    TResult Function(GoogleSignInIncompletePreference value)?
+        incompletePreference,
     TResult Function(GoogleSignInFailure value)? failure,
     required TResult orElse(),
   }) {
