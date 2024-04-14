@@ -19,6 +19,8 @@ import '../features/auth/presentation/screens/sign_up/sign_up_page.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_password_reset/verify_password_reset_bloc.dart';
 import '../features/auth/presentation/screens/verification/verification_page.dart';
+import '../features/calendar/presentation/blocs/calendar/calendar_bloc.dart';
+import '../features/calendar/presentation/screens/calendar/calendar_page.dart';
 import '../features/landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../features/landing/presentation/screens/main/main_page.dart';
 import '../features/notification/presentation/bloc/notification/notification_bloc.dart';
@@ -77,6 +79,7 @@ class RouteConfig {
       _forgetPasswordPage(),
       _newPasswordPage(),
       _notificationPage(),
+      _calendarPage(),
     ],
   );
 
@@ -215,6 +218,9 @@ class RouteConfig {
           ),
           BlocProvider(
             create: (context) => getIt<UserProfileBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<CalendarBloc>(),
           ),
         ],
         child: const MainPage(),
@@ -416,6 +422,24 @@ class RouteConfig {
       ),
     );
   }
+
+  static GoRoute _calendarPage() {
+    return GoRoute(
+      path: Routes.calendarPage,
+      name: Routes.calendarPage,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<CalendarBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<TodoBloc>(),
+          ),
+        ],
+        child: const CalendarPage(),
+      ),
+    );
+  }
 }
 
 class Routes {
@@ -440,4 +464,5 @@ class Routes {
   static const String forgetPasswordPage = '/forget_password';
   static const String newPasswordPage = '/new_password';
   static const String notificationPage = '/notification';
+  static const String calendarPage = '/calendar';
 }
