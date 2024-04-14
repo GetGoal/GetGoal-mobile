@@ -127,11 +127,13 @@ class _CalendarPageState extends State<CalendarPage> {
                           boxShadow: AppShadow.shadow,
                         ),
                         markerDecoration: BoxDecoration(
-                          gradient: AppColors.redGradient,
                           shape: BoxShape.circle,
                           boxShadow: AppShadow.shadow,
+                          gradient: AppColors.redGradient,
                         ),
-                        // markerMargin: const EdgeInsets.only(top: 2),
+                        markersAnchor: 0.1,
+                        markerSizeScale: 0.1,
+                        markerMargin: const EdgeInsets.only(top: 4),
                       ),
                       headerStyle: HeaderStyle(
                         formatButtonVisible: false,
