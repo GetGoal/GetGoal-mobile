@@ -89,5 +89,8 @@
     },
     "notification": {
         "page_title": "การแจ้งเตือน"
+    },
+    "calendar_page": {
+        "task": "รายการที่ต้องทำ"
     }
 }

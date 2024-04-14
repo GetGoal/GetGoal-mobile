@@ -23,6 +23,11 @@ import '../features/auth/presentation/screens/preference/bloc/update_user_label/
 import '../features/auth/presentation/screens/sign_up/bloc/create_account/create_account_bloc.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_account/verify_account_bloc.dart';
 import '../features/auth/presentation/screens/verification/bloc/verify_password_reset/verify_password_reset_bloc.dart';
+import '../features/calendar/data/repositories/calendar_repository_impl.dart';
+import '../features/calendar/data/sources/api/calendar_api_service.dart';
+import '../features/calendar/domain/repositories/calendar_repository.dart';
+import '../features/calendar/domain/usecases/get_avaliable_calendar_task_usecase.dart';
+import '../features/calendar/presentation/blocs/calendar/calendar_bloc.dart';
 import '../features/landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../features/notification/presentation/bloc/notification/notification_bloc.dart';
 import '../features/program/data/repositories/program_filter_repository_impl.dart';
@@ -125,6 +130,11 @@ Future<void> _initApiService() async {
   getIt.registerLazySingleton<UserApiService>(
     () => UserApiService(getIt()),
   );
+
+  // Initialize API service for calendar feature
+  getIt.registerLazySingleton<CalendarApiService>(
+    () => CalendarApiService(getIt()),
+  );
 }
 
 Future<void> _initRepositories() async {
@@ -149,6 +159,11 @@ Future<void> _initRepositories() async {
   // Initialize repository for user feature
   getIt.registerLazySingleton<UserRepository>(
     () => UserRepositoryImpl(getIt()),
+  );
+
+  // Initialize repository for calendar feature
+  getIt.registerLazySingleton<CalendarRepository>(
+    () => CalendarRepositoryImpl(getIt()),
   );
 }
 
@@ -262,6 +277,11 @@ Future<void> _initUsecases() async {
   getIt.registerLazySingleton(
     () => UpdateUserLabelUsecase(getIt()),
   );
+
+  // Initialize usecase for calendar feature
+  getIt.registerLazySingleton(
+    () => GetAvaliableCalendarTaskUsecase(getIt()),
+  );
 }
 
 Future<void> _initBlocs() async {
@@ -364,5 +384,10 @@ Future<void> _initBlocs() async {
   // Initialize Bloc for notification feature
   getIt.registerFactory<NotificationBloc>(
     () => NotificationBloc(),
+  );
+
+  // Initialize Bloc for calendar feature
+  getIt.registerFactory<CalendarBloc>(
+    () => CalendarBloc(getIt()),
   );
 }
