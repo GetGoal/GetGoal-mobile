@@ -303,6 +303,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   label:
                       Label(labelName: programList[index].labels![0].labelName),
                   createdAt: DateTime.now().toString(),
+                  onAnalytics: () {
+                    context.pushNamed(
+                      Routes.programStatisticsPage,
+                      pathParameters: {
+                        'id': programList[index].programId.toString(),
+                      },
+                    );
+                  },
                   onEdit: () async {
                     bool? isRefresh = await context.pushNamed(
                       Routes.programCreatePage,
