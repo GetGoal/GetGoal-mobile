@@ -74,7 +74,7 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
     _programEditBloc.add(
       ProgramEditEvent.started(programId: widget.pageData!.programId),
     );
-    _programCategoryBloc.add(const ProgramCategoryEvent.started());
+    _programCategoryBloc.add(const ProgramCategoryEvent.started(labels: []));
     super.initState();
   }
 
@@ -110,7 +110,6 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
         switch (state) {
           case ProgramEditStateInitial(:final program):
             if (program == null) return;
-            // print(program.programImage);
             _firebaseImagePath = program.programImage!;
             _programNameTextInputController.text = program.programName!;
             if (program.programDesc != '') {
@@ -118,8 +117,9 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
                   program.programDesc!;
             }
             if (program.labels!.isNotEmpty) {
-              _programCategoryTextInputController.text =
-                  program.labels![0].labelName!;
+              _programCategoryBloc
+                  .add(ProgramCategoryEvent.started(labels: program.labels!));
+              _categorySelected = program.labels!;
             }
 
             _programExpectedTimeTextInputController.text =
