@@ -43,6 +43,7 @@ import '../features/program/domain/usecases/program/edit_program_by_id_usecase.d
 import '../features/program/domain/usecases/program/get_program_by_id_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_label_name_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_by_search_usecase.dart';
+import '../features/program/domain/usecases/program/get_program_statistics_usecase.dart';
 import '../features/program/domain/usecases/program/get_program_usecase.dart';
 import '../features/program/domain/usecases/program/get_recommend_program_usecase.dart';
 import '../features/program/domain/usecases/program/save_program_usecase.dart';
@@ -52,6 +53,7 @@ import '../features/program/presentation/bloc/program/program_bloc.dart';
 import '../features/program/presentation/bloc/program_category/program_category_bloc.dart';
 import '../features/program/presentation/bloc/program_edit/program_edit_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
+import '../features/program/presentation/bloc/program_statistics/program_statistics_bloc.dart';
 import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/splash/presentation/bloc/splash_page_bloc.dart';
@@ -202,6 +204,9 @@ Future<void> _initUsecases() async {
   getIt.registerLazySingleton(
     () => VerifyTokenUsecase(getIt()),
   );
+  getIt.registerLazySingleton(
+    () => GetProgramStatisticsUsecase(getIt()),
+  );
 
 // Initialize for task feature
   getIt.registerLazySingleton(
@@ -311,6 +316,9 @@ Future<void> _initBlocs() async {
   );
   getIt.registerFactory<ProgramCategoryBloc>(
     () => ProgramCategoryBloc(),
+  );
+  getIt.registerFactory<ProgramStatisticsBloc>(
+    () => ProgramStatisticsBloc(getIt()),
   );
 
   // Initialize Bloc for task feature

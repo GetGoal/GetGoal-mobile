@@ -12,6 +12,7 @@ import '../../../../shared/app_cache.dart';
 import '../../../task/data/mappers/task_mapper.dart';
 import '../../domain/entities/program.dart';
 import '../../domain/entities/program_create.dart';
+import '../../domain/entities/program_statistics.dart';
 import '../../domain/repositories/program_repository.dart';
 import '../mappers/program_mapper.dart';
 import '../models/request/create_program_request.dart';
@@ -313,6 +314,43 @@ class ProgramRepositoryImpl implements ProgramRepository {
         message: res.data.message,
         count: res.data.count,
         data: program,
+        error: res.data.error,
+      );
+
+      return data;
+    } on DioException catch (e) {
+      final data = jsonDecode(e.response.toString());
+
+      return BaseDataResponse(
+        code: data['code'],
+        message: data['message'],
+        count: data['count'],
+        data: null,
+        error: data['error'],
+      );
+    }
+  }
+
+  @override
+  Future<BaseDataResponse<ProgramStatistics>> getProgramStatistics(
+    String programId,
+  ) async {
+    try {
+      final res = await _programApiService.getProgramStatistics(programId);
+
+      final statistics = ProgramStatistics(
+        programId: res.data.data!.programId,
+        joined: res.data.data!.joined,
+        saved: res.data.data!.saved,
+        viewed: res.data.data!.viewed,
+        lastJoined: res.data.data!.lastJoined,
+      );
+
+      final data = BaseDataResponse(
+        code: res.data.code,
+        message: res.data.message,
+        count: res.data.count,
+        data: statistics,
         error: res.data.error,
       );
 

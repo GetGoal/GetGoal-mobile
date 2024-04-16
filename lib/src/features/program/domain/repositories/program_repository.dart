@@ -2,6 +2,7 @@ import '../../../../core/bases/base_data.dart';
 import '../../../../core/bases/base_data_response.dart';
 import '../entities/program.dart';
 import '../entities/program_create.dart';
+import '../entities/program_statistics.dart';
 
 abstract class ProgramRepository {
   Future<DataState<List<Program>>> getPrograms();
@@ -23,4 +24,9 @@ abstract class ProgramRepository {
 
   // Save program
   Future<BaseDataResponse> saveProgram(String programId);
+
+  // Get program statistics
+  Future<BaseDataResponse<ProgramStatistics>> getProgramStatistics(
+    String programId,
+  );
 }

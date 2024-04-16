@@ -25,6 +25,7 @@ class ProgramCard extends StatefulWidget {
     this.onSave,
     this.onEdit,
     this.onDelete,
+    this.onAnalytics,
     this.isShowMenu = false,
     this.isShowSaveButton = true,
     this.isSaved = false,
@@ -42,6 +43,7 @@ class ProgramCard extends StatefulWidget {
   final Function? onSave;
   final Function? onEdit;
   final Function? onDelete;
+  final Function? onAnalytics;
   final bool isShowMenu;
   final bool isShowSaveButton;
   final bool? isSaved;
@@ -226,6 +228,22 @@ class _ProgramCardState extends State<ProgramCard> {
           iconColor: AppColors.description,
         ),
         itemBuilder: (context) => [
+          // Analytic program
+          PopupMenuItem(
+            onTap: () {
+              if (widget.onAnalytics == null) return;
+              widget.onAnalytics!();
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  Text('Analytics'),
+                ],
+              ),
+            ),
+          ),
+
           // Edit program
           PopupMenuItem(
             onTap: () {
