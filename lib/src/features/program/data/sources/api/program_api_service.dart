@@ -6,6 +6,7 @@ import '../../models/request/create_program_request.dart';
 import '../../models/request/filter_program_request.dart';
 import '../../models/request/search_program_request.dart';
 import '../../models/response/program_response.dart';
+import '../../models/response/program_statistics_response.dart';
 
 part 'program_api_service.g.dart';
 
@@ -28,6 +29,12 @@ abstract class ProgramApiService {
 
   @GET('/v1/programs/{id}')
   Future<HttpResponse<BaseDataResponse<ProgramModel>>> getProgramById(
+    @Path('id') String programId,
+  );
+
+  @GET('/v1/programs/{id}/stat')
+  Future<HttpResponse<BaseDataResponse<ProgramStatisticsResponse>>>
+      getProgramStatistics(
     @Path('id') String programId,
   );
 
