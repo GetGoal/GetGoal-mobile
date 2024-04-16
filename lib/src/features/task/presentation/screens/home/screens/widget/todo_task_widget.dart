@@ -53,7 +53,7 @@ class TodoTask extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                width: 72,
+                width: 80,
                 child: GetGoalGradientText(
                   DateFormat.jm().format(DateTime.parse(startTime!)),
                   style: bodyBold(),
@@ -63,7 +63,7 @@ class TodoTask extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              Expanded(
+              Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -75,7 +75,7 @@ class TodoTask extends StatelessWidget {
                   ],
                 ),
               ),
-              const Spacer(),
+              const SizedBox(width: 16),
               _taskCircle(taskStatus!),
             ],
           ),
@@ -124,6 +124,8 @@ class TodoTask extends StatelessWidget {
   Widget _taskName() {
     return Text(
       taskName ?? '',
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
       style: bodyBold().copyWith(
         color: taskStatus == TASKSTATUS.todo
             ? AppColors.white
@@ -135,6 +137,8 @@ class TodoTask extends StatelessWidget {
   Widget _taskDescription() {
     return Text(
       taskDescription ?? '-',
+      maxLines: 5,
+      overflow: TextOverflow.ellipsis,
       style: caption1Regular().copyWith(
         color: taskStatus == TASKSTATUS.todo
             ? AppColors.white
