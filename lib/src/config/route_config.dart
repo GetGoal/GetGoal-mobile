@@ -29,10 +29,12 @@ import '../features/program/presentation/bloc/program/program_bloc.dart';
 import '../features/program/presentation/bloc/program_category/program_category_bloc.dart';
 import '../features/program/presentation/bloc/program_edit/program_edit_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
+import '../features/program/presentation/bloc/program_statistics/program_statistics_bloc.dart';
 import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/program/presentation/screens/program_create/program_create_page.dart';
 import '../features/program/presentation/screens/program_create/program_task_create.dart';
 import '../features/program/presentation/screens/program_info/program_info_page.dart';
+import '../features/program/presentation/screens/program_statistics/program_statistic_page.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/setting/presentation/screens/setting/setting_page.dart';
 import '../features/splash/presentation/bloc/splash_page_bloc.dart';
@@ -67,6 +69,7 @@ class RouteConfig {
       _verificationPage(),
       _mainPage(),
       _programInfoPage(),
+      _programStatisticsPage(),
       _userProfilePage(),
       _taskPlanningPage(),
       _settingPage(),
@@ -233,6 +236,23 @@ class RouteConfig {
           ),
         ],
         child: ProgramInfoPage(
+          programId: state.pathParameters['id'],
+        ),
+      ),
+    );
+  }
+
+  static GoRoute _programStatisticsPage() {
+    return GoRoute(
+      path: '${Routes.programStatisticsPage}/:id',
+      name: Routes.programStatisticsPage,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<ProgramStatisticsBloc>(),
+          ),
+        ],
+        child: ProgramStatisticsPage(
           programId: state.pathParameters['id'],
         ),
       ),
@@ -430,6 +450,7 @@ class Routes {
   static const String mainPage = '/main';
   static const String programPage = '/program';
   static const String programInfomationPage = '/program_info';
+  static const String programStatisticsPage = '/program/statistics';
   static const String programCreatePage = '/program/create';
   static const String programTaskCreatePage = '/program/create/task';
   static const String taskPlanningPage = '/task_planning';
