@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
 import '../../themes/color.dart';
@@ -7,7 +8,7 @@ import '../../themes/font.dart';
 class NormalTextInputField extends StatelessWidget {
   const NormalTextInputField({
     super.key,
-    required this.label,
+    this.label,
     this.readOnly = false,
     this.hintText,
     this.prefixIcon,
@@ -23,9 +24,12 @@ class NormalTextInputField extends StatelessWidget {
     this.onSaved,
     this.onFieldSubmitted,
     this.isDisable = false,
+    this.isHideLabel = false,
+    this.textInputFormatter = const <TextInputFormatter>[],
+    this.keyboardType,
   });
 
-  final String label;
+  final String? label;
   final bool? readOnly;
   final String? hintText;
   final Widget? prefixIcon;
@@ -41,19 +45,25 @@ class NormalTextInputField extends StatelessWidget {
   final Function(String?)? onSaved;
   final Function(String)? onFieldSubmitted;
   final bool? isDisable;
+  final bool? isHideLabel;
+  final List<TextInputFormatter>? textInputFormatter;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: subHeadlineBold().copyWith(color: AppColors.description),
-        ),
-        const SizedBox(height: 8.0),
+        isHideLabel!
+            ? const SizedBox()
+            : Text(
+                label ?? 'Unknown',
+                style: subHeadlineBold().copyWith(color: AppColors.description),
+              ),
+        isHideLabel! ? const SizedBox() : const SizedBox(height: 8.0),
         SizedBox(
           child: TextFormField(
+            keyboardType: keyboardType,
             readOnly: isDisable!,
             onFieldSubmitted: onFieldSubmitted,
             onSaved: onSaved,
@@ -82,6 +92,8 @@ class NormalTextInputField extends StatelessWidget {
             textInputAction: textInputAction,
 
             maxLines: maxLines,
+
+            inputFormatters: <TextInputFormatter>[...textInputFormatter!],
 
             // Text input field Decoration
             decoration: InputDecoration(
