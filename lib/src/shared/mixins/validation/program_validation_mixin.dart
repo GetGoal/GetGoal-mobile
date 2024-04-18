@@ -27,6 +27,9 @@ mixin ProgramValidationMixin {
     if (value!.isEmpty) {
       return 'Please enter expected time';
     }
+    if (value is! int) {
+      return 'Please enter number';
+    }
     return null;
   }
 }

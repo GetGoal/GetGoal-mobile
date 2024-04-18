@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -20,6 +22,7 @@ import '../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../shared/widgets/input/multi_selector.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../../shared/widgets/text/get_goal_gradient_text.dart';
+import '../../../../../shared/widgets/text_field/dropdown_input_field.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import '../../../../../shared/widgets/text_field/upload_file_input.dart';
 import '../../../../auth/presentation/screens/preference/widgets/preference_chip.dart';
@@ -60,14 +63,17 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
       context.read<ProgramCategoryBloc>();
 
   final _formKey = GlobalKey<FormState>();
+  final _dropdownKey = GlobalKey<FormFieldState>();
   final _programNameTextInputController = TextEditingController();
   final _programDescriptionTextInputController = TextEditingController();
   final _programCategoryTextInputController = TextEditingController();
-  final _programExpectedTimeTextInputController = TextEditingController();
+  final _programTimeUnitTextInputController = TextEditingController();
+  final _programSuffixUnitTextInputController = TextEditingController();
   String _imagePath = '';
   File _imageFile = File('');
   String _firebaseImagePath = '';
   List<Label> _categorySelected = [];
+  String _selectedTimeSuffix = 'Day(s)';
 
   @override
   void initState() {
@@ -83,7 +89,8 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
     _programNameTextInputController.dispose();
     _programDescriptionTextInputController.dispose();
     _programCategoryTextInputController.dispose();
-    _programExpectedTimeTextInputController.dispose();
+    _programTimeUnitTextInputController.dispose();
+    _programSuffixUnitTextInputController.dispose();
     super.dispose();
   }
 
@@ -122,8 +129,11 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
                   program.labels![0].labelName!;
             }
 
-            _programExpectedTimeTextInputController.text =
-                program.expectedTime!;
+            final timeSplit = program.expectedTime!.split(' ');
+            _programTimeUnitTextInputController.text = timeSplit[0];
+            _programSuffixUnitTextInputController.text = timeSplit[1];
+
+            _selectedTimeSuffix = timeSplit[1];
 
             AppCache.programTaskCreateList = program.tasks!;
             break;
@@ -151,7 +161,6 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
                   _buildCategoryFieldInput(),
                   const SizedBox(height: 20),
                   _buildExpectedTimeFieldInput(),
-                  const SizedBox(height: 40),
                   _buildNextPageButton(),
                   const SizedBox(height: 20),
                 ],
@@ -304,11 +313,61 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
   }
 
   Widget _buildExpectedTimeFieldInput() {
-    return NormalTextInputField(
-      controller: _programExpectedTimeTextInputController,
-      label: Translations.of(context).create_program.expected_time,
-      hintText: Translations.of(context).create_program.ex_expected_time,
-      validator: programExpectedTimeValidator,
+    List<String> data = <String>[
+      'Day(s)',
+      'Week(s)',
+      'Month(s)',
+      'Year(s)',
+      'Minute(s)',
+      'Hour(s)',
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          t.create_program.expected_time,
+          style: subHeadlineBold().copyWith(color: AppColors.description),
+        ),
+        const SizedBox(height: 8.0),
+        StaggeredGrid.count(
+          crossAxisCount: 7,
+          crossAxisSpacing: 16,
+          children: [
+            // Value
+            StaggeredGridTile.count(
+              crossAxisCellCount: 4,
+              mainAxisCellCount: 2,
+              child: NormalTextInputField(
+                keyboardType: TextInputType.number,
+                isHideLabel: true,
+                controller: _programTimeUnitTextInputController,
+                hintText:
+                    Translations.of(context).create_program.ex_expected_time,
+                validator: programExpectedTimeValidator,
+                textInputFormatter: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+              ),
+            ),
+            // Time unit
+            StaggeredGridTile.count(
+              crossAxisCellCount: 3,
+              mainAxisCellCount: 1,
+              child: DropdownInputField(
+                key: _dropdownKey,
+                value: _selectedTimeSuffix,
+                hintText: Translations.of(context).create_task.set_noti,
+                dropdownData: data,
+                onChanged: (value) {
+                  _programSuffixUnitTextInputController.text = value!;
+                  _selectedTimeSuffix = value;
+                },
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -317,12 +376,15 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
       buttonText: Translations.of(context).create_program.next_button,
       onTap: () {
         if (_formKey.currentState!.validate()) {
+          final expectedTime =
+              '${_programTimeUnitTextInputController.text} $_selectedTimeSuffix';
+
           final ProgramCreate program = ProgramCreate(
             imagePath: _imagePath != '' ? _imagePath : _firebaseImagePath,
             programName: _programNameTextInputController.text,
             programDescription: _programDescriptionTextInputController.text,
             category: _categorySelected,
-            expectedTime: _programExpectedTimeTextInputController.text,
+            expectedTime: expectedTime,
           );
 
           AppCache.programCreate = program;

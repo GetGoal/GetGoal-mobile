@@ -68,6 +68,7 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
       controller: _emailInputController,
       label: 'Your Email',
       validator: emailValidator,
+      keyboardType: TextInputType.emailAddress,
     );
   }
 
