@@ -314,12 +314,12 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
 
   Widget _buildExpectedTimeFieldInput() {
     List<String> data = <String>[
+      'Minute(s)',
+      'Hour(s)',
       'Day(s)',
       'Week(s)',
       'Month(s)',
       'Year(s)',
-      'Minute(s)',
-      'Hour(s)',
     ];
 
     return Column(
