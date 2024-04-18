@@ -31,8 +31,8 @@ class DropdownInputField extends StatelessWidget {
         value: value,
         hint: Text('$hintText'),
         elevation: 1,
+        isExpanded: true,
         borderRadius: BorderRadius.circular(16),
-        isDense: true,
         decoration: InputDecoration(
           isDense: true,
           fillColor: AppColors.secondary,
