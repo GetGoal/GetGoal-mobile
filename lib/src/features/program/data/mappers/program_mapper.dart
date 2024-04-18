@@ -12,7 +12,7 @@ extension ProgramMapper on ProgramModel {
         expectedTime: expectedTime ?? '',
         updatedAt: updatedAt ?? DateTime.now().toString(),
         labels: labels == null
-            ? []
+            ? [const Label(labelName: 'Unknown')]
             : labels!
                 .map(
                   (e) => Label(

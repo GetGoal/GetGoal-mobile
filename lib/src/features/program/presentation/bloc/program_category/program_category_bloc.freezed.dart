@@ -16,22 +16,31 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProgramCategoryEvent {
+  List<Object>? get labels => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(List<Label>? labels) started,
     required TResult Function(List<ProgramFilter> labels) onCategoryTapped,
+    required TResult Function(
+            List<ProgramFilter> labels, ProgramFilter currentCategory)
+        onAddNewCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function(List<Label>? labels)? started,
     TResult? Function(List<ProgramFilter> labels)? onCategoryTapped,
+    TResult? Function(
+            List<ProgramFilter> labels, ProgramFilter currentCategory)?
+        onAddNewCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(List<Label>? labels)? started,
     TResult Function(List<ProgramFilter> labels)? onCategoryTapped,
+    TResult Function(List<ProgramFilter> labels, ProgramFilter currentCategory)?
+        onAddNewCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,6 +49,8 @@ mixin _$ProgramCategoryEvent {
     required TResult Function(ProgramCategoryEventStarted value) started,
     required TResult Function(ProgramCategoryEventOnCategoryTapped value)
         onCategoryTapped,
+    required TResult Function(ProgramCategoryEventOnAddNewCategory value)
+        onAddNewCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +58,8 @@ mixin _$ProgramCategoryEvent {
     TResult? Function(ProgramCategoryEventStarted value)? started,
     TResult? Function(ProgramCategoryEventOnCategoryTapped value)?
         onCategoryTapped,
+    TResult? Function(ProgramCategoryEventOnAddNewCategory value)?
+        onAddNewCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +67,8 @@ mixin _$ProgramCategoryEvent {
     TResult Function(ProgramCategoryEventStarted value)? started,
     TResult Function(ProgramCategoryEventOnCategoryTapped value)?
         onCategoryTapped,
+    TResult Function(ProgramCategoryEventOnAddNewCategory value)?
+        onAddNewCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -84,6 +99,8 @@ abstract class _$$ProgramCategoryEventStartedImplCopyWith<$Res> {
           _$ProgramCategoryEventStartedImpl value,
           $Res Function(_$ProgramCategoryEventStartedImpl) then) =
       __$$ProgramCategoryEventStartedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Label>? labels});
 }
 
 /// @nodoc
@@ -95,55 +112,96 @@ class __$$ProgramCategoryEventStartedImplCopyWithImpl<$Res>
       _$ProgramCategoryEventStartedImpl _value,
       $Res Function(_$ProgramCategoryEventStartedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labels = freezed,
+  }) {
+    return _then(_$ProgramCategoryEventStartedImpl(
+      labels: freezed == labels
+          ? _value._labels
+          : labels // ignore: cast_nullable_to_non_nullable
+              as List<Label>?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ProgramCategoryEventStartedImpl implements ProgramCategoryEventStarted {
-  const _$ProgramCategoryEventStartedImpl();
+  const _$ProgramCategoryEventStartedImpl({final List<Label>? labels})
+      : _labels = labels;
+
+  final List<Label>? _labels;
+  @override
+  List<Label>? get labels {
+    final value = _labels;
+    if (value == null) return null;
+    if (_labels is EqualUnmodifiableListView) return _labels;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ProgramCategoryEvent.started()';
+    return 'ProgramCategoryEvent.started(labels: $labels)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProgramCategoryEventStartedImpl);
+            other is _$ProgramCategoryEventStartedImpl &&
+            const DeepCollectionEquality().equals(other._labels, _labels));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_labels));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProgramCategoryEventStartedImplCopyWith<_$ProgramCategoryEventStartedImpl>
+      get copyWith => __$$ProgramCategoryEventStartedImplCopyWithImpl<
+          _$ProgramCategoryEventStartedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(List<Label>? labels) started,
     required TResult Function(List<ProgramFilter> labels) onCategoryTapped,
+    required TResult Function(
+            List<ProgramFilter> labels, ProgramFilter currentCategory)
+        onAddNewCategory,
   }) {
-    return started();
+    return started(labels);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function(List<Label>? labels)? started,
     TResult? Function(List<ProgramFilter> labels)? onCategoryTapped,
+    TResult? Function(
+            List<ProgramFilter> labels, ProgramFilter currentCategory)?
+        onAddNewCategory,
   }) {
-    return started?.call();
+    return started?.call(labels);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(List<Label>? labels)? started,
     TResult Function(List<ProgramFilter> labels)? onCategoryTapped,
+    TResult Function(List<ProgramFilter> labels, ProgramFilter currentCategory)?
+        onAddNewCategory,
     required TResult orElse(),
   }) {
     if (started != null) {
-      return started();
+      return started(labels);
     }
     return orElse();
   }
@@ -154,6 +212,8 @@ class _$ProgramCategoryEventStartedImpl implements ProgramCategoryEventStarted {
     required TResult Function(ProgramCategoryEventStarted value) started,
     required TResult Function(ProgramCategoryEventOnCategoryTapped value)
         onCategoryTapped,
+    required TResult Function(ProgramCategoryEventOnAddNewCategory value)
+        onAddNewCategory,
   }) {
     return started(this);
   }
@@ -164,6 +224,8 @@ class _$ProgramCategoryEventStartedImpl implements ProgramCategoryEventStarted {
     TResult? Function(ProgramCategoryEventStarted value)? started,
     TResult? Function(ProgramCategoryEventOnCategoryTapped value)?
         onCategoryTapped,
+    TResult? Function(ProgramCategoryEventOnAddNewCategory value)?
+        onAddNewCategory,
   }) {
     return started?.call(this);
   }
@@ -174,6 +236,8 @@ class _$ProgramCategoryEventStartedImpl implements ProgramCategoryEventStarted {
     TResult Function(ProgramCategoryEventStarted value)? started,
     TResult Function(ProgramCategoryEventOnCategoryTapped value)?
         onCategoryTapped,
+    TResult Function(ProgramCategoryEventOnAddNewCategory value)?
+        onAddNewCategory,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -184,8 +248,14 @@ class _$ProgramCategoryEventStartedImpl implements ProgramCategoryEventStarted {
 }
 
 abstract class ProgramCategoryEventStarted implements ProgramCategoryEvent {
-  const factory ProgramCategoryEventStarted() =
+  const factory ProgramCategoryEventStarted({final List<Label>? labels}) =
       _$ProgramCategoryEventStartedImpl;
+
+  @override
+  List<Label>? get labels;
+  @JsonKey(ignore: true)
+  _$$ProgramCategoryEventStartedImplCopyWith<_$ProgramCategoryEventStartedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -266,8 +336,11 @@ class _$ProgramCategoryEventOnCategoryTappedImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(List<Label>? labels) started,
     required TResult Function(List<ProgramFilter> labels) onCategoryTapped,
+    required TResult Function(
+            List<ProgramFilter> labels, ProgramFilter currentCategory)
+        onAddNewCategory,
   }) {
     return onCategoryTapped(labels);
   }
@@ -275,8 +348,11 @@ class _$ProgramCategoryEventOnCategoryTappedImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function(List<Label>? labels)? started,
     TResult? Function(List<ProgramFilter> labels)? onCategoryTapped,
+    TResult? Function(
+            List<ProgramFilter> labels, ProgramFilter currentCategory)?
+        onAddNewCategory,
   }) {
     return onCategoryTapped?.call(labels);
   }
@@ -284,8 +360,10 @@ class _$ProgramCategoryEventOnCategoryTappedImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(List<Label>? labels)? started,
     TResult Function(List<ProgramFilter> labels)? onCategoryTapped,
+    TResult Function(List<ProgramFilter> labels, ProgramFilter currentCategory)?
+        onAddNewCategory,
     required TResult orElse(),
   }) {
     if (onCategoryTapped != null) {
@@ -300,6 +378,8 @@ class _$ProgramCategoryEventOnCategoryTappedImpl
     required TResult Function(ProgramCategoryEventStarted value) started,
     required TResult Function(ProgramCategoryEventOnCategoryTapped value)
         onCategoryTapped,
+    required TResult Function(ProgramCategoryEventOnAddNewCategory value)
+        onAddNewCategory,
   }) {
     return onCategoryTapped(this);
   }
@@ -310,6 +390,8 @@ class _$ProgramCategoryEventOnCategoryTappedImpl
     TResult? Function(ProgramCategoryEventStarted value)? started,
     TResult? Function(ProgramCategoryEventOnCategoryTapped value)?
         onCategoryTapped,
+    TResult? Function(ProgramCategoryEventOnAddNewCategory value)?
+        onAddNewCategory,
   }) {
     return onCategoryTapped?.call(this);
   }
@@ -320,6 +402,8 @@ class _$ProgramCategoryEventOnCategoryTappedImpl
     TResult Function(ProgramCategoryEventStarted value)? started,
     TResult Function(ProgramCategoryEventOnCategoryTapped value)?
         onCategoryTapped,
+    TResult Function(ProgramCategoryEventOnAddNewCategory value)?
+        onAddNewCategory,
     required TResult orElse(),
   }) {
     if (onCategoryTapped != null) {
@@ -335,10 +419,203 @@ abstract class ProgramCategoryEventOnCategoryTapped
           {required final List<ProgramFilter> labels}) =
       _$ProgramCategoryEventOnCategoryTappedImpl;
 
+  @override
   List<ProgramFilter> get labels;
   @JsonKey(ignore: true)
   _$$ProgramCategoryEventOnCategoryTappedImplCopyWith<
           _$ProgramCategoryEventOnCategoryTappedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ProgramCategoryEventOnAddNewCategoryImplCopyWith<$Res> {
+  factory _$$ProgramCategoryEventOnAddNewCategoryImplCopyWith(
+          _$ProgramCategoryEventOnAddNewCategoryImpl value,
+          $Res Function(_$ProgramCategoryEventOnAddNewCategoryImpl) then) =
+      __$$ProgramCategoryEventOnAddNewCategoryImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<ProgramFilter> labels, ProgramFilter currentCategory});
+
+  $ProgramFilterCopyWith<$Res> get currentCategory;
+}
+
+/// @nodoc
+class __$$ProgramCategoryEventOnAddNewCategoryImplCopyWithImpl<$Res>
+    extends _$ProgramCategoryEventCopyWithImpl<$Res,
+        _$ProgramCategoryEventOnAddNewCategoryImpl>
+    implements _$$ProgramCategoryEventOnAddNewCategoryImplCopyWith<$Res> {
+  __$$ProgramCategoryEventOnAddNewCategoryImplCopyWithImpl(
+      _$ProgramCategoryEventOnAddNewCategoryImpl _value,
+      $Res Function(_$ProgramCategoryEventOnAddNewCategoryImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labels = null,
+    Object? currentCategory = null,
+  }) {
+    return _then(_$ProgramCategoryEventOnAddNewCategoryImpl(
+      labels: null == labels
+          ? _value._labels
+          : labels // ignore: cast_nullable_to_non_nullable
+              as List<ProgramFilter>,
+      currentCategory: null == currentCategory
+          ? _value.currentCategory
+          : currentCategory // ignore: cast_nullable_to_non_nullable
+              as ProgramFilter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProgramFilterCopyWith<$Res> get currentCategory {
+    return $ProgramFilterCopyWith<$Res>(_value.currentCategory, (value) {
+      return _then(_value.copyWith(currentCategory: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$ProgramCategoryEventOnAddNewCategoryImpl
+    implements ProgramCategoryEventOnAddNewCategory {
+  const _$ProgramCategoryEventOnAddNewCategoryImpl(
+      {required final List<ProgramFilter> labels,
+      required this.currentCategory})
+      : _labels = labels;
+
+  final List<ProgramFilter> _labels;
+  @override
+  List<ProgramFilter> get labels {
+    if (_labels is EqualUnmodifiableListView) return _labels;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_labels);
+  }
+
+  @override
+  final ProgramFilter currentCategory;
+
+  @override
+  String toString() {
+    return 'ProgramCategoryEvent.onAddNewCategory(labels: $labels, currentCategory: $currentCategory)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProgramCategoryEventOnAddNewCategoryImpl &&
+            const DeepCollectionEquality().equals(other._labels, _labels) &&
+            (identical(other.currentCategory, currentCategory) ||
+                other.currentCategory == currentCategory));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_labels), currentCategory);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProgramCategoryEventOnAddNewCategoryImplCopyWith<
+          _$ProgramCategoryEventOnAddNewCategoryImpl>
+      get copyWith => __$$ProgramCategoryEventOnAddNewCategoryImplCopyWithImpl<
+          _$ProgramCategoryEventOnAddNewCategoryImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<Label>? labels) started,
+    required TResult Function(List<ProgramFilter> labels) onCategoryTapped,
+    required TResult Function(
+            List<ProgramFilter> labels, ProgramFilter currentCategory)
+        onAddNewCategory,
+  }) {
+    return onAddNewCategory(labels, currentCategory);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Label>? labels)? started,
+    TResult? Function(List<ProgramFilter> labels)? onCategoryTapped,
+    TResult? Function(
+            List<ProgramFilter> labels, ProgramFilter currentCategory)?
+        onAddNewCategory,
+  }) {
+    return onAddNewCategory?.call(labels, currentCategory);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Label>? labels)? started,
+    TResult Function(List<ProgramFilter> labels)? onCategoryTapped,
+    TResult Function(List<ProgramFilter> labels, ProgramFilter currentCategory)?
+        onAddNewCategory,
+    required TResult orElse(),
+  }) {
+    if (onAddNewCategory != null) {
+      return onAddNewCategory(labels, currentCategory);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ProgramCategoryEventStarted value) started,
+    required TResult Function(ProgramCategoryEventOnCategoryTapped value)
+        onCategoryTapped,
+    required TResult Function(ProgramCategoryEventOnAddNewCategory value)
+        onAddNewCategory,
+  }) {
+    return onAddNewCategory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ProgramCategoryEventStarted value)? started,
+    TResult? Function(ProgramCategoryEventOnCategoryTapped value)?
+        onCategoryTapped,
+    TResult? Function(ProgramCategoryEventOnAddNewCategory value)?
+        onAddNewCategory,
+  }) {
+    return onAddNewCategory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ProgramCategoryEventStarted value)? started,
+    TResult Function(ProgramCategoryEventOnCategoryTapped value)?
+        onCategoryTapped,
+    TResult Function(ProgramCategoryEventOnAddNewCategory value)?
+        onAddNewCategory,
+    required TResult orElse(),
+  }) {
+    if (onAddNewCategory != null) {
+      return onAddNewCategory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ProgramCategoryEventOnAddNewCategory
+    implements ProgramCategoryEvent {
+  const factory ProgramCategoryEventOnAddNewCategory(
+          {required final List<ProgramFilter> labels,
+          required final ProgramFilter currentCategory}) =
+      _$ProgramCategoryEventOnAddNewCategoryImpl;
+
+  @override
+  List<ProgramFilter> get labels;
+  ProgramFilter get currentCategory;
+  @JsonKey(ignore: true)
+  _$$ProgramCategoryEventOnAddNewCategoryImplCopyWith<
+          _$ProgramCategoryEventOnAddNewCategoryImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

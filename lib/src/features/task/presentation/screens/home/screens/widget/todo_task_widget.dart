@@ -64,15 +64,18 @@ class TodoTask extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _taskName(),
-                    const SizedBox(height: 4),
-                    _taskDescription(),
-                    const SizedBox(height: 4),
-                    _taskCategory(),
-                  ],
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _taskName(),
+                      const SizedBox(height: 4),
+                      _taskDescription(),
+                      const SizedBox(height: 4),
+                      _taskCategory(),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(width: 16),
