@@ -16,6 +16,7 @@ class ProgramCategoryBloc
       : super(const ProgramCategoryState.success(labels: [])) {
     on<ProgramCategoryEventStarted>(_onStarted);
     on<ProgramCategoryEventOnCategoryTapped>(_onCategoryTapped);
+    on<ProgramCategoryEventOnAddNewCategory>(_onAddNewCategory);
   }
 
   FutureOr<void> _onStarted(
@@ -100,6 +101,48 @@ class ProgramCategoryBloc
       labelList.sort((a, b) {
         return a.labelName!.toLowerCase().compareTo(b.labelName!.toLowerCase());
       });
+    }
+
+    emit(ProgramCategoryState.success(labels: labelList));
+  }
+
+  FutureOr<void> _onAddNewCategory(
+    ProgramCategoryEventOnAddNewCategory event,
+    Emitter<ProgramCategoryState> emit,
+  ) async {
+    final labelList = event.labels.toList();
+    final currentCategory = event.currentCategory;
+
+    ProgramFilter? newCategory;
+    newCategory = currentCategory.copyWith();
+
+    for (var e in labelList) {
+      if (e.labelName == currentCategory.labelName) {
+        if (!e.isSelected!) {
+          newCategory = currentCategory.copyWith(
+            isSelected: false,
+          );
+        } else {
+          newCategory = currentCategory.copyWith(
+            isSelected: true,
+          );
+        }
+      }
+    }
+
+    if (newCategory == null) return;
+    final isDuplicate = labelList.contains(
+      newCategory,
+    );
+    final duplicateIndex = labelList.indexOf(
+      newCategory,
+    );
+
+    if (isDuplicate) {
+      newCategory = currentCategory.copyWith();
+      labelList[duplicateIndex] = newCategory;
+    } else {
+      labelList.add(newCategory);
     }
 
     emit(ProgramCategoryState.success(labels: labelList));

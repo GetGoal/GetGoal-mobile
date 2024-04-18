@@ -538,17 +538,18 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
                       child: GestureDetector(
                         onTap: () {
                           final labelList = labels.toList();
-                          final label = ProgramFilter.label(
+                          final currentCategory = ProgramFilter.label(
                             labelName: _programCategoryTextInputController.text
                                 .toCapitalize()
                                 .trim(),
                             updatedAt: null,
                             isSelected: true,
                           );
-                          labelList.add(label);
+
                           _programCategoryBloc.add(
-                            ProgramCategoryEvent.onCategoryTapped(
+                            ProgramCategoryEvent.onAddNewCategory(
                               labels: labelList,
+                              currentCategory: currentCategory,
                             ),
                           );
                           _programCategoryTextInputController.clear();

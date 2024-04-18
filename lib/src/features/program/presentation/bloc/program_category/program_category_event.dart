@@ -8,4 +8,8 @@ class ProgramCategoryEvent with _$ProgramCategoryEvent {
   const factory ProgramCategoryEvent.onCategoryTapped({
     required List<ProgramFilter> labels,
   }) = ProgramCategoryEventOnCategoryTapped;
+  const factory ProgramCategoryEvent.onAddNewCategory({
+    required List<ProgramFilter> labels,
+    required ProgramFilter currentCategory,
+  }) = ProgramCategoryEventOnAddNewCategory;
 }
