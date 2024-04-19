@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../../../config/i18n/strings.g.dart';
 import '../../../../../../config/route_config.dart';
@@ -13,7 +14,7 @@ import '../../../../../landing/presentation/bloc/main_page/main_page_bloc.dart';
 import '../../../../domain/entities/task.dart';
 import '../bloc/date_timeline/date_timeline_bloc.dart';
 import '../bloc/todo/todo_bloc.dart';
-import 'widget/date_section_timeline_widget.dart';
+import 'widget/date_card_selection.dart';
 import 'widget/todo_task_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,6 +31,9 @@ class _HomePageState extends State<HomePage> {
 
   final ItemScrollController itemScrollController = ItemScrollController();
 
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+
   @override
   void initState() {
     _dateTimelineBloc.add(const DateTimelineEvent.started());
@@ -37,12 +41,43 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  void _onDaySelected(selectedDay, focusedDay) {
+    if (!isSameDay(_selectedDay, selectedDay)) {
+      setState(() {
+        _selectedDay = selectedDay;
+        _focusedDay = focusedDay;
+      });
+    }
+
+    final day = DateFormat.d(LocaleSettings.currentLocale.languageCode)
+        .format(selectedDay);
+    final month = DateFormat.MMMM(LocaleSettings.currentLocale.languageCode)
+        .format(selectedDay);
+    final year = LocaleSettings.currentLocale.languageCode == 'en'
+        ? DateFormat.y(LocaleSettings.currentLocale.languageCode)
+            .format(selectedDay)
+        : int.parse(
+              DateFormat.y(LocaleSettings.currentLocale.languageCode)
+                  .format(selectedDay),
+            ) +
+            543;
+
+    _mainPageBloc.add(
+      MainPageEvent.bottomNavTapped(
+        bottomNavSelected: 0,
+        appbarTitle: '$month, $day $year',
+      ),
+    );
+
+    _todoBloc.add(TodoEvent.dateSelectorTapped(date: selectedDay));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 24),
+        const SizedBox(height: 8),
         _dateSectionBar(),
         const SizedBox(height: 24),
         Container(
@@ -60,32 +95,40 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _dateSectionBar() {
-    return DateSelectorTimeline(
-      initialDate: DateTime.now().subtract(const Duration(days: 3650)),
-      currentDate: DateTime.now(),
-      ontap: (date) {
-        final day = DateFormat.d(LocaleSettings.currentLocale.languageCode)
-            .format(date);
-        final month = DateFormat.MMMM(LocaleSettings.currentLocale.languageCode)
-            .format(date);
-        final year = LocaleSettings.currentLocale.languageCode == 'en'
-            ? DateFormat.y(LocaleSettings.currentLocale.languageCode)
-                .format(date)
-            : int.parse(
-                  DateFormat.y(LocaleSettings.currentLocale.languageCode)
-                      .format(date),
-                ) +
-                543;
-
-        _dateTimelineBloc.add(DateTimelineEvent.tapped(selectedTime: date));
-        _todoBloc.add(TodoEvent.dateSelectorTapped(date: date));
-        _mainPageBloc.add(
-          MainPageEvent.bottomNavTapped(
-            bottomNavSelected: 0,
-            appbarTitle: '$month, $day $year',
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: TableCalendar(
+        rowHeight: 80,
+        calendarFormat: CalendarFormat.week,
+        headerVisible: false,
+        daysOfWeekVisible: false,
+        focusedDay: _focusedDay,
+        firstDay: DateTime.utc(2010, 10, 16),
+        lastDay: DateTime.utc(2030, 3, 14),
+        calendarBuilders: _buildCalendarBuilders(),
+        availableGestures: AvailableGestures.all,
+        calendarStyle: CalendarStyle(
+          defaultTextStyle: bodyBold(),
+          holidayTextStyle: bodyBold(),
+          weekendTextStyle: bodyBold(),
+          outsideDaysVisible: false,
+          selectedDecoration: BoxDecoration(
+            gradient: AppColors.primaryGradient,
+            shape: BoxShape.circle,
+            boxShadow: AppShadow.shadow,
           ),
-        );
-      },
+          todayDecoration: BoxDecoration(
+            color: AppColors.secondary,
+            shape: BoxShape.circle,
+            boxShadow: AppShadow.shadow,
+          ),
+        ),
+        onPageChanged: (focusedDay) {
+          _focusedDay = focusedDay;
+        },
+        onDaySelected: _onDaySelected,
+        selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
+      ),
     );
   }
 
@@ -203,5 +246,31 @@ class _HomePageState extends State<HomePage> {
       default:
         return TASKSTATUS.todo;
     }
+  }
+
+  CalendarBuilders _buildCalendarBuilders() {
+    return CalendarBuilders(
+      defaultBuilder: (context, day, focusedDay) {
+        return DateCardSelection(day: day);
+      },
+      selectedBuilder: (context, day, focusedDay) {
+        return DateCardSelection(day: day, isSelected: true);
+      },
+      todayBuilder: (context, day, focusedDay) {
+        return DateCardSelection(day: day, isToday: true);
+      },
+      dowBuilder: (context, day) {
+        if (day.weekday == DateTime.sunday) {
+          final text = DateFormat.E().format(day);
+          return Center(
+            child: Text(
+              text,
+              style: const TextStyle(color: Colors.red),
+            ),
+          );
+        }
+        return null;
+      },
+    );
   }
 }
