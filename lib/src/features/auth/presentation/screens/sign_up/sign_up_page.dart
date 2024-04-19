@@ -84,6 +84,7 @@ class _SignUpPageState extends State<SignUpPage> with AuthValidationMixin {
       label: 'Email Address',
       hintText: 'example@mail.com',
       validator: emailValidator,
+      keyboardType: TextInputType.emailAddress,
     );
   }
 
