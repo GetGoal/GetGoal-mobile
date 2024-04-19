@@ -278,6 +278,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
       ),
       onTap: _selectStartDate,
       validator: taskStartDateValidator,
+      keyboardType: TextInputType.none,
     );
   }
 
@@ -293,6 +294,7 @@ class _TaskCreatePageState extends State<TaskCreatePage>
       ),
       onTap: _selectTime,
       validator: taskTimeValidator,
+      keyboardType: TextInputType.none,
     );
   }
 
