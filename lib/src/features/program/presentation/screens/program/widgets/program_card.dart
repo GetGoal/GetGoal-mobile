@@ -29,6 +29,7 @@ class ProgramCard extends StatefulWidget {
     this.isShowMenu = false,
     this.isShowSaveButton = true,
     this.isSaved = false,
+    this.owner,
   });
 
   final String? programImage;
@@ -47,6 +48,7 @@ class ProgramCard extends StatefulWidget {
   final bool isShowMenu;
   final bool isShowSaveButton;
   final bool? isSaved;
+  final ProgramOwner? owner;
 
   @override
   State<ProgramCard> createState() => _ProgramCardState();
@@ -72,10 +74,12 @@ class _ProgramCardState extends State<ProgramCard> {
         widget.onTab!();
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 24),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _createdBy(),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -83,7 +87,7 @@ class _ProgramCardState extends State<ProgramCard> {
                 widget.isShowMenu ? _programMenu() : const SizedBox(),
               ],
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 16),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,7 +99,7 @@ class _ProgramCardState extends State<ProgramCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       _programExpectedTime(),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 8),
                       _programDescription(),
                     ],
                   ),
@@ -111,12 +115,19 @@ class _ProgramCardState extends State<ProgramCard> {
     );
   }
 
+  Widget _createdBy() {
+    return Text(
+      'Created by ${widget.owner!.firstName} ${widget.owner!.lastName}',
+      style: caption1Regular().copyWith(color: AppColors.description),
+    );
+  }
+
   Widget _programName() {
     return Flexible(
       child: Text(
         widget.programName ?? '',
         maxLines: 2,
-        style: subHeadlineBold(),
+        style: bodyBold(),
       ),
     );
   }
@@ -125,7 +136,7 @@ class _ProgramCardState extends State<ProgramCard> {
     return Text(
       widget.programDesc ?? 'No descripition',
       overflow: TextOverflow.ellipsis,
-      maxLines: 4,
+      maxLines: 2,
       style: footnoteRegular().copyWith(color: AppColors.description),
     );
   }
@@ -136,7 +147,7 @@ class _ProgramCardState extends State<ProgramCard> {
         ProgramLabel(
           title: widget.label?.labelName ?? '',
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 16),
         Text(
           DateFormat('yMMMd').format(DateTime.parse(widget.createdAt!)),
           style: caption2Regular().copyWith(color: AppColors.description),
