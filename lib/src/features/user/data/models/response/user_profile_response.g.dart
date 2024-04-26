@@ -14,6 +14,7 @@ UserProfileResponse _$UserProfileResponseFromJson(Map<String, dynamic> json) =>
       lastName: json['last_name'] as String?,
       labels:
           (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      imageUrl: json['image_url'] as String?,
     );
 
 Map<String, dynamic> _$UserProfileResponseToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$UserProfileResponseToJson(
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'labels': instance.labels,
+      'image_url': instance.imageUrl,
     };
