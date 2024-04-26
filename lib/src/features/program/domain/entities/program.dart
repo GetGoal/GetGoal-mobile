@@ -17,6 +17,7 @@ sealed class Program with _$Program {
     final List<Label>? labels,
     final List<Task>? tasks,
     final bool? isSaved,
+    final ProgramOwner? owner,
   }) = _Program;
 }
 
@@ -26,4 +27,15 @@ sealed class Label with _$Label {
     final int? labelId,
     final String? labelName,
   }) = _Label;
+}
+
+@freezed
+sealed class ProgramOwner with _$ProgramOwner {
+  const factory ProgramOwner({
+    final int? ownerId,
+    final String? firstName,
+    final String? lastName,
+    final String? email,
+    final String? imageUrl,
+  }) = _ProgramOwner;
 }

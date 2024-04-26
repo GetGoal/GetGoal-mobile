@@ -26,6 +26,7 @@ mixin _$Program {
   List<Label>? get labels => throw _privateConstructorUsedError;
   List<Task>? get tasks => throw _privateConstructorUsedError;
   bool? get isSaved => throw _privateConstructorUsedError;
+  ProgramOwner? get owner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProgramCopyWith<Program> get copyWith => throw _privateConstructorUsedError;
@@ -46,7 +47,10 @@ abstract class $ProgramCopyWith<$Res> {
       String? updatedAt,
       List<Label>? labels,
       List<Task>? tasks,
-      bool? isSaved});
+      bool? isSaved,
+      ProgramOwner? owner});
+
+  $ProgramOwnerCopyWith<$Res>? get owner;
 }
 
 /// @nodoc
@@ -72,6 +76,7 @@ class _$ProgramCopyWithImpl<$Res, $Val extends Program>
     Object? labels = freezed,
     Object? tasks = freezed,
     Object? isSaved = freezed,
+    Object? owner = freezed,
   }) {
     return _then(_value.copyWith(
       programId: freezed == programId
@@ -114,7 +119,23 @@ class _$ProgramCopyWithImpl<$Res, $Val extends Program>
           ? _value.isSaved
           : isSaved // ignore: cast_nullable_to_non_nullable
               as bool?,
+      owner: freezed == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as ProgramOwner?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProgramOwnerCopyWith<$Res>? get owner {
+    if (_value.owner == null) {
+      return null;
+    }
+
+    return $ProgramOwnerCopyWith<$Res>(_value.owner!, (value) {
+      return _then(_value.copyWith(owner: value) as $Val);
+    });
   }
 }
 
@@ -135,7 +156,11 @@ abstract class _$$ProgramImplCopyWith<$Res> implements $ProgramCopyWith<$Res> {
       String? updatedAt,
       List<Label>? labels,
       List<Task>? tasks,
-      bool? isSaved});
+      bool? isSaved,
+      ProgramOwner? owner});
+
+  @override
+  $ProgramOwnerCopyWith<$Res>? get owner;
 }
 
 /// @nodoc
@@ -159,6 +184,7 @@ class __$$ProgramImplCopyWithImpl<$Res>
     Object? labels = freezed,
     Object? tasks = freezed,
     Object? isSaved = freezed,
+    Object? owner = freezed,
   }) {
     return _then(_$ProgramImpl(
       programId: freezed == programId
@@ -201,6 +227,10 @@ class __$$ProgramImplCopyWithImpl<$Res>
           ? _value.isSaved
           : isSaved // ignore: cast_nullable_to_non_nullable
               as bool?,
+      owner: freezed == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as ProgramOwner?,
     ));
   }
 }
@@ -218,7 +248,8 @@ class _$ProgramImpl implements _Program {
       this.updatedAt,
       final List<Label>? labels,
       final List<Task>? tasks,
-      this.isSaved})
+      this.isSaved,
+      this.owner})
       : _labels = labels,
         _tasks = tasks;
 
@@ -258,10 +289,12 @@ class _$ProgramImpl implements _Program {
 
   @override
   final bool? isSaved;
+  @override
+  final ProgramOwner? owner;
 
   @override
   String toString() {
-    return 'Program(programId: $programId, programName: $programName, rating: $rating, programImage: $programImage, programDesc: $programDesc, expectedTime: $expectedTime, updatedAt: $updatedAt, labels: $labels, tasks: $tasks, isSaved: $isSaved)';
+    return 'Program(programId: $programId, programName: $programName, rating: $rating, programImage: $programImage, programDesc: $programDesc, expectedTime: $expectedTime, updatedAt: $updatedAt, labels: $labels, tasks: $tasks, isSaved: $isSaved, owner: $owner)';
   }
 
   @override
@@ -284,7 +317,8 @@ class _$ProgramImpl implements _Program {
                 other.updatedAt == updatedAt) &&
             const DeepCollectionEquality().equals(other._labels, _labels) &&
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
-            (identical(other.isSaved, isSaved) || other.isSaved == isSaved));
+            (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
+            (identical(other.owner, owner) || other.owner == owner));
   }
 
   @override
@@ -299,7 +333,8 @@ class _$ProgramImpl implements _Program {
       updatedAt,
       const DeepCollectionEquality().hash(_labels),
       const DeepCollectionEquality().hash(_tasks),
-      isSaved);
+      isSaved,
+      owner);
 
   @JsonKey(ignore: true)
   @override
@@ -319,7 +354,8 @@ abstract class _Program implements Program {
       final String? updatedAt,
       final List<Label>? labels,
       final List<Task>? tasks,
-      final bool? isSaved}) = _$ProgramImpl;
+      final bool? isSaved,
+      final ProgramOwner? owner}) = _$ProgramImpl;
 
   @override
   int? get programId;
@@ -341,6 +377,8 @@ abstract class _Program implements Program {
   List<Task>? get tasks;
   @override
   bool? get isSaved;
+  @override
+  ProgramOwner? get owner;
   @override
   @JsonKey(ignore: true)
   _$$ProgramImplCopyWith<_$ProgramImpl> get copyWith =>
@@ -476,5 +514,206 @@ abstract class _Label implements Label {
   @override
   @JsonKey(ignore: true)
   _$$LabelImplCopyWith<_$LabelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ProgramOwner {
+  int? get ownerId => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ProgramOwnerCopyWith<ProgramOwner> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProgramOwnerCopyWith<$Res> {
+  factory $ProgramOwnerCopyWith(
+          ProgramOwner value, $Res Function(ProgramOwner) then) =
+      _$ProgramOwnerCopyWithImpl<$Res, ProgramOwner>;
+  @useResult
+  $Res call(
+      {int? ownerId,
+      String? firstName,
+      String? lastName,
+      String? email,
+      String? imageUrl});
+}
+
+/// @nodoc
+class _$ProgramOwnerCopyWithImpl<$Res, $Val extends ProgramOwner>
+    implements $ProgramOwnerCopyWith<$Res> {
+  _$ProgramOwnerCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ownerId = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? email = freezed,
+    Object? imageUrl = freezed,
+  }) {
+    return _then(_value.copyWith(
+      ownerId: freezed == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ProgramOwnerImplCopyWith<$Res>
+    implements $ProgramOwnerCopyWith<$Res> {
+  factory _$$ProgramOwnerImplCopyWith(
+          _$ProgramOwnerImpl value, $Res Function(_$ProgramOwnerImpl) then) =
+      __$$ProgramOwnerImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? ownerId,
+      String? firstName,
+      String? lastName,
+      String? email,
+      String? imageUrl});
+}
+
+/// @nodoc
+class __$$ProgramOwnerImplCopyWithImpl<$Res>
+    extends _$ProgramOwnerCopyWithImpl<$Res, _$ProgramOwnerImpl>
+    implements _$$ProgramOwnerImplCopyWith<$Res> {
+  __$$ProgramOwnerImplCopyWithImpl(
+      _$ProgramOwnerImpl _value, $Res Function(_$ProgramOwnerImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ownerId = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? email = freezed,
+    Object? imageUrl = freezed,
+  }) {
+    return _then(_$ProgramOwnerImpl(
+      ownerId: freezed == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ProgramOwnerImpl implements _ProgramOwner {
+  const _$ProgramOwnerImpl(
+      {this.ownerId, this.firstName, this.lastName, this.email, this.imageUrl});
+
+  @override
+  final int? ownerId;
+  @override
+  final String? firstName;
+  @override
+  final String? lastName;
+  @override
+  final String? email;
+  @override
+  final String? imageUrl;
+
+  @override
+  String toString() {
+    return 'ProgramOwner(ownerId: $ownerId, firstName: $firstName, lastName: $lastName, email: $email, imageUrl: $imageUrl)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProgramOwnerImpl &&
+            (identical(other.ownerId, ownerId) || other.ownerId == ownerId) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, ownerId, firstName, lastName, email, imageUrl);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProgramOwnerImplCopyWith<_$ProgramOwnerImpl> get copyWith =>
+      __$$ProgramOwnerImplCopyWithImpl<_$ProgramOwnerImpl>(this, _$identity);
+}
+
+abstract class _ProgramOwner implements ProgramOwner {
+  const factory _ProgramOwner(
+      {final int? ownerId,
+      final String? firstName,
+      final String? lastName,
+      final String? email,
+      final String? imageUrl}) = _$ProgramOwnerImpl;
+
+  @override
+  int? get ownerId;
+  @override
+  String? get firstName;
+  @override
+  String? get lastName;
+  @override
+  String? get email;
+  @override
+  String? get imageUrl;
+  @override
+  @JsonKey(ignore: true)
+  _$$ProgramOwnerImplCopyWith<_$ProgramOwnerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
