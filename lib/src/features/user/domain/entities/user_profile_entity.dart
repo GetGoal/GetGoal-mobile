@@ -10,5 +10,6 @@ sealed class UserProfileEntity with _$UserProfileEntity {
     final String? firstName,
     final String? lastName,
     final List<String>? labels,
+    final String? imageUrl,
   }) = _UserProfileEntity;
 }
