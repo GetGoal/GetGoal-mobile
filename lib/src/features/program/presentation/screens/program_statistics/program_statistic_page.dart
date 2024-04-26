@@ -70,15 +70,15 @@ class _ProgramStatisticsPageState extends State<ProgramStatisticsPage> {
           case ProgramStatisticsStateSuccess(:final programStatistics):
             final date = programStatistics.lastJoined!.split('T');
             final lastJoined = date[0].split('-');
-            return GridView.count(
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              crossAxisCount: 2,
-              childAspectRatio: 1.5,
-              children: <Widget>[
+            bool isJoined = programStatistics.joined == 0;
+
+            return ListView(
+              children: [
                 ProgramStatisticsCard(
                   label: 'Last Joined',
-                  count: '${lastJoined[2]}/${lastJoined[1]}/${lastJoined[0]}',
+                  count: isJoined
+                      ? '-'
+                      : '${lastJoined[2]}/${lastJoined[1]}/${lastJoined[0]}',
                 ),
                 ProgramStatisticsCard(
                   label: 'Joined',

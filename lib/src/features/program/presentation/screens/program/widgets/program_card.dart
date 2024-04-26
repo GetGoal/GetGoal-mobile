@@ -249,7 +249,7 @@ class _ProgramCardState extends State<ProgramCard> {
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 children: [
-                  Text('Analytics'),
+                  Text('Statistics'),
                 ],
               ),
             ),

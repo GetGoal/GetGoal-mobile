@@ -89,11 +89,11 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
         NormalTextInputField(
           controller: _passwordInputController,
           label: 'Password',
-          isPassword: isShowPassword,
+          isPassword: !isShowPassword,
           validator: passwordValidator,
           suffixIcon: GestureDetector(
             onTap: _setShowPasswordState,
-            child: isShowPassword
+            child: !isShowPassword
                 ? CustomIcon(
                     icon: AppIcon.show_password,
                     iconColor: AppColors.description,
