@@ -10,7 +10,6 @@ import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/icon/custom_icon.dart';
-import '../../../../../shared/widgets/image/cache_image.dart';
 import '../../../../../shared/widgets/loading_screen_widget.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_sub_scaffold.dart';
 import '../../../../task/domain/entities/task.dart';
@@ -93,23 +92,20 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
           ProgramInfoEvent.started(programId: widget.programId),
         ),
         child: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.all(AppSpacing.appMargin),
-            child: Column(
-              children: [
-                _programImage(program.programImage!),
-                const SizedBox(height: 24),
-                _programHeader(
-                  label: program.labels![0],
-                  programName: program.programName,
-                  duration: program.expectedTime,
-                ),
-                const SizedBox(height: 24),
-                _programDescription(program.programDesc),
-                const SizedBox(height: 24),
-                _taskOverview(program.tasks),
-              ],
-            ),
+          child: Column(
+            children: [
+              _programHeader(
+                label: program.labels![0],
+                programName: program.programName,
+                duration: program.expectedTime,
+                owner: program.owner!,
+              ),
+              _programImage(program.programImage!),
+              const SizedBox(height: 16),
+              _programDescription(program.programDesc),
+              const SizedBox(height: 36),
+              _taskOverview(program.tasks),
+            ],
           ),
         ),
       ),
@@ -145,12 +141,13 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
   }
 
   Widget _programImage(String? programImage) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: 234,
-      child: CacheImage(
-        programImage: programImage ?? '',
-        radius: 24,
+    return Container(
+      height: 304,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.fitWidth,
+          image: NetworkImage(programImage ?? ''),
+        ),
       ),
     );
   }
@@ -159,104 +156,92 @@ class _ProgramInfoPageState extends State<ProgramInfoPage> {
     required Label? label,
     required String? duration,
     required String? programName,
+    required ProgramOwner owner,
   }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Row(
-              children: [
-                ProgramLabel(title: label?.labelName ?? ''),
-                const SizedBox(width: 8),
-                Text(
-                  DateFormat('yMMMd').format(DateTime.now()),
-                  style: caption2Regular().copyWith(
-                    color: AppColors.description,
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            programName ?? '',
+            style: title2Bold(),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              const CustomIcon(
+                icon: AppIcon.program_duration_icon,
+                size: 16,
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              Text('${duration ?? 0}', style: caption1Regular()),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Created by ${owner.firstName} ${owner.lastName}',
+            style: caption1Regular(),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Row(
+                children: [
+                  ProgramLabel(title: label?.labelName ?? ''),
+                  const SizedBox(width: 8),
+                  Text(
+                    DateFormat('yMMMd').format(DateTime.now()),
+                    style: caption2Regular().copyWith(
+                      color: AppColors.description,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const Spacer(),
-            Row(
-              children: [
-                const CustomIcon(
-                  icon: AppIcon.program_duration_icon,
-                  size: 16,
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Text('${duration ?? 0}', style: caption2Regular()),
-              ],
-            ),
-          ],
-        ),
-        const SizedBox(height: 4),
-        Text(
-          programName ?? '',
-          style: title2Bold(),
-        ),
-        const SizedBox(height: 4),
-        Row(
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.primary2,
-                  ),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  'Thana Sriwichai',
-                  style: caption1Regular(),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
     );
   }
 
   Widget _programDescription(String? programDesc) {
     return Container(
       padding: const EdgeInsets.only(left: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         border: Border(left: BorderSide(color: AppColors.primary2)),
       ),
       width: double.infinity,
       child: Text(
         programDesc ?? '',
-        maxLines: 6,
-        overflow: TextOverflow.ellipsis,
         style: subHeadlineRegular(),
       ),
     );
   }
 
   Widget _taskOverview(List<Task>? tasks) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Tasks Overview', style: bodyBold()),
-        const SizedBox(height: 16),
-        Column(
-          children: List<TaskCard>.generate(tasks!.length, (index) {
-            return TaskCard(
-              number: index + 1,
-              taskName: tasks[index].taskName,
-              taskDesc: tasks[index].taskDescription,
-            );
-          }),
-        ),
-      ],
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Tasks Overview', style: bodyBold()),
+          const SizedBox(height: 16),
+          Column(
+            children: List<TaskCard>.generate(tasks!.length, (index) {
+              return TaskCard(
+                number: index + 1,
+                taskName: tasks[index].taskName,
+                taskDesc: tasks[index].taskDescription,
+              );
+            }),
+          ),
+        ],
+      ),
     );
   }
 
