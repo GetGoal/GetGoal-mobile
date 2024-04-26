@@ -31,11 +31,14 @@ import '../features/program/presentation/bloc/program/program_bloc.dart';
 import '../features/program/presentation/bloc/program_category/program_category_bloc.dart';
 import '../features/program/presentation/bloc/program_edit/program_edit_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
+import '../features/program/presentation/bloc/program_section/program_section_bloc.dart';
 import '../features/program/presentation/bloc/program_statistics/program_statistics_bloc.dart';
+import '../features/program/presentation/bloc/recommened_program/recommended_program_bloc.dart';
 import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/program/presentation/screens/program_create/program_create_page.dart';
 import '../features/program/presentation/screens/program_create/program_task_create.dart';
 import '../features/program/presentation/screens/program_info/program_info_page.dart';
+import '../features/program/presentation/screens/program_search/program_search_page.dart';
 import '../features/program/presentation/screens/program_statistics/program_statistic_page.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/setting/presentation/screens/setting/setting_page.dart';
@@ -70,6 +73,7 @@ class RouteConfig {
       _preferencePage(),
       _verificationPage(),
       _mainPage(),
+      _programSearchPage(),
       _programInfoPage(),
       _programStatisticsPage(),
       _userProfilePage(),
@@ -202,6 +206,9 @@ class RouteConfig {
             create: (context) => getIt<ProgramBloc>(),
           ),
           BlocProvider(
+            create: (context) => getIt<RecommendedProgramBloc>(),
+          ),
+          BlocProvider(
             create: (context) => getIt<ProgramInfoBloc>(),
           ),
           BlocProvider(
@@ -225,8 +232,26 @@ class RouteConfig {
           BlocProvider(
             create: (context) => getIt<CalendarBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<ProgramSectionBloc>(),
+          ),
         ],
         child: const MainPage(),
+      ),
+    );
+  }
+
+  static GoRoute _programSearchPage() {
+    return GoRoute(
+      path: Routes.programSearch,
+      name: Routes.programSearch,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<ProgramBloc>(),
+          ),
+        ],
+        child: const ProgramSearchPage(),
       ),
     );
   }
@@ -473,6 +498,7 @@ class Routes {
   static const String verificationPage = '/verification';
   static const String mainPage = '/main';
   static const String programPage = '/program';
+  static const String programSearch = '/program_search';
   static const String programInfomationPage = '/program_info';
   static const String programStatisticsPage = '/program/statistics';
   static const String programCreatePage = '/program/create';

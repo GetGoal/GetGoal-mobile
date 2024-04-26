@@ -53,7 +53,9 @@ import '../features/program/presentation/bloc/program/program_bloc.dart';
 import '../features/program/presentation/bloc/program_category/program_category_bloc.dart';
 import '../features/program/presentation/bloc/program_edit/program_edit_bloc.dart';
 import '../features/program/presentation/bloc/program_info/program_info_bloc.dart';
+import '../features/program/presentation/bloc/program_section/program_section_bloc.dart';
 import '../features/program/presentation/bloc/program_statistics/program_statistics_bloc.dart';
+import '../features/program/presentation/bloc/recommened_program/recommended_program_bloc.dart';
 import '../features/program/presentation/screens/program_create/bloc/program_create/program_create_bloc.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
 import '../features/splash/presentation/bloc/splash_page_bloc.dart';
@@ -319,6 +321,12 @@ Future<void> _initBlocs() async {
   );
   getIt.registerFactory<ProgramStatisticsBloc>(
     () => ProgramStatisticsBloc(getIt()),
+  );
+  getIt.registerFactory<RecommendedProgramBloc>(
+    () => RecommendedProgramBloc(getIt()),
+  );
+  getIt.registerFactory<ProgramSectionBloc>(
+    () => ProgramSectionBloc(),
   );
 
   // Initialize Bloc for task feature

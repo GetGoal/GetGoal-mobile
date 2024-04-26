@@ -6,7 +6,6 @@ extension ProgramMapper on ProgramModel {
   Program programToEntity() => Program(
         programId: programId ?? 0,
         programName: programName ?? '',
-        rating: rating ?? 0.0,
         programDesc: programDesc ?? '',
         programImage: madiaUrl ?? '',
         expectedTime: expectedTime ?? '',
@@ -24,5 +23,12 @@ extension ProgramMapper on ProgramModel {
         tasks:
             tasks == null ? [] : tasks!.map((e) => e.taskToEntity()).toList(),
         isSaved: isSaved ?? false,
+        owner: ProgramOwner(
+          ownerId: owner!.ownerId,
+          firstName: owner!.firstName!.isEmpty ? 'Unknown' : owner!.firstName,
+          lastName: owner!.lastName!.isEmpty ? '' : owner!.lastName,
+          email: owner!.email!.isEmpty ? 'Unknown' : owner!.email,
+          imageUrl: owner!.imageUrl!.isEmpty ? 'Unknown' : owner!.imageUrl,
+        ),
       );
 }

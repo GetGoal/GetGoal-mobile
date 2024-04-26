@@ -86,39 +86,38 @@ class _UserProfilePageState extends State<UserProfilePage> {
   }
 
   Widget _buildUserProfileInfo() {
-    return Column(
-      children: [
-        const SizedBox(
-          width: 96,
-          height: 96,
-          child: CacheImage(
-            programImage:
-                'https://images.unsplash.com/photo-1682686580452-37f1892ee5e8?q=80&w=1975&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            radius: 100,
-          ),
-        ),
-        const SizedBox(height: 8),
-        BlocConsumer<UserProfileBloc, UserProfileState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            switch (state) {
-              case UserProfileStateInitial():
-                return const SizedBox();
-              case UserProfileStateLoading():
-                return const SizedBox();
-              case UserProfileStateLoadedSuccess(:final user):
-                return Text(
+    return BlocConsumer<UserProfileBloc, UserProfileState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        switch (state) {
+          case UserProfileStateInitial():
+            return const SizedBox();
+          case UserProfileStateLoading():
+            return const SizedBox();
+          case UserProfileStateLoadedSuccess(:final user):
+            return Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: SizedBox(
+                    width: 96,
+                    height: 96,
+                    child: Image.asset('assets/images/user_profile.png'),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
                   '${user.firstName} ${user.lastName}',
                   style: title2Bold(),
-                );
-              case UserProfileStateError():
-                return Text('Error', style: title1());
-              default:
-                return const SizedBox();
-            }
-          },
-        ),
-      ],
+                ),
+              ],
+            );
+          case UserProfileStateError():
+            return Text('Error', style: title1());
+          default:
+            return const SizedBox();
+        }
+      },
     );
   }
 

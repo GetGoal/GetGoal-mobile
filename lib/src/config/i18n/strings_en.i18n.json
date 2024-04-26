@@ -24,7 +24,10 @@
         "search": "Search",
         "task_overview": "Tasks Overview",
         "start_program": "Start this program",
-        "program_error": "Sorry, some error occur.\nPlease retry"
+        "program_error": "Sorry, some error occur.\nPlease retry",
+        "recommended_program": "Recommended for you",
+        "see_all": "See All",
+        "explore_program": "Explore"
     },
     "create_button": {
         "create_new": "Create new",

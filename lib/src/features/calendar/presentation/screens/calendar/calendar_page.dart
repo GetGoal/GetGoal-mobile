@@ -109,6 +109,7 @@ class _CalendarPageState extends State<CalendarPage> {
                       vertical: AppSpacing.appMargin,
                     ),
                     child: TableCalendar(
+                      rowHeight: 72,
                       focusedDay: _focusedDay,
                       firstDay: DateTime.utc(2010, 10, 16),
                       lastDay: DateTime.utc(2030, 3, 14),

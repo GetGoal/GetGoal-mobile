@@ -6,12 +6,11 @@ import '../../../../../../shared/icon.dart';
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
 import '../../../../../../shared/widgets/icon/custom_icon.dart';
-import '../../../../../../shared/widgets/image/cache_image.dart';
 import '../../../../domain/entities/program.dart';
 import 'program_label.dart';
 
-class ProgramCard extends StatefulWidget {
-  const ProgramCard({
+class ProgramRecommendedCard extends StatefulWidget {
+  const ProgramRecommendedCard({
     super.key,
     this.programImage,
     this.createdBy,
@@ -51,10 +50,10 @@ class ProgramCard extends StatefulWidget {
   final ProgramOwner? owner;
 
   @override
-  State<ProgramCard> createState() => _ProgramCardState();
+  State<ProgramRecommendedCard> createState() => _ProgramRecommendedCardState();
 }
 
-class _ProgramCardState extends State<ProgramCard> {
+class _ProgramRecommendedCardState extends State<ProgramRecommendedCard> {
   bool isTappedSave = false;
 
   @override
@@ -74,40 +73,17 @@ class _ProgramCardState extends State<ProgramCard> {
         widget.onTab!();
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 24),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        width: MediaQuery.of(context).size.width / 1.2,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _programImage(),
+            const SizedBox(height: 16),
             _createdBy(),
+            const SizedBox(height: 4),
+            _programName(),
             const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _programName(),
-                widget.isShowMenu ? _programMenu() : const SizedBox(),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 265,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _programExpectedTime(),
-                      const SizedBox(height: 8),
-                      _programDescription(),
-                    ],
-                  ),
-                ),
-                _programImage(),
-              ],
-            ),
-            const SizedBox(height: 16),
             _programMetaData(),
           ],
         ),
@@ -116,28 +92,28 @@ class _ProgramCardState extends State<ProgramCard> {
   }
 
   Widget _createdBy() {
-    return Text(
-      'Created by ${widget.owner!.firstName} ${widget.owner!.lastName}',
-      style: caption1Regular().copyWith(color: AppColors.description),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          'Created by ${widget.owner?.firstName} ${widget.owner?.lastName}',
+          style: caption2Regular().copyWith(color: AppColors.description),
+        ),
+        _programExpectedTime(),
+      ],
     );
   }
 
   Widget _programName() {
-    return Flexible(
+    return SizedBox(
+      height: 48,
       child: Text(
         widget.programName ?? '',
         maxLines: 2,
+        overflow: TextOverflow.ellipsis,
         style: bodyBold(),
       ),
-    );
-  }
-
-  Widget _programDescription() {
-    return Text(
-      widget.programDesc ?? 'No descripition',
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
-      style: footnoteRegular().copyWith(color: AppColors.description),
     );
   }
 
@@ -147,7 +123,7 @@ class _ProgramCardState extends State<ProgramCard> {
         ProgramLabel(
           title: widget.label?.labelName ?? '',
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 8),
         Text(
           DateFormat('yMMMd').format(DateTime.parse(widget.createdAt!)),
           style: caption2Regular().copyWith(color: AppColors.description),
@@ -192,14 +168,13 @@ class _ProgramCardState extends State<ProgramCard> {
       alignment: Alignment.topRight,
       children: [
         Container(
-          height: 96,
-          width: 96,
+          height: 144,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-          ),
-          child: CacheImage(
-            programImage: widget.programImage!,
-            radius: 16,
+            image: DecorationImage(
+              fit: BoxFit.fitWidth,
+              image: NetworkImage(widget.programImage!),
+            ),
           ),
         ),
       ],
@@ -220,77 +195,6 @@ class _ProgramCardState extends State<ProgramCard> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _programMenu() {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        splashFactory: NoSplash.splashFactory,
-      ),
-      child: PopupMenuButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: const EdgeInsets.all(0),
-        icon: CustomIcon(
-          size: 24,
-          icon: AppIcon.menu_icon,
-          iconColor: AppColors.description,
-        ),
-        itemBuilder: (context) => [
-          // Analytic program
-          PopupMenuItem(
-            onTap: () {
-              if (widget.onAnalytics == null) return;
-              widget.onAnalytics!();
-            },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                children: [
-                  Text('Analytics'),
-                ],
-              ),
-            ),
-          ),
-
-          // Edit program
-          PopupMenuItem(
-            onTap: () {
-              if (widget.onEdit == null) return;
-              widget.onEdit!();
-            },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                children: [
-                  Text('Edit'),
-                ],
-              ),
-            ),
-          ),
-
-          // Delete program
-          PopupMenuItem(
-            onTap: () {
-              if (widget.onDelete == null) return;
-              widget.onDelete!();
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                children: [
-                  Text(
-                    'Delete',
-                    style: TextStyle(color: AppColors.red),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -52,10 +52,7 @@ class _MainPageState extends State<MainPage> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            toolbarHeight:
-                state.bottomNavSelected == 0 || state.bottomNavSelected == 1
-                    ? 96
-                    : null,
+            toolbarHeight: state.bottomNavSelected != 1 ? 72 : 0,
             title: Padding(
               padding: EdgeInsets.only(
                 top: AppSpacing.appMargin,
@@ -89,28 +86,19 @@ class _MainPageState extends State<MainPage> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        state.appbarTitle,
-                        style: title1Bold().copyWith(color: AppColors.white),
-                      ),
+                      state.bottomNavSelected != 1
+                          ? Text(
+                              state.appbarTitle,
+                              style:
+                                  title1Bold().copyWith(color: AppColors.white),
+                            )
+                          : const SizedBox(),
                       const Spacer(),
-                      // state.bottomNavSelected == 0
-                      //     ? _buildNotificationIconAction()
-                      //     : const SizedBox(),
                       state.bottomNavSelected == 4
                           ? _buildSettingIconAction()
                           : const SizedBox(),
                     ],
                   ),
-                  state.bottomNavSelected == 1
-                      ? Text(
-                          Translations.of(context).program.page_description,
-                          style: caption2Regular().copyWith(
-                            color: AppColors.description,
-                          ),
-                          maxLines: 2,
-                        )
-                      : const SizedBox(),
                 ],
               ),
             ),

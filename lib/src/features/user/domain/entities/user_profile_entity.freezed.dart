@@ -21,6 +21,7 @@ mixin _$UserProfileEntity {
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
   List<String>? get labels => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserProfileEntityCopyWith<UserProfileEntity> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $UserProfileEntityCopyWith<$Res> {
       String? email,
       String? firstName,
       String? lastName,
-      List<String>? labels});
+      List<String>? labels,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$UserProfileEntityCopyWithImpl<$Res, $Val extends UserProfileEntity>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? labels = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -81,6 +84,10 @@ class _$UserProfileEntityCopyWithImpl<$Res, $Val extends UserProfileEntity>
           ? _value.labels
           : labels // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$UserProfileEntityImplCopyWith<$Res>
       String? email,
       String? firstName,
       String? lastName,
-      List<String>? labels});
+      List<String>? labels,
+      String? imageUrl});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$UserProfileEntityImplCopyWithImpl<$Res>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? labels = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(_$UserProfileEntityImpl(
       userId: freezed == userId
@@ -139,6 +148,10 @@ class __$$UserProfileEntityImplCopyWithImpl<$Res>
           ? _value._labels
           : labels // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$UserProfileEntityImpl implements _UserProfileEntity {
       this.email,
       this.firstName,
       this.lastName,
-      final List<String>? labels})
+      final List<String>? labels,
+      this.imageUrl})
       : _labels = labels;
 
   @override
@@ -173,8 +187,11 @@ class _$UserProfileEntityImpl implements _UserProfileEntity {
   }
 
   @override
+  final String? imageUrl;
+
+  @override
   String toString() {
-    return 'UserProfileEntity(userId: $userId, email: $email, firstName: $firstName, lastName: $lastName, labels: $labels)';
+    return 'UserProfileEntity(userId: $userId, email: $email, firstName: $firstName, lastName: $lastName, labels: $labels, imageUrl: $imageUrl)';
   }
 
   @override
@@ -188,12 +205,14 @@ class _$UserProfileEntityImpl implements _UserProfileEntity {
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
-            const DeepCollectionEquality().equals(other._labels, _labels));
+            const DeepCollectionEquality().equals(other._labels, _labels) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, userId, email, firstName,
-      lastName, const DeepCollectionEquality().hash(_labels));
+      lastName, const DeepCollectionEquality().hash(_labels), imageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -209,7 +228,8 @@ abstract class _UserProfileEntity implements UserProfileEntity {
       final String? email,
       final String? firstName,
       final String? lastName,
-      final List<String>? labels}) = _$UserProfileEntityImpl;
+      final List<String>? labels,
+      final String? imageUrl}) = _$UserProfileEntityImpl;
 
   @override
   int? get userId;
@@ -221,6 +241,8 @@ abstract class _UserProfileEntity implements UserProfileEntity {
   String? get lastName;
   @override
   List<String>? get labels;
+  @override
+  String? get imageUrl;
   @override
   @JsonKey(ignore: true)
   _$$UserProfileEntityImplCopyWith<_$UserProfileEntityImpl> get copyWith =>

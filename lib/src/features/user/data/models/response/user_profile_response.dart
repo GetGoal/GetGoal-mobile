@@ -10,6 +10,7 @@ class UserProfileResponse {
     required this.firstName,
     required this.lastName,
     required this.labels,
+    required this.imageUrl,
   });
 
   factory UserProfileResponse.fromJson(
@@ -33,4 +34,7 @@ class UserProfileResponse {
 
   @JsonKey(name: 'labels')
   final List<String>? labels;
+
+  @JsonKey(name: 'image_url')
+  final String? imageUrl;
 }

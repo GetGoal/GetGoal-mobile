@@ -24,7 +24,10 @@
         "search": "ค้นหา",
         "task_overview": "ภาครวม",
         "start_program": "เริ่มโปรแกรมนี้",
-        "program_error": "เกิดข้อผิดพลาด\nกรุณาลองใหม่อีกครั้ง"
+        "program_error": "เกิดข้อผิดพลาด\nกรุณาลองใหม่อีกครั้ง",
+        "recommended_program": "โปรแกรมแนะนำสำหรับคุณ",
+        "see_all": "ดูทั้งหมด",
+        "explore_program": "ค้นหาความเป็นตัวคุณ"
     },
     "create_button": {
         "create_new": "สร้าง",

@@ -1,29 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_profile_response.dart';
+part of 'owner_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserProfileResponse _$UserProfileResponseFromJson(Map<String, dynamic> json) =>
-    UserProfileResponse(
-      userId: json['user_id'] as int?,
-      email: json['email'] as String?,
+OwnerModel _$OwnerModelFromJson(Map<String, dynamic> json) => OwnerModel(
+      ownerId: json['owner_id'] as int?,
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
-      labels:
-          (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      email: json['email'] as String?,
       imageUrl: json['image_url'] as String?,
     );
 
-Map<String, dynamic> _$UserProfileResponseToJson(
-        UserProfileResponse instance) =>
+Map<String, dynamic> _$OwnerModelToJson(OwnerModel instance) =>
     <String, dynamic>{
-      'user_id': instance.userId,
-      'email': instance.email,
+      'owner_id': instance.ownerId,
       'first_name': instance.firstName,
       'last_name': instance.lastName,
-      'labels': instance.labels,
+      'email': instance.email,
       'image_url': instance.imageUrl,
     };

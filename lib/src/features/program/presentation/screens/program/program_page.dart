@@ -4,17 +4,21 @@ import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../config/i18n/strings.g.dart';
+import '../../../../../config/route_config.dart';
 import '../../../../../shared/icon.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/themes/spacing.dart';
 import '../../../../../shared/widgets/icon/custom_icon.dart';
-import '../../../domain/entities/program.dart';
+import '../../../../../shared/widgets/text/get_goal_gradient_text.dart';
 import '../../../domain/entities/program_filter.dart';
 import '../../bloc/filter_program/filter_program_bloc.dart';
 import '../../bloc/program/program_bloc.dart';
+import '../../bloc/program_section/program_section_bloc.dart';
+import '../../bloc/recommened_program/recommended_program_bloc.dart';
 import 'widgets/filter_item.dart';
 import 'widgets/program_card.dart';
+import 'widgets/program_recommended_card.dart';
 
 class ProgramPage extends StatefulWidget {
   const ProgramPage({super.key});
@@ -26,12 +30,18 @@ class ProgramPage extends StatefulWidget {
 class _ProgramPageState extends State<ProgramPage> {
   FilterProgramBloc get _filterProgramBloc => context.read<FilterProgramBloc>();
   ProgramBloc get _programBloc => context.read<ProgramBloc>();
+  ProgramSectionBloc get _programSectionBloc =>
+      context.read<ProgramSectionBloc>();
+  RecommendedProgramBloc get _recommendedProgramBloc =>
+      context.read<RecommendedProgramBloc>();
 
   final _searchController = TextEditingController();
 
   @override
   void initState() {
     _filterProgramBloc.add(const FilterProgramEvent.started());
+    _programSectionBloc.add(const ProgramSectionEvent.started());
+    _recommendedProgramBloc.add(const RecommendedProgramEvent.started());
     _programBloc.add(const ProgramEvent.started());
     _searchController.addListener(() {
       setState(() {});
@@ -49,13 +59,40 @@ class _ProgramPageState extends State<ProgramPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 24),
-        _searchBar(),
-        const SizedBox(height: 16),
-        _filterBar(),
-        const SizedBox(height: 16),
         _programSection(),
       ],
+    );
+  }
+
+  Widget _pageTitle() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                t.navbar.program,
+                style: title1Bold().copyWith(color: AppColors.white),
+              ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () => context.pushNamed(Routes.programSearch),
+                child: const CustomIcon(icon: AppIcon.search_icon),
+              ),
+            ],
+          ),
+          Text(
+            Translations.of(context).program.page_description,
+            style: caption2Regular().copyWith(
+              color: AppColors.description,
+            ),
+            maxLines: 2,
+          ),
+        ],
+      ),
     );
   }
 
@@ -84,22 +121,18 @@ class _ProgramPageState extends State<ProgramPage> {
   }
 
   Widget _programSection() {
-    return BlocBuilder<ProgramBloc, ProgramState>(
+    return BlocBuilder<ProgramSectionBloc, ProgramSectionState>(
       builder: (context, state) {
         switch (state) {
-          case ProgramStateInital():
+          case ProgramSectionStateInitial():
             return const SizedBox();
-          case ProgramStateLoading():
+          case ProgramSectionStateLoading():
             return _programLoading();
-          case ProgramStateLoadedSuccess(
-              :final programs,
-            ):
-            return _programLoadedSuccess(programs);
-          case ProgramStateEmpty():
-            return _programEmpty();
-          case ProgramStateError():
+          case ProgramSectionStateSuccess():
+            return _programLoadedSuccess();
+          case ProgramSectionStateFailure():
             return _programError();
-          case ProgramStateSearchEmpty():
+          case ProgramSectionStateHide():
             return _programSearchEmpty();
           default:
             return const SizedBox();
@@ -198,58 +231,183 @@ class _ProgramPageState extends State<ProgramPage> {
     );
   }
 
-  Widget _programLoadedSuccess(List<Program> programList) {
+  Widget _programLoadedSuccess() {
     return Expanded(
       child: RefreshIndicator(
         color: AppColors.primary2,
         backgroundColor: AppColors.secondary,
-        onRefresh: () async => _programBloc.add(const ProgramEvent.started()),
+        onRefresh: () async {
+          _programBloc.add(const ProgramEvent.started());
+          _recommendedProgramBloc.add(const RecommendedProgramEvent.started());
+        },
         child: SingleChildScrollView(
           child: Container(
             margin: const EdgeInsets.only(bottom: 16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ListView.separated(
-                  separatorBuilder: (context, index) => Divider(
-                    color: AppColors.stroke,
+                _pageTitle(),
+                const SizedBox(height: 36),
+                _buildRecommendProgram(),
+                const SizedBox(height: 24),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
+                  child: Text(
+                    t.program.explore_program,
+                    style: title2Bold(),
                   ),
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
-                  shrinkWrap: true,
-                  itemCount: programList.length,
-                  itemBuilder: (context, index) {
-                    bool isLabelEmpty = programList[index].labels!.isEmpty;
-                    return ProgramCard(
-                      programImage: programList[index].programImage,
-                      programName: programList[index].programName,
-                      programDesc: programList[index].programDesc,
-                      rating: programList[index].rating,
-                      duration: programList[index].expectedTime,
-                      label: isLabelEmpty
-                          ? const Label(labelName: 'Unknow')
-                          : programList[index].labels![0],
-                      createdAt: programList[index].updatedAt,
-                      isSaved: programList[index].isSaved,
-                      onTab: () {
-                        context.push(
-                          '/program_info/${programList[index].programId}',
-                        );
-                      },
-                      onSave: () {
-                        _programBloc.add(
-                          ProgramEvent.saveProgram(
-                            programId: programList[index].programId.toString(),
-                          ),
-                        );
-                      },
-                    );
-                  },
                 ),
+                const SizedBox(height: 16),
+                _filterBar(),
+                _buildExploreProgram(),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildRecommendProgram() {
+    return BlocConsumer<RecommendedProgramBloc, RecommendedProgramState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        switch (state) {
+          case RecommendedProgramStateInitial():
+            return const SizedBox();
+          case RecommendedProgramStateLoading():
+            return const SizedBox();
+          case RecommendedProgramStateSuccess(:final programs):
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: AppSpacing.appMargin,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        t.program.recommended_program,
+                        style: title2Bold(),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: GetGoalGradientText(
+                          t.program.see_all,
+                          style: caption1Regular(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 320,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: AppColors.stroke,
+                      ),
+                    ),
+                  ),
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 16),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return ProgramRecommendedCard(
+                        programImage: programs[index].programImage,
+                        programName: programs[index].programName,
+                        programDesc: programs[index].programDesc,
+                        rating: programs[index].rating,
+                        duration: programs[index].expectedTime,
+                        label: programs[index].labels![0],
+                        createdAt: programs[index].updatedAt,
+                        isSaved: programs[index].isSaved,
+                        owner: programs[index].owner,
+                        onTab: () {
+                          context.push(
+                            '/program_info/${programs[index].programId}',
+                          );
+                        },
+                        onSave: () {
+                          _programBloc.add(
+                            ProgramEvent.saveProgram(
+                              programId: programs[index].programId.toString(),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
+          case RecommendedProgramStateFailure():
+            return const SizedBox();
+          default:
+            return const SizedBox();
+        }
+      },
+    );
+  }
+
+  Widget _buildExploreProgram() {
+    return BlocConsumer<ProgramBloc, ProgramState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        switch (state) {
+          case ProgramStateInital():
+            return const SizedBox();
+          case ProgramStateLoading():
+            return const SizedBox();
+          case ProgramStateLoadedSuccess(:final programs):
+            return ListView.separated(
+              separatorBuilder: (context, index) => Divider(
+                color: AppColors.stroke,
+              ),
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.appMargin),
+              shrinkWrap: true,
+              itemCount: programs.length,
+              itemBuilder: (context, index) {
+                return ProgramCard(
+                  programImage: programs[index].programImage,
+                  programName: programs[index].programName,
+                  programDesc: programs[index].programDesc,
+                  rating: programs[index].rating,
+                  duration: programs[index].expectedTime,
+                  label: programs[index].labels![0],
+                  createdAt: programs[index].updatedAt,
+                  isSaved: programs[index].isSaved,
+                  owner: programs[index].owner,
+                  onTab: () {
+                    context.push(
+                      '/program_info/${programs[index].programId}',
+                    );
+                  },
+                  onSave: () {
+                    _programBloc.add(
+                      ProgramEvent.saveProgram(
+                        programId: programs[index].programId.toString(),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          case ProgramStateError():
+            return const SizedBox();
+          default:
+            return const SizedBox();
+        }
+      },
     );
   }
 
@@ -278,6 +436,8 @@ class _ProgramPageState extends State<ProgramPage> {
             ElevatedButton(
               onPressed: () {
                 _programBloc.add(const ProgramEvent.started());
+                _recommendedProgramBloc
+                    .add(const RecommendedProgramEvent.started());
               },
               child: const Text('Reload'),
             ),
@@ -309,8 +469,8 @@ class _ProgramPageState extends State<ProgramPage> {
       child: TextField(
         style: subHeadlineRegular().copyWith(color: AppColors.white),
         onTap: () {
-          _programBloc.add(const ProgramEvent.searching());
           _filterProgramBloc.add(const FilterProgramEvent.hided());
+          // _programSectionBloc.add(const ProgramSectionEvent.onSearch());
         },
         onSubmitted: (value) {
           if (value.trim().isEmpty) {
@@ -344,7 +504,8 @@ class _ProgramPageState extends State<ProgramPage> {
               ? const SizedBox()
               : IconButton(
                   onPressed: () {
-                    _programBloc.add(const ProgramEvent.started());
+                    _programSectionBloc
+                        .add(const ProgramSectionEvent.started());
                     _filterProgramBloc.add(const FilterProgramEvent.started());
                     _searchController.clear();
                   },
@@ -383,8 +544,6 @@ class _ProgramPageState extends State<ProgramPage> {
       );
       switch (index) {
         case 0:
-          _programBloc.add(const ProgramEvent.getRecommendProgram());
-        case 1:
           _programBloc.add(const ProgramEvent.getAllProgram());
           break;
         default:

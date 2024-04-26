@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 132 (66 per locale)
+/// Strings: 138 (69 per locale)
 ///
-/// Built on 2024-04-14 at 16:05 UTC
+/// Built on 2024-04-25 at 07:52 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -184,7 +184,7 @@ class _StringsTaskEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get task_status_to_do => 'Task';
+	String get task_status_to_do => 'To-do';
 	String get task_status_done => 'Done';
 	String get empty_task => 'No tasks';
 	String get empty_task_todo => 'Wow! There aren\'t any tasks left to do.\nGreat job! <3';
@@ -217,6 +217,9 @@ class _StringsProgramEn {
 	String get task_overview => 'Tasks Overview';
 	String get start_program => 'Start this program';
 	String get program_error => 'Sorry, some error occur.\nPlease retry';
+	String get recommended_program => 'Recommended for you';
+	String get see_all => 'See All';
+	String get explore_program => 'Explore';
 }
 
 // Path: create_button
@@ -287,7 +290,7 @@ class _StringsCreateProgramEn {
 	String get category => 'Category';
 	String get ex_category => 'Ex. Music';
 	String get expected_time => 'Expected time';
-	String get ex_expected_time => 'Ex. 3 Days';
+	String get ex_expected_time => 'Ex. 3';
 	String get next_button => 'Next';
 	String get create_task_list => 'Create Task List';
 }
@@ -449,6 +452,9 @@ class _StringsProgramTh implements _StringsProgramEn {
 	@override String get task_overview => 'ภาครวม';
 	@override String get start_program => 'เริ่มโปรแกรมนี้';
 	@override String get program_error => 'เกิดข้อผิดพลาด\nกรุณาลองใหม่อีกครั้ง';
+	@override String get recommended_program => 'โปรแกรมแนะนำสำหรับคุณ';
+	@override String get see_all => 'ดูทั้งหมด';
+	@override String get explore_program => 'ค้นหาความเป็นตัวคุณ';
 }
 
 // Path: create_button
@@ -519,7 +525,7 @@ class _StringsCreateProgramTh implements _StringsCreateProgramEn {
 	@override String get category => 'หมวดหมู่';
 	@override String get ex_category => 'ตัวอย่าง ดนตรี';
 	@override String get expected_time => 'เวลาที่คาดหวัง';
-	@override String get ex_expected_time => 'ตัวอย่าง 3 วัน';
+	@override String get ex_expected_time => 'ตัวอย่าง 3';
 	@override String get next_button => 'ต่อไป';
 	@override String get create_task_list => 'สร้างรายการงาน';
 }
@@ -598,7 +604,7 @@ extension on Translations {
 			case 'navbar.home': return 'Home';
 			case 'navbar.calendar': return 'Calendar';
 			case 'navbar.user': return 'User';
-			case 'task.task_status_to_do': return 'Task';
+			case 'task.task_status_to_do': return 'To-do';
 			case 'task.task_status_done': return 'Done';
 			case 'task.empty_task': return 'No tasks';
 			case 'task.empty_task_todo': return 'Wow! There aren\'t any tasks left to do.\nGreat job! <3';
@@ -613,6 +619,9 @@ extension on Translations {
 			case 'program.task_overview': return 'Tasks Overview';
 			case 'program.start_program': return 'Start this program';
 			case 'program.program_error': return 'Sorry, some error occur.\nPlease retry';
+			case 'program.recommended_program': return 'Recommended for you';
+			case 'program.see_all': return 'See All';
+			case 'program.explore_program': return 'Explore';
 			case 'create_button.create_new': return 'Create new';
 			case 'create_button.create_program': return 'Program';
 			case 'create_button.create_program_des': return 'Create a program for your needs or everyone';
@@ -647,7 +656,7 @@ extension on Translations {
 			case 'create_program.category': return 'Category';
 			case 'create_program.ex_category': return 'Ex. Music';
 			case 'create_program.expected_time': return 'Expected time';
-			case 'create_program.ex_expected_time': return 'Ex. 3 Days';
+			case 'create_program.ex_expected_time': return 'Ex. 3';
 			case 'create_program.next_button': return 'Next';
 			case 'create_program.create_task_list': return 'Create Task List';
 			case 'edit_program.edit_program': return 'Program Settings';
@@ -687,6 +696,9 @@ extension on _StringsTh {
 			case 'program.task_overview': return 'ภาครวม';
 			case 'program.start_program': return 'เริ่มโปรแกรมนี้';
 			case 'program.program_error': return 'เกิดข้อผิดพลาด\nกรุณาลองใหม่อีกครั้ง';
+			case 'program.recommended_program': return 'โปรแกรมแนะนำสำหรับคุณ';
+			case 'program.see_all': return 'ดูทั้งหมด';
+			case 'program.explore_program': return 'ค้นหาความเป็นตัวคุณ';
 			case 'create_button.create_new': return 'สร้าง';
 			case 'create_button.create_program': return 'โปรแกรม';
 			case 'create_button.create_program_des': return 'สร้างโปรแกรมตามความต้องการของคุณหรือทุกคน';
@@ -721,7 +733,7 @@ extension on _StringsTh {
 			case 'create_program.category': return 'หมวดหมู่';
 			case 'create_program.ex_category': return 'ตัวอย่าง ดนตรี';
 			case 'create_program.expected_time': return 'เวลาที่คาดหวัง';
-			case 'create_program.ex_expected_time': return 'ตัวอย่าง 3 วัน';
+			case 'create_program.ex_expected_time': return 'ตัวอย่าง 3';
 			case 'create_program.next_button': return 'ต่อไป';
 			case 'create_program.create_task_list': return 'สร้างรายการงาน';
 			case 'edit_program.edit_program': return 'แก้ไขโปรแกรม';
