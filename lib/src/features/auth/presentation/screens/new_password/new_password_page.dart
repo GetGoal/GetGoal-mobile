@@ -70,10 +70,10 @@ class _NewPasswordPageState extends State<NewPasswordPage>
         controller: _emailInputController,
         label: 'New password',
         validator: passwordValidator,
-        isPassword: isShowPassword,
+        isPassword: !isShowPassword,
         suffixIcon: GestureDetector(
           onTap: _setShowPasswordState,
-          child: isShowPassword
+          child: !isShowPassword
               ? CustomIcon(
                   icon: AppIcon.show_password,
                   iconColor: AppColors.description,
