@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 import '../../../../../../shared/themes/color.dart';
 import '../../../../../../shared/themes/font.dart';
+import '../../../../../../shared/widgets/text/get_goal_gradient_text.dart';
 
 class ProgramStatisticsCard extends StatelessWidget {
   const ProgramStatisticsCard({
@@ -17,11 +17,9 @@ class ProgramStatisticsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.symmetric(vertical: 24),
       decoration: BoxDecoration(
-        color: AppColors.secondary,
-        border: GradientBoxBorder(gradient: AppColors.primaryGradient),
-        borderRadius: BorderRadius.circular(24),
+        border: Border(bottom: BorderSide(color: AppColors.stroke)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,14 +36,19 @@ class ProgramStatisticsCard extends StatelessWidget {
   Widget _buildLabel() {
     return Text(
       label,
-      style: subHeadlineBold().copyWith(color: AppColors.description),
+      style: bodyBold().copyWith(color: AppColors.description),
     );
   }
 
   Widget _buildStat() {
-    return Text(
+    return GetGoalGradientText(
       count,
-      style: title2Bold(),
+      style: const TextStyle(
+        fontSize: 40,
+        fontWeight: FontWeight.bold,
+        fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+      ),
     );
   }
 }
