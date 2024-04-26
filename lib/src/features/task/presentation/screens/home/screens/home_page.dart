@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    _selectedDay = _focusedDay;
     _dateTimelineBloc.add(const DateTimelineEvent.started());
     _todoBloc.add(TodoEvent.started(DateTime.now()));
     super.initState();
@@ -108,10 +109,10 @@ class _HomePageState extends State<HomePage> {
         calendarBuilders: _buildCalendarBuilders(),
         availableGestures: AvailableGestures.all,
         calendarStyle: CalendarStyle(
+          outsideDaysVisible: true,
           defaultTextStyle: bodyBold(),
           holidayTextStyle: bodyBold(),
           weekendTextStyle: bodyBold(),
-          outsideDaysVisible: false,
           selectedDecoration: BoxDecoration(
             gradient: AppColors.primaryGradient,
             shape: BoxShape.circle,
@@ -258,6 +259,9 @@ class _HomePageState extends State<HomePage> {
       },
       todayBuilder: (context, day, focusedDay) {
         return DateCardSelection(day: day, isToday: true);
+      },
+      outsideBuilder: (context, day, focusedDay) {
+        return DateCardSelection(day: day);
       },
       dowBuilder: (context, day) {
         if (day.weekday == DateTime.sunday) {
