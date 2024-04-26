@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../config/route_config.dart';
+import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
 import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/themes/font.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/dialog/error_dialog.dart';
+import '../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import 'bloc/login/login_bloc.dart';
@@ -26,11 +28,19 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
   final _emailInputController = TextEditingController();
   final _passwordInputController = TextEditingController();
 
+  bool isShowPassword = false;
+
   @override
   void dispose() {
     _emailInputController.dispose();
     _passwordInputController.dispose();
     super.dispose();
+  }
+
+  void _setShowPasswordState() {
+    setState(() {
+      isShowPassword = !isShowPassword;
+    });
   }
 
   @override
@@ -79,8 +89,20 @@ class _LoginPageState extends State<LoginPage> with AuthValidationMixin {
         NormalTextInputField(
           controller: _passwordInputController,
           label: 'Password',
-          isPassword: true,
+          isPassword: isShowPassword,
           validator: passwordValidator,
+          suffixIcon: GestureDetector(
+            onTap: _setShowPasswordState,
+            child: isShowPassword
+                ? CustomIcon(
+                    icon: AppIcon.show_password,
+                    iconColor: AppColors.description,
+                  )
+                : CustomIcon(
+                    icon: AppIcon.hide_password,
+                    iconColor: AppColors.description,
+                  ),
+          ),
         ),
         const SizedBox(height: 8),
         GestureDetector(

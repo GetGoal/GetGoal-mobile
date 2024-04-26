@@ -5,9 +5,12 @@ import 'package:go_router/go_router.dart';
 import '../../../../../config/i18n/strings.g.dart';
 import '../../../../../config/route_config.dart';
 import '../../../../../shared/app_cache.dart';
+import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
+import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/dialog/error_dialog.dart';
+import '../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import 'bloc/new_password/new_password_bloc.dart';
@@ -26,10 +29,18 @@ class _NewPasswordPageState extends State<NewPasswordPage>
   final _formKey = GlobalKey<FormState>();
   final _emailInputController = TextEditingController();
 
+  bool isShowPassword = false;
+
   @override
   void dispose() {
     _emailInputController.dispose();
     super.dispose();
+  }
+
+  void _setShowPasswordState() {
+    setState(() {
+      isShowPassword = !isShowPassword;
+    });
   }
 
   @override
@@ -59,7 +70,19 @@ class _NewPasswordPageState extends State<NewPasswordPage>
         controller: _emailInputController,
         label: 'New password',
         validator: passwordValidator,
-        isPassword: true,
+        isPassword: isShowPassword,
+        suffixIcon: GestureDetector(
+          onTap: _setShowPasswordState,
+          child: isShowPassword
+              ? CustomIcon(
+                  icon: AppIcon.show_password,
+                  iconColor: AppColors.description,
+                )
+              : CustomIcon(
+                  icon: AppIcon.hide_password,
+                  iconColor: AppColors.description,
+                ),
+        ),
       ),
     );
   }

@@ -4,9 +4,12 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../config/route_config.dart';
 import '../../../../../shared/app_cache.dart';
+import '../../../../../shared/icon.dart';
 import '../../../../../shared/mixins/validation/auth_validation_mixin.dart';
+import '../../../../../shared/themes/color.dart';
 import '../../../../../shared/widgets/button/main_botton.dart';
 import '../../../../../shared/widgets/dialog/error_dialog.dart';
+import '../../../../../shared/widgets/icon/custom_icon.dart';
 import '../../../../../shared/widgets/scaffold/get_goal_scaffold.dart';
 import '../../../../../shared/widgets/text_field/normal_text_input_field.dart';
 import '../../../domain/entity/create_user.dart';
@@ -29,6 +32,23 @@ class _SignUpPageState extends State<SignUpPage> with AuthValidationMixin {
   final _lastNameTextField = TextEditingController();
   final _emailTextField = TextEditingController();
   final _passwordTextField = TextEditingController();
+
+  bool isShowPassword = false;
+
+  @override
+  void dispose() {
+    _firstNameTextField.dispose();
+    _lastNameTextField.dispose();
+    _emailTextField.dispose();
+    _passwordTextField.dispose();
+    super.dispose();
+  }
+
+  void _setShowPasswordState() {
+    setState(() {
+      isShowPassword = !isShowPassword;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +112,20 @@ class _SignUpPageState extends State<SignUpPage> with AuthValidationMixin {
     return NormalTextInputField(
       controller: _passwordTextField,
       label: 'Password',
-      isPassword: true,
+      isPassword: isShowPassword,
       validator: passwordValidator,
+      suffixIcon: GestureDetector(
+        onTap: _setShowPasswordState,
+        child: isShowPassword
+            ? CustomIcon(
+                icon: AppIcon.show_password,
+                iconColor: AppColors.description,
+              )
+            : CustomIcon(
+                icon: AppIcon.hide_password,
+                iconColor: AppColors.description,
+              ),
+      ),
     );
   }
 

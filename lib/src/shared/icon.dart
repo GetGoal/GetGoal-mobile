@@ -36,4 +36,6 @@ class AppIcon {
   static const String menu_icon = 'assets/icons/menu_icon.svg';
   static const String trash_icon = 'assets/icons/trash_icon.svg';
   static const String notification_icon = 'assets/icons/notification_icon.svg';
+  static const String show_password = 'assets/icons/show_password.svg';
+  static const String hide_password = 'assets/icons/hide_password.svg';
 }
