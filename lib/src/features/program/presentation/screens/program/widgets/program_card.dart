@@ -191,15 +191,12 @@ class _ProgramCardState extends State<ProgramCard> {
     return Stack(
       alignment: Alignment.topRight,
       children: [
-        Container(
+        SizedBox(
           height: 96,
           width: 96,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-          ),
           child: CacheImage(
             programImage: widget.programImage!,
-            radius: 16,
+            radius: 8,
           ),
         ),
       ],

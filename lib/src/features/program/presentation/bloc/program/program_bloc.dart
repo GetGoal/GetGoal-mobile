@@ -48,7 +48,7 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
     Emitter<ProgramState> emit,
   ) async {
     try {
-      final programList = await _getRecommendProgramUsecase.call();
+      final programList = await _getProgramUsecase.call();
 
       if (programList.data!.isEmpty) {
         emit(const ProgramState.programEmpty());
@@ -136,7 +136,7 @@ class ProgramBloc extends Bloc<ProgramEvent, ProgramState> {
     Emitter<ProgramState> emit,
   ) async {
     try {
-      emit(const ProgramState.loadedSuccess(programs: []));
+      emit(const ProgramState.loading());
 
       final programList = await _getProgramUsecase.call();
 
