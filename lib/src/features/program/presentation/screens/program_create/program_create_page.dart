@@ -344,7 +344,6 @@ class _ProgramCreatePageState extends State<ProgramCreatePage>
                 controller: _programTimeUnitTextInputController,
                 hintText:
                     Translations.of(context).create_program.ex_expected_time,
-                validator: programExpectedTimeValidator,
                 textInputFormatter: <TextInputFormatter>[
                   FilteringTextInputFormatter.digitsOnly,
                 ],
