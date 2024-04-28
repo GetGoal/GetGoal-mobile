@@ -38,6 +38,7 @@ import '../features/program/presentation/screens/program_create/bloc/program_cre
 import '../features/program/presentation/screens/program_create/program_create_page.dart';
 import '../features/program/presentation/screens/program_create/program_task_create.dart';
 import '../features/program/presentation/screens/program_info/program_info_page.dart';
+import '../features/program/presentation/screens/program_recommened/program_recommend_page.dart';
 import '../features/program/presentation/screens/program_search/program_search_page.dart';
 import '../features/program/presentation/screens/program_statistics/program_statistic_page.dart';
 import '../features/setting/presentation/bloc/language/language_bloc.dart';
@@ -87,6 +88,7 @@ class RouteConfig {
       _newPasswordPage(),
       _notificationPage(),
       _calendarPage(),
+      _programRecommendedPage(),
     ],
   );
 
@@ -252,6 +254,24 @@ class RouteConfig {
           ),
         ],
         child: const ProgramSearchPage(),
+      ),
+    );
+  }
+
+  static GoRoute _programRecommendedPage() {
+    return GoRoute(
+      path: Routes.programRecommendedPage,
+      name: Routes.programRecommendedPage,
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<ProgramBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<RecommendedProgramBloc>(),
+          ),
+        ],
+        child: const ProgramRecommededPage(),
       ),
     );
   }
@@ -512,4 +532,5 @@ class Routes {
   static const String newPasswordPage = '/new_password';
   static const String notificationPage = '/notification';
   static const String calendarPage = '/calendar';
+  static const String programRecommendedPage = '/program_recommended';
 }

@@ -14,21 +14,22 @@ class CacheImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       key: UniqueKey(),
-      memCacheWidth: 96,
-      memCacheHeight: 96,
-      maxWidthDiskCache: 96,
-      maxHeightDiskCache: 96,
+      memCacheWidth: 128,
+      memCacheHeight: 128,
+      maxWidthDiskCache: 128,
+      maxHeightDiskCache: 128,
       fadeInDuration: const Duration(milliseconds: 100),
       fadeOutCurve: Curves.fastLinearToSlowEaseIn,
       imageUrl: programImage!,
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
-          boxShadow: AppShadow.shadow,
+          // boxShadow: AppShadow.shadow,
+          color: AppColors.black,
           borderRadius: BorderRadius.all(Radius.circular(radius ?? 0)),
           image: DecorationImage(
             image: imageProvider,
-            fit: BoxFit.cover,
-            alignment: Alignment.topCenter,
+            fit: BoxFit.contain,
+            alignment: Alignment.center,
           ),
         ),
       ),
