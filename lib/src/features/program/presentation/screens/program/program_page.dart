@@ -127,7 +127,7 @@ class _ProgramPageState extends State<ProgramPage> {
           case ProgramSectionStateInitial():
             return const SizedBox();
           case ProgramSectionStateLoading():
-            return _programLoading();
+            return const SizedBox();
           case ProgramSectionStateSuccess():
             return _programLoadedSuccess();
           case ProgramSectionStateFailure():
@@ -221,8 +221,9 @@ class _ProgramPageState extends State<ProgramPage> {
     );
   }
 
-  Widget _programLoading() {
-    return Expanded(
+  Widget _programRecommendedLoading() {
+    return SizedBox(
+      height: 320,
       child: Center(
         child: CircularProgressIndicator(
           color: AppColors.primary2,
@@ -248,6 +249,29 @@ class _ProgramPageState extends State<ProgramPage> {
               children: [
                 _pageTitle(),
                 const SizedBox(height: 36),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: AppSpacing.appMargin,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        t.program.recommended_program,
+                        style: title2Bold(),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          context.pushNamed(Routes.programRecommendedPage);
+                        },
+                        child: GetGoalGradientText(
+                          t.program.see_all,
+                          style: caption1Regular(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 _buildRecommendProgram(),
                 const SizedBox(height: 24),
                 Padding(
@@ -277,32 +301,11 @@ class _ProgramPageState extends State<ProgramPage> {
           case RecommendedProgramStateInitial():
             return const SizedBox();
           case RecommendedProgramStateLoading():
-            return const SizedBox();
+            return _programRecommendedLoading();
           case RecommendedProgramStateSuccess(:final programs):
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: AppSpacing.appMargin,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        t.program.recommended_program,
-                        style: title2Bold(),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: GetGoalGradientText(
-                          t.program.see_all,
-                          style: caption1Regular(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 Container(
                   height: 320,
                   decoration: BoxDecoration(
@@ -350,7 +353,7 @@ class _ProgramPageState extends State<ProgramPage> {
               ],
             );
           case RecommendedProgramStateFailure():
-            return const SizedBox();
+            return _programRecommendError();
           default:
             return const SizedBox();
         }
@@ -366,7 +369,7 @@ class _ProgramPageState extends State<ProgramPage> {
           case ProgramStateInital():
             return const SizedBox();
           case ProgramStateLoading():
-            return const SizedBox();
+            return _exploreProgramLoading();
           case ProgramStateLoadedSuccess(:final programs):
             return ListView.separated(
               separatorBuilder: (context, index) => Divider(
@@ -403,11 +406,22 @@ class _ProgramPageState extends State<ProgramPage> {
               },
             );
           case ProgramStateError():
-            return const SizedBox();
+            return _programError();
           default:
             return const SizedBox();
         }
       },
+    );
+  }
+
+  Widget _exploreProgramLoading() {
+    return SizedBox(
+      height: 296,
+      child: Center(
+        child: CircularProgressIndicator(
+          color: AppColors.primary2,
+        ),
+      ),
     );
   }
 
@@ -424,11 +438,41 @@ class _ProgramPageState extends State<ProgramPage> {
   }
 
   Widget _programError() {
-    return Expanded(
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('Some error occur. Please retry'),
+          const SizedBox(
+            height: 8,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _programBloc.add(const ProgramEvent.started());
+            },
+            child: const Text('Reload'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _programRecommendError() {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: AppColors.stroke,
+          ),
+        ),
+      ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(
+              height: 36,
+            ),
             const Text('Some error occur. Please retry'),
             const SizedBox(
               height: 8,
@@ -436,10 +480,11 @@ class _ProgramPageState extends State<ProgramPage> {
             ElevatedButton(
               onPressed: () {
                 _programBloc.add(const ProgramEvent.started());
-                _recommendedProgramBloc
-                    .add(const RecommendedProgramEvent.started());
               },
               child: const Text('Reload'),
+            ),
+            const SizedBox(
+              height: 36,
             ),
           ],
         ),
