@@ -9,7 +9,6 @@ import '../../../../shared/themes/color.dart';
 import '../../../../shared/themes/font.dart';
 import '../../../../shared/themes/spacing.dart';
 import '../../../../shared/widgets/dialog/error_dialog.dart';
-import '../../../../shared/widgets/image/cache_image.dart';
 import '../../../../shared/widgets/text/get_goal_gradient_text.dart';
 import '../../../program/domain/entities/program.dart';
 import '../../../program/presentation/bloc/delete_program/delete_program_bloc.dart';
