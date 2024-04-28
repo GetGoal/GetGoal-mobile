@@ -293,14 +293,15 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   onTab: () => context.push(
                     '/program_info/${programList[index].programId}',
                   ),
-                  programImage: programList[index].programImage,
-                  programName: programList[index].programName,
-                  programDesc: programList[index].programDesc,
-                  rating: programList[index].rating,
-                  duration: programList[index].expectedTime,
+                  programImage: programList[index]!.programImage,
+                  programName: programList[index]!.programName,
+                  programDesc: programList[index]!.programDesc,
+                  rating: programList[index]!.rating,
+                  duration: programList[index]!.expectedTime,
                   label:
                       Label(labelName: programList[index].labels![0].labelName),
                   createdAt: DateTime.now().toString(),
+                  owner: programList[index]!.owner,
                   onAnalytics: () {
                     context.pushNamed(
                       Routes.programStatisticsPage,
