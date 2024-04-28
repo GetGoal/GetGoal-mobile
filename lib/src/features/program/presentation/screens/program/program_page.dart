@@ -479,7 +479,9 @@ class _ProgramPageState extends State<ProgramPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                _programBloc.add(const ProgramEvent.started());
+                _recommendedProgramBloc.add(
+                  const RecommendedProgramEvent.started(),
+                );
               },
               child: const Text('Reload'),
             ),
